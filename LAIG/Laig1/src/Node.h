@@ -25,6 +25,7 @@ public:
 	string getID();
 	float* getMatrix();
 	vector<string> getChildren();
+	void readANF(); //caso não seja para fazer o read no construtor
 };
 
 #endif
