@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef _NODE_H_
+#define _NODE_H_
 
 #include <vector>
 #include "Primitives.h"
@@ -19,7 +19,12 @@ class Node
 	Appearance* appearance;
 	static Appearance* fatherAppearance;
 public:
-	Node();
+	Node(string ID);
+	Node(string ID, vector<string> children);
+	void setParentApp(Appearance* fatherAppearance);
+	string getID();
+	float* getMatrix();
+	vector<string> getChildren();
 };
 
 #endif

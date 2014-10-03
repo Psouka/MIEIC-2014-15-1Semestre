@@ -1,3 +1,6 @@
+#ifndef _GRAPH_H_
+#define _GRAPH_H_
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -6,9 +9,12 @@
 #include "Node.h"
 
 class Graph {
-	map<string, Node*> graph;
+	typedef map<string, Node*> graphMap;
+	graphMap graph;
 
 public:
 	Graph();
-
+	graphMap getGraph();
 };
+
+#endif

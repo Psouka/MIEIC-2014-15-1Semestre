@@ -1,3 +1,6 @@
+#ifndef _SCENEGRAPH_H_
+#define _SCENEGRAPH_H_
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -9,6 +12,9 @@ class SceneGraph {
 	Graph* graph;
 
 public:
-	display();
-	process(string nodeID);
+	SceneGraph(Graph* graph);
+	void display();
+	void process(string nodeID);
 };
+
+#endif

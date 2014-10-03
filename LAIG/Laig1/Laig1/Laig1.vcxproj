@@ -80,6 +80,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ANFScene.cpp" />
+    <ClCompile Include="..\src\Appearance.cpp" />
+    <ClCompile Include="..\src\Graph.cpp" />
+    <ClCompile Include="..\src\Node.cpp" />
+    <ClCompile Include="..\src\Primitives.cpp" />
+    <ClCompile Include="..\src\SceneGraph.cpp" />
     <ClCompile Include="..\src\tinystr.cpp" />
     <ClCompile Include="..\src\XMLScene.cpp" />
   </ItemGroup>

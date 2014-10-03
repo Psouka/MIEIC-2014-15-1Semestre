@@ -1,5 +1,6 @@
 #ifndef APPEARANCE_H
 #define APPEARANCE_H
+
 #include "CGFscene.h"
 
 class Appearance
@@ -8,7 +9,7 @@ class Appearance
 	string appearanceid;
 	float emissive[4];
 public:
-	Appearance(string id);	
+	Appearance(string ID);	
 	CGFappearance* getApp();
 	string getAppId();
 	float* getEmissive();
