@@ -17,5 +17,15 @@
         <lighting doublesided="true" local="true" enabled="true" ambient="11 11 11 11" />
  
     </globals>
+
+
+      <cameras initial="ss" >
+        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
+        <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
+
+        <perspective id="ID" near="10" far="20" angle="45" pos="5 5 5" target="10 10 10" />
+        <ortho id="ss" direction="ee" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
+
+    </cameras>
     
  </anf>

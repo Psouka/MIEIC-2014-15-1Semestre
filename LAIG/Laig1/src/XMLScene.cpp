@@ -2,7 +2,6 @@
 #include <iostream>
 
 using namespace std;
-
 XMLScene::XMLScene(char *filename)
 {
 
@@ -17,15 +16,14 @@ XMLScene::XMLScene(char *filename)
 		exit( 1 );
 	}
 
-	TiXmlElement* anfElement= doc->FirstChildElement( "anf" );
+	TiXmlElement* dgxElement= doc->FirstChildElement( "dgx" );
 
-	if (anfElement == NULL)
+	if (dgxElement == NULL)
 	{
 		printf("Main dgx block element not found! Exiting!\n");
 		exit(1);
 	}
 
-	/*
 	initElement = dgxElement->FirstChildElement( "Init" );
 	matsElement = dgxElement->FirstChildElement( "Materials" );
 	textsElement =  dgxElement->FirstChildElement( "Textures" );
@@ -33,16 +31,6 @@ XMLScene::XMLScene(char *filename)
 	nodesElement =  dgxElement->FirstChildElement( "Nodes" );
 
 	graphElement =  dgxElement->FirstChildElement( "Graph" );
-	*/
-
-
-	globaisElement = anfElement->FirstChildElement("globais");
-	globaisElement = anfElement->FirstChildElement("cameras");
-	globaisElement = anfElement->FirstChildElement("textures");
-	globaisElement = anfElement->FirstChildElement("lights");
-	globaisElement = anfElement->FirstChildElement("apperances");
-	globaisElement = anfElement->FirstChildElement("graph");
-
 
 
 	// Init
@@ -90,65 +78,6 @@ XMLScene::XMLScene(char *filename)
 		}
 		else
 			printf("translate not found\n");		
-
-		//
-		//  ROTATE
-		//
-		TiXmlElement* rotateElement=initElement->FirstChildElement("rotate");
-		if (translateElement)
-		{
-			char *valString = NULL;
-			char axis;
-			float angle;
-
-			valString=(char *) rotateElement->Attribute("axis");
-
-			if(valString && sscanf(valString,"%s",&axis)== 1)
-			{
-				printf("  rotate values (axis): %s \n", axis);
-			}
-			else
-				printf("Error parsing rotate");
-
-
-			valString=(char *) rotateElement->Attribute("angle");
-
-			if(valString && sscanf(valString,"%f",&angle)== 1)
-			{
-				printf("  rotate values (angle): %f\n", angle);
-			}
-			else
-				printf("Error parsing rotate");
-		
-		
-		}
-		else
-			printf("rotate not found\n");	
-
-		//
-		// SCALE
-		//
-	    TiXmlElement* scaleElement=initElement->FirstChildElement("scale");
-		if (scaleElement)
-		{
-			char *valString=NULL;
-			float x,y,z;
-
-			valString=(char *) scaleElement->Attribute("xyz");
-
-			if(valString && sscanf(valString,"%f %f %f",&x, &y, &z)==3)
-			{
-				printf("  scale values (XYZ): %f %f %f\n", x, y, z);
-			}
-			else
-				printf("Error parsing scale");
-		}
-		else
-			printf("scale not found\n");		
-
-
-
-
 
 		// repeat for each of the variables as needed
 	}
@@ -214,7 +143,6 @@ XMLScene::XMLScene(char *filename)
 	}
 
 }
-
 XMLScene::~XMLScene()
 {
 	delete(doc);
@@ -238,12 +166,3 @@ TiXmlElement *XMLScene::findChildByAttribute(TiXmlElement *parent,const char * a
 	return child;
 }
 
-int main(){
-
-	XMLScene("aula1.xml");
-
-	system("pause");
-
-	return 0;
-
-}

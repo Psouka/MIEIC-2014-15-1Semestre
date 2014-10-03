@@ -1,0 +1,31 @@
+<anf>
+
+    <!-- bloco de configuracoes globais -->
+    <!-- a declaracao dos componentes deste bloco e' obrigatoria --> 
+    <globals>
+        <!-- Parametros de desenho -->
+        <!-- Valores para mode: "fill" , "line", "point" -->
+        <!-- Valores para shading: "flat", "gouraud" ) -->
+        <drawing mode="line" shading="flat" background="10 10 10 10" />
+ 
+        <!-- Parametros de culling -->
+        <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
+        <!-- Valores para cullorder : "ccw" ou "cw" -->
+        <culling face="both" order="ccw" />
+ 
+        <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->
+        <lighting doublesided="true" local="true" enabled="true" ambient="11 11 11 11" />
+ 
+    </globals>
+
+
+      <cameras initial="ss" >
+        <!-- tem de existir, pelo menos uma camara dos tipos seguintes (perspective ou ortho) -->
+        <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
+
+        <perspective id="ss" near="ff" far="ff" angle="ff" pos="ff ff ff" target="ff ff ff" />
+        <ortho id="ss" direction="ee" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
+
+    </cameras>
+    
+ </anf>
