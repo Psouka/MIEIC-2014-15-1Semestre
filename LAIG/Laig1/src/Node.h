@@ -7,18 +7,17 @@
 #include <iostream>
 #include "CGFscene.h"
 #include "Appearance.h"
+
 using namespace std;
 
 class Node
 {
-	string nodeID;
-	vector<Node*> childrenNodes;
-	vector<Primitives*> primitivas;
-	float transforms[16];
+	string ID;
+	vector<string> children;
+	vector<Primitives*> primitives;
+	float matrix[16];
 	Appearance* appearance;
-	string appearanceref;
-	float length_s,length_t;
-	static Appearance* parentApp;
+	static Appearance* fatherAppearance;
 public:
 	Node();
 };

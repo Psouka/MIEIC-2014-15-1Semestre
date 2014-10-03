@@ -88,10 +88,12 @@
     <ClInclude Include="..\src\Appearance.h" />
     <ClInclude Include="..\src\Cameras.h" />
     <ClInclude Include="..\src\Globals.h" />
+    <ClInclude Include="..\src\Graph.h" />
     <ClInclude Include="..\src\Lights.h" />
     <ClInclude Include="..\src\myInterface.h" />
     <ClInclude Include="..\src\Node.h" />
     <ClInclude Include="..\src\Primitives.h" />
+    <ClInclude Include="..\src\SceneGraph.h" />
     <ClInclude Include="..\src\tinystr.h" />
     <ClInclude Include="..\src\tinyxml.h" />
     <ClInclude Include="..\src\XMLScene.h" />
