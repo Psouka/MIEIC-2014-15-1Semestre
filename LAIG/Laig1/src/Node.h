@@ -1,5 +1,5 @@
-#ifndef NODE_H
-#define NODE_H
+#ifndef _NODE_H_
+#define _NODE_H_
 
 #include <vector>
 #include "Primitives.h"
@@ -7,6 +7,7 @@
 #include <iostream>
 #include "CGFscene.h"
 #include "Appearance.h"
+
 using namespace std;
 
 class Node
@@ -18,11 +19,15 @@ class Node
 	vector<Primitives*> primitivas;
 	float transforms[16];
 	Appearance* appearance;
-	string appearanceref;
-	float length_s,length_t;
-	static Appearance* parentApp;
+	static Appearance* fatherAppearance;
 public:
-	Node();
+	Node(string ID);
+	Node(string ID, vector<string> children);
+	void setParentApp(Appearance* fatherAppearance);
+	string getID();
+	float* getMatrix();
+	vector<string> getChildren();
+	void readANF(); //caso não seja para fazer o read no construtor
 };
 
 #endif

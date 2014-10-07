@@ -81,9 +81,16 @@
   <ItemGroup>
     <ClCompile Include="..\src\ANFScene.cpp" />
     <ClCompile Include="..\src\Appearance.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\src\Cameras.cpp" />
     <ClCompile Include="..\src\Globals.cpp" />
     <ClCompile Include="..\src\Textures.cpp" />
+=======
+    <ClCompile Include="..\src\Graph.cpp" />
+    <ClCompile Include="..\src\Node.cpp" />
+    <ClCompile Include="..\src\Primitives.cpp" />
+    <ClCompile Include="..\src\SceneGraph.cpp" />
+>>>>>>> origin/master
     <ClCompile Include="..\src\tinystr.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -91,11 +98,16 @@
     <ClInclude Include="..\src\Appearance.h" />
     <ClInclude Include="..\src\Cameras.h" />
     <ClInclude Include="..\src\Globals.h" />
+    <ClInclude Include="..\src\Graph.h" />
     <ClInclude Include="..\src\Lights.h" />
     <ClInclude Include="..\src\myInterface.h" />
     <ClInclude Include="..\src\Node.h" />
     <ClInclude Include="..\src\Primitives.h" />
+<<<<<<< HEAD
     <ClInclude Include="..\src\Textures.h" />
+=======
+    <ClInclude Include="..\src\SceneGraph.h" />
+>>>>>>> origin/master
     <ClInclude Include="..\src\tinystr.h" />
     <ClInclude Include="..\src\tinyxml.h" />
   </ItemGroup>

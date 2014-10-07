@@ -16,9 +16,9 @@ public:
 class Circle : public Primitives
 {
 	float radius;
-	int lados;
+	int slices;
 public:
-	Circle(float rad, int l);
+	Circle(float rad, int slices);
 	void draw();
 };
 
