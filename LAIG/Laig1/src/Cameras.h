@@ -10,13 +10,16 @@ using namespace std;
 class Camera
 {
 protected:
-	string initial;
+	bool initial;
 	string cameraid;
 	float position[3];
 	float target[3];
 	float nearP;
 	float farP;
 public:
+	void setPosition(float *p);
+	void setTarget(float *t);
+	void setInitial(bool i);
 	Camera(string id);
 	float getnearP();
 	float getfarP();

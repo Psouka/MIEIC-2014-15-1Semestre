@@ -12,7 +12,9 @@ using namespace std;
 class Node
 {
 	string nodeID;
+	int displaylist;
 	vector<Node*> childrenNodes;
+	vector<string> childStrids;
 	vector<Primitives*> primitivas;
 	float transforms[16];
 	Appearance* appearance;

@@ -2,6 +2,11 @@
 #define _ANFSCENE_H_
 
 #include "tinyxml.h"
+#include "Cameras.h"
+#include "Globals.h"
+#include "Lights.h"
+#include "Textures.h"
+#include "Appearance.h"
 
 class ANFScene
 {
@@ -10,21 +15,27 @@ public:
 	~ANFScene();
 
 	static TiXmlElement *findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val);
-	void parseGlobals();
-	void parseCameras();
-	void parseLights();
-	void parseTextures();
-	void parseAppearences();
+	int parseGlobals();
+	int parseCameras();
+	int parseLights();
+	int parseTextures();
+	int parseAppearences();
 	void parseNodes();
 	void parseGraph();
+	string findTexture(string id);
 	
 protected:
+	vector <Camera*> cameras;
+	vector <Light*> lights;
+	vector <Texture*> textures;
+	vector <Appearance*> Apps;
+	Globals ANFGlobals;
 
 	TiXmlDocument* doc;
 
 	TiXmlElement* globalsElement; 
 	TiXmlElement* camerasElement; 
-	TiXmlElement* lightsElement;
+	TiXmlElement* lightElement;
 	TiXmlElement* texturesElement;
 	TiXmlElement* appearancesElement;
 	TiXmlElement* nodesElement;

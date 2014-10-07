@@ -5,17 +5,9 @@
 class Appearance
 {
 	CGFappearance* app;
-	string appearanceid;
-	float emissive[4];
+	string id, textureref;
 public:
-	Appearance(string id);	
-	CGFappearance* getApp();
-	string getAppId();
-	float* getEmissive();
-	void setEmissive(float e[4]);
-	void apply();
-	void setAppearance(CGFappearance* a);
-	float texlength_s, texlength_t;
+	Appearance(string id, string textureref, CGFappearance* app);
 };
 
 #endif

@@ -24,8 +24,15 @@
         <!-- no caso da camara ortho, o atributo "direction" define o eixo segundo o qual se efetua a projecao -->
 
         <perspective id="ID" near="10" far="20" angle="45" pos="5 5 5" target="10 10 10" />
-        <ortho id="ss" direction="ee" near="ff" far="ff" left="ff" right="ff" top="ff" bottom="ff" />
+        <ortho id="ID2" direction="ee" near="21" far="32" left="10" right="10" top="10" bottom="10" />
+        
 
     </cameras>
+
+
+    <textures>       
+          <texture id="ss" file="ss" texlength_s="10" texlength_t="10" />
+          <texture id="ss2" file="ss2" texlength_s="11" texlength_t="11" />
+    </textures>
     
  </anf>
