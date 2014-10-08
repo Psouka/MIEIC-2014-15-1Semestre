@@ -11,3 +11,17 @@ Appearance :: Appearance(string id, string textureref, CGFappearance* app){
 	this->app = app;
 
 }
+
+
+CGFappearance* Appearance :: getApp(){
+return app;
+}
+
+
+void Appearance ::setAppearance(CGFappearance* a){
+app = a;
+}
+
+string  Appearance ::getAppId(){
+return id;
+}

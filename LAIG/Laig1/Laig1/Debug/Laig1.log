@@ -1,34 +1,10 @@
-﻿Build started 08/10/2014 12:35:51.
+﻿Build started 08/10/2014 19:44:24.
      1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\Laig1.unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\Programas\CGRA_Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp
-         ANFScene.cpp
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(95): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(111): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(215): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(341): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(394): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(441): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(463): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(486): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(506): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(650): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(667): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(685): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\Programas\CGRA_Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\Node.cpp
+         Node.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\Programas\CGRA_Libraries\lib glew32.lib CGFlibd.lib tinyxml.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.lib" /MACHINE:X86 Debug\ANFScene.obj
          Debug\Appearance.obj
@@ -37,9 +13,18 @@
          Debug\Graph.obj
          Debug\Node.obj
          Debug\Primitives.obj
-         Debug\SceneGraph.obj
          Debug\Textures.obj
          Debug\tinystr.obj
+     1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+     1>CGFlibd.lib(CGFappearance.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFappearance.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(CGFlight.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFlight.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(CGFobject.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFobject.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(CGFtexture.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFtexture.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(imagetools.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(imagetools.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(stb_image.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(stb_image.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxml.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxml.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc100.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxmlerror.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlerror.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc100.pdb'; linking object as if no debug info
+     1>tinyxml.lib(tinyxmlparser.obj) : warning LNK4099: PDB 'vc100.pdb' was not found with 'tinyxml.lib(tinyxmlparser.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc100.pdb'; linking object as if no debug info
          Laig1.vcxproj -> D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe
        FinalizeBuildStatus:
          Deleting file "Debug\Laig1.unsuccessfulbuild".
@@ -48,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.45
+Time Elapsed 00:00:03.49

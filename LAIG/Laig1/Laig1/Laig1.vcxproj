@@ -18,7 +18,6 @@
     <ClCompile Include="..\src\Graph.cpp" />
     <ClCompile Include="..\src\Node.cpp" />
     <ClCompile Include="..\src\Primitives.cpp" />
-    <ClCompile Include="..\src\SceneGraph.cpp" />
     <ClCompile Include="..\src\Textures.cpp" />
     <ClCompile Include="..\src\tinystr.cpp" />
   </ItemGroup>
@@ -32,7 +31,6 @@
     <ClInclude Include="..\src\myInterface.h" />
     <ClInclude Include="..\src\Node.h" />
     <ClInclude Include="..\src\Primitives.h" />
-    <ClInclude Include="..\src\SceneGraph.h" />
     <ClInclude Include="..\src\Textures.h" />
     <ClInclude Include="..\src\tinystr.h" />
     <ClInclude Include="..\src\tinyxml.h" />

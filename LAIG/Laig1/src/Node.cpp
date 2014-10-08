@@ -4,27 +4,42 @@
 #include "Node.h"
 #include "Graph.h"
 
+Node::Node(){
+}
+
 Node::Node(string nodeID) {
 	this->nodeID = nodeID;
+	for(int i=0;i<16;i++)
+	{
+		if(i==0||i==5||i==10||i==15)
+			transforms[i]=1;
+		else
+			transforms[i]=0;
+	}
+
 }
 
-Node::Node(string nodeID, vector<string> children) {
-	this->nodeID = nodeID;
-	this->childStrids = children;
+void Node::setApp(CGFappearance *p){
+	this->app = p;
+
 }
 
-string Node::getID() {
-	return this->nodeID;
+void Node:: addPrimitive(Primitives* p){
+	primitives.push_back(p);
 }
 
-float* Node::getMatrix() {
-	return transforms;
+
+
+void Node:: addDescend(Node * n){
+	descendants.push_back(n);
+
 }
 
-void Node::setParentApp(Appearance* fatherAppearance) {
-	this->fatherAppearance = fatherAppearance;
+string Node:: getID(){
+	return nodeID;
 }
 
-vector<string> Node::getChildren() {
-	return this->childStrids;
-}
+
+void Node::translate(float x, float y, float z){}
+void Node::rotate(string axis, float angle){}
+void Node::scale(float x, float y, float z){}

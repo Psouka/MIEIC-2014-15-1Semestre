@@ -15,6 +15,7 @@ class Graph {
 public:
 	Graph();
 	graphMap getGraph();
+	void addNode(Node* n);
 };
 
 #endif

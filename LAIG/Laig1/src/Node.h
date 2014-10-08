@@ -13,21 +13,23 @@ using namespace std;
 class Node
 {
 	string nodeID;
-	int displaylist;
-	vector<Node*> childrenNodes;
-	vector<string> childStrids;
-	vector<Primitives*> primitivas;
+	vector<Node *> descendants;
+	vector<Primitives *> primitives;
 	float transforms[16];
-	Appearance* appearance;
-	Appearance* fatherAppearance;
+	CGFappearance * app;
 public:
+	Node();
 	Node(string ID);
 	Node(string ID, vector<string> children);
-	void setParentApp(Appearance* fatherAppearance);
+	void setApp(CGFappearance *p);
+	void addPrimitive(Primitives* p);
+	void addDescend(Node * n);
 	string getID();
 	float* getMatrix();
-	vector<string> getChildren();
 	void readANF(); //caso não seja para fazer o read no construtor
+	void translate(float x, float y, float z);
+	void rotate(string axis, float angle);
+	void scale(float x, float y, float z);
 };
 
 #endif

@@ -29,7 +29,6 @@ ANFScene :: ANFScene(char *filename){
 	lightElement =  anfElement->FirstChildElement( "lights" );
 	texturesElement =  anfElement->FirstChildElement( "textures" );
 	appearancesElement =  anfElement->FirstChildElement( "appearances" );
-	nodesElement =  anfElement->FirstChildElement( "node" );
 	graphElement =  anfElement->FirstChildElement( "graph" );
 
 
@@ -43,6 +42,8 @@ ANFScene :: ANFScene(char *filename){
 	printf("\n\n[TEXTURAS] DONE\n");
 	this->parseAppearences();
 	printf("\n\n[APPEARENCES] DONE\n\n");
+	this->parseGraph();
+	printf("\n\n[GRAPH]\n\n");
 
 }
 
@@ -82,7 +83,7 @@ int ANFScene :: parseCameras(){
 					camElement->QueryFloatAttribute("far",&far)==TIXML_SUCCESS &&
 					camElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
 				{
-					
+
 					printf("\n	near: %f",near);
 					printf("\n	far: %f",far);
 					printf("\n	angle: %f",angle);
@@ -142,7 +143,7 @@ int ANFScene :: parseCameras(){
 				char *id=NULL;
 				float near,far,left,right,top,bottom;
 
-					if(id = (char *)camElement->Attribute("id"))
+				if(id = (char *)camElement->Attribute("id"))
 					printf("\n	id: %s",id);
 				else
 					printf("ID ERROR");
@@ -397,7 +398,7 @@ int ANFScene :: parseLights(){
 				pos[1] = x1;
 				pos[2] = x2;
 
-				printf("\n	Type: %s",ValString);
+				printf("\n	Position: %s",ValString);
 			}
 			else
 				printf("LIGHTS POSITION ERROR");
@@ -407,25 +408,25 @@ int ANFScene :: parseLights(){
 
 			if(ValString = (char *)lElement->Attribute("enabled")){
 
-			if(strcmp(ValString,"true") == 0)
-				CGFLtemp->enable();
-			else
-				CGFLtemp->disable();
-			
-			printf("\n	Enable: %s",ValString);
-			
+				if(strcmp(ValString,"true") == 0)
+					CGFLtemp->enable();
+				else
+					CGFLtemp->disable();
+
+				printf("\n	Enable: %s",ValString);
+
 			}
 			else
 				printf("LIGHTS ENABLE ERROR");
 
 
 			if(ValString = (char *)lElement->Attribute("marker")){
-			if(strcmp(ValString,"true") == 0)
-				marker = true;
-			else
-				marker = false;
+				if(strcmp(ValString,"true") == 0)
+					marker = true;
+				else
+					marker = false;
 
-			printf("\n	Marker: %s",ValString);
+				printf("\n	Marker: %s",ValString);
 			}
 			else
 				printf("LIGHTS MARKER ERROR");
@@ -447,7 +448,7 @@ int ANFScene :: parseLights(){
 					printf("\n	Ambient component: %s",ValString);
 				}
 				else
-				printf("LIGHTS AMBIENT COMPONENT ERROR");
+					printf("LIGHTS AMBIENT COMPONENT ERROR");
 			}
 			else
 				printf("LIGHTS AMBIENT COMPONENT ERROR");
@@ -469,7 +470,7 @@ int ANFScene :: parseLights(){
 					printf("\n	Diffuse component: %s",ValString);
 				}
 				else
-				printf("LIGHTS DIFFUSE COMPONENT ERROR");
+					printf("LIGHTS DIFFUSE COMPONENT ERROR");
 			}
 			else
 				printf("LIGHTS DIFFUSE COMPONENT ERROR");
@@ -492,7 +493,7 @@ int ANFScene :: parseLights(){
 					printf("\n	Specular component: %s",ValString);
 				}
 				else
-				printf("LIGHTS SPECULAR COMPONENT ERROR");
+					printf("LIGHTS SPECULAR COMPONENT ERROR");
 			}
 			else
 				printf("LIGHTS SPECULAR COMPONENT ERROR");
@@ -512,7 +513,7 @@ int ANFScene :: parseLights(){
 
 				}
 				else
-				printf("LIGHTS TARGET ERROR");
+					printf("LIGHTS TARGET ERROR");
 
 				if (lElement->QueryFloatAttribute("exponent",&exponent)==TIXML_SUCCESS && 
 					lElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
@@ -521,7 +522,7 @@ int ANFScene :: parseLights(){
 					printf("\n	Exponent : %f",exponent);
 				}
 				else
-				printf("LIGHTS angle/exponent ERROR");
+					printf("LIGHTS angle/exponent ERROR");
 
 
 				Ltemp = new SpotLight(CGFLtemp,pos,type,marker, target,exponent, angle);
@@ -640,13 +641,13 @@ int ANFScene :: parseAppearences(){
 			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
 			printf("\n(Components)");
 			while(compElement){
-			
+
 				type = (char *)compElement->Attribute("type");
 				valString = (char *)compElement->Attribute("value");
 
 				if(strcmp(type,"ambient") == 0)
 				{
-					
+
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
 						ambient[0] = x0;
@@ -715,13 +716,147 @@ int ANFScene :: parseAppearences(){
 
 			temp = new Appearance(string(appid),string(textref),app);
 
-			Apps.push_back(temp);
+			apps.push_back(temp);
 
 			appearanceElement = appearanceElement->NextSiblingElement();
 		}
 
 
 
+	}
+	return 0;
+}
+
+int ANFScene :: parseGraph(){
+	if(graphElement == NULL)
+		printf("Graph block not found!\n");
+	else {
+		printf("\n[GRAPH]");
+
+		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
+		TiXmlElement *transformsElement=nodeElement->FirstChildElement("transforms");
+		TiXmlElement* appearanceref=nodeElement->FirstChildElement("appearanceref");
+		TiXmlElement* primitiveElement=nodeElement->FirstChildElement("primitives");
+		TiXmlElement* descendantElement=nodeElement->FirstChildElement("descendants");
+
+		Node *Nodetemp;
+		char* ValString, *type;
+		float angle, x0, x1, x2;
+		while(nodeElement){
+
+			if(ValString = (char *) nodeElement->Attribute("id"))
+			{
+				printf("\n	Id: %s",ValString);
+			}
+			else
+				printf("\nID NODE ERROR");
+
+			Nodetemp = new Node(string(ValString));
+
+			TiXmlElement* transformElement=transformsElement->FirstChildElement();
+
+			if(transformElement)
+				printf("\n	(Transforms)");
+			else
+				printf("\nTRANSFORMS ERROR");
+
+			while(transformElement)
+			{
+
+
+				if(strcmp(transformElement->Value(),"translate")==0)
+				{
+					ValString = (char *) transformElement->Attribute("to");
+
+					if(ValString && sscanf(ValString,"%f %f %f",&x0, &x1, &x2)==3)
+					{
+						printf("\n	Translate: (%f,%f,%f)\n", x0, x1, x2);
+						Nodetemp->translate(x0,x1,x2);
+					}
+					else
+						printf("\nERROR TRANSLATE\n");		
+
+
+				}
+
+				if(strcmp(transformElement->Value(),"rotate")==0)
+				{
+
+					ValString=(char *) transformElement->Attribute("axis");
+
+					if ( ValString && (transformElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS))
+					{
+						Nodetemp->rotate(string(ValString),angle);
+						printf("\n	Rotate:  axis: %s  angle: %f \n", ValString, angle);
+					}
+					else
+						printf("ERROR ROTATE\n");
+				}
+
+				if(strcmp(transformElement->Value(),"scale")==0)
+				{
+					ValString = (char *) transformElement->Attribute("factor");
+
+					if(ValString && sscanf(ValString ,"%f %f %f",&x0, &x1, &x2)==3)
+					{
+						Nodetemp->scale(x0,x1,x2);
+						printf("\n	Scale: x: %f  y: %f  z: %f \n", x0, x1, x2);
+					}
+					else
+						printf("ERROR SCALE\n");
+				}
+				transformElement=transformElement->NextSiblingElement();
+			}
+
+
+			if(appearanceref)
+			{
+				ValString=(char *) appearanceref->Attribute("id");
+
+				if (ValString)
+				{
+
+					Nodetemp->setApp(findApp(ValString));
+					printf("\n	Appearanceref: %s \n", ValString);
+				}
+				else
+					printf("ERROR PARSING APPEARANCEREF\n");
+			}
+
+
+
+			
+			if(primitiveElement)
+				printf("\n	(Primitives)");
+			else
+				printf("\nPRIMITIVES ERROR");
+
+			TiXmlElement* pElement = primitiveElement->FirstChildElement();
+			while(pElement)
+			{
+
+			}
+
+
+			if(descendantElement)
+				printf("\n	(Descendants)");
+			else
+				printf("\nDESCENDANTS ERROR");
+			TiXmlElement* DElement = descendantElement->FirstChildElement();
+			while(pElement)
+			{
+				ValString=(char *) descendantElement->Attribute("id");
+
+				Nodetemp->addDescend(ANFGraph.getGraph()[string(ValString)]);
+
+
+				pElement = pElement->NextSiblingElement();
+			}
+
+
+			ANFGraph.addNode(Nodetemp);
+			nodeElement = nodeElement->NextSiblingElement();
+		}
 	}
 	return 0;
 }
@@ -733,6 +868,16 @@ string ANFScene ::findTexture(string id){
 			return textures[i]->getFile();
 	}
 	return "";
+}
+
+CGFappearance* ANFScene :: findApp(string id){
+	for(unsigned int i = 0; i < apps.size(); i++){
+		if(apps[i]->getAppId() == id)
+			return apps[i]->getApp();
+	}
+
+	return NULL;
+
 }
 
 
