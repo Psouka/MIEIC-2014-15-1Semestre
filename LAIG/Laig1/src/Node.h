@@ -19,7 +19,7 @@ class Node
 	vector<Primitives*> primitivas;
 	float transforms[16];
 	Appearance* appearance;
-	static Appearance* fatherAppearance;
+	Appearance* fatherAppearance;
 public:
 	Node(string ID);
 	Node(string ID, vector<string> children);

@@ -621,6 +621,7 @@ int ANFScene :: parseAppearences(){
 
 
 	}
+	return 0;
 }
 
 string ANFScene ::findTexture(string id){
