@@ -822,10 +822,7 @@ int ANFScene :: parseGraph(){
 				else
 					printf("ERROR PARSING APPEARANCEREF\n");
 			}
-
-
-
-
+			
 			if(primitiveElement)
 				printf("\n	(Primitives)");
 			else

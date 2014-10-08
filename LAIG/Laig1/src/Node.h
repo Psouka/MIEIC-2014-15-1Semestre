@@ -20,7 +20,6 @@ class Node
 public:
 	Node();
 	Node(string ID);
-	Node(string ID, vector<string> children);
 	void setApp(CGFappearance *p);
 	void addPrimitive(Primitives* p);
 	void addDescend(Node * n);
