@@ -43,7 +43,7 @@ ANFScene :: ANFScene(char *filename){
 	this->parseAppearences();
 	printf("\n\n[APPEARENCES] DONE\n\n");
 	this->parseGraph();
-	printf("\n\n[GRAPH]\n\n");
+	printf("\n\n[GRAPH] DONE\n\n");
 
 }
 
@@ -740,8 +740,8 @@ int ANFScene :: parseGraph(){
 		TiXmlElement* descendantElement=nodeElement->FirstChildElement("descendants");
 
 		Node *Nodetemp;
-		char* ValString, *type;
-		float angle, x0, x1, x2;
+		char* ValString, *ValString2, *ValString3, *type;
+		float angle, x0, x1, x2, x3, y0, y1, y2,y3, z0, z1, z2, z3;
 		while(nodeElement){
 
 			if(ValString = (char *) nodeElement->Attribute("id"))
@@ -825,7 +825,7 @@ int ANFScene :: parseGraph(){
 
 
 
-			
+
 			if(primitiveElement)
 				printf("\n	(Primitives)");
 			else
@@ -835,6 +835,99 @@ int ANFScene :: parseGraph(){
 			while(pElement)
 			{
 
+				if (strcmp(pElement->Value(),"rectangle")==0)
+				{
+
+					ValString = (char *) pElement->Attribute("xy1");
+					ValString2 = (char *) pElement->Attribute("xy2");
+
+					if(ValString && sscanf(ValString,"%f %f",&x1, &y1)==2
+						&& ValString2 && sscanf(ValString2,"%f %f",&x2, &y2)==2)
+					{
+						Nodetemp->addPrimitive(new Rectangle(x1,y1,x2,y2));
+						printf("\n	Rectangle x1: %f y1:%f x2: %f y2:%f",x1,y1,x2,y2);
+					}
+					else
+						printf("\nERROR RECTANGLE");
+
+
+				}
+
+				else if (strcmp(pElement->Value(),"triangle")==0)
+				{
+
+					ValString = (char *) pElement->Attribute("xyz1");
+					ValString2 = (char *) pElement->Attribute("xyz2");
+					ValString3 = (char *) pElement->Attribute("xyz3");
+
+					if(ValString && sscanf(ValString,"%f %f %f",&x1, &y1, &z1)==3
+						&& ValString2 && sscanf(ValString2,"%f %f %f",&x2, &y2, &z2)==3
+						&& ValString3 && sscanf(ValString3,"%f %f %f",&x3, &y3, &z3)==3)
+					{
+						Nodetemp->addPrimitive(new Triangle(x1,y1,z1,x2,y2,z2,x3,y3,z3));
+						printf("\n	Triangle x1:%f y1:%f z1:%f x2:%f y2:%f z2:%f x3:%f y3:%f z3:%f",x1,y1,z1,x2,y2,z2,x3,y3,z3);
+					}
+					else
+						printf("\nERROR TRIANGLE");
+
+				}
+
+				// <cylinder base="ff" top="ff" height="ff" slices="ii" stacks="ii" /> 
+
+				else if (strcmp(pElement->Value(),"cylinder")==0)
+				{
+					ValString = (char *) pElement->Attribute("slices");
+					ValString2 = (char *) pElement->Attribute("stacks");
+
+					if (pElement->QueryFloatAttribute("base",&x0)==TIXML_SUCCESS && 
+						pElement->QueryFloatAttribute("top",&x1)==TIXML_SUCCESS &&
+						pElement->QueryFloatAttribute("height",&x2)==TIXML_SUCCESS
+						&& ValString && ValString2)
+					{
+						Nodetemp->addPrimitive(new Cylinder(atoi(ValString),atoi(ValString2),x0,x1,x2));
+						printf("\n	Cylinder slices:%s stacks:%s base:%f top:%f height:%f",ValString,ValString2,x0,x1,x2);
+					}
+					else
+						printf("\nERROR CYLINDER");
+				}
+
+				//<sphere radius="ff" slices="ii" stacks="ii" />
+
+				else if (strcmp(pElement->Value(),"sphere")==0)
+				{
+					ValString = (char *) pElement->Attribute("slices");
+					ValString2 = (char *) pElement->Attribute("stacks");
+
+					if (pElement->QueryFloatAttribute("radius",&x0)==TIXML_SUCCESS
+						&& ValString && ValString2)
+					{
+						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString2),x0));
+						printf("\n	Shpere slices:%s stacks:%s radius:%f",ValString,ValString2,x0);
+					}
+					else
+						printf("\nERROR SPHERE");
+				}
+
+				// <torus inner="ff" outer="ff" slices="ii" loops="ii" />
+
+				else if (strcmp(pElement->Value(),"torus")==0)
+				{
+					ValString = (char *) pElement->Attribute("slices");
+					ValString2 = (char *) pElement->Attribute("loops");
+
+					if (pElement->QueryFloatAttribute("inner",&x0)==TIXML_SUCCESS && 
+						pElement->QueryFloatAttribute("outer",&x1)==TIXML_SUCCESS
+						&& ValString && ValString2)
+					{
+						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString2),x0));
+						printf("\n	Shpere slices:%s loops:%s inner:%f outer:%f",ValString,ValString2,x0,x1);
+					}
+					else
+						printf("\nERROR TORUS");
+				}
+
+
+				pElement = pElement->NextSiblingElement();
 			}
 
 
@@ -842,15 +935,14 @@ int ANFScene :: parseGraph(){
 				printf("\n	(Descendants)");
 			else
 				printf("\nDESCENDANTS ERROR");
-			TiXmlElement* DElement = descendantElement->FirstChildElement();
-			while(pElement)
+			TiXmlElement* dElement = descendantElement->FirstChildElement();
+			while(dElement)
 			{
-				ValString=(char *) descendantElement->Attribute("id");
+				ValString=(char *) dElement->Attribute("id");
 
 				Nodetemp->addDescend(ANFGraph.getGraph()[string(ValString)]);
 
-
-				pElement = pElement->NextSiblingElement();
+				dElement = dElement->NextSiblingElement();
 			}
 
 
@@ -880,12 +972,10 @@ CGFappearance* ANFScene :: findApp(string id){
 
 }
 
-
 ANFScene::~ANFScene()
 {
 	delete(doc);
 }
-
 
 TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val)
 	// Searches within descendants of a parent for a node that has an attribute _attr_ (e.g. an id) with the value _val_
@@ -902,7 +992,6 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 
 	return child;
 }
-
 
 int main(){
 
