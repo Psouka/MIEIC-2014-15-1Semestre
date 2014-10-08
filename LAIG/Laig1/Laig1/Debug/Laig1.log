@@ -1,4 +1,4 @@
-﻿Build started 08/10/2014 12:05:51.
+﻿Build started 08/10/2014 12:35:51.
      1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -23,11 +23,11 @@
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
      1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(506): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(652): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(650): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(669): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(667): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
-     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(687): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+     1>d:\workspace-github\mieic-2014-15-1semestre\laig\laig1\src\anfscene.cpp(685): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
                  c:\program files (x86)\microsoft visual studio 11.0\vc\include\stdio.h(311) : see declaration of 'sscanf'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\Programas\CGRA_Libraries\lib glew32.lib CGFlibd.lib tinyxml.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.lib" /MACHINE:X86 Debug\ANFScene.obj
@@ -48,4 +48,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.35
+Time Elapsed 00:00:01.45

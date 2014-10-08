@@ -614,7 +614,7 @@ int ANFScene :: parseAppearences(){
 		{
 
 			if(appid = (char *)appearanceElement->Attribute("id"))
-				printf("\n	Attribute: %s\n",appid);
+				printf("\n	Attribute: %s",appid);
 			else
 			{
 				printf("APPEARENCES ID ERROR\n");
@@ -622,13 +622,13 @@ int ANFScene :: parseAppearences(){
 			}
 
 			if(appearanceElement->QueryFloatAttribute("shininess",&shininess) ==TIXML_SUCCESS)
-				printf("\n	Shininess:%f\n",shininess);
+				printf("\n	Shininess:%f",shininess);
 			else
 				printf("APPEARENCES SHININESS ERROR\n");
 
 			if(textref = (char *)appearanceElement->Attribute("textureref"))
 			{
-				printf("\n	Textureref: %s\n",textref);
+				printf("\n	Textureref: %s",textref);
 			}
 			else
 			{
@@ -644,7 +644,7 @@ int ANFScene :: parseAppearences(){
 				type = (char *)compElement->Attribute("type");
 				valString = (char *)compElement->Attribute("value");
 
-				if(strcmp(type,"ambient"))
+				if(strcmp(type,"ambient") == 0)
 				{
 					
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
@@ -662,7 +662,7 @@ int ANFScene :: parseAppearences(){
 				}
 
 
-				else if(strcmp(type,"diffuse"))
+				else if(strcmp(type,"diffuse")== 0)
 				{
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
@@ -680,20 +680,20 @@ int ANFScene :: parseAppearences(){
 				}
 
 
-				else if(strcmp(type,"specular"))
+				else if(strcmp(type,"specular")== 0)
 				{
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
-						diffuse[0] = x0;
-						diffuse[1] = x1;
-						diffuse[2] = x2;
-						diffuse[3] = x3;
+						specular[0] = x0;
+						specular[1] = x1;
+						specular[2] = x2;
+						specular[3] = x3;
 						printf("\n	Specular: <%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
 					}
 
 
 					else
-						printf("APPEARENCES DIFFUSE ERROR\n");
+						printf("APPEARENCES SPECULAR ERROR\n");
 
 				}
 

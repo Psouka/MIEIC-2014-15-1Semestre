@@ -59,7 +59,7 @@
         <!-- deve existir um ou mais blocos "appearance" -->
         <!-- IMPORTANTE: -->
         <!--   textureref e opcional, a utilizar caso haja textura associada a esta aparencia --> 
-        <appearance id="ss" shininess="10" textureref="ss" >
+        <appearance id="ssid" shininess="10" textureref="ss" >
                <component type="ambient" value="1 1 1 1" />
                <component type="diffuse" value="2 2 2 2" />
                <component type="specular" value="3 3 3 3" />
