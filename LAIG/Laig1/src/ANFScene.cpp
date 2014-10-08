@@ -34,20 +34,15 @@ ANFScene :: ANFScene(char *filename){
 
 
 	this->parseGlobals();
-	printf("\nGLOBAIS DONE!!!");
-	system("pause");
+	printf("\n\n[GLOBAIS] DONE\n");
 	this->parseLights();
-	printf("\nLUZES DONE!!!");
-	system("pause");
+	printf("\n\n[LUZES] DONE\n");
 	this->parseCameras();
-	printf("\nCAMERAS DONE!!!");
-	system("pause");
+	printf("\n\n[CAMERAS] DONE\n");
 	this->parseTextures();
-	printf("\nTEXTURES DONE!!!");
-	system("pause");
+	printf("\n\n[TEXTURAS] DONE\n");
 	this->parseAppearences();
-	printf("\nAPPEARENCES DONE!!!");
-	system("pause");
+	printf("\n\n[APPEARENCES] DONE\n\n");
 
 }
 
@@ -227,19 +222,19 @@ int ANFScene:: parseGlobals(){
 					drawmode = GL_LINE;
 				else if(strcmp(mode,"point")==0)
 					drawmode = GL_POINT;
-				printf("  drawmode: %s\n", mode);
+				printf("\n	Drawmode: %s", mode);
 
 				if(strcmp(shading,"flat")==0)
 					drawshading = GL_FLAT;
 				else if(strcmp(shading,"gouraud")==0)
 					drawshading = GL_SMOOTH;
-				printf("  shading: %s\n", shading);
+				printf("\n	Shading: %s", shading);
 
 				bg[0] = bg0;
 				bg[1] = bg1;
 				bg[2] = bg2;
 				bg[3] = bg3;
-				printf("  background  : (%f,%f,%f,%f)\n", bg[0], bg[1], bg[2], bg[3]);
+				printf("\n	Background  : (%f,%f,%f,%f)", bg[0], bg[1], bg[2], bg[3]);
 
 				ANFGlobals.updateDraw(drawmode,drawshading,bg);
 
@@ -273,7 +268,7 @@ int ANFScene:: parseGlobals(){
 					ol = GL_CCW;
 				else if(strcmp(cullorder,"CW")==0)
 					ol = GL_CW;
-				printf("  cullorder: %s\n", cullorder);
+				printf("\n	Cullorder: %s", cullorder);
 
 				if(strcmp(cullface,"back")==0)
 					fl = GL_BACK;
@@ -281,7 +276,7 @@ int ANFScene:: parseGlobals(){
 					fl = GL_FRONT;
 				else if(strcmp(cullface,"both")==0)
 					fl = GL_FRONT_AND_BACK ;
-				printf("  cullface: %s\n\n", cullface);
+				printf("\n	Cullface: %s", cullface);
 
 				ANFGlobals.updateCulli(fl,ol);
 			}
@@ -310,7 +305,11 @@ int ANFScene:: parseGlobals(){
 					doublesided = true;
 				else
 					doublesided = false;
+
+				printf("\n	Doublesided: %s",valString);
 			}
+			else
+				printf("\nDOUBLESIDED ERROR");
 
 			valString =(char *)gElement->Attribute("local");
 
@@ -319,7 +318,10 @@ int ANFScene:: parseGlobals(){
 					local= true;
 				else
 					local = false;
+				printf("\n	Local: %s",valString);
 			}
+			else
+				printf("\nLOCAL ERROR");
 
 			valString =(char *)gElement->Attribute("enabled");
 
@@ -328,7 +330,10 @@ int ANFScene:: parseGlobals(){
 					enabled = true;
 				else
 					enabled = false;
+				printf("\n	Enabled: %s",valString);
 			}
+			else
+				printf("\nENABLED ERROR");
 
 
 			valString=(char *)gElement->Attribute("ambient");
@@ -339,8 +344,10 @@ int ANFScene:: parseGlobals(){
 				ambient[1] = a1;
 				ambient[2] = a2;
 				ambient[3] = a3;
+				printf("Ambient: <%f %f %f %f>",ambient[0],ambient[1], ambient[2], ambient[3]);
 			}
-
+			else
+				printf("\nAMBIENT ERROR");
 
 			ANFGlobals.updateLight(doublesided,local,enabled,ambient);
 		}
@@ -606,59 +613,56 @@ int ANFScene :: parseAppearences(){
 		while(appearanceElement)
 		{
 
-			appid = (char *)appearanceElement->Attribute("id");
-			if(appid)
-			{
-				printf("Appearance attribute: %s\n",appid);
-			}
+			if(appid = (char *)appearanceElement->Attribute("id"))
+				printf("\n	Attribute: %s\n",appid);
 			else
 			{
-				printf("Error1 parsing Appearances\n");
+				printf("APPEARENCES ID ERROR\n");
 				return -1;
 			}
 
 			if(appearanceElement->QueryFloatAttribute("shininess",&shininess) ==TIXML_SUCCESS)
-				printf("Appearance Shininess:%f\n",shininess);
+				printf("\n	Shininess:%f\n",shininess);
 			else
-				printf("Error2 Appearance Shininess\n");
+				printf("APPEARENCES SHININESS ERROR\n");
 
-			textref = (char *)appearanceElement->Attribute("textureref");
-			if(textref)
+			if(textref = (char *)appearanceElement->Attribute("textureref"))
 			{
-				printf("Appearance textureref: %s\n",textref);
+				printf("\n	Textureref: %s\n",textref);
 			}
 			else
 			{
-				printf("Error3 parsing Appearances\n");
+				printf("APPEARENCES TEXTUREREF ERROR\n");
 				return -1;
 			}
 
 
 			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
+			printf("\n(Components)");
 			while(compElement){
+			
 				type = (char *)compElement->Attribute("type");
+				valString = (char *)compElement->Attribute("value");
 
 				if(strcmp(type,"ambient"))
 				{
-
-
-					valString = (char *)compElement->Attribute("value");
+					
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
 						ambient[0] = x0;
 						ambient[1] = x1;
 						ambient[2] = x2;
 						ambient[3] = x3;
-						printf("		Appearence component type=ambient value=<%f %f %f %f>", ambient[0],ambient[1],ambient[2],ambient[3]);
+						printf("\n	Ambient: <%f %f %f %f>", ambient[0],ambient[1],ambient[2],ambient[3]);
 					}
 					else
-						printf("		Appearence compoenent Ambient Error");
+						printf("APPEARENCES AMBIENT ERROR\n");
 
 
 				}
 
 
-				if(strcmp(type,"diffuse"))
+				else if(strcmp(type,"diffuse"))
 				{
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
@@ -666,17 +670,17 @@ int ANFScene :: parseAppearences(){
 						diffuse[1] = x1;
 						diffuse[2] = x2;
 						diffuse[3] = x3;
-						printf("		Appearence component type=diffuse value=<%f %f %f %f>", diffuse[0],diffuse[1],diffuse[2],diffuse[3]);
+						printf("\n	Diffuse: <%f %f %f %f>", diffuse[0],diffuse[1],diffuse[2],diffuse[3]);
 					}
 
 
 					else
-						printf("		Appearence compoenent diffuse Error");
+						printf("APPEARENCES DIFFUSE ERROR\n");
 
 				}
 
 
-				if(strcmp(type,"specular"))
+				else if(strcmp(type,"specular"))
 				{
 					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
@@ -684,17 +688,17 @@ int ANFScene :: parseAppearences(){
 						diffuse[1] = x1;
 						diffuse[2] = x2;
 						diffuse[3] = x3;
-						printf("		Appearence component type=specular value=<%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
+						printf("\n	Specular: <%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
 					}
 
 
 					else
-						printf("		Appearence compoenent specular Error");
+						printf("APPEARENCES DIFFUSE ERROR\n");
 
 				}
 
 
-
+				compElement = compElement->NextSiblingElement();
 			}
 			app = new CGFappearance(ambient,diffuse,specular,shininess);
 			string file = findTexture(textref);
@@ -757,7 +761,7 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 
 int main(){
 
-	ANFScene("aula1.anf");
+	ANFScene("teste.anf");
 
 	system("pause");
 
