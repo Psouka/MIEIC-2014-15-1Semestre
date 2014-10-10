@@ -16,6 +16,7 @@ public:
 	Graph();
 	graphMap getGraph();
 	void addNode(Node* n);
+	void draw();
 };
 
 #endif

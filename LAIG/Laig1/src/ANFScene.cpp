@@ -2,10 +2,11 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
-using namespace std;
+#include <time.h>
 
-ANFScene :: ANFScene(char *filename){
-
+ANFScene :: ANFScene(char *filename)
+	:  CGFscene()
+{
 
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
@@ -93,9 +94,9 @@ int ANFScene :: parseCameras(){
 
 					initial=(char *)camElement->Attribute("pos");
 
-					if(initial && sscanf(initial,"%f %f %f",&pos0, &pos1, &pos2)==3)
+					if(initial && sscanf_s(initial,"%f %f %f",&pos0, &pos1, &pos2)==3)
 					{
-						printf("\n	pos: (%f,%f,%f)\n", pos0, pos1, pos2);
+						printf("\n	pos: (%f,%f,%f)", pos0, pos1, pos2);
 						position[0]=pos0;
 						position[1]=pos1;
 						position[2]=pos2;
@@ -109,9 +110,9 @@ int ANFScene :: parseCameras(){
 
 					initial=(char *)camElement->Attribute("target");
 
-					if(initial && sscanf(initial,"%f %f %f",&tar0, &tar1, &tar2)==3)
+					if(initial && sscanf_s(initial,"%f %f %f",&tar0, &tar1, &tar2)==3)
 					{
-						printf("\ntarget : (%f,%f,%f)\n\n", tar0, tar1, tar2);
+						printf("\n	target : (%f,%f,%f)", tar0, tar1, tar2);
 						target[0] = tar0;
 						target[1] = tar1;
 						target[2] = tar2;
@@ -213,7 +214,7 @@ int ANFScene:: parseGlobals(){
 			shading =(char *)gElement->Attribute("shading");
 			valString=(char *)gElement->Attribute("background");
 
-			if(valString &&sscanf(valString,"%f %f %f %f",&bg0, &bg1, &bg2, &bg3)==4)
+			if(valString &&sscanf_s(valString,"%f %f %f %f",&bg0, &bg1, &bg2, &bg3)==4)
 			{
 				GLenum drawmode, drawshading;
 
@@ -339,7 +340,7 @@ int ANFScene:: parseGlobals(){
 
 			valString=(char *)gElement->Attribute("ambient");
 
-			if(valString &&sscanf(valString,"%f %f %f %f",&a0, &a1, &a2, &a3)==4)
+			if(valString &&sscanf_s(valString,"%f %f %f %f",&a0, &a1, &a2, &a3)==4)
 			{
 				ambient[0] = a0;
 				ambient[1] = a1;
@@ -392,7 +393,7 @@ int ANFScene :: parseLights(){
 				printf("LIGHTS TYPE ERROR");
 
 			ValString = (char *)lElement->Attribute("pos");
-			if(ValString &&sscanf(ValString,"%f %f %f",&x0, &x1, &x2)==3)
+			if(ValString &&sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
 			{
 				pos[0] = x0;
 				pos[1] = x1;
@@ -439,7 +440,7 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 				{
 					a[0] = x0;
 					a[1] = x1;
@@ -461,7 +462,7 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf(ValString,"%f %f %f %f",&x0, &x1, &x2,&x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2,&x3)==4)
 				{
 					d[0] = x0;
 					d[1] = x1;
@@ -484,7 +485,7 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 				{
 					s[0] = x0;
 					s[1] = x1;
@@ -504,7 +505,7 @@ int ANFScene :: parseLights(){
 				float exponent, angle;
 
 				ValString = (char *)lElement->Attribute("target");
-				if(ValString &&sscanf(ValString,"%f %f %f %f",&x0, &x1, &x2)==3)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2)==3)
 				{
 					target[0] = x0;
 					target[1] = x1;
@@ -648,7 +649,7 @@ int ANFScene :: parseAppearences(){
 				if(strcmp(type,"ambient") == 0)
 				{
 
-					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
 						ambient[0] = x0;
 						ambient[1] = x1;
@@ -665,7 +666,7 @@ int ANFScene :: parseAppearences(){
 
 				else if(strcmp(type,"diffuse")== 0)
 				{
-					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
 						diffuse[0] = x0;
 						diffuse[1] = x1;
@@ -683,7 +684,7 @@ int ANFScene :: parseAppearences(){
 
 				else if(strcmp(type,"specular")== 0)
 				{
-					if(valString &&sscanf(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
 					{
 						specular[0] = x0;
 						specular[1] = x1;
@@ -705,7 +706,7 @@ int ANFScene :: parseAppearences(){
 			string file = findTexture(textref);
 			if(file == "")
 			{
-				printf("Textura inexistente");
+				printf("\nTextura inexistente");
 				system("pause");
 				exit(1);
 
@@ -734,15 +735,24 @@ int ANFScene :: parseGraph(){
 		printf("\n[GRAPH]");
 
 		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
-		TiXmlElement *transformsElement=nodeElement->FirstChildElement("transforms");
-		TiXmlElement* appearanceref=nodeElement->FirstChildElement("appearanceref");
-		TiXmlElement* primitiveElement=nodeElement->FirstChildElement("primitives");
-		TiXmlElement* descendantElement=nodeElement->FirstChildElement("descendants");
 
 		Node *Nodetemp;
-		char* ValString, *ValString2, *ValString3, *type;
-		float angle, x0, x1, x2, x3, y0, y1, y2,y3, z0, z1, z2, z3;
+		char* ValString, *ValString2, *ValString3;
+		float angle, x0,x1, x2, x3, y1, y2,y3,z1, z2, z3;
+		TiXmlElement *transformsElement;
+		TiXmlElement* appearanceref;
+		TiXmlElement* primitiveElement;
+		TiXmlElement* descendantElement;
+		TiXmlElement* pElement;
+		TiXmlElement* transformElement;
+		TiXmlElement* dElement;
 		while(nodeElement){
+			
+		transformsElement=nodeElement->FirstChildElement("transforms");
+		appearanceref=nodeElement->FirstChildElement("appearanceref");
+		primitiveElement=nodeElement->FirstChildElement("primitives");
+		descendantElement=nodeElement->FirstChildElement("descendants");
+
 
 			if(ValString = (char *) nodeElement->Attribute("id"))
 			{
@@ -752,13 +762,12 @@ int ANFScene :: parseGraph(){
 				printf("\nID NODE ERROR");
 
 			Nodetemp = new Node(string(ValString));
-
-			TiXmlElement* transformElement=transformsElement->FirstChildElement();
+			transformElement=transformsElement->FirstChildElement();
 
 			if(transformElement)
 				printf("\n	(Transforms)");
 			else
-				printf("\nTRANSFORMS ERROR");
+				printf("\nTRANSFORMS ERROR | WITHOUT TRANSFORMS");
 
 			while(transformElement)
 			{
@@ -768,7 +777,7 @@ int ANFScene :: parseGraph(){
 				{
 					ValString = (char *) transformElement->Attribute("to");
 
-					if(ValString && sscanf(ValString,"%f %f %f",&x0, &x1, &x2)==3)
+					if(ValString && sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
 					{
 						printf("\n	Translate: (%f,%f,%f)\n", x0, x1, x2);
 						Nodetemp->translate(x0,x1,x2);
@@ -797,7 +806,7 @@ int ANFScene :: parseGraph(){
 				{
 					ValString = (char *) transformElement->Attribute("factor");
 
-					if(ValString && sscanf(ValString ,"%f %f %f",&x0, &x1, &x2)==3)
+					if(ValString && sscanf_s(ValString ,"%f %f %f",&x0, &x1, &x2)==3)
 					{
 						Nodetemp->scale(x0,x1,x2);
 						printf("\n	Scale: x: %f  y: %f  z: %f \n", x0, x1, x2);
@@ -828,7 +837,7 @@ int ANFScene :: parseGraph(){
 			else
 				printf("\nPRIMITIVES ERROR");
 
-			TiXmlElement* pElement = primitiveElement->FirstChildElement();
+			pElement = primitiveElement->FirstChildElement();
 			while(pElement)
 			{
 
@@ -838,8 +847,8 @@ int ANFScene :: parseGraph(){
 					ValString = (char *) pElement->Attribute("xy1");
 					ValString2 = (char *) pElement->Attribute("xy2");
 
-					if(ValString && sscanf(ValString,"%f %f",&x1, &y1)==2
-						&& ValString2 && sscanf(ValString2,"%f %f",&x2, &y2)==2)
+					if(ValString && sscanf_s(ValString,"%f %f",&x1, &y1)==2
+						&& ValString2 && sscanf_s(ValString2,"%f %f",&x2, &y2)==2)
 					{
 						Nodetemp->addPrimitive(new Rectangle(x1,y1,x2,y2));
 						printf("\n	Rectangle x1: %f y1:%f x2: %f y2:%f",x1,y1,x2,y2);
@@ -857,9 +866,9 @@ int ANFScene :: parseGraph(){
 					ValString2 = (char *) pElement->Attribute("xyz2");
 					ValString3 = (char *) pElement->Attribute("xyz3");
 
-					if(ValString && sscanf(ValString,"%f %f %f",&x1, &y1, &z1)==3
-						&& ValString2 && sscanf(ValString2,"%f %f %f",&x2, &y2, &z2)==3
-						&& ValString3 && sscanf(ValString3,"%f %f %f",&x3, &y3, &z3)==3)
+					if(ValString && sscanf_s(ValString,"%f %f %f",&x1, &y1, &z1)==3
+						&& ValString2 && sscanf_s(ValString2,"%f %f %f",&x2, &y2, &z2)==3
+						&& ValString3 && sscanf_s(ValString3,"%f %f %f",&x3, &y3, &z3)==3)
 					{
 						Nodetemp->addPrimitive(new Triangle(x1,y1,z1,x2,y2,z2,x3,y3,z3));
 						printf("\n	Triangle x1:%f y1:%f z1:%f x2:%f y2:%f z2:%f x3:%f y3:%f z3:%f",x1,y1,z1,x2,y2,z2,x3,y3,z3);
@@ -932,7 +941,7 @@ int ANFScene :: parseGraph(){
 				printf("\n	(Descendants)");
 			else
 				printf("\nDESCENDANTS ERROR");
-			TiXmlElement* dElement = descendantElement->FirstChildElement();
+			dElement = descendantElement->FirstChildElement();
 			while(dElement)
 			{
 				ValString=(char *) dElement->Attribute("id");
@@ -990,11 +999,68 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 	return child;
 }
 
-int main(){
+void ANFScene::init(){
+	srand((time(NULL)));
+	glEnable(GL_LIGHTING);
 
-	ANFScene("teste.anf");
 
-	system("pause");
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, ANFGlobals.doublesided ? 1 : GL_FALSE);
+
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ANFGlobals.ambient);
+
+	glFrontFace(ANFGlobals.order);
+
+	glEnable(GL_CULL_FACE);
+	glCullFace(ANFGlobals.face);
+
+
+	glPolygonMode(GL_FRONT_AND_BACK,ANFGlobals.drawMode);
+
+	glEnable(GL_NORMALIZE);
+
+}
+
+void  ANFScene:: display(){
+	
+	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	
+	
+	CGFscene::activeCamera->applyView(); 
+
+	axis.draw();
+
+	for(unsigned int i = 0; i < lights.size(); i++)
+		lights[i]->getLight()->draw();
+
+}
+
+int main(int argc, char* argv[]){
+
+	CGFapplication app = CGFapplication();
+
+		try {
+		app.init(&argc, argv);
+
+		if(argc > 1)
+			app.setScene(new ANFScene(argv[1]));
+		else
+			app.setScene(new ANFScene("teste2.anf"));
+
+		app.setInterface(new CGFinterface());
+
+		app.run();
+		}
+		catch(GLexception& ex) {
+		cout << "Erro: " << ex.what();
+		return -1;
+	}
+	catch(exception& ex) {
+		cout << "Erro inesperado: " << ex.what();
+		return -1;
+	}
 
 	return 0;
 

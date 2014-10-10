@@ -39,7 +39,34 @@ string Node:: getID(){
 	return nodeID;
 }
 
+void Node::translate(float x, float y, float z)
+{
+	glPushMatrix();
+	glLoadMatrixf(transforms);
+	glTranslatef(x,y,z);
+	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
+	glPopMatrix();
+}
 
-void Node::translate(float x, float y, float z){}
-void Node::rotate(string axis, float angle){}
-void Node::scale(float x, float y, float z){}
+void Node::rotate(string axis, float angle)
+{
+	glPushMatrix();
+	glLoadMatrixf(transforms);
+	if(axis=="x")
+		glRotatef(angle,1,0,0);
+	if(axis=="y")
+		glRotatef(angle,0,1,0);
+	if(axis=="z")
+		glRotatef(angle,0,0,1);
+	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
+	glPopMatrix();
+}
+
+void Node::scale(float x, float y, float z)
+{
+	glPushMatrix();
+	glLoadMatrixf(transforms);
+	glScalef(x,y,z);
+	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
+	glPopMatrix();
+}

@@ -6,8 +6,7 @@
 using namespace std;
 
 class Globals{
-protected:
-
+public:
 	//drawing
 	GLenum drawMode, shading;
 	float background[4];
@@ -17,7 +16,6 @@ protected:
 	bool doublesided , local , enabled;
 	float ambient[4];
 
-public:
 	Globals();
 	void updateDraw(GLenum m, GLenum s, float *b);
 	void updateCulli(GLenum f, GLenum o);

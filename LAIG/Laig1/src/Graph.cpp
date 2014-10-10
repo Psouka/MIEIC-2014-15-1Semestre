@@ -16,3 +16,7 @@ Graph::graphMap Graph::getGraph() {
 void Graph:: addNode(Node* n){
 	graph[n->getID()] = n;
 }
+
+void draw(){
+
+}

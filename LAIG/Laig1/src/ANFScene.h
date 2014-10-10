@@ -9,9 +9,10 @@
 #include "Appearance.h"
 #include "Graph.h"
 
-class ANFScene
+class ANFScene : public CGFscene
 {
 public:
+	ANFScene(){}
 	ANFScene(char *filename);
 	~ANFScene();
 
@@ -24,6 +25,8 @@ public:
 	int parseGraph();
 	string findTexture(string id);
 	CGFappearance* findApp(string id);
+	void init();
+	void display();
 	
 	
 protected:
