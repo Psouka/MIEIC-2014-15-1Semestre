@@ -27,6 +27,7 @@ public:
 	CGFappearance* findApp(string id);
 	void init();
 	void display();
+	void displayNode();
 	
 	
 protected:

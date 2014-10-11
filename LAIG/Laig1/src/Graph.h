@@ -11,9 +11,10 @@
 class Graph {
 	typedef map<string, Node*> graphMap;
 	graphMap graph;
-
+	string root;
 public:
 	Graph();
+	Graph(string root);
 	graphMap getGraph();
 	void addNode(Node* n);
 	void draw();

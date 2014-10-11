@@ -5,8 +5,11 @@
 #include "Graph.h"
 #include "Node.h"
 
-Graph::Graph() {
+Graph::Graph(){
+}
 
+Graph::Graph(string root) {
+	this->root = root;
 }
 
 Graph::graphMap Graph::getGraph() {

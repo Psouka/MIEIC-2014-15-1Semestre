@@ -7,6 +7,7 @@
 
 class Light
 {
+	string id;
 	CGFlight* lightt;
 	string type;
 	bool marker;
@@ -14,7 +15,7 @@ class Light
 
 public:
 	Light();
-	Light(CGFlight *l, float* p, string t, bool m);
+	Light(string id,CGFlight *l, float* p, string t, bool m);
 	CGFlight * getLight();
 
 };
@@ -25,11 +26,12 @@ class SpotLight : public Light{
 	float exponent, angle;
 
 public:
-	SpotLight(CGFlight*L, float* p, string t, bool m, float*targ, float exp, float angle);
+	SpotLight(string id,CGFlight*L, float* p, string t, bool m, float*targ, float exp, float angle);
 
 };
 
-Light :: Light(CGFlight *l, float *p,string t, bool m){
+Light :: Light(string id,CGFlight *l, float *p,string t, bool m){
+	this->id = id;
 	this->marker = m;
 	this->lightt = l;
 	this-> type = t;
@@ -43,8 +45,8 @@ CGFlight * Light ::getLight(){
 	return lightt;
 }
 
-SpotLight :: SpotLight(CGFlight*L, float* p, string t,bool m, float*targ, float exp, float angle)
-	: Light(L,p,t,m)
+SpotLight :: SpotLight(string id,CGFlight*L, float* p, string t,bool m, float*targ, float exp, float angle)
+	: Light(id,L,p,t,m)
 {
 	target[0] = targ[0];
 	target[1] = targ[1];

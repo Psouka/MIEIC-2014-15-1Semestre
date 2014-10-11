@@ -1,4 +1,4 @@
-#include "ANFScene.h"
+﻿#include "ANFScene.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -378,6 +378,8 @@ int ANFScene :: parseLights(){
 		bool marker;
 		Light *Ltemp;
 		CGFlight * CGFLtemp;
+		int id_lights[8] = {GL_LIGHT0 , GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
+		int idlight = 0;
 		while(lElement){
 
 			printf("\n[LIGHTS]");
@@ -404,8 +406,14 @@ int ANFScene :: parseLights(){
 			else
 				printf("LIGHTS POSITION ERROR");
 
+			if(idlight > 7)
+			{
+			printf("\nTOO MANY LIGHTS");
+			break;
+			}
 
-			CGFLtemp = new CGFlight(atoi(lightid), pos);
+			CGFLtemp = new CGFlight(id_lights[idlight], pos);
+			idlight++;
 
 			if(ValString = (char *)lElement->Attribute("enabled")){
 
@@ -526,11 +534,11 @@ int ANFScene :: parseLights(){
 					printf("LIGHTS angle/exponent ERROR");
 
 
-				Ltemp = new SpotLight(CGFLtemp,pos,type,marker, target,exponent, angle);
+				Ltemp = new SpotLight(lightid,CGFLtemp,pos,type,marker, target,exponent, angle);
 
 			}
 			else{
-				Ltemp = new Light(CGFLtemp,pos,type,marker);
+				Ltemp = new Light(lightid,CGFLtemp,pos,type,marker);
 
 			}
 
@@ -734,6 +742,8 @@ int ANFScene :: parseGraph(){
 	else {
 		printf("\n[GRAPH]");
 
+
+
 		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
 
 		Node *Nodetemp;
@@ -746,12 +756,19 @@ int ANFScene :: parseGraph(){
 		TiXmlElement* pElement;
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
+
+		if(ValString = (char *) graphElement->Attribute("rootid"))
+		{
+			printf("\n	Rootid: %s",ValString);
+			ANFGraph = Graph(string(ValString));
+		}
+
 		while(nodeElement){
-			
-		transformsElement=nodeElement->FirstChildElement("transforms");
-		appearanceref=nodeElement->FirstChildElement("appearanceref");
-		primitiveElement=nodeElement->FirstChildElement("primitives");
-		descendantElement=nodeElement->FirstChildElement("descendants");
+
+			transformsElement=nodeElement->FirstChildElement("transforms");
+			appearanceref=nodeElement->FirstChildElement("appearanceref");
+			primitiveElement=nodeElement->FirstChildElement("primitives");
+			descendantElement=nodeElement->FirstChildElement("descendants");
 
 
 			if(ValString = (char *) nodeElement->Attribute("id"))
@@ -831,7 +848,7 @@ int ANFScene :: parseGraph(){
 				else
 					printf("ERROR PARSING APPEARANCEREF\n");
 			}
-			
+
 			if(primitiveElement)
 				printf("\n	(Primitives)");
 			else
@@ -1021,13 +1038,13 @@ void ANFScene::init(){
 }
 
 void  ANFScene:: display(){
-	
+
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
-	
+
+
 	CGFscene::activeCamera->applyView(); 
 
 	axis.draw();
@@ -1035,13 +1052,23 @@ void  ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
 
+	displayNode();
+
+
+	glutSwapBuffers();
 }
+
+
+void ANFScene::displayNode() {
+	
+}
+
 
 int main(int argc, char* argv[]){
 
 	CGFapplication app = CGFapplication();
 
-		try {
+	try {
 		app.init(&argc, argv);
 
 		if(argc > 1)
@@ -1052,8 +1079,8 @@ int main(int argc, char* argv[]){
 		app.setInterface(new CGFinterface());
 
 		app.run();
-		}
-		catch(GLexception& ex) {
+	}
+	catch(GLexception& ex) {
 		cout << "Erro: " << ex.what();
 		return -1;
 	}
