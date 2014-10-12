@@ -24,19 +24,20 @@ void Node::setApp(CGFappearance *p){
 
 }
 
-void Node:: addPrimitive(Primitives* p){
+void Node::addPrimitive(Primitives* p){
 	primitives.push_back(p);
 }
 
-
-
-void Node:: addDescend(Node * n){
-	descendants.push_back(n);
-
+void Node::addDescend(Node * n){
+	children.push_back(n);
 }
 
 string Node:: getID(){
 	return nodeID;
+}
+
+vector<Node*> Node::getChildren() {
+	return children;
 }
 
 void Node::translate(float x, float y, float z)
