@@ -1052,15 +1052,22 @@ void  ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
 
-	displayNode();
-
+	process("root");
 
 	glutSwapBuffers();
 }
 
-
-void ANFScene::displayNode() {
-	
+void ANFScene::process(string nodeID) {
+		
+	Node *no = ANFGraph->getGraph()[nodeID];
+	glMultMatrixf(no->getMatrix());
+	//processar texturas e aparencia
+	vector<Node*>::iterator it = no->getChildren().begin();
+	for(it; it != no->getChildren().end(); it++) {
+		glPushMatrix();
+		process((*it)->getID);
+		glPopMatrix();
+	}
 }
 
 

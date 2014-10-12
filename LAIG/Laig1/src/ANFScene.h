@@ -27,7 +27,7 @@ public:
 	CGFappearance* findApp(string id);
 	void init();
 	void display();
-	void displayNode();
+	void process(string nodeID);
 	
 	
 protected:
@@ -36,7 +36,7 @@ protected:
 	vector <Texture*> textures;
 	vector <Appearance*> apps;
 	Globals ANFGlobals;
-	Graph ANFGraph;
+	Graph* ANFGraph;
 
 	TiXmlDocument* doc;
 

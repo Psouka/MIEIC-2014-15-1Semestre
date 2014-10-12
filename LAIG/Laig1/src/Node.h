@@ -13,7 +13,7 @@ using namespace std;
 class Node
 {
 	string nodeID;
-	vector<Node *> descendants;
+	vector<Node *> children;
 	vector<Primitives *> primitives;
 	float transforms[16];
 	CGFappearance * app;
@@ -29,6 +29,7 @@ public:
 	void translate(float x, float y, float z);
 	void rotate(string axis, float angle);
 	void scale(float x, float y, float z);
+	vector<Node*> getChildren();
 };
 
 #endif
