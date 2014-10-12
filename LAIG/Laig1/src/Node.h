@@ -30,6 +30,7 @@ public:
 	void rotate(string axis, float angle);
 	void scale(float x, float y, float z);
 	vector<Node*> getChildren();
+	vector<Primitives*> getPrimitives();
 };
 
 #endif

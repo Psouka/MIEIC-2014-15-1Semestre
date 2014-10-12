@@ -760,7 +760,7 @@ int ANFScene :: parseGraph(){
 		if(ValString = (char *) graphElement->Attribute("rootid"))
 		{
 			printf("\n	Rootid: %s",ValString);
-			ANFGraph = Graph(string(ValString));
+			ANFGraph = new Graph(string(ValString));
 		}
 
 		while(nodeElement){
@@ -963,13 +963,13 @@ int ANFScene :: parseGraph(){
 			{
 				ValString=(char *) dElement->Attribute("id");
 
-				Nodetemp->addDescend(ANFGraph.getGraph()[string(ValString)]);
+				Nodetemp->addDescend(ANFGraph->getGraph()[string(ValString)]);
 
 				dElement = dElement->NextSiblingElement();
 			}
 
 
-			ANFGraph.addNode(Nodetemp);
+			ANFGraph->addNode(Nodetemp);
 			nodeElement = nodeElement->NextSiblingElement();
 		}
 	}
@@ -1064,9 +1064,15 @@ void ANFScene::process(string nodeID) {
 	glMultMatrixf(no->getMatrix());
 	//processar texturas e aparencia
 	vector<Node*>::iterator it = no->getChildren().begin();
+
+	vector<Primitives*>::iterator itP = no->getPrimitives().begin();
+	for(itP; itP != no->getPrimitives().end(); itP++) {
+		(*itP)->draw();
+	}
+
 	for(it; it != no->getChildren().end(); it++) {
 		glPushMatrix();
-		process((*it)->getID);
+		process((*it)->getID());
 		glPopMatrix();
 	}
 }

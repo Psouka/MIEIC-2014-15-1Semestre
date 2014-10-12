@@ -24,6 +24,10 @@ void Node::setApp(CGFappearance *p){
 
 }
 
+float* Node::getMatrix() {
+	return transforms;
+}
+
 void Node::addPrimitive(Primitives* p){
 	primitives.push_back(p);
 }
@@ -38,6 +42,10 @@ string Node:: getID(){
 
 vector<Node*> Node::getChildren() {
 	return children;
+}
+
+vector<Primitives*> Node::getPrimitives() {
+	return primitives;
 }
 
 void Node::translate(float x, float y, float z)
