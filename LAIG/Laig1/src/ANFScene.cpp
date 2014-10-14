@@ -966,6 +966,7 @@ int ANFScene :: parseGraph(){
 
 
 			}
+
 			ANFGraph->addNode(Nodetemp);
 			nodeElement = nodeElement->NextSiblingElement();
 		} 
@@ -1055,27 +1056,36 @@ void ANFScene:: display(){
 
 	axis.draw();
 
+
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
 
-	process("root");
+	
+
+	process(ANFGraph->getRoot());
 
 	glutSwapBuffers();
 }
 
 void ANFScene::process(string nodeID) {
 	
-	Node *no = ANFGraph->getGraph()[nodeID];
+	
 
-	glMultMatrixf(no->getMatrix());
+	Node *node = ANFGraph->getGraph()[nodeID];
+	
+	glMultMatrixf(node->getMatrix());
+
 	//processar texturas e aparencia
-	vector<Node*> nodes = getNodes(no->getChildren());
+	vector<string> temp  = node->getChildren();
+		unsigned int i = temp.size();
 
-	vector<Primitives*>::iterator itP = no->getPrimitives().begin();
-	for(itP; itP != no->getPrimitives().end(); itP++) {
-	(*itP)->draw();
+	vector<Node*> nodes = getNodes(node->getChildren());
+	
+	vector<Primitives*> prim = node->getPrimitives();
+	for(unsigned int a = 0; a < prim.size(); a++) {
+	prim[a]->draw();
 	}
-
+	
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 	glPushMatrix();
 	process(nodes[i]->getID());

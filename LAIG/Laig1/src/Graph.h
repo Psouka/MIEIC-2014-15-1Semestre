@@ -18,6 +18,7 @@ public:
 	graphMap getGraph();
 	void addNode(Node* n);
 	void draw();
+	string getRoot();
 };
 
 #endif
