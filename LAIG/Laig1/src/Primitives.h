@@ -40,7 +40,7 @@ public:
 
 class Cylinder : public Primitives
 {
-	float base,top,height;
+	float base,top,height,angle;
 	int slices, stacks;
 public:
 	Cylinder(float base, float top, float height, int slices, int stacks);

@@ -408,8 +408,8 @@ int ANFScene :: parseLights(){
 
 			if(idlight > 7)
 			{
-			printf("\nTOO MANY LIGHTS");
-			break;
+				printf("\nTOO MANY LIGHTS");
+				break;
 			}
 
 			CGFLtemp = new CGFlight(id_lights[idlight], pos);
@@ -741,9 +741,6 @@ int ANFScene :: parseGraph(){
 		printf("Graph block not found!\n");
 	else {
 		printf("\n[GRAPH]");
-
-
-
 		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
 
 		Node *Nodetemp;
@@ -850,10 +847,8 @@ int ANFScene :: parseGraph(){
 			}
 
 			if(primitiveElement)
-				printf("\n	(Primitives)");
-			else
-				printf("\nPRIMITIVES ERROR");
-
+			{	printf("\n	(Primitives)");
+			
 			pElement = primitiveElement->FirstChildElement();
 			while(pElement)
 			{
@@ -952,26 +947,29 @@ int ANFScene :: parseGraph(){
 
 				pElement = pElement->NextSiblingElement();
 			}
-
+			}
+		
 
 			if(descendantElement)
-				printf("\n	(Descendants)");
-			else
-				printf("\nDESCENDANTS ERROR");
+			{printf("\n	(Descendants)");
+
 			dElement = descendantElement->FirstChildElement();
-			while(dElement)
-			{
-				ValString=(char *) dElement->Attribute("id");
+			if(descendantElement)
+				while(dElement)
+				{
+					ValString=(char *) dElement->Attribute("id");
 
-				Nodetemp->addDescend(ANFGraph->getGraph()[string(ValString)]);
+					Nodetemp->addDescend(string(ValString));
 
-				dElement = dElement->NextSiblingElement();
+					dElement = dElement->NextSiblingElement();
+				}
+
+
 			}
-
 
 			ANFGraph->addNode(Nodetemp);
 			nodeElement = nodeElement->NextSiblingElement();
-		}
+		} 
 	}
 	return 0;
 }
@@ -993,6 +991,15 @@ CGFappearance* ANFScene :: findApp(string id){
 
 	return NULL;
 
+}
+
+vector<Node*> ANFScene ::getNodes(vector<string> n){
+vector<Node*> retorno;
+
+for(unsigned int i = 0; i <n.size();i++)
+	retorno.push_back(ANFGraph->getGraph()[n[i]]);
+
+return retorno;
 }
 
 ANFScene::~ANFScene()
@@ -1049,32 +1056,42 @@ void ANFScene:: display(){
 
 	axis.draw();
 
+
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
 
-	process("root");
+	
+
+	process(ANFGraph->getRoot());
 
 	glutSwapBuffers();
 }
 
-
 void ANFScene::process(string nodeID) {
-		
-	Node *no = ANFGraph->getGraph()[nodeID];
-	glMultMatrixf(no->getMatrix());
+	
+	
+
+	Node *node = ANFGraph->getGraph()[nodeID];
+	
+	glMultMatrixf(node->getMatrix());
+
 	//processar texturas e aparencia
-	vector<Node*>::iterator it = no->getChildren().begin();
+	vector<string> temp  = node->getChildren();
+		unsigned int i = temp.size();
 
-	vector<Primitives*>::iterator itP = no->getPrimitives().begin();
-	for(itP; itP != no->getPrimitives().end(); itP++) {
-		(*itP)->draw();
+	vector<Node*> nodes = getNodes(node->getChildren());
+	
+	vector<Primitives*> prim = node->getPrimitives();
+	for(unsigned int a = 0; a < prim.size(); a++) {
+	prim[a]->draw();
 	}
-
-	for(it; it != no->getChildren().end(); it++) {
-		glPushMatrix();
-		process((*it)->getID());
-		glPopMatrix();
+	
+	for(unsigned int i = 0; i < nodes.size(); i++) {
+	glPushMatrix();
+	process(nodes[i]->getID());
+	glPopMatrix();
 	}
+	
 }
 
 int main(int argc, char* argv[]){
@@ -1087,7 +1104,7 @@ int main(int argc, char* argv[]){
 		if(argc > 1)
 			app.setScene(new ANFScene(argv[1]));
 		else
-			app.setScene(new ANFScene("teste2.anf"));
+			app.setScene(new ANFScene("scene.anf"));
 
 		app.setInterface(new CGFinterface());
 

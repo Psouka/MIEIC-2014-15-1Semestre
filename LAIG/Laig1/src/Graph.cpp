@@ -23,3 +23,7 @@ void Graph:: addNode(Node* n){
 void draw(){
 
 }
+
+string Graph :: getRoot(){
+	return root;
+}
