@@ -32,7 +32,7 @@ void Node::addPrimitive(Primitives* p){
 	primitives.push_back(p);
 }
 
-void Node::addDescend(Node * n){
+void Node::addDescend(string n){
 	children.push_back(n);
 }
 
@@ -40,7 +40,7 @@ string Node:: getID(){
 	return nodeID;
 }
 
-vector<Node*> Node::getChildren() {
+vector<string> Node::getChildren() {
 	return children;
 }
 
