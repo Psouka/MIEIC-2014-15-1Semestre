@@ -941,7 +941,7 @@ int ANFScene :: parseGraph(){
 						pElement->QueryFloatAttribute("outer",&x1)==TIXML_SUCCESS
 						&& ValString && ValString2)
 					{
-						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString2),x0));
+						Nodetemp->addPrimitive(new Torus(x0,x1,atoi(ValString),atoi(ValString2)));
 						printf("\n	Shpere slices:%s loops:%s inner:%f outer:%f",ValString,ValString2,x0,x1);
 					}
 					else
