@@ -906,7 +906,7 @@ int ANFScene :: parseGraph(){
 						pElement->QueryFloatAttribute("height",&x2)==TIXML_SUCCESS
 						&& ValString && ValString2)
 					{
-						Nodetemp->addPrimitive(new Cylinder(atoi(ValString),atoi(ValString2),x0,x1,x2));
+						Nodetemp->addPrimitive(new Cylinder(x0,x1,x2,atoi(ValString),atoi(ValString2)));
 						printf("\n	Cylinder slices:%s stacks:%s base:%f top:%f height:%f",ValString,ValString2,x0,x1,x2);
 					}
 					else
