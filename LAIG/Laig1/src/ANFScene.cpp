@@ -641,13 +641,12 @@ int ANFScene :: parseAppearences(){
 				printf("\n	Textureref: %s",textref);
 			}
 			else
-			{
-				printf("APPEARENCES TEXTUREREF ERROR\n");
-				return -1;
-			}
+				textref = "";
 
 
 			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
+
+
 			printf("\n(Components)");
 			while(compElement){
 
@@ -712,22 +711,20 @@ int ANFScene :: parseAppearences(){
 			}
 			app = new CGFappearance(ambient,diffuse,specular,shininess);
 			string file = findTexture(textref);
-			if(file == "")
+			if(file != "")
 			{
-				printf("\nTextura inexistente");
-				system("pause");
-				exit(1);
-
-			}
 			CGFtexture * ttemp = new CGFtexture(file);
 			app->setTexture(ttemp);
-
+			}
+			else
+				printf("\nTextura inexistente");
 
 			temp = new Appearance(string(appid),string(textref),app);
 
 			apps.push_back(temp);
 
 			appearanceElement = appearanceElement->NextSiblingElement();
+			printf("\n\n");
 		}
 
 
@@ -1059,8 +1056,6 @@ void ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
 
-	
-
 	process(ANFGraph->getRoot());
 
 	glutSwapBuffers();
@@ -1092,13 +1087,9 @@ void ANFScene::process(string nodeID) {
 	}
 	
 	for(unsigned int i = 0; i < nodes.size(); i++) {
-<<<<<<< HEAD
-	process(nodes[i]->getID());
-=======
 		glPushMatrix();
 		process(nodes[i]->getID());
 		glPopMatrix();
->>>>>>> origin/master
 	}
 	
 }
