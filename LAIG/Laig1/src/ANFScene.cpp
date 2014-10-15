@@ -779,9 +779,8 @@ int ANFScene :: parseGraph(){
 			transformElement=transformsElement->FirstChildElement();
 
 			if(transformElement)
-				printf("\n	(Transforms)");
-			else
-				printf("\nTRANSFORMS ERROR | WITHOUT TRANSFORMS");
+			{	printf("\n	(Transforms)");
+			
 
 			while(transformElement)
 			{
@@ -830,7 +829,7 @@ int ANFScene :: parseGraph(){
 				}
 				transformElement=transformElement->NextSiblingElement();
 			}
-
+			}
 
 			if(appearanceref)
 			{
@@ -1069,15 +1068,20 @@ void ANFScene:: display(){
 
 void ANFScene::process(string nodeID) {
 	
-	
-
 	Node *node = ANFGraph->getGraph()[nodeID];
+
+	if(node == NULL)
+	{
+	printf("\n%s nao encontrado",nodeID);
+	system("pause");
+	exit(1);
+	}
 	
 	glMultMatrixf(node->getMatrix());
 
 	//processar texturas e aparencia
 	vector<string> temp  = node->getChildren();
-		unsigned int i = temp.size();
+	unsigned int i = temp.size();
 
 	vector<Node*> nodes = getNodes(node->getChildren());
 	
