@@ -115,6 +115,7 @@ void Sphere :: draw(){
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricTexture(qObj, GL_TRUE);
 	glEnable(GL_TEXTURE_2D);
+
 	gluSphere(qObj, radius, slices, stacks);
 }
 

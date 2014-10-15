@@ -791,7 +791,7 @@ int ANFScene :: parseGraph(){
 
 					if(ValString && sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
 					{
-						printf("\n	Translate: (%f,%f,%f)\n", x0, x1, x2);
+						printf("\n	Translate: (%f,%f,%f)", x0, x1, x2);
 						Nodetemp->translate(x0,x1,x2);
 					}
 					else
@@ -808,7 +808,7 @@ int ANFScene :: parseGraph(){
 					if ( ValString && (transformElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS))
 					{
 						Nodetemp->rotate(string(ValString),angle);
-						printf("\n	Rotate:  axis: %s  angle: %f \n", ValString, angle);
+						printf("\n	Rotate:  axis: %s  angle: %f", ValString, angle);
 					}
 					else
 						printf("ERROR ROTATE\n");
@@ -821,7 +821,7 @@ int ANFScene :: parseGraph(){
 					if(ValString && sscanf_s(ValString ,"%f %f %f",&x0, &x1, &x2)==3)
 					{
 						Nodetemp->scale(x0,x1,x2);
-						printf("\n	Scale: x: %f  y: %f  z: %f \n", x0, x1, x2);
+						printf("\n	Scale: x: %f  y: %f  z: %f", x0, x1, x2);
 					}
 					else
 						printf("ERROR SCALE\n");
@@ -841,7 +841,7 @@ int ANFScene :: parseGraph(){
 				{
 
 					Nodetemp->setApp(findApp(ValString));
-					printf("\n	Appearanceref: %s \n", ValString);
+					printf("\n	Appearanceref: %s", ValString);
 				}
 				else
 					printf("ERROR PARSING APPEARANCEREF\n");
@@ -967,7 +967,7 @@ int ANFScene :: parseGraph(){
 
 
 			}
-
+			printf("\n\n");
 			ANFGraph->addNode(Nodetemp);
 			nodeElement = nodeElement->NextSiblingElement();
 		} 
