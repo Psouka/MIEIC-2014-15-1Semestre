@@ -778,12 +778,21 @@ int ANFScene :: parseGraph(){
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 			
+<<<<<<< HEAD
+			
+			while(transformElement)
+			{
+				glLoadIdentity();
+
+				if(strcmp(transformElement->Value(),"translate")==0)
+=======
 			char *ttemp;
 			while(transformElement)
 			{
 
 				ttemp = (char *) transformElement->Attribute("type");
 				if(strcmp(ttemp,"translate")==0)
+>>>>>>> origin/master
 				{
 
 
@@ -826,6 +835,7 @@ int ANFScene :: parseGraph(){
 					else
 						printf("ERROR SCALE\n");
 				}
+				glGetFloatv(GL_MODELVIEW_MATRIX, Nodetemp->transforms);
 				transformElement=transformElement->NextSiblingElement();
 			}
 			}
@@ -995,12 +1005,12 @@ CGFappearance* ANFScene :: findApp(string id){
 }
 
 vector<Node*> ANFScene ::getNodes(vector<string> n){
-vector<Node*> retorno;
+	vector<Node*> retorno;
 
-for(unsigned int i = 0; i <n.size();i++)
-	retorno.push_back(ANFGraph->getGraph()[n[i]]);
+	for(unsigned int i = 0; i <n.size();i++)
+		retorno.push_back(ANFGraph->getGraph()[n[i]]);
 
-return retorno;
+	return retorno;
 }
 
 ANFScene::~ANFScene()
@@ -1050,8 +1060,6 @@ void ANFScene:: display(){
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
 
 	CGFscene::activeCamera->applyView(); 
 
@@ -1073,9 +1081,9 @@ void ANFScene::process(string nodeID) {
 
 	if(node == NULL)
 	{
-	printf("\n%s nao encontrado",nodeID);
-	system("pause");
-	exit(1);
+		printf("\n%s nao encontrado",nodeID);
+		system("pause");
+		exit(1);
 	}
 	
 	glMultMatrixf(node->getMatrix());

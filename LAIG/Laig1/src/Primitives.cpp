@@ -127,5 +127,5 @@ Torus :: Torus(float inner, float outer, int slices, int loops){
 }
 
 void Torus :: draw(){
-glutSolidTorus(inner, outer, slices, loops);
+	glutSolidTorus(inner, outer, slices, loops);
 }
