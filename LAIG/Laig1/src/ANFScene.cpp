@@ -923,8 +923,8 @@ int ANFScene :: parseGraph(){
 					if (pElement->QueryFloatAttribute("radius",&x0)==TIXML_SUCCESS
 						&& ValString && ValString2)
 					{
-						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString),atoi(ValString2)));
-						printf("\n	Shpere slices:%s stacks:%s radius:%f",ValString,ValString2,x0);
+						Nodetemp->addPrimitive(new Sphere(x0,atoi(ValString),atoi(ValString2)));
+						printf("\n	Shpere slices:%f stacks:%s radius:%f",x0,ValString,ValString2);
 					}
 					else
 						printf("\nERROR SPHERE");

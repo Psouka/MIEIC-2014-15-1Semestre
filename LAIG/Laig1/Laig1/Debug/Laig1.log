@@ -1,4 +1,4 @@
-﻿Build started 15/10/2014 17:48:22.
+﻿Build started 15/10/2014 17:53:22.
      1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -23,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.77
+Time Elapsed 00:00:01.36
