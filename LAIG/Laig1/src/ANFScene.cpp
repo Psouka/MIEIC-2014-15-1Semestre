@@ -1070,6 +1070,7 @@ void ANFScene::process(string nodeID) {
 	
 	Node *node = ANFGraph->getGraph()[nodeID];
 
+
 	if(node == NULL)
 	{
 	printf("\n%s nao encontrado",nodeID);
@@ -1091,9 +1092,13 @@ void ANFScene::process(string nodeID) {
 	}
 	
 	for(unsigned int i = 0; i < nodes.size(); i++) {
+<<<<<<< HEAD
+	process(nodes[i]->getID());
+=======
 		glPushMatrix();
 		process(nodes[i]->getID());
 		glPopMatrix();
+>>>>>>> origin/master
 	}
 	
 }
