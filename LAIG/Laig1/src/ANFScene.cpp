@@ -641,13 +641,12 @@ int ANFScene :: parseAppearences(){
 				printf("\n	Textureref: %s",textref);
 			}
 			else
-			{
-				printf("APPEARENCES TEXTUREREF ERROR\n");
-				return -1;
-			}
+				textref = "";
 
 
 			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
+
+
 			printf("\n(Components)");
 			while(compElement){
 
@@ -712,22 +711,20 @@ int ANFScene :: parseAppearences(){
 			}
 			app = new CGFappearance(ambient,diffuse,specular,shininess);
 			string file = findTexture(textref);
-			if(file == "")
+			if(file != "")
 			{
-				printf("\nTextura inexistente");
-				system("pause");
-				exit(1);
-
-			}
 			CGFtexture * ttemp = new CGFtexture(file);
 			app->setTexture(ttemp);
-
+			}
+			else
+				printf("\nTextura inexistente");
 
 			temp = new Appearance(string(appid),string(textref),app);
 
 			apps.push_back(temp);
 
 			appearanceElement = appearanceElement->NextSiblingElement();
+			printf("\n\n");
 		}
 
 
@@ -781,13 +778,24 @@ int ANFScene :: parseGraph(){
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 			
+<<<<<<< HEAD
 			
 			while(transformElement)
 			{
 				glLoadIdentity();
 
 				if(strcmp(transformElement->Value(),"translate")==0)
+=======
+			char *ttemp;
+			while(transformElement)
+			{
+
+				ttemp = (char *) transformElement->Attribute("type");
+				if(strcmp(ttemp,"translate")==0)
+>>>>>>> origin/master
 				{
+
+
 					ValString = (char *) transformElement->Attribute("to");
 
 					if(ValString && sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
@@ -801,7 +809,7 @@ int ANFScene :: parseGraph(){
 
 				}
 
-				if(strcmp(transformElement->Value(),"rotate")==0)
+				else if(strcmp(ttemp,"rotate")==0)
 				{
 
 					ValString=(char *) transformElement->Attribute("axis");
@@ -815,7 +823,7 @@ int ANFScene :: parseGraph(){
 						printf("ERROR ROTATE\n");
 				}
 
-				if(strcmp(transformElement->Value(),"scale")==0)
+				else if(strcmp(ttemp,"scale")==0)
 				{
 					ValString = (char *) transformElement->Attribute("factor");
 
@@ -831,6 +839,9 @@ int ANFScene :: parseGraph(){
 				transformElement=transformElement->NextSiblingElement();
 			}
 			}
+
+
+
 
 			if(appearanceref)
 			{
@@ -1057,8 +1068,6 @@ void ANFScene:: display(){
 
 	for(unsigned int i = 0; i < lights.size(); i++)
 		lights[i]->getLight()->draw();
-
-	
 
 	process(ANFGraph->getRoot());
 

@@ -50,6 +50,8 @@ void Node::translate(float x, float y, float z)
 	glLoadMatrixf(transforms);
 	glTranslatef(x,y,z);
 	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
+
+
 	glPopMatrix();
 }
 
