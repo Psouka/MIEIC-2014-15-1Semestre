@@ -778,21 +778,15 @@ int ANFScene :: parseGraph(){
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 			
-<<<<<<< HEAD
-			
-			while(transformElement)
-			{
-				glLoadIdentity();
 
-				if(strcmp(transformElement->Value(),"translate")==0)
-=======
-			char *ttemp;
+			
+				char *ttemp;
 			while(transformElement)
 			{
 
 				ttemp = (char *) transformElement->Attribute("type");
 				if(strcmp(ttemp,"translate")==0)
->>>>>>> origin/master
+
 				{
 
 
@@ -835,7 +829,6 @@ int ANFScene :: parseGraph(){
 					else
 						printf("ERROR SCALE\n");
 				}
-				glGetFloatv(GL_MODELVIEW_MATRIX, Nodetemp->transforms);
 				transformElement=transformElement->NextSiblingElement();
 			}
 			}
@@ -984,6 +977,7 @@ int ANFScene :: parseGraph(){
 	}
 	return 0;
 }
+
 
 string ANFScene ::findTexture(string id){
 
