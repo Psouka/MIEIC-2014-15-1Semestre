@@ -1082,14 +1082,14 @@ void ANFScene::process(string nodeID) {
 	vector<Node*> nodes = getNodes(node->getChildren());
 	
 	vector<Primitives*> prim = node->getPrimitives();
-	for(unsigned int a = 0; a < prim.size(); a++) {
-	prim[a]->draw();
+		for(unsigned int a = 0; a < prim.size(); a++) {
+		prim[a]->draw();
 	}
 	
 	for(unsigned int i = 0; i < nodes.size(); i++) {
-	glPushMatrix();
-	process(nodes[i]->getID());
-	glPopMatrix();
+		glPushMatrix();
+		process(nodes[i]->getID());
+		glPopMatrix();
 	}
 	
 }

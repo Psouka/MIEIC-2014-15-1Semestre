@@ -1,12 +1,10 @@
-﻿Build started 14/10/2014 13:47:01.
-     1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
-     1>InitializeBuildStatus:
-         Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
-       ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\Programas\CGRA_Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp
+﻿Build started 14/10/2014 16:10:42.
+     1>Project "C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IC:\LibrariesCGRA\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp
          ANFScene.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe" /INCREMENTAL /NOLOGO /LIBPATH:D:\Programas\CGRA_Libraries\lib glew32.lib CGFlibd.lib tinyxml.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.lib" /MACHINE:X86 Debug\ANFScene.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\LibrariesCGRA\lib glew32.lib CGFlibd.lib tinyxml.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.lib" /MACHINE:X86 Debug\ANFScene.obj
          Debug\Appearance.obj
          Debug\Cameras.obj
          Debug\Globals.obj
@@ -15,12 +13,9 @@
          Debug\Primitives.obj
          Debug\Textures.obj
          Debug\tinystr.obj
-         Laig1.vcxproj -> D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe
-       FinalizeBuildStatus:
-         Deleting file "Debug\Laig1.unsuccessfulbuild".
-         Touching "Debug\Laig1.lastbuildstate".
-     1>Done Building Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" (Build target(s)).
+         Laig1.vcxproj -> C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe
+     1>Done Building Project "C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:01.40
+Time Elapsed 00:00:01.37
