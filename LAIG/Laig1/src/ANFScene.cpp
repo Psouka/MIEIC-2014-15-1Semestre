@@ -778,13 +778,15 @@ int ANFScene :: parseGraph(){
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 			
-
+			char *ttemp;
 			while(transformElement)
 			{
 
-
-				if(strcmp(transformElement->Value(),"translate")==0)
+				ttemp = (char *) transformElement->Attribute("type");
+				if(strcmp(ttemp,"translate")==0)
 				{
+
+
 					ValString = (char *) transformElement->Attribute("to");
 
 					if(ValString && sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
@@ -798,7 +800,7 @@ int ANFScene :: parseGraph(){
 
 				}
 
-				if(strcmp(transformElement->Value(),"rotate")==0)
+				else if(strcmp(ttemp,"rotate")==0)
 				{
 
 					ValString=(char *) transformElement->Attribute("axis");
@@ -812,7 +814,7 @@ int ANFScene :: parseGraph(){
 						printf("ERROR ROTATE\n");
 				}
 
-				if(strcmp(transformElement->Value(),"scale")==0)
+				else if(strcmp(ttemp,"scale")==0)
 				{
 					ValString = (char *) transformElement->Attribute("factor");
 
@@ -827,6 +829,9 @@ int ANFScene :: parseGraph(){
 				transformElement=transformElement->NextSiblingElement();
 			}
 			}
+
+
+
 
 			if(appearanceref)
 			{
