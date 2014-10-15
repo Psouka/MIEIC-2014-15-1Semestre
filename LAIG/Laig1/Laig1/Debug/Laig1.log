@@ -1,4 +1,24 @@
+<<<<<<< HEAD
 ﻿Build started 15/10/2014 16:16:40.
+=======
+<<<<<<< HEAD
+﻿Build started 15/10/2014 15:43:05.
+     1>Project "C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+=======
+<<<<<<< HEAD
+﻿Build started 15/10/2014 13:49:50.
+=======
+<<<<<<< HEAD
+﻿Build started 14/10/2014 16:10:42.
+     1>Project "C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /IC:\LibrariesCGRA\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp
+         ANFScene.cpp
+=======
+﻿Build started 15/10/2014 13:28:04.
+>>>>>>> origin/master
+>>>>>>> origin/master
      1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
          Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -15,6 +35,7 @@
          Debug\Primitives.obj
          Debug\Textures.obj
          Debug\tinystr.obj
+<<<<<<< HEAD
      1>LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
      1>Textures.obj : warning LNK4020: a type record in 'd:\workspace-github\mieic-2014-15-1semestre\laig\laig1\laig1\debug\vc110.pdb' is corrupted; some symbols and types may not be accessible from the debugger
      1>Graph.obj : warning LNK4020: a type record in 'd:\workspace-github\mieic-2014-15-1semestre\laig\laig1\laig1\debug\vc110.pdb' is corrupted; some symbols and types may not be accessible from the debugger
@@ -44,3 +65,24 @@
 Build succeeded.
 
 Time Elapsed 00:00:01.78
+=======
+>>>>>>> origin/master
+         Laig1.vcxproj -> C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\Laig1.exe
+     1>Done Building Project "C:\Users\-Vitóóóór\Documents\GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+<<<<<<< HEAD
+Time Elapsed 00:00:00.76
+=======
+<<<<<<< HEAD
+Time Elapsed 00:00:01.06
+=======
+<<<<<<< HEAD
+Time Elapsed 00:00:01.37
+=======
+Time Elapsed 00:00:01.00
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
+>>>>>>> origin/master
