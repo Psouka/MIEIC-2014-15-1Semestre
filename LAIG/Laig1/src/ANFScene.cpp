@@ -1048,8 +1048,8 @@ void ANFScene::init(){
 	glFrontFace(ANFGlobals.order);
 
 	glEnable(GL_CULL_FACE);
-	glCullFace(ANFGlobals.face);
 
+	glCullFace(ANFGlobals.face);
 
 	glPolygonMode(GL_FRONT_AND_BACK,ANFGlobals.drawMode);
 
@@ -1070,8 +1070,10 @@ void ANFScene:: display(){
 	axis.draw();
 
 
-	for(unsigned int i = 0; i < lights.size(); i++)
-		lights[i]->getLight()->draw();
+	for(unsigned int i = 0; i < lights.size(); i++) {
+		if(lights[i]->getMarker())
+			lights[i]->getLight()->draw();
+	}
 
 	process(ANFGraph->getRoot());
 

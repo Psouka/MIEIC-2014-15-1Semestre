@@ -1,10 +1,8 @@
 #include "Globals.h"
 
 Globals :: Globals(){
+
 }
-
-
-
 
 void Globals :: updateDraw(GLenum m, GLenum s, float *b){
 	drawMode = m;
@@ -18,6 +16,7 @@ void Globals :: updateCulli(GLenum f, GLenum o){
 	face = f;
 	order = o;
 }
+
 void Globals :: updateLight(bool d, bool l, bool e, float *a){
 	doublesided = d;
 	local = l;

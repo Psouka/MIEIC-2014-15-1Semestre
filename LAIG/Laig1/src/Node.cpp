@@ -18,9 +18,6 @@ Node::Node(string nodeID) {
 
 void Node::setApp(CGFappearance *p){
 
-
-
-
 	this->app = p;
 }
 

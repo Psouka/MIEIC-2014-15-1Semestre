@@ -17,6 +17,7 @@ public:
 	Light();
 	Light(string id,CGFlight *l, float* p, string t, bool m);
 	CGFlight * getLight();
+	bool getMarker();
 
 };
 
@@ -44,6 +45,9 @@ Light :: Light(string id,CGFlight *l, float *p,string t, bool m){
 	pos[2] = p[2];
 }
 
+bool Light::getMarker(){
+	return marker;
+}
 
 CGFlight * Light ::getLight(){
 	return lightt;
