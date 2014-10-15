@@ -30,6 +30,7 @@ public:
 
 };
 #endif
+
 Light :: Light(){
 }
 

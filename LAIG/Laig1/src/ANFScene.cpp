@@ -1113,7 +1113,8 @@ int main(int argc, char* argv[]){
 		if(argc > 1)
 			app.setScene(new ANFScene(argv[1]));
 		else
-			app.setScene(new ANFScene("scene.anf"));
+			app.setScene(new ANFScene("LAIG_TP1_ANF_T01_G03_v2.anf"));
+		//app.setScene(new ANFScene("scene.anf"));
 
 		app.setInterface(new CGFinterface());
 
