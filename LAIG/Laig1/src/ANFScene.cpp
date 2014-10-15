@@ -923,7 +923,7 @@ int ANFScene :: parseGraph(){
 					if (pElement->QueryFloatAttribute("radius",&x0)==TIXML_SUCCESS
 						&& ValString && ValString2)
 					{
-						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString2),x0));
+						Nodetemp->addPrimitive(new Sphere(atoi(ValString),atoi(ValString),atoi(ValString2)));
 						printf("\n	Shpere slices:%s stacks:%s radius:%f",ValString,ValString2,x0);
 					}
 					else
@@ -977,7 +977,6 @@ int ANFScene :: parseGraph(){
 	}
 	return 0;
 }
-
 
 string ANFScene ::findTexture(string id){
 
@@ -1055,6 +1054,8 @@ void ANFScene:: display(){
 
 	glMatrixMode(GL_MODELVIEW);
 
+	glLoadIdentity();
+
 	CGFscene::activeCamera->applyView(); 
 
 	axis.draw();
@@ -1066,6 +1067,7 @@ void ANFScene:: display(){
 	process(ANFGraph->getRoot());
 
 	glutSwapBuffers();
+
 }
 
 void ANFScene::process(string nodeID) {
