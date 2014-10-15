@@ -9,19 +9,15 @@ Node::Node(){
 
 Node::Node(string nodeID) {
 	this->nodeID = nodeID;
-	for(int i=0;i<16;i++)
-	{
-		if(i==0||i==5||i==10||i==15)
-			transforms[i]=1;
-		else
-			transforms[i]=0;
-	}
+	glPushMatrix();
+	glLoadIdentity();
+	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
+	glPopMatrix();
 
 }
 
 void Node::setApp(CGFappearance *p){
 	this->app = p;
-
 }
 
 float* Node::getMatrix() {
