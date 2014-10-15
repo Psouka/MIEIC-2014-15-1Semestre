@@ -715,6 +715,7 @@ int ANFScene :: parseAppearences(){
 			{
 			CGFtexture * ttemp = new CGFtexture(file);
 			app->setTexture(ttemp);
+
 			}
 			else
 				printf("\nTextura inexistente");
@@ -750,6 +751,7 @@ int ANFScene :: parseGraph(){
 		TiXmlElement* pElement;
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
+		CGFappearance* lastapp;
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
 		{
@@ -842,13 +844,20 @@ int ANFScene :: parseGraph(){
 
 				if (ValString)
 				{
+					if(strcmp(ValString,"inherit") == 0)
 
-					Nodetemp->setApp(findApp(ValString));
+						Nodetemp->setApp(lastapp);
+					else
+					{
+						lastapp = findApp(ValString);
+					Nodetemp->setApp(lastapp);
+					}
 					printf("\n	Appearanceref: %s", ValString);
 				}
 				else
 					printf("ERROR PARSING APPEARANCEREF\n");
 			}
+
 
 			if(primitiveElement)
 			{	printf("\n	(Primitives)");
@@ -1097,6 +1106,7 @@ void ANFScene::process(string nodeID) {
 	
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
+		nodes[i]->ApplyApp();
 		process(nodes[i]->getID());
 		glPopMatrix();
 	}

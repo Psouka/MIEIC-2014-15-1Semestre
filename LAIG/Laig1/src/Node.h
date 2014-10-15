@@ -30,6 +30,7 @@ public:
 	void scale(float x, float y, float z);
 	vector<string> getChildren();
 	vector<Primitives*> getPrimitives();
+	void ApplyApp();
 };
 
 #endif

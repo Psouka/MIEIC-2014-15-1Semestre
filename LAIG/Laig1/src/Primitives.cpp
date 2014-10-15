@@ -50,6 +50,8 @@ Triangle :: Triangle(float x1, float y1, float z1, float x2, float y2, float z2,
 void Triangle :: draw(){
 	glPushMatrix();
 	//glNormal3f(x,y,z);
+
+
 	glBegin(GL_TRIANGLES);
 	glTexCoord2f(0,0);
 	glVertex3f(x1,y1,z1);

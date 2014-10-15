@@ -17,6 +17,10 @@ Node::Node(string nodeID) {
 }
 
 void Node::setApp(CGFappearance *p){
+
+
+
+
 	this->app = p;
 }
 
@@ -43,6 +47,13 @@ vector<string> Node::getChildren() {
 vector<Primitives*> Node::getPrimitives() {
 	return primitives;
 }
+
+void Node::ApplyApp(){
+	if(app!= NULL)
+	app->apply();
+}
+
+
 
 void Node::translate(float x, float y, float z)
 {
