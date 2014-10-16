@@ -45,7 +45,7 @@ class Cylinder : public Primitives
 public:
 	Cylinder(float base, float top, float height, int slices, int stacks);
 	void draw();
-	
+
 };
 
 class Sphere : public Primitives
