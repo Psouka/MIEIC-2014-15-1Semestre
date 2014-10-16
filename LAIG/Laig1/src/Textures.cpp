@@ -1,25 +1,19 @@
 #include "Textures.h"
 
 
-Texture :: Texture(string i, string f, float tex_s,float tex_t){
-id = i;
-file = f;
-texlength_s = tex_s;
-texlength_t = tex_t;
-CGFtextura = new CGFtexture(file);
+Texture :: Texture(string i, string f, float tex_s,float tex_t)
+	:CGFtexture(f){
+		id = i;
+		file = f;
+		texWidth = tex_s;
+		texHeight = tex_t;
 }
 
-Texture :: Texture(){}
-
-
-CGFtexture * Texture :: getTexture(){
-
-	return CGFtextura;
-}
-
+Texture :: Texture()
+	:CGFtexture(NULL){}
 
 string Texture ::getFile(){
-return file;
+	return file;
 }
 
 string Texture ::getId(){

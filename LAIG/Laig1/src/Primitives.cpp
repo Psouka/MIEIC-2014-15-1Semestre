@@ -3,11 +3,13 @@
 #include <iostream>
 #include "Primitives.h"
 #define PI 3.14159265359
-Primitives :: Primitives(){
+Primitives :: Primitives()
+:CGFobject(){
 
 }
 
-Rectangle :: Rectangle(float x1,float y1, float x2, float y2){
+Rectangle :: Rectangle(float x1,float y1, float x2, float y2)
+:Primitives(){
 
 	this->x1 = x1;
 	this->x2 = x2;
@@ -34,7 +36,8 @@ void Rectangle :: draw(){
 	glPopMatrix();
 }
 
-Triangle :: Triangle(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3){
+Triangle :: Triangle(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3)
+:Primitives(){
 
 	this->x1 = x1;
 	this->x2 = x2;
@@ -63,7 +66,8 @@ void Triangle :: draw(){
 	glPopMatrix();
 }
 
-Cylinder :: Cylinder(float base, float top, float height, int slices, int stacks){
+Cylinder :: Cylinder(float base, float top, float height, int slices, int stacks)
+:Primitives(){
 	this->base = base;
 	this->top = top;
 	this->height = height;
@@ -107,7 +111,8 @@ void Cylinder :: draw(){
 	gluCylinder(qObj, base, top, height, slices, stacks);
 }
 
-Sphere :: Sphere(float radius, int slices, int stacks){
+Sphere :: Sphere(float radius, int slices, int stacks)
+:Primitives(){
 	this->radius = radius;
 	this->slices = slices;
 	this->stacks = stacks;
@@ -121,7 +126,8 @@ void Sphere :: draw(){
 	gluSphere(qObj, radius, slices, stacks);
 }
 
-Torus :: Torus(float inner, float outer, int slices, int loops){
+Torus :: Torus(float inner, float outer, int slices, int loops)
+:Primitives(){
 	this->inner = inner;
 	this->outer = outer;
 	this->slices = slices;

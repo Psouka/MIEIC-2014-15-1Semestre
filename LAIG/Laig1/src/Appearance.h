@@ -3,15 +3,12 @@
 
 #include "CGFscene.h"
 
-class Appearance
+class Appearance : public CGFappearance
 {
-	CGFappearance* app;
 	string id, textureref;
 public:
-	Appearance(string id, string textureref, CGFappearance* app);
-	CGFappearance* getApp();
+	Appearance(float*a,float *d,float *s, float shi, string id, string textureref);
 	string getAppId();
-	void setAppearance(CGFappearance* a);
 };
 
 #endif

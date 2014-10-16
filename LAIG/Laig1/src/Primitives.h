@@ -5,7 +5,7 @@
 #include "CGFobject.h"
 using namespace std;
 
-class Primitives
+class Primitives : CGFobject
 {
 public:
 	Primitives();

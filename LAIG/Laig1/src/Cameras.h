@@ -7,13 +7,11 @@
 
 using namespace std;
 
-class Camera
+class Camera : CGFcamera
 {
 protected:
 	bool initial;
 	string cameraid;
-	float position[3];
-	float target[3];
 	float nearP;
 	float farP;
 public:

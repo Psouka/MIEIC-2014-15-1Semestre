@@ -1,6 +1,7 @@
 #include "Cameras.h"
 
 Camera::Camera(string id)
+	:CGFcamera()
 {
 	cameraid=id;
 	initial = false;

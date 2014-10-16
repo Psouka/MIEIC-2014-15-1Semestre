@@ -639,7 +639,7 @@ int ANFScene :: parseAppearences(){
 		float shininess;
 		float x0,x1,x2,x3;
 		Appearance* temp;
-		CGFappearance* app;
+		CGFtexture * ttemp;
 
 		while(appearanceElement)
 		{
@@ -730,26 +730,20 @@ int ANFScene :: parseAppearences(){
 
 				compElement = compElement->NextSiblingElement();
 			}
-			app = new CGFappearance(ambient,diffuse,specular,shininess);
-			string file = findTexture(textref);
-			if(file != "")
-			{
-				CGFtexture * ttemp = new CGFtexture(file);
-				app->setTexture(ttemp);
 
-			}
-			else
-				printf("\nTextura inexistente");
+			temp = new Appearance(ambient,diffuse,specular,shininess,string(appid),string(textref));
+			ttemp = findTexture(textref);
+			if(ttemp != NULL)
+			temp->setTexture(ttemp);
 
-			temp = new Appearance(string(appid),string(textref),app);
+
+			
 
 			apps.push_back(temp);
 
 			appearanceElement = appearanceElement->NextSiblingElement();
 			printf("\n\n");
 		}
-
-
 
 	}
 	return 0;
@@ -1008,19 +1002,19 @@ int ANFScene :: parseGraph(){
 	return 0;
 }
 
-string ANFScene ::findTexture(string id){
+Texture* ANFScene ::findTexture(string id){
 
 	for(unsigned int i = 0; i < textures.size(); i++){
 		if(textures[i]->getId() == id)
-			return textures[i]->getFile();
+			return textures[i];
 	}
-	return "";
+	return NULL;
 }
 
 CGFappearance* ANFScene :: findApp(string id){
 	for(unsigned int i = 0; i < apps.size(); i++){
 		if(apps[i]->getAppId() == id)
-			return apps[i]->getApp();
+			return apps[i];
 	}
 
 	return NULL;
