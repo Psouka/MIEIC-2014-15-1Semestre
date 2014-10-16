@@ -734,10 +734,10 @@ int ANFScene :: parseAppearences(){
 			temp = new Appearance(ambient,diffuse,specular,shininess,string(appid),string(textref));
 			ttemp = findTexture(textref);
 			if(ttemp != NULL)
-			temp->setTexture(ttemp);
+				temp->setTexture(ttemp);
 
 
-			
+
 
 			apps.push_back(temp);
 
@@ -1070,7 +1070,20 @@ void ANFScene::init(){
 
 	glEnable(GL_NORMALIZE);
 
+	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
+
 }
+
+void  ANFScene::FillChildren(Node* node){
+	vector<Node*> nodes = getNodes(node->getChildren());
+	node->setChilds(nodes);
+
+	for(unsigned int i = 0; i < nodes.size(); i++) {
+		FillChildren(nodes[i]);
+	}
+
+}
+
 
 void ANFScene:: display(){
 
@@ -1110,7 +1123,7 @@ void ANFScene::process(Node* node) {
 	vector<string> temp  = node->getChildren();
 	unsigned int i = temp.size();
 
-	vector<Node*> nodes = getNodes(node->getChildren());
+	vector<Node*> nodes = node->getNChilds();
 
 	vector<Primitives*> prim = node->getPrimitives();
 	for(unsigned int a = 0; a < prim.size(); a++) {

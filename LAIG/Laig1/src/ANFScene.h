@@ -29,6 +29,7 @@ public:
 	void init();
 	void display();
 	void process(Node* node);
+	void FillChildren(Node* node);
 	
 	
 protected:

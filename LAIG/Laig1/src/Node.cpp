@@ -50,6 +50,13 @@ void Node::ApplyApp(){
 	app->apply();
 }
 
+vector<Node*> Node::getNChilds(){
+return nodeChilds;
+}
+
+void Node::setChilds(vector<Node*> n){
+	nodeChilds = n;
+}
 
 
 void Node::translate(float x, float y, float z)
