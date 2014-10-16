@@ -7,7 +7,7 @@
 
 class Light : public CGFlight
 {
-	string id;
+	string id_s;
 	string type;
 	bool marker;
 
@@ -25,7 +25,7 @@ class SpotLight : public Light{
 	float exponent, angle;
 
 public:
-	SpotLight(string id,unsigned int iID, float* p, string t, bool m, float*targ, float exp, float angle);
+	SpotLight(string id_s,unsigned int iID, float* p, string t, bool m, float*targ, float exp, float angle);
 
 };
 
@@ -34,9 +34,9 @@ Light :: Light()
 	: CGFlight(NULL,NULL){
 }
 
-Light :: Light(string id,unsigned int iID,float *p,string t, bool m)
+Light :: Light(string id_s,unsigned int iID,float *p,string t, bool m)
 	:CGFlight(iID,p){
-		this->id = id;
+		this->id_s = id_s;
 		this->marker = m;
 		this-> type = t;
 }
@@ -46,8 +46,8 @@ bool Light::getMarker(){
 }
 
 
-SpotLight :: SpotLight(string id,unsigned int iID, float* p, string t,bool m, float*targ, float exp, float angle)
-	: Light(id,iID,p,t,m)
+SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, float*targ, float exp, float angle)
+	: Light(id_s,iID,p,t,m)
 {
 	float direction[3] = {(target[0]-position[0]),(target[1]-position[1]),(target[2]-position[2])};
 	this->direction[0] = direction[0];
@@ -55,6 +55,7 @@ SpotLight :: SpotLight(string id,unsigned int iID, float* p, string t,bool m, fl
 	this->direction[2] = direction[2];
 
 	exponent = exp;
+	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
 	this->angle = angle;
 }
 

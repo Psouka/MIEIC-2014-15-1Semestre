@@ -266,9 +266,9 @@ int ANFScene:: parseGlobals(){
 
 			if(cullorder && cullface)
 			{
-				if(strcmp(cullorder,"CCW")==0)
+				if(strcmp(cullorder,"ccw")==0)
 					ol = GL_CCW;
-				else if(strcmp(cullorder,"CW")==0)
+				else if(strcmp(cullorder,"cw")==0)
 					ol = GL_CW;
 				printf("\n	Cullorder: %s", cullorder);
 
@@ -537,31 +537,23 @@ int ANFScene :: parseLights(){
 
 
 				Ltemp = new SpotLight(lightid,idlight,pos,type,marker, target,exponent, angle);
-				if(enable)
-					Ltemp->enable();
-				else
-					Ltemp->disable();
 
-				Ltemp->setAmbient(a);
-				Ltemp->setDiffuse(d);
-				Ltemp->setSpecular(s);
-				idlight++;
 
 			}
 			else{
 				Ltemp = new Light(lightid,idlight,pos,type,marker);
-				if(enable)
-					Ltemp->enable();
-				else
-					Ltemp->disable();
 
-				Ltemp->setAmbient(a);
-				Ltemp->setDiffuse(d);
-				Ltemp->setSpecular(s);
-				idlight++;
 
 			}
+			if(enable)
+				Ltemp->enable();
+			else
+				Ltemp->disable();
 
+			Ltemp->setAmbient(a);
+			Ltemp->setDiffuse(d);
+			Ltemp->setSpecular(s);
+			idlight++;
 
 			lights.push_back(Ltemp);
 			lElement = lElement->NextSiblingElement();
@@ -1051,11 +1043,17 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 }
 
 void ANFScene::init(){
+
 	srand((time(NULL)));
 
-	glEnable(GL_LIGHTING);
+	if(ANFGlobals.enabled)
+		glEnable(GL_LIGHTING);
+	else
+		glDisable(GL_LIGHTING);
 
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, ANFGlobals.doublesided ? 1 : GL_FALSE);
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, ANFGlobals.doublesided);
+
+	glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, ANFGlobals.local);
 
 	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, ANFGlobals.ambient);
 
@@ -1067,7 +1065,12 @@ void ANFScene::init(){
 
 	glPolygonMode(GL_FRONT_AND_BACK,ANFGlobals.drawMode);
 
+	glClearColor(ANFGlobals.background[0], ANFGlobals.background[1],
+		ANFGlobals.background[2],ANFGlobals.background[3]);
+
 	glEnable(GL_NORMALIZE);
+
+	glEnable (GL_TEXTURE_2D);
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
@@ -1082,7 +1085,6 @@ void  ANFScene::FillChildren(Node* node){
 	}
 
 }
-
 
 void ANFScene:: display(){
 
