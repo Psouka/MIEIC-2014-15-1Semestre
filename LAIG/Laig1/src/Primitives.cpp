@@ -4,50 +4,54 @@
 #include "Primitives.h"
 #define PI 3.14159265359
 Primitives :: Primitives()
-:CGFobject(){
+	:CGFobject(){
 
 }
 
 Rectangle :: Rectangle(float x1,float y1, float x2, float y2)
-:Primitives(){
+	:Primitives(){
 
-	this->x1 = x1;
-	this->x2 = x2;
-	this->y1 = y1;
-	this->y2 = y2;
+		this->x1 = x1;
+		this->x2 = x2;
+		this->y1 = y1;
+		this->y2 = y2;
 }
 
 void Rectangle :: draw(){
 	glPushMatrix();
-	glNormal3f(0,0,1);
 	glBegin(GL_POLYGON);
+
+	glNormal3f(x1, y1,1);
 	glTexCoord2f(0,0);
-	glVertex3d(x1,y1,0);
+	glVertex2f(x1, y1);
 
+	glNormal3f(x2, y1,1);
 	glTexCoord2f(1,0);
-	glVertex3d(x2,y1,0);
+	glVertex2f(x2, y1);
 
+	glNormal3f(x2, y2,1);
 	glTexCoord2f(1,1);
-	glVertex3d(x2,y2,0);
+	glVertex2f(x2, y2);
 
+	glNormal3f(x1, y1,1);
 	glTexCoord2f(0,1);
-	glVertex3d(x1,y2,0);
+	glVertex2f(x1, y2);
 	glEnd();
 	glPopMatrix();
 }
 
 Triangle :: Triangle(float x1, float y1, float z1, float x2, float y2, float z2, float x3, float y3, float z3)
-:Primitives(){
+	:Primitives(){
 
-	this->x1 = x1;
-	this->x2 = x2;
-	this->x3 = x3;
-	this->y1 = y1;
-	this->y2 = y2;
-	this->y3 = y3;
-	this->z1 = z1;
-	this->z2 = z2;
-	this->z3 = z3;
+		this->x1 = x1;
+		this->x2 = x2;
+		this->x3 = x3;
+		this->y1 = y1;
+		this->y2 = y2;
+		this->y3 = y3;
+		this->z1 = z1;
+		this->z2 = z2;
+		this->z3 = z3;
 }
 
 void Triangle :: draw(){
@@ -60,20 +64,20 @@ void Triangle :: draw(){
 	glVertex3f(x1,y1,z1);
 	glTexCoord2f(1,0);
 	glVertex3f(x2,y2,z2);
-	glTexCoord2f(1,1);
+	glTexCoord2f(0.5,1);
 	glVertex3f(x3,y3,z3);
 	glEnd();
 	glPopMatrix();
 }
 
 Cylinder :: Cylinder(float base, float top, float height, int slices, int stacks)
-:Primitives(){
-	this->base = base;
-	this->top = top;
-	this->height = height;
-	this->slices = slices;
-	this->stacks = stacks;
-	this->angle = 2 * acos(-1.0) / slices;
+	:Primitives(){
+		this->base = base;
+		this->top = top;
+		this->height = height;
+		this->slices = slices;
+		this->stacks = stacks;
+		this->angle = 2 * acos(-1.0) / slices;
 }
 
 void Cylinder :: draw(){
@@ -112,10 +116,10 @@ void Cylinder :: draw(){
 }
 
 Sphere :: Sphere(float radius, int slices, int stacks)
-:Primitives(){
-	this->radius = radius;
-	this->slices = slices;
-	this->stacks = stacks;
+	:Primitives(){
+		this->radius = radius;
+		this->slices = slices;
+		this->stacks = stacks;
 }
 
 void Sphere :: draw(){
@@ -127,11 +131,11 @@ void Sphere :: draw(){
 }
 
 Torus :: Torus(float inner, float outer, int slices, int loops)
-:Primitives(){
-	this->inner = inner;
-	this->outer = outer;
-	this->slices = slices;
-	this->loops = loops;
+	:Primitives(){
+		this->inner = inner;
+		this->outer = outer;
+		this->slices = slices;
+		this->loops = loops;
 }
 
 void Torus :: draw(){
