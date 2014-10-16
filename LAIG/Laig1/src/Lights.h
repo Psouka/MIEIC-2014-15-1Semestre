@@ -31,14 +31,14 @@ public:
 
 
 Light :: Light()
-: CGFlight(NULL,NULL){
+	: CGFlight(NULL,NULL){
 }
 
 Light :: Light(string id,unsigned int iID,float *p,string t, bool m)
-:CGFlight(iID,p){
-	this->id = id;
-	this->marker = m;
-	this-> type = t;
+	:CGFlight(iID,p){
+		this->id = id;
+		this->marker = m;
+		this-> type = t;
 }
 
 bool Light::getMarker(){

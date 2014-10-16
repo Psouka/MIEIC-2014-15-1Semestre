@@ -379,8 +379,7 @@ int ANFScene :: parseLights(){
 		float x0,x1,x2,x3;
 		bool marker, enable;
 		Light *Ltemp;
-		int id_lights[8] = {GL_LIGHT0 , GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
-		int idlight = 0;
+		int idlight = GL_LIGHT0;
 		while(lElement){
 
 			printf("\n[LIGHTS]");
@@ -407,7 +406,7 @@ int ANFScene :: parseLights(){
 			else
 				printf("LIGHTS POSITION ERROR");
 
-			if(idlight > 7)
+			if(idlight > GL_LIGHT7)
 			{
 				printf("\nTOO MANY LIGHTS");
 				break;
@@ -537,7 +536,7 @@ int ANFScene :: parseLights(){
 
 
 
-				Ltemp = new SpotLight(lightid,id_lights[idlight],pos,type,marker, target,exponent, angle);
+				Ltemp = new SpotLight(lightid,idlight,pos,type,marker, target,exponent, angle);
 				if(enable)
 					Ltemp->enable();
 				else
@@ -550,7 +549,7 @@ int ANFScene :: parseLights(){
 
 			}
 			else{
-				Ltemp = new Light(lightid,id_lights[idlight],pos,type,marker);
+				Ltemp = new Light(lightid,idlight,pos,type,marker);
 				if(enable)
 					Ltemp->enable();
 				else
@@ -757,7 +756,7 @@ int ANFScene :: parseGraph(){
 		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
 
 		Node *Nodetemp;
-		char* ValString, *ValString2, *ValString3;
+		char *ValString, *ValString2, *ValString3;
 		float angle, x0,x1, x2, x3, y1, y2,y3,z1, z2, z3;
 		TiXmlElement *transformsElement;
 		TiXmlElement* appearanceref;
