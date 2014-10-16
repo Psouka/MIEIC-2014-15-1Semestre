@@ -1090,20 +1090,16 @@ void ANFScene:: display(){
 			lights[i]->draw();
 	}
 
-	process(ANFGraph->getRoot());
+	process(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
 	glutSwapBuffers();
 
 }
 
-void ANFScene::process(string nodeID) {
-
-	Node *node = ANFGraph->getGraph()[nodeID];
-
-
+void ANFScene::process(Node* node) {
 	if(node == NULL)
 	{
-		printf("\n%s nao encontrado",nodeID);
+		printf("\nNode nao encontrado");
 		system("pause");
 		exit(1);
 	}
@@ -1124,7 +1120,7 @@ void ANFScene::process(string nodeID) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
 		nodes[i]->ApplyApp();
-		process(nodes[i]->getID());
+		process(nodes[i]);
 		glPopMatrix();
 	}
 

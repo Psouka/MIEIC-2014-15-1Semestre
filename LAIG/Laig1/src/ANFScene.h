@@ -28,7 +28,7 @@ public:
 	vector<Node*> getNodes(vector<string> n);
 	void init();
 	void display();
-	void process(string nodeID);
+	void process(Node* node);
 	
 	
 protected:
