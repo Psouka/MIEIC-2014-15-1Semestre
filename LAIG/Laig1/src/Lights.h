@@ -49,13 +49,18 @@ bool Light::getMarker(){
 SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, float*targ, float exp, float angle)
 	: Light(id_s,iID,p,t,m)
 {
-	float direction[3] = {(target[0]-position[0]),(target[1]-position[1]),(target[2]-position[2])};
-	this->direction[0] = direction[0];
-	this->direction[1] = direction[1];
-	this->direction[2] = direction[2];
+
+	target[0] = targ[0];
+	target[1] = targ[1];
+	target[2] = targ[2];
+
+	this->direction[0] = target[0]-position[0];
+	this->direction[1] = target[1]-position[1];
+	this->direction[2] = target[2]-position[2];
 
 	exponent = exp;
 	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
+
 	this->angle = angle;
 }
 

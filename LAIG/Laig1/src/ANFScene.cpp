@@ -534,8 +534,6 @@ int ANFScene :: parseLights(){
 					printf("LIGHTS angle/exponent ERROR");
 
 
-
-
 				Ltemp = new SpotLight(lightid,idlight,pos,type,marker, target,exponent, angle);
 
 
@@ -545,14 +543,14 @@ int ANFScene :: parseLights(){
 
 
 			}
+			Ltemp->setAmbient(a);
+			Ltemp->setDiffuse(d);
+			Ltemp->setSpecular(s);
+
 			if(enable)
 				Ltemp->enable();
 			else
 				Ltemp->disable();
-
-			Ltemp->setAmbient(a);
-			Ltemp->setDiffuse(d);
-			Ltemp->setSpecular(s);
 			idlight++;
 
 			lights.push_back(Ltemp);
