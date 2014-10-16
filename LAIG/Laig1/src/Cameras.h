@@ -7,7 +7,7 @@
 
 using namespace std;
 
-class Camera : CGFcamera
+class Camera : public CGFcamera
 {
 protected:
 	bool initial;
