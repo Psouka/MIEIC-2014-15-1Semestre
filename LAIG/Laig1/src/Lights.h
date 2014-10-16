@@ -30,7 +30,7 @@ public:
 	SpotLight(string id,CGFlight*L, float* p, string t, bool m, float*targ, float exp, float angle);
 
 };
-#endif
+
 
 Light :: Light(){
 }
@@ -63,3 +63,4 @@ SpotLight :: SpotLight(string id,CGFlight*L, float* p, string t,bool m, float*ta
 	this->angle = angle;
 }
 
+#endif

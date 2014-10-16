@@ -454,6 +454,7 @@ int ANFScene :: parseLights(){
 					a[1] = x1;
 					a[2] = x2;
 					a[3] = x3;
+					CGFLtemp->setAmbient(a);
 					printf("\n	Ambient component: %s",ValString);
 				}
 				else
@@ -476,6 +477,7 @@ int ANFScene :: parseLights(){
 					d[1] = x1;
 					d[2] = x2;
 					d[3] = x3;
+					CGFLtemp->setDiffuse(d);
 					printf("\n	Diffuse component: %s",ValString);
 				}
 				else
@@ -499,6 +501,7 @@ int ANFScene :: parseLights(){
 					s[1] = x1;
 					s[2] = x2;
 					s[3] = x3;
+					CGFLtemp->setSpecular(s);
 					printf("\n	Specular component: %s",ValString);
 				}
 				else
@@ -933,7 +936,7 @@ int ANFScene :: parseGraph(){
 						&& ValString && ValString2)
 					{
 						Nodetemp->addPrimitive(new Sphere(x0,atoi(ValString),atoi(ValString2)));
-						printf("\n	Shpere slices:%f stacks:%s radius:%f",x0,ValString,ValString2);
+						printf("\n	Shpere slices:%f stacks:%s radius:%s",x0,ValString,ValString2);
 					}
 					else
 						printf("\nERROR SPHERE");
