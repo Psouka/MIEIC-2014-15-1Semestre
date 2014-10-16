@@ -22,7 +22,7 @@ public:
 
 class SpotLight : public Light{
 	float target[3];
-	float exponent, angle;
+	float exponent;
 
 public:
 	SpotLight(string id_s,unsigned int iID, float* p, string t, bool m, float*targ, float exp, float angle);
@@ -62,6 +62,7 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
 
 	this->angle = angle;
+
 }
 
 #endif
