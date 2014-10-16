@@ -12,6 +12,7 @@ class Texture
 	float texlength_s, texlength_t;
 	CGFtexture *CGFtextura;
 	
+	
 public:
 	Texture(string i, string f, float tex_s,float tex_t);
 	Texture();

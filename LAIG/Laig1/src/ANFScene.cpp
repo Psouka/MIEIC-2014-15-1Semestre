@@ -372,12 +372,13 @@ int ANFScene :: parseLights(){
 	{
 		TiXmlElement* lElement = lightElement->FirstChildElement();
 		TiXmlElement* compElement;
+		float target[3];
+		float exponent, angle;
 		char* lightid, *type, *ValString;
 		float pos[3], a[4], d[4], s[4];
 		float x0,x1,x2,x3;
-		bool marker;
+		bool marker, enable;
 		Light *Ltemp;
-		CGFlight * CGFLtemp;
 		int id_lights[8] = {GL_LIGHT0 , GL_LIGHT1, GL_LIGHT2, GL_LIGHT3, GL_LIGHT4, GL_LIGHT5, GL_LIGHT6, GL_LIGHT7};
 		int idlight = 0;
 		while(lElement){
@@ -412,15 +413,13 @@ int ANFScene :: parseLights(){
 				break;
 			}
 
-			CGFLtemp = new CGFlight(id_lights[idlight], pos);
-			idlight++;
 
 			if(ValString = (char *)lElement->Attribute("enabled")){
 
 				if(strcmp(ValString,"true") == 0)
-					CGFLtemp->enable();
+					enable = true;
 				else
-					CGFLtemp->disable();
+					enable = false;
 
 				printf("\n	Enable: %s",ValString);
 
@@ -454,7 +453,7 @@ int ANFScene :: parseLights(){
 					a[1] = x1;
 					a[2] = x2;
 					a[3] = x3;
-					CGFLtemp->setAmbient(a);
+
 					printf("\n	Ambient component: %s",ValString);
 				}
 				else
@@ -477,7 +476,7 @@ int ANFScene :: parseLights(){
 					d[1] = x1;
 					d[2] = x2;
 					d[3] = x3;
-					CGFLtemp->setDiffuse(d);
+
 					printf("\n	Diffuse component: %s",ValString);
 				}
 				else
@@ -501,7 +500,7 @@ int ANFScene :: parseLights(){
 					s[1] = x1;
 					s[2] = x2;
 					s[3] = x3;
-					CGFLtemp->setSpecular(s);
+
 					printf("\n	Specular component: %s",ValString);
 				}
 				else
@@ -512,8 +511,7 @@ int ANFScene :: parseLights(){
 
 
 			if(strcmp(type,"spot") == 0){
-				float target[3];
-				float exponent, angle;
+
 
 				ValString = (char *)lElement->Attribute("target");
 				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2)==3)
@@ -537,11 +535,31 @@ int ANFScene :: parseLights(){
 					printf("LIGHTS angle/exponent ERROR");
 
 
-				Ltemp = new SpotLight(lightid,CGFLtemp,pos,type,marker, target,exponent, angle);
+
+
+				Ltemp = new SpotLight(lightid,id_lights[idlight],pos,type,marker, target,exponent, angle);
+				if(enable)
+					Ltemp->enable();
+				else
+					Ltemp->disable();
+
+				Ltemp->setAmbient(a);
+				Ltemp->setDiffuse(d);
+				Ltemp->setSpecular(s);
+				idlight++;
 
 			}
 			else{
-				Ltemp = new Light(lightid,CGFLtemp,pos,type,marker);
+				Ltemp = new Light(lightid,id_lights[idlight],pos,type,marker);
+				if(enable)
+					Ltemp->enable();
+				else
+					Ltemp->disable();
+
+				Ltemp->setAmbient(a);
+				Ltemp->setDiffuse(d);
+				Ltemp->setSpecular(s);
+				idlight++;
 
 			}
 
@@ -716,8 +734,8 @@ int ANFScene :: parseAppearences(){
 			string file = findTexture(textref);
 			if(file != "")
 			{
-			CGFtexture * ttemp = new CGFtexture(file);
-			app->setTexture(ttemp);
+				CGFtexture * ttemp = new CGFtexture(file);
+				app->setTexture(ttemp);
 
 			}
 			else
@@ -782,10 +800,10 @@ int ANFScene :: parseGraph(){
 
 			if(transformElement)
 			{	printf("\n	(Transforms)");
-			
 
-			
-				char *ttemp;
+
+
+			char *ttemp;
 			while(transformElement)
 			{
 
@@ -853,7 +871,7 @@ int ANFScene :: parseGraph(){
 					else
 					{
 						lastapp = findApp(ValString);
-					Nodetemp->setApp(lastapp);
+						Nodetemp->setApp(lastapp);
 					}
 					printf("\n	Appearanceref: %s", ValString);
 				}
@@ -864,7 +882,7 @@ int ANFScene :: parseGraph(){
 
 			if(primitiveElement)
 			{	printf("\n	(Primitives)");
-			
+
 			pElement = primitiveElement->FirstChildElement();
 			while(pElement)
 			{
@@ -964,7 +982,7 @@ int ANFScene :: parseGraph(){
 				pElement = pElement->NextSiblingElement();
 			}
 			}
-		
+
 
 			if(descendantElement)
 			{printf("\n	(Descendants)");
@@ -1075,7 +1093,7 @@ void ANFScene:: display(){
 
 	for(unsigned int i = 0; i < lights.size(); i++) {
 		if(lights[i]->getMarker())
-			lights[i]->getLight()->draw();
+			lights[i]->draw();
 	}
 
 	process(ANFGraph->getRoot());
@@ -1085,7 +1103,7 @@ void ANFScene:: display(){
 }
 
 void ANFScene::process(string nodeID) {
-	
+
 	Node *node = ANFGraph->getGraph()[nodeID];
 
 
@@ -1095,7 +1113,7 @@ void ANFScene::process(string nodeID) {
 		system("pause");
 		exit(1);
 	}
-	
+
 	glMultMatrixf(node->getMatrix());
 
 	//processar texturas e aparencia
@@ -1103,19 +1121,19 @@ void ANFScene::process(string nodeID) {
 	unsigned int i = temp.size();
 
 	vector<Node*> nodes = getNodes(node->getChildren());
-	
+
 	vector<Primitives*> prim = node->getPrimitives();
-		for(unsigned int a = 0; a < prim.size(); a++) {
+	for(unsigned int a = 0; a < prim.size(); a++) {
 		prim[a]->draw();
 	}
-	
+
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
 		nodes[i]->ApplyApp();
 		process(nodes[i]->getID());
 		glPopMatrix();
 	}
-	
+
 }
 
 int main(int argc, char* argv[]){
