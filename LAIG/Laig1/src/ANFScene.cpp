@@ -1053,8 +1053,8 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 
 void ANFScene::init(){
 	srand((time(NULL)));
-	glEnable(GL_LIGHTING);
 
+	glEnable(GL_LIGHTING);
 
 	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, ANFGlobals.doublesided ? 1 : GL_FALSE);
 
@@ -1096,7 +1096,6 @@ void ANFScene:: display(){
 	CGFscene::activeCamera->applyView(); 
 
 	axis.draw();
-
 
 	for(unsigned int i = 0; i < lights.size(); i++) {
 		if(lights[i]->getMarker())
