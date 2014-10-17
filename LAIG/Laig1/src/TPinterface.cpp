@@ -26,26 +26,8 @@ void TPinterface::initGUI()
 
 	
 	addColumn();
-	/*
-	int & activeCameraPosition = ((Scene *)this->scene)->activeCameraPosition;
-	std::cout << "active xx camera:"<< ((Scene *)this->scene)->activeCameraPosition;
-
-
-	// Jump the first camera..
-	GLUI_Panel * cameraPanel = addPanel("Cameras: ", 1);
-	GLUI_RadioGroup * rgCameras = addRadioGroupToPanel(cameraPanel,&((Scene *)this->scene)->activeCameraPosition, 123);
-	i = 20;
 	
-	std::vector<Camera *> cameras = ((Scene *)this->scene)->getCameras();
-
-	unsigned size = i + cameras.size();
-	std::vector<Camera *>::iterator it = cameras.begin();	
-	for(; it != cameras.end() ;it++, i++){
-		addRadioButtonToGroup (rgCameras, (char *)(*it)->getTitle().c_str());
-		//if(size == i && size != 19){
-//			addSeparatorToPanel(cameraPanel);
-		//}
-	} */
+		
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl)
