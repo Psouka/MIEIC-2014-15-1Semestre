@@ -55,6 +55,7 @@ int ANFScene :: parseCameras(){
 		printf("\n[CAMERAS]");
 		char *initial_c=NULL;
 		char *initial=NULL;
+		char* valString= NULL;
 		initial_c = (char *)camerasElement->Attribute("initial");
 		if(initial_c)
 			printf("	Cameras attribute: %s\n",initial_c);
@@ -133,13 +134,20 @@ int ANFScene :: parseCameras(){
 			{
 				printf("\n(Ortho)");
 
-				char *id=NULL;
+				char *id=NULL, direction;
 				float near,far,left,right,top,bottom;
 
 				if(id = (char *)camElement->Attribute("id"))
 					printf("\n	id: %s",id);
 				else
 					printf("ID ERROR");
+
+				if(valString = (char *)camElement->Attribute("direction"))
+				{printf("\n	id: %s",valString);
+				direction = valString[0];
+				}
+				else
+					printf("DIRECTION ERROR");
 
 				if (camElement->QueryFloatAttribute("near",&near)==TIXML_SUCCESS && 
 					camElement->QueryFloatAttribute("far",&far)==TIXML_SUCCESS &&
@@ -156,7 +164,7 @@ int ANFScene :: parseCameras(){
 					printf("\n	top:%f",top);
 					printf("\n	bottom:%f",bottom);
 
-					Camera* camera = new OrthoCamera(string(id),near,far,left,right,top,bottom);
+					Camera* camera = new OrthoCamera(string(id),near,far,left,right,top,bottom,direction);
 
 					if(strcmp(id,initial_c)==0)
 					{
@@ -500,6 +508,7 @@ int ANFScene :: parseLights(){
 
 
 			}
+
 			Ltemp->setAmbient(a);
 			Ltemp->setDiffuse(d);
 			Ltemp->setSpecular(s);
@@ -1037,7 +1046,7 @@ void ANFScene:: display(){
 	glLoadIdentity();
 
 	CGFscene::activeCamera->applyView(); 
-
+	//cameras[0]->applyView();
 	axis.draw();
 
 	for(unsigned int i = 0; i < lights.size(); i++) {

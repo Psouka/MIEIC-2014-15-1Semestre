@@ -29,6 +29,7 @@ class PerspectiveCamera : public Camera {
 public:
 	PerspectiveCamera(string id, float nearP, float farP, float angle);
 	float getAngle();
+	void applyView();
 };
 
 class OrthoCamera : public Camera {
@@ -36,7 +37,9 @@ class OrthoCamera : public Camera {
 	float right;
 	float top;
 	float bottom;
+	char direction;
 public:
-	OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom);
+	OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom,char direction);
+	void applyView();
 };
 #endif

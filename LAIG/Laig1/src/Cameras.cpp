@@ -14,7 +14,39 @@ PerspectiveCamera::PerspectiveCamera(string id, float nearP, float farP, float a
 	this->angle=angle;
 }
 
-OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom) : Camera(id)
+void PerspectiveCamera:: applyView(){
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(angle, 1.0, nearP, farP);
+    gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
+}
+
+
+void OrthoCamera:: applyView(){
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	switch(direction)
+	{
+	case 'x':
+		glOrtho(left, right, bottom, top, nearP, farP);
+		gluLookAt(nearP, 0.0, 0.0, farP, 0.0, 0.0, 0.0, 1.0, 0.0);
+		break;
+	case 'y':
+		glOrtho(left, right, bottom, top, nearP, farP);
+		gluLookAt(0.0, nearP, 0.0, 0.0, farP, 0.0, 0.0, 0.0, 1.0);
+		break;
+	case 'z':
+		glOrtho(left, right, bottom, top, nearP, farP);
+		gluLookAt(0.0, 0.0, nearP, 0.0, 0.0, farP, 0.0, 1.0, 0.0);
+		break;
+	default:
+		break;
+	}
+}
+
+
+OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom,char direction) : Camera(id)
 {
 	this->nearP=nearP;
 	this->farP=farP;
@@ -22,6 +54,7 @@ OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float r
 	this->right=right;
 	this->top=top;
 	this->bottom=bottom;
+	this->direction = direction;
 }
 
 void Camera :: setPosition(float *p){
