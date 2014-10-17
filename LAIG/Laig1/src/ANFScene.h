@@ -8,6 +8,7 @@
 #include "Textures.h"
 #include "Appearance.h"
 #include "Graph.h"
+//#include "TPinterface.h"
 
 class ANFScene : public CGFscene
 {
@@ -30,6 +31,7 @@ public:
 	void display();
 	void process(Node* node);
 	void FillChildren(Node* node);
+	vector <Light*> getLights();
 	
 	
 protected:

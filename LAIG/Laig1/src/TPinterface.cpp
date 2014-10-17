@@ -1,65 +1,69 @@
 #include "TPinterface.h"
 
 
-TPinterface::TPinterface()
+TPinterface:: TPinterface()
+:CGFinterface(){
+}
+
+TPinterface:: TPinterface(ANFScene* S)
 	:CGFinterface()
 {
 	testVar=0;
+	Scene = S;
 }
 
-
-void TPinterface::processKeyboard(unsigned char key, int x, int y)
-{
-	// Uncomment below if you would like to process the default keys (e.g. 's' for snapshot, 'Esc' for exiting, ...)
-    //CGFinterface::processKeyboard(key, x, y);
-    
-	switch(key)
-	{
-	default: break;
-	}
-}
 
 void TPinterface::initGUI()
 {
+	lights = Scene->getLights();
+
+
+	int i = 1;
+	GLUI_Panel * panelLights = addPanel("Lights: ", 1);
+	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end() ;it++){
+		addCheckboxToPanel (panelLights,(char *)((*it)->getid_s()).c_str(),(int *)&((*it)->active), i);
+	}
+
+	
+	addColumn();
 	/*
-    GLUI_Panel * lightsPanel = addPanel( (char*)"Luzes", 1);
-    
-    addCheckboxToPanel(lightsPanel, (char*)"Luz 1", &(((LightingScene*) scene)->light0On), 0);
-    addCheckboxToPanel(lightsPanel, (char*)"Luz 2", &(((LightingScene*) scene)->light1On), 1);
-    addCheckboxToPanel(lightsPanel, (char*)"Luz 3", &(((LightingScene*) scene)->light2On), 2);
-    addCheckboxToPanel(lightsPanel, (char*)"Luz 4", &(((LightingScene*) scene)->light3On), 3);
-    addCheckboxToPanel(lightsPanel, (char*)"Luz 5", &(((LightingScene*) scene)->light4On), 4);
-    
-    addColumn();
-    
-    addButton((char*)"Parar/continuar relogio", 5);
-        
-    GLUI_Panel * texturePanel = addPanel( (char*)"Robot");
-    
-    GLUI_Listbox * textureList = addListboxToPanel(texturePanel, (char*)"Textura ", &(((LightingScene*) scene)->myBot->texture), 6);
-    
-    textureList->add_item (0, "Nenhuma");
-    textureList->add_item (1, "Android");
-    textureList->add_item (2, "Wall-e");
-    textureList->add_item (3, "Teste");
-    textureList->add_item (4, "Laser");
-    textureList->add_item (5, "Matrix");
-    
-    textureList->set_int_val (1);
-    
-    GLUI_RadioGroup * radioGroup = addRadioGroupToPanel (texturePanel, &(((LightingScene*) scene)->myBot->isWireframe) , 7);
-    
-    addRadioButtonToGroup(radioGroup, (char*) "Com textura");
-    addRadioButtonToGroup(radioGroup, (char*) "Wireframe");
-    */
+	int & activeCameraPosition = ((Scene *)this->scene)->activeCameraPosition;
+	std::cout << "active xx camera:"<< ((Scene *)this->scene)->activeCameraPosition;
+
+
+	// Jump the first camera..
+	GLUI_Panel * cameraPanel = addPanel("Cameras: ", 1);
+	GLUI_RadioGroup * rgCameras = addRadioGroupToPanel(cameraPanel,&((Scene *)this->scene)->activeCameraPosition, 123);
+	i = 20;
+	
+	std::vector<Camera *> cameras = ((Scene *)this->scene)->getCameras();
+
+	unsigned size = i + cameras.size();
+	std::vector<Camera *>::iterator it = cameras.begin();	
+	for(; it != cameras.end() ;it++, i++){
+		addRadioButtonToGroup (rgCameras, (char *)(*it)->getTitle().c_str());
+		//if(size == i && size != 19){
+//			addSeparatorToPanel(cameraPanel);
+		//}
+	} */
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl)
 {
-	printf ("GUI control id: %ld\n  ",ctrl->user_id);
+	printf ("GUI control id: %d\n",ctrl->user_id);
 	switch (ctrl->user_id)
 	{
-	default :break;
+		case 1:
+			for(unsigned int i = 0; i < lights.size(); i++){
+			if(lights[i]->active)
+				lights[i]->turnOn();
+			else
+				lights[i]->turnOff();
+			}
+			break;
+		case 2:
+			printf("  Camera Changed\n");
+			break;
 	}
 }
 

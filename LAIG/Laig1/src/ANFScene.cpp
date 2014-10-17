@@ -514,9 +514,9 @@ int ANFScene :: parseLights(){
 			Ltemp->setSpecular(s);
 
 			if(enable)
-				Ltemp->enable();
+				Ltemp->turnOn();
 			else
-				Ltemp->disable();
+				Ltemp->turnOff();
 			idlight++;
 
 			lights.push_back(Ltemp);
@@ -1037,6 +1037,10 @@ void  ANFScene::FillChildren(Node* node){
 
 }
 
+vector <Light*> ANFScene::getLights(){
+	return lights;
+}
+
 void ANFScene:: display(){
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -1046,7 +1050,7 @@ void ANFScene:: display(){
 	glLoadIdentity();
 
 	CGFscene::activeCamera->applyView(); 
-	//cameras[0]->applyView();
+	//cameras[2]->applyView();
 	axis.draw();
 
 	for(unsigned int i = 0; i < lights.size(); i++) {
@@ -1090,32 +1094,3 @@ void ANFScene::process(Node* node) {
 
 }
 
-int main(int argc, char* argv[]){
-
-	CGFapplication app = CGFapplication();
-
-	try {
-		app.init(&argc, argv);
-
-		if(argc > 1)
-			app.setScene(new ANFScene(argv[1]));
-		else
-			app.setScene(new ANFScene("LAIG_TP1_ANF_T01_G03_v2.anf"));
-		//app.setScene(new ANFScene("scene.anf"));
-
-		app.setInterface(new CGFinterface());
-
-		app.run();
-	}
-	catch(GLexception& ex) {
-		cout << "Erro: " << ex.what();
-		return -1;
-	}
-	catch(exception& ex) {
-		cout << "Erro inesperado: " << ex.what();
-		return -1;
-	}
-
-	return 0;
-
-}

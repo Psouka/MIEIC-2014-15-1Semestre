@@ -5,14 +5,16 @@
 #include "ANFScene.h"
 
 class TPinterface: public CGFinterface {
+	ANFScene *Scene;
+	std::vector<Light *> lights;
 public:
-    TPinterface();
-    
+	TPinterface();
+    TPinterface(ANFScene* S);
     virtual void initGUI();
     virtual void processGUI(GLUI_Control *ctrl);
-    virtual void processKeyboard(unsigned char key, int x, int y);
     
     int testVar;
+	
 };
 
 
