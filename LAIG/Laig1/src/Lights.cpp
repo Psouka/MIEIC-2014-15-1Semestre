@@ -52,8 +52,5 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 //	this->direction[2] = target[2]-position[2];
 	exponent = exp;
 //	this->angle = angle;
-	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
-	glLightf(this->id,GL_SPOT_CUTOFF,angle);
-	glLightfv(this->id,GL_SPOT_DIRECTION,target);
 
 }
