@@ -28,7 +28,6 @@ public:
 	PerspectiveCamera(string id, float nearP, float farP, float angle);
 	float getAngle();
 	void applyView();
-	void updateProjectionMatrix (int width, int height);
 };
 
 class OrthoCamera : public Camera {
@@ -40,6 +39,6 @@ class OrthoCamera : public Camera {
 public:
 	OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom,char direction);
 	void applyView();
-	void updateProjectionMatrix (int width, int height);
+	
 };
 #endif
