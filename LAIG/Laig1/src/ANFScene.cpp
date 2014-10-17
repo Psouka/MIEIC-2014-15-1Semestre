@@ -1052,9 +1052,11 @@ void ANFScene:: display(){
 
 	glLoadIdentity();
 
+	CGFapplication::activeApp->forceRefresh();
 	if(Active_Camera == 0)
 	{
-	CGFscene::activeCamera->applyView();}
+	CGFscene::activeCamera->applyView();
+	}
 	else
 		cameras[(Active_Camera -1)]->applyView();
 
@@ -1064,7 +1066,8 @@ void ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++) {
 		if(lights[i]->getMarker())
 			lights[i]->draw();
-		else
+		
+
 			lights[i]->update();
 	
 	}

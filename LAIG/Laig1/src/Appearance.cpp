@@ -8,7 +8,6 @@ Appearance :: Appearance(float*a,float *d,float *s, float shi, string id, string
 :CGFappearance(a,d,s,shi){
 	this->id = id;
 	this->textureref = textureref;
-
 }
 
 string  Appearance ::getAppId(){

@@ -19,6 +19,7 @@ void PerspectiveCamera:: applyView(){
 }
 
 void PerspectiveCamera::updateProjectionMatrix (int width, int height){
+
 	float aspect = (float) width / (float) height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -29,16 +30,26 @@ void PerspectiveCamera::updateProjectionMatrix (int width, int height){
 
 
 void OrthoCamera:: applyView(){
+	
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(left,right,bottom,top,nearP,farP);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+
+	if(direction == 'y'){
+		glRotated(90,1,0,0);
+	}else if(direction == 'z'){
+		glRotated(90,0,1,0);
+	}
 }
 
 void OrthoCamera::updateProjectionMatrix (int width, int height){
+	/*glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(left, right, bottom, top, nearP, farP);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	*/
 }
 
 
