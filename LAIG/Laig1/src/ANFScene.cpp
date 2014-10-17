@@ -593,7 +593,7 @@ int ANFScene :: parseAppearences(){
 		float ambient[4], diffuse[4], specular[4];
 		float shininess;
 		Appearance* temp;
-		CGFtexture * ttemp;
+		Texture* ttemp;
 
 		while(appearanceElement)
 		{
@@ -676,10 +676,7 @@ int ANFScene :: parseAppearences(){
 			temp = new Appearance(ambient,diffuse,specular,shininess,string(appid),string(textref));
 			ttemp = findTexture(textref);
 			if(ttemp != NULL)
-				temp->setTexture(ttemp);
-
-
-
+				temp->setAppTexture(ttemp);
 
 			apps.push_back(temp);
 
@@ -1068,7 +1065,7 @@ void ANFScene:: display(){
 			lights[i]->draw();
 		
 
-			lights[i]->update();
+			lights[i]->updateL();
 	
 	}
 
@@ -1107,4 +1104,3 @@ void ANFScene::process(Node* node) {
 	}
 
 }
-

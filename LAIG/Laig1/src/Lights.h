@@ -21,6 +21,7 @@ public:
 	bool getEnable();
 	void turnOn();
 	void turnOff();
+	virtual void updateL();
 
 };
 
@@ -31,6 +32,7 @@ class SpotLight : public Light{
 
 public:
 	SpotLight(string id_s,unsigned int iID, float* p, string t, bool m, float*targ, float exp, float angle);
+	void updateL();
 
 };
 

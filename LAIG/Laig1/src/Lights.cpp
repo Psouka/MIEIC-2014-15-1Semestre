@@ -11,8 +11,6 @@ Light :: Light(string id_s,unsigned int iID,float *p,string t, bool m)
 		this->marker = m;
 		this-> type = t;
 		this->position[3] = 0;
-
-
 }
 
 bool Light::getMarker(){
@@ -35,6 +33,9 @@ void Light::turnOff(){
 	active = 0;
 	this->disable();
 }
+void Light :: updateL(){
+	this->update();
+}
 
 
 
@@ -53,4 +54,9 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 	exponent = exp;
 //	this->angle = angle;
 
+}
+
+void SpotLight :: updateL(){
+	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
+	this->update();
 }

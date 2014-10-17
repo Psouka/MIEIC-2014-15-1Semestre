@@ -13,3 +13,8 @@ Appearance :: Appearance(float*a,float *d,float *s, float shi, string id, string
 string  Appearance ::getAppId(){
 return id;
 }
+
+void Appearance ::setAppTexture(Texture * t){
+	this->setTexture(t);
+	APPTexture = t;
+}
