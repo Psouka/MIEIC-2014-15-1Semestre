@@ -42,6 +42,15 @@
     <ClCompile Include="..\src\Primitives.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Lights.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TPinterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Node.h">
@@ -77,7 +86,7 @@
     <ClInclude Include="..\src\Lights.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\myInterface.h">
+    <ClInclude Include="..\src\TPinterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

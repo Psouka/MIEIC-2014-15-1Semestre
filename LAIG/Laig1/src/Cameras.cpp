@@ -30,20 +30,6 @@ void OrthoCamera:: applyView(){
 	glOrtho(left, right, bottom, top, nearP, farP);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	switch(direction)
-	{
-	case 'x':
-		gluLookAt(1, 0.0, 0.0, farP, 0.0, 0.0, 0.0, 1.0, 0.0);
-		break;
-	case 'y':
-		gluLookAt(0.0, 1, 0.0, 0, -farP, 0.0, 0.0, 0.0, -1.0);
-		break;
-	case 'z':
-		gluLookAt(0.0, 0.0, 1, 0.0, 0.0, -farP, 0.0, 1.0, 0.0);
-		break;
-	default:
-		break;
-	}
 }
 
 
