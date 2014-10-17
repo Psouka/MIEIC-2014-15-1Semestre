@@ -4,7 +4,6 @@ Camera::Camera(string id)
 	:CGFcamera()
 {
 	cameraid=id;
-	initial = false;
 }
 
 PerspectiveCamera::PerspectiveCamera(string id, float nearP, float farP, float angle) : Camera(id)
@@ -68,9 +67,4 @@ void Camera :: setTarget(float *t){
 	target[0] = t[0];
 	target[1] = t[1];
 	target[2] = t[2];
-}
-
-
-void Camera :: setInitial(bool i){
-	initial = i;
 }

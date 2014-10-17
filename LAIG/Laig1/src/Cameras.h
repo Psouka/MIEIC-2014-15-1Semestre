@@ -10,14 +10,12 @@ using namespace std;
 class Camera : public CGFcamera
 {
 protected:
-	bool initial;
 	float nearP;
 	float farP;
 public:
 	string cameraid;
 	void setPosition(float *p);
 	void setTarget(float *t);
-	void setInitial(bool i);
 	Camera(string id);
 	float getnearP();
 	float getfarP();

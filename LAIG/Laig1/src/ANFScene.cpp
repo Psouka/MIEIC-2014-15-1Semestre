@@ -125,7 +125,7 @@ int ANFScene :: parseCameras(){
 
 				if(strcmp(id,initial_c)==0)
 				{
-					camera->setInitial(true);
+					Active_Camera = cameras.size()+1;
 				}
 				cameras.push_back(camera);
 				perspectiveRead = true;
@@ -168,7 +168,7 @@ int ANFScene :: parseCameras(){
 
 					if(strcmp(id,initial_c)==0)
 					{
-						camera->setInitial(true);
+						Active_Camera = cameras.size()+1;
 					}
 
 					cameras.push_back(camera);
@@ -1024,7 +1024,6 @@ void ANFScene::init(){
 	glEnable (GL_TEXTURE_2D);
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
-	Active_Camera = 0;
 }
 
 void  ANFScene::FillChildren(Node* node){
