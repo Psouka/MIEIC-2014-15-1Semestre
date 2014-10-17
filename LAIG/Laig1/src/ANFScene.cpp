@@ -1057,7 +1057,6 @@ void ANFScene:: display(){
 	else
 		cameras[(Active_Camera -1)]->applyView();
 
-
 	axis.draw();
 
 	for(unsigned int i = 0; i < lights.size(); i++) {
