@@ -14,36 +14,30 @@ PerspectiveCamera::PerspectiveCamera(string id, float nearP, float farP, float a
 }
 
 void PerspectiveCamera:: applyView(){
+	
+	gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
+}
+
+void PerspectiveCamera::updateProjectionMatrix (int width, int height){
+	float aspect = (float) width / (float) height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(angle, 1.0, nearP, farP);
+	gluPerspective(angle, aspect, nearP, farP);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
 }
 
 
 void OrthoCamera:: applyView(){
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(left, right, bottom, top, nearP, farP);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	switch(direction)
-	{
-	case 'x':
-		gluLookAt(1, 0.0, 0.0, farP, 0.0, 0.0, 0.0, 1.0, 0.0);
-		break;
-	case 'y':
-		gluLookAt(0.0, 1, 0.0, 0, -farP, 0.0, 0.0, 0.0, -1.0);
-		break;
-	case 'z':
-		gluLookAt(0.0, 0.0, 1, 0.0, 0.0, -farP, 0.0, 1.0, 0.0);
-		break;
-	default:
-		break;
-	}
+}
+
+void OrthoCamera::updateProjectionMatrix (int width, int height){
+	glViewport(0,0,width,height);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(left,right,bottom,top,nearP,farP);
 }
 
 
