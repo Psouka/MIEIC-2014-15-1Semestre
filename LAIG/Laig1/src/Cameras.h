@@ -11,10 +11,10 @@ class Camera : public CGFcamera
 {
 protected:
 	bool initial;
-	string cameraid;
 	float nearP;
 	float farP;
 public:
+	string cameraid;
 	void setPosition(float *p);
 	void setTarget(float *t);
 	void setInitial(bool i);

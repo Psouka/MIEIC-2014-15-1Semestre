@@ -13,10 +13,10 @@
 class ANFScene : public CGFscene
 {
 public:
+	int Active_Camera;
 	ANFScene(){}
 	ANFScene(char *filename);
 	~ANFScene();
-
 	static TiXmlElement *findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val);
 	int parseGlobals();
 	int parseCameras();
@@ -32,6 +32,7 @@ public:
 	void process(Node* node);
 	void FillChildren(Node* node);
 	vector <Light*> getLights();
+	vector <Camera*> getCameras();
 	
 	
 protected:

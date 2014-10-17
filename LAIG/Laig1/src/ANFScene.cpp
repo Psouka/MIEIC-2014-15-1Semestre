@@ -1024,7 +1024,7 @@ void ANFScene::init(){
 	glEnable (GL_TEXTURE_2D);
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
-
+	Active_Camera = 0;
 }
 
 void  ANFScene::FillChildren(Node* node){
@@ -1041,6 +1041,10 @@ vector <Light*> ANFScene::getLights(){
 	return lights;
 }
 
+vector <Camera*> ANFScene::getCameras(){
+	return cameras;
+}
+
 void ANFScene:: display(){
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -1049,8 +1053,13 @@ void ANFScene:: display(){
 
 	glLoadIdentity();
 
-	CGFscene::activeCamera->applyView(); 
-	//cameras[2]->applyView();
+	if(Active_Camera == 0)
+	{initCameras();
+	CGFscene::activeCamera->applyView();}
+	else
+		cameras[(Active_Camera -1)]->applyView();
+
+
 	axis.draw();
 
 	for(unsigned int i = 0; i < lights.size(); i++) {

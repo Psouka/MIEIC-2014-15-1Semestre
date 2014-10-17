@@ -10,6 +10,7 @@ Light :: Light(string id_s,unsigned int iID,float *p,string t, bool m)
 		this->id_s = id_s;
 		this->marker = m;
 		this-> type = t;
+		this->position[3] = 1;
 }
 
 bool Light::getMarker(){
@@ -42,6 +43,7 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 	target[0] = targ[0];
 	target[1] = targ[1];
 	target[2] = targ[2];
+	
 
 //	this->direction[0] = target[0]-position[0];
 //	this->direction[1] = target[1]-position[1];
