@@ -1064,6 +1064,8 @@ void ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++) {
 		if(lights[i]->getMarker())
 			lights[i]->draw();
+		else
+			lights[i]->update();
 	}
 
 	process(ANFGraph->getGraph()[ANFGraph->getRoot()]);
