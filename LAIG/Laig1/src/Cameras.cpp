@@ -39,7 +39,7 @@ void OrthoCamera:: applyView(){
 
 	if(direction == 'y'){
 		glRotated(90,1,0,0);
-	}else if(direction == 'z'){
+	}else if(direction == 'x'){
 		glRotated(90,0,1,0);
 	}
 }
