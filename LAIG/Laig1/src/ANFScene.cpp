@@ -1054,7 +1054,6 @@ void ANFScene:: display(){
 
 	if(Active_Camera == 0)
 	{
-		initCameras();
 	CGFscene::activeCamera->applyView();}
 	else
 		cameras[(Active_Camera -1)]->applyView();

@@ -23,7 +23,7 @@
   </cameras>
 
   <lights>
-    <light id="omniLight" type="omni" enabled="false" marker="false" pos="9.5 4.5 4.5" >
+    <light id="omniLight" type="omni" enabled="false" marker="true" pos="9.5 4.5 4.5" >
       <component type="ambient" value="0.1 0.1 0.1 1.0" />
       <component type="diffuse" value="0.4 0.4 0.4 1.0" />
       <component type="specular" value="0.4 0.4 0.4 1.0" />
