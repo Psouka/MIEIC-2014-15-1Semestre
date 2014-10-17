@@ -89,17 +89,11 @@ int ANFScene :: parseCameras(){
 					printf("\n	far: %f",far);
 					printf("\n	angle: %f",angle);
 
-
-					float pos0,pos1,pos2,tar0,tar1,tar2;
-
 					initial=(char *)camElement->Attribute("pos");
 
-					if(initial && sscanf_s(initial,"%f %f %f",&pos0, &pos1, &pos2)==3)
+					if(initial && sscanf_s(initial,"%f %f %f",&position[0], &position[1], &position[2])==3)
 					{
-						printf("\n	pos: (%f,%f,%f)", pos0, pos1, pos2);
-						position[0]=pos0;
-						position[1]=pos1;
-						position[2]=pos2;
+						printf("\n	pos: (%f,%f,%f)",&position[0], &position[1], &position[2]);
 					}
 					else
 					{
@@ -110,12 +104,10 @@ int ANFScene :: parseCameras(){
 
 					initial=(char *)camElement->Attribute("target");
 
-					if(initial && sscanf_s(initial,"%f %f %f",&tar0, &tar1, &tar2)==3)
+					if(initial && sscanf_s(initial,"%f %f %f",&target[0], &target[1], &target[2])==3)
 					{
-						printf("\n	target : (%f,%f,%f)", tar0, tar1, tar2);
-						target[0] = tar0;
-						target[1] = tar1;
-						target[2] = tar2;
+						printf("\n	target : (%f,%f,%f)", target[0], target[1], target[2]);
+
 					}
 					else
 					{
@@ -207,14 +199,12 @@ int ANFScene:: parseGlobals(){
 		{
 			char *mode, *shading;
 			float bg[4];
-			float bg0, bg1, bg2, bg3;
-
 
 			mode =(char *)gElement->Attribute("mode");
 			shading =(char *)gElement->Attribute("shading");
 			valString=(char *)gElement->Attribute("background");
 
-			if(valString &&sscanf_s(valString,"%f %f %f %f",&bg0, &bg1, &bg2, &bg3)==4)
+			if(valString &&sscanf_s(valString,"%f %f %f %f",&bg[0], &bg[1], &bg[2], &bg[3])==4)
 			{
 				GLenum drawmode, drawshading;
 
@@ -232,10 +222,6 @@ int ANFScene:: parseGlobals(){
 					drawshading = GL_SMOOTH;
 				printf("\n	Shading: %s", shading);
 
-				bg[0] = bg0;
-				bg[1] = bg1;
-				bg[2] = bg2;
-				bg[3] = bg3;
 				printf("\n	Background  : (%f,%f,%f,%f)", bg[0], bg[1], bg[2], bg[3]);
 
 				ANFGlobals.updateDraw(drawmode,drawshading,bg);
@@ -298,7 +284,6 @@ int ANFScene:: parseGlobals(){
 		{
 			bool doublesided , local , enabled;
 			float ambient[4];
-			float a0, a1, a2, a3;
 
 			valString =(char *)gElement->Attribute("doublesided");
 
@@ -340,12 +325,8 @@ int ANFScene:: parseGlobals(){
 
 			valString=(char *)gElement->Attribute("ambient");
 
-			if(valString &&sscanf_s(valString,"%f %f %f %f",&a0, &a1, &a2, &a3)==4)
+			if(valString &&sscanf_s(valString,"%f %f %f %f",&ambient[0], &ambient[1], &ambient[2], &ambient[3])==4)
 			{
-				ambient[0] = a0;
-				ambient[1] = a1;
-				ambient[2] = a2;
-				ambient[3] = a3;
 				printf("Ambient: <%f %f %f %f>",ambient[0],ambient[1], ambient[2], ambient[3]);
 			}
 			else
@@ -376,7 +357,6 @@ int ANFScene :: parseLights(){
 		float exponent, angle;
 		char* lightid, *type, *ValString;
 		float pos[3], a[4], d[4], s[4];
-		float x0,x1,x2,x3;
 		bool marker, enable;
 		Light *Ltemp;
 		int idlight = GL_LIGHT0;
@@ -395,12 +375,8 @@ int ANFScene :: parseLights(){
 				printf("LIGHTS TYPE ERROR");
 
 			ValString = (char *)lElement->Attribute("pos");
-			if(ValString &&sscanf_s(ValString,"%f %f %f",&x0, &x1, &x2)==3)
+			if(ValString &&sscanf_s(ValString,"%f %f %f",&pos[0], &pos[1], &pos[2])==3)
 			{
-				pos[0] = x0;
-				pos[1] = x1;
-				pos[2] = x2;
-
 				printf("\n	Position: %s",ValString);
 			}
 			else
@@ -446,13 +422,8 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&a[0], &a[1], &a[2], &a[3])==4)
 				{
-					a[0] = x0;
-					a[1] = x1;
-					a[2] = x2;
-					a[3] = x3;
-
 					printf("\n	Ambient component: %s",ValString);
 				}
 				else
@@ -469,13 +440,8 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2,&x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&d[0], &d[1], &d[2],&d[3])==4)
 				{
-					d[0] = x0;
-					d[1] = x1;
-					d[2] = x2;
-					d[3] = x3;
-
 					printf("\n	Diffuse component: %s",ValString);
 				}
 				else
@@ -493,13 +459,8 @@ int ANFScene :: parseLights(){
 
 				ValString = (char *)compElement->Attribute("value");
 
-				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&s[0], &s[1], &s[2], &s[3])==4)
 				{
-					s[0] = x0;
-					s[1] = x1;
-					s[2] = x2;
-					s[3] = x3;
-
 					printf("\n	Specular component: %s",ValString);
 				}
 				else
@@ -513,13 +474,9 @@ int ANFScene :: parseLights(){
 
 
 				ValString = (char *)lElement->Attribute("target");
-				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&x0, &x1, &x2)==3)
+				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&target[0], &target[1], &target[2])==3)
 				{
-					target[0] = x0;
-					target[1] = x1;
-					target[2] = x2;
 					printf("\n	Target : %s",ValString);
-
 				}
 				else
 					printf("LIGHTS TARGET ERROR");
@@ -626,7 +583,6 @@ int ANFScene :: parseAppearences(){
 		char* appid,* textref, *type;
 		float ambient[4], diffuse[4], specular[4];
 		float shininess;
-		float x0,x1,x2,x3;
 		Appearance* temp;
 		CGFtexture * ttemp;
 
@@ -666,12 +622,8 @@ int ANFScene :: parseAppearences(){
 				if(strcmp(type,"ambient") == 0)
 				{
 
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&ambient[0], &ambient[1], &ambient[2], &ambient[3])==4)
 					{
-						ambient[0] = x0;
-						ambient[1] = x1;
-						ambient[2] = x2;
-						ambient[3] = x3;
 						printf("\n	Ambient: <%f %f %f %f>", ambient[0],ambient[1],ambient[2],ambient[3]);
 					}
 					else
@@ -683,12 +635,8 @@ int ANFScene :: parseAppearences(){
 
 				else if(strcmp(type,"diffuse")== 0)
 				{
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&diffuse[0], &diffuse[1], &diffuse[2], &diffuse[3])==4)
 					{
-						diffuse[0] = x0;
-						diffuse[1] = x1;
-						diffuse[2] = x2;
-						diffuse[3] = x3;
 						printf("\n	Diffuse: <%f %f %f %f>", diffuse[0],diffuse[1],diffuse[2],diffuse[3]);
 					}
 
@@ -701,12 +649,8 @@ int ANFScene :: parseAppearences(){
 
 				else if(strcmp(type,"specular")== 0)
 				{
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&x0, &x1, &x2, &x3)==4)
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&specular[0], &specular[1], &specular[2], &specular[3])==4)
 					{
-						specular[0] = x0;
-						specular[1] = x1;
-						specular[2] = x2;
-						specular[3] = x3;
 						printf("\n	Specular: <%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
 					}
 
