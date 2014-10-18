@@ -17,11 +17,11 @@ class Node
 	vector<Node*> nodeChilds;
 	vector<Primitives *> primitives;
 	float transforms[16];
-	CGFappearance * app;
+	Appearance * app;
 public:
 	Node();
 	Node(string ID);
-	void setApp(CGFappearance *p);
+	void setApp(Appearance *p);
 	void addPrimitive(Primitives* p);
 	void addDescend(string n);
 	string getID();
@@ -34,6 +34,7 @@ public:
 	void ApplyApp();
 	vector<Node*> getNChilds();
 	void setChilds(vector<Node*> n);
+	Appearance * getApp();
 };
 
 #endif

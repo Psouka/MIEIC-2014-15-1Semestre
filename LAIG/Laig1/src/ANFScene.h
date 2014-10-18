@@ -27,7 +27,7 @@ public:
 	int parseAppearences();
 	int parseGraph();
 	Texture *findTexture(string id);
-	CGFappearance* findApp(string id);
+	Appearance* findApp(string id);
 	vector<Node*> getNodes(vector<string> n);
 	void init();
 	void display();

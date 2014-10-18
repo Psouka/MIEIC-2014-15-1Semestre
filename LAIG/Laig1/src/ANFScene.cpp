@@ -705,7 +705,7 @@ int ANFScene :: parseGraph(){
 		TiXmlElement* pElement;
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
-		CGFappearance* lastapp;
+		Appearance* lastapp;
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
 		{
@@ -950,7 +950,7 @@ Texture* ANFScene ::findTexture(string id){
 	return NULL;
 }
 
-CGFappearance* ANFScene :: findApp(string id){
+Appearance* ANFScene :: findApp(string id){
 	for(unsigned int i = 0; i < apps.size(); i++){
 		if(apps[i]->getAppId() == id)
 			return apps[i];
@@ -1092,11 +1092,11 @@ void ANFScene::process(Node* node) {
 
 	vector<Primitives*> prim = node->getPrimitives();
 	for(unsigned int a = 0; a < prim.size(); a++) {
-		prim[a]->draw();
+		prim[a]->draw(node->getApp()->APPTexture);
 	}
 	if (drawMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
-		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+		glPolygonMode( GL_FRONT_AND_BACK, ANFGlobals.drawMode);
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();

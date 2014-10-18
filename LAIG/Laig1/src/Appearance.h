@@ -7,8 +7,8 @@
 class Appearance : public CGFappearance
 {
 	string id, textureref;
-	Texture *APPTexture;
 public:
+	Texture *APPTexture;
 	Appearance(float*a,float *d,float *s, float shi, string id, string textureref);
 	string getAppId();
 	void setAppTexture(Texture * t);

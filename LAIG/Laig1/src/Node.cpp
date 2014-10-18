@@ -16,7 +16,7 @@ Node::Node(string nodeID) {
 
 }
 
-void Node::setApp(CGFappearance *p){
+void Node::setApp(Appearance *p){
 
 	this->app = p;
 }
@@ -57,6 +57,11 @@ return nodeChilds;
 void Node::setChilds(vector<Node*> n){
 	nodeChilds = n;
 }
+
+Appearance * Node:: getApp(){
+	return app;
+}
+
 
 
 void Node::translate(float x, float y, float z)
