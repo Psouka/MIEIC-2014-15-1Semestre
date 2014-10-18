@@ -1046,6 +1046,7 @@ vector <Camera*> ANFScene::getCameras(){
 }
 
 void ANFScene::changeCamera(){
+
 	if(Active_Camera == 0)
 		initCameras();
 	else
