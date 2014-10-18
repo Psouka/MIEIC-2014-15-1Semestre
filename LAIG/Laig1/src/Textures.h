@@ -11,6 +11,7 @@ class Texture : public CGFtexture
 	
 public:
 	float tex_s, tex_t;
+	Texture(string id);
 	Texture(string i, string f, float tex_s,float tex_t);
 	Texture();
 	string getFile();

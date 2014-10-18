@@ -677,6 +677,8 @@ int ANFScene :: parseAppearences(){
 			ttemp = findTexture(textref);
 			if(ttemp != NULL)
 				temp->setAppTexture(ttemp);
+			else
+				temp->setAppTexture(new Texture("NULL"));
 
 			apps.push_back(temp);
 

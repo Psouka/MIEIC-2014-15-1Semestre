@@ -9,8 +9,13 @@ Texture :: Texture(string i, string f, float tex_s,float tex_t)
 		this->tex_t = tex_t;
 }
 
+Texture ::Texture(string id)
+:CGFtexture(){
+	this->id = id;
+}
+
 Texture :: Texture()
-	:CGFtexture(NULL){}
+	:CGFtexture(){}
 
 string Texture ::getFile(){
 	return file;

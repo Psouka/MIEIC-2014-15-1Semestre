@@ -18,6 +18,14 @@ Rectangle :: Rectangle(float x1,float y1, float x2, float y2)
 }
 
 void Rectangle :: draw(Texture* t){
+	float xT,yT;
+	if(t->getId() != "NULL")
+	{
+		float lenT = t->tex_s, heiT = t->tex_s, lenO = x2-x1,heiO = y2-y1;
+	xT = lenO/lenT;
+	yT = heiO/heiT;}
+	else
+		xT = yT = 1;
 	glPushMatrix();
 	glBegin(GL_POLYGON);
 
@@ -26,15 +34,15 @@ void Rectangle :: draw(Texture* t){
 	glVertex2f(x1, y1);
 
 	glNormal3f(x2, y1,1);
-	glTexCoord2f(1,0);
+	glTexCoord2f(xT,0);
 	glVertex2f(x2, y1);
 
 	glNormal3f(x2, y2,1);
-	glTexCoord2f(1,1);
+	glTexCoord2f(xT,yT);
 	glVertex2f(x2, y2);
 
 	glNormal3f(x1, y1,1);
-	glTexCoord2f(0,1);
+	glTexCoord2f(0,yT);
 	glVertex2f(x1, y2);
 	glEnd();
 	glPopMatrix();
