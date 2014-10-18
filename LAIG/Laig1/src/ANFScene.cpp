@@ -707,7 +707,6 @@ int ANFScene :: parseGraph(){
 		TiXmlElement* pElement;
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
-		Appearance* lastapp;
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
 		{
@@ -791,9 +790,6 @@ int ANFScene :: parseGraph(){
 			}
 			}
 
-
-
-
 			if(appearanceref)
 			{
 				ValString=(char *) appearanceref->Attribute("id");
@@ -801,12 +797,12 @@ int ANFScene :: parseGraph(){
 				if (ValString)
 				{
 					if(strcmp(ValString,"inherit") == 0)
-
-						Nodetemp->setApp(lastapp);
+					{
+						Nodetemp->setApp(new Appearance("inherit"));
+					}
 					else
 					{
-						lastapp = findApp(ValString);
-						Nodetemp->setApp(lastapp);
+						Nodetemp->setApp(findApp(ValString));
 					}
 					printf("\n	Appearanceref: %s", ValString);
 				}
@@ -959,7 +955,6 @@ Appearance* ANFScene :: findApp(string id){
 	}
 
 	return NULL;
-
 }
 
 vector<Node*> ANFScene ::getNodes(vector<string> n){
@@ -1062,7 +1057,7 @@ void ANFScene:: display(){
 	glLoadIdentity();
 
 	CGFapplication::activeApp->forceRefresh();
-	
+
 	CGFscene::activeCamera->applyView();
 
 	axis.draw();
@@ -1070,19 +1065,18 @@ void ANFScene:: display(){
 	for(unsigned int i = 0; i < lights.size(); i++) {
 		if(lights[i]->getMarker())
 			lights[i]->draw();
-		
 
-			lights[i]->updateL();
-	
+		lights[i]->updateL();
 	}
-
-	process(ANFGraph->getGraph()[ANFGraph->getRoot()]);
+	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
+	process(root,root->getApp());
 
 	glutSwapBuffers();
 
 }
 
-void ANFScene::process(Node* node) {
+void ANFScene::process(Node* node,Appearance * app) {
+
 	if(node == NULL)
 	{
 		printf("\nNode nao encontrado");
@@ -1100,7 +1094,7 @@ void ANFScene::process(Node* node) {
 
 	vector<Primitives*> prim = node->getPrimitives();
 	for(unsigned int a = 0; a < prim.size(); a++) {
-		prim[a]->draw(node->getApp()->APPTexture);
+		prim[a]->draw(app->APPTexture);
 	}
 	if (drawMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
@@ -1108,8 +1102,17 @@ void ANFScene::process(Node* node) {
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
-		nodes[i]->ApplyApp();
-		process(nodes[i]);
+
+		if(nodes[i]->getApp()->get_text_ref() != "inherit")
+		{
+			nodes[i]->ApplyApp();
+			process(nodes[i],nodes[i]->getApp());
+		}
+		else
+		{
+			app->apply();
+			process(nodes[i],app);
+		}
 		glPopMatrix();
 	}
 

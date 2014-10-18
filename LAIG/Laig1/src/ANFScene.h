@@ -31,7 +31,7 @@ public:
 	vector<Node*> getNodes(vector<string> n);
 	void init();
 	void display();
-	void process(Node* node);
+	void process(Node* node,Appearance * app);
 	void FillChildren(Node* node);
 	vector <Light*> getLights();
 	vector <Camera*> getCameras();

@@ -27,6 +27,7 @@ void Rectangle :: draw(Texture* t){
 	}
 	else
 		xT = yT = 1;
+
 	glPushMatrix();
 	glBegin(GL_POLYGON);
 
@@ -145,5 +146,48 @@ Torus :: Torus(float inner, float outer, int slices, int loops)
 }
 
 void Torus :: draw(Texture* t){
-	glutSolidTorus(inner, outer, slices, loops);
+		int i, j;
+		GLfloat theta, phi, theta1;
+		GLfloat cosTheta, sinTheta;
+		GLfloat cosTheta1, sinTheta1;
+		GLfloat ringDelta, sideDelta;
+
+		ringDelta = 2.0 * PI / loops;
+		sideDelta = 2.0 * PI / slices;
+
+		theta = 0.0;
+		cosTheta = 1.0;
+		sinTheta = 0.0;
+		for (i = loops - 1; i >= 0; i--) {
+			theta1 = theta + ringDelta;
+			cosTheta1 = cos(theta1);
+			sinTheta1 = sin(theta1);
+			glBegin(GL_QUAD_STRIP);
+			phi = 0.0;
+			for (j = slices; j >= 0; j--) {
+				GLfloat cosPhi, sinPhi, dist;
+
+				phi += sideDelta;
+				cosPhi = cos(phi);
+				sinPhi = sin(phi);
+				dist = outer + inner * cosPhi;
+				//v = arccos (Y/R)/2p
+//u = [arccos ((X/(R + r*cos(2 pv))]2p
+
+
+				glNormal3f(cosTheta1 * cosPhi, -sinTheta1  *cosPhi, sinPhi);
+				glTexCoord2d(acos((-sinTheta1  *dist))/inner / 2*PI,acos((cosTheta1  *dist)/(inner + cosTheta1) * 2*PI));
+				glVertex3f(cosTheta1  *dist, -sinTheta1  *dist, inner * sinPhi);
+
+
+				glNormal3f(cosTheta  *cosPhi, -sinTheta  *cosPhi, sinPhi);
+				glTexCoord2d(acos((-sinTheta1 * dist))/inner / 2*PI,acos((cosTheta1  *dist)/(inner + cosTheta1) * 2*PI));
+				glVertex3f(cosTheta  *dist, -sinTheta * dist,  inner * sinPhi);
+			}
+			glEnd();
+			theta = theta1;
+			cosTheta = cosTheta1;
+			sinTheta = sinTheta1;
+}
+
 }

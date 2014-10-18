@@ -10,6 +10,15 @@ Appearance :: Appearance(float*a,float *d,float *s, float shi, string id, string
 	this->textureref = textureref;
 }
 
+Appearance ::Appearance(string text_ref){
+	this->textureref = text_ref;
+}
+
+string  Appearance ::get_text_ref(){
+return textureref;
+}
+
+
 string  Appearance ::getAppId(){
 return id;
 }

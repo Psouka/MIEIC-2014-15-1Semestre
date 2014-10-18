@@ -10,7 +10,8 @@ Light :: Light(string id_s,unsigned int iID,float *p,string t, bool m)
 		this->id_s = id_s;
 		this->marker = m;
 		this-> type = t;
-		this->position[3] = 0;
+		this->position[3] = 1;
+		this->angle = 180;
 }
 
 bool Light::getMarker(){
@@ -37,8 +38,6 @@ void Light :: updateL(){
 	this->update();
 }
 
-
-
 SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, float*targ, float exp, float angle)
 	: Light(id_s,iID,p,t,m)
 {
@@ -46,8 +45,16 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 	target[0] = targ[0];
 	target[1] = targ[1];
 	target[2] = targ[2];
+
+	direction[0] =	target[0] - position[0];
+	direction[1] = target[1] - position[1];
+	direction[2] = target[2] - position[2];
 	
-	this->position[3] = 1;
+	float normal = sqrt( pow(direction[0],2) + pow(direction[1],2) + pow(direction[2],2));
+
+	direction[0] =	direction[0] / normal;
+	direction[1] = direction[1] / normal;
+	direction[2] = direction[2] / normal;
 	exponent = exp;
 	this->angle = angle;
 
