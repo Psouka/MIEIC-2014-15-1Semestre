@@ -61,6 +61,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl)
 		break;
 	case 2:
 		printf("\nCamera Changed");
+		Scene->changeCamera();
 		break;
 	case 3:
 		printf("\nDraw Mode Changed");

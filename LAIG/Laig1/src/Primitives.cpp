@@ -22,8 +22,9 @@ void Rectangle :: draw(Texture* t){
 	if(t->getId() != "NULL")
 	{
 		float lenT = t->tex_s, heiT = t->tex_s, lenO = x2-x1,heiO = y2-y1;
-	xT = lenO/lenT;
-	yT = heiO/heiT;}
+		xT = lenO/lenT;
+		yT = heiO/heiT;
+	}
 	else
 		xT = yT = 1;
 	glPushMatrix();

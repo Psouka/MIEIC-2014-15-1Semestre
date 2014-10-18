@@ -1022,6 +1022,8 @@ void ANFScene::init(){
 
 	glEnable (GL_TEXTURE_2D);
 
+	changeCamera();
+
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 }
 
@@ -1043,6 +1045,13 @@ vector <Camera*> ANFScene::getCameras(){
 	return cameras;
 }
 
+void ANFScene::changeCamera(){
+	if(Active_Camera == 0)
+		initCameras();
+	else
+		CGFscene::activeCamera = cameras[(Active_Camera -1)];
+}
+
 void ANFScene:: display(){
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
@@ -1052,12 +1061,8 @@ void ANFScene:: display(){
 	glLoadIdentity();
 
 	CGFapplication::activeApp->forceRefresh();
-	if(Active_Camera == 0)
-	{
+	
 	CGFscene::activeCamera->applyView();
-	}
-	else
-		cameras[(Active_Camera -1)]->applyView();
 
 	axis.draw();
 

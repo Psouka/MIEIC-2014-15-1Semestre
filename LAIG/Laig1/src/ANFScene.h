@@ -35,6 +35,7 @@ public:
 	void FillChildren(Node* node);
 	vector <Light*> getLights();
 	vector <Camera*> getCameras();
+	void changeCamera();
 	
 	
 protected:
