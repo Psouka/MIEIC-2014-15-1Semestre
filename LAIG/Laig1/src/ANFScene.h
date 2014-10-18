@@ -13,6 +13,8 @@
 class ANFScene : public CGFscene
 {
 public:
+	//interface
+	int drawMode;
 	int Active_Camera;
 	ANFScene(){}
 	ANFScene(char *filename);

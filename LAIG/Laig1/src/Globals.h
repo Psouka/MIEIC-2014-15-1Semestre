@@ -15,6 +15,7 @@ public:
 	//Lightning
 	bool doublesided , local , enabled;
 	float ambient[4];
+	
 
 	Globals();
 	void updateDraw(GLenum m, GLenum s, float *b);

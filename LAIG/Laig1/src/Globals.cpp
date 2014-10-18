@@ -1,7 +1,6 @@
 #include "Globals.h"
 
 Globals :: Globals(){
-
 }
 
 void Globals :: updateDraw(GLenum m, GLenum s, float *b){

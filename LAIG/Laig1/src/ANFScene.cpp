@@ -7,7 +7,7 @@
 ANFScene :: ANFScene(char *filename)
 	:  CGFscene()
 {
-
+	drawMode = 0;
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
@@ -1094,6 +1094,9 @@ void ANFScene::process(Node* node) {
 	for(unsigned int a = 0; a < prim.size(); a++) {
 		prim[a]->draw();
 	}
+	if (drawMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	else
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
