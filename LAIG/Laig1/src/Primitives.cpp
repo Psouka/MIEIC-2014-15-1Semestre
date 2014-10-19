@@ -151,7 +151,7 @@ void Sphere :: draw(Texture* t){
 	glEnable(GL_TEXTURE_2D);
 	if(t != NULL){
 	glBindTexture(GL_TEXTURE_2D, t->getTexId());
-	}else{}
+	}
 	gluSphere(qObj, radius, slices, stacks);
 }
 
