@@ -1,24 +1,20 @@
 #include "Cameras.h"
 
-Camera::Camera(string id)
-	:CGFcamera()
-{
+Camera::Camera(string id): CGFcamera() {
 	cameraid=id;
 }
 
-PerspectiveCamera::PerspectiveCamera(string id, float nearP, float farP, float angle) : Camera(id)
-{
+PerspectiveCamera::PerspectiveCamera(string id, float nearP, float farP, float angle): Camera(id) {
 	this->nearP=nearP;
 	this->farP=farP;
 	this->angle=angle;
 }
 
-void PerspectiveCamera:: applyView(){
-	
+void PerspectiveCamera::applyView() {
 	gluLookAt(position[0], position[1], position[2], target[0], target[1], target[2], 0, 1, 0);
 }
 
-void PerspectiveCamera::updateProjectionMatrix (int width, int height){
+void PerspectiveCamera::updateProjectionMatrix (int width, int height) {
 
 	float aspect = (float) width / (float) height;
 	glMatrixMode(GL_PROJECTION);
@@ -29,11 +25,11 @@ void PerspectiveCamera::updateProjectionMatrix (int width, int height){
 }
 
 
-void OrthoCamera:: applyView(){
+void OrthoCamera:: applyView() {
 	updateProjectionMatrix(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 }
 
-void OrthoCamera::updateProjectionMatrix (int width, int height){
+void OrthoCamera::updateProjectionMatrix (int width, int height) {
 	float aspect = (float) width / (float) height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -47,8 +43,7 @@ void OrthoCamera::updateProjectionMatrix (int width, int height){
 }
 
 
-OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom,char direction) : Camera(id)
-{
+OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float right, float top, float bottom,char direction): Camera(id) {
 	this->nearP=nearP;
 	this->farP=farP;
 	this->left=left;
@@ -58,14 +53,14 @@ OrthoCamera::OrthoCamera(string id, float nearP, float farP, float left, float r
 	this->direction = direction;
 }
 
-void Camera :: setPosition(float *p){
+void Camera::setPosition(float *p) {
 	position[0] = p[0];
 	position[1] = p[1];
 	position[2] = p[2];
 }
 
 
-void Camera :: setTarget(float *t){
+void Camera::setTarget(float *t) {
 	target[0] = t[0];
 	target[1] = t[1];
 	target[2] = t[2];

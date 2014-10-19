@@ -1,26 +1,22 @@
 #include "TPinterface.h"
 
 
-TPinterface:: TPinterface()
-	:CGFinterface(){
+TPinterface:: TPinterface(): CGFinterface() {
 }
 
-TPinterface:: TPinterface(ANFScene* S)
-	:CGFinterface()
-{
+TPinterface:: TPinterface(ANFScene* S): CGFinterface() {
 	testVar=0;
 	Scene = S;
 }
 
 
-void TPinterface::initGUI()
-{
+void TPinterface::initGUI() {
 	lights = Scene->getLights();
 	cameras = Scene->getCameras();
 
 	int i = 1;
 	GLUI_Panel * panelLights = addPanel("Lights: ", 1);
-	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end() ;it++){
+	for(std::vector<Light *>::iterator it = lights.begin(); it != lights.end() ;it++) {
 		addCheckboxToPanel (panelLights,(char *)((*it)->getid_s()).c_str(),(int *)&((*it)->active), i);
 	}
 	addColumn();
@@ -47,13 +43,12 @@ void TPinterface::initGUI()
 	textureList->add_item (2, "Point");
 }
 
-void TPinterface::processGUI(GLUI_Control *ctrl)
-{
+void TPinterface::processGUI(GLUI_Control *ctrl) {
 	printf ("\nGUI control id: %d",ctrl->user_id);
 	switch (ctrl->user_id)
 	{
 	case 1:
-		for(unsigned int i = 0; i < lights.size(); i++){
+		for(unsigned int i = 0; i < lights.size(); i++) {
 			if(lights[i]->active)
 				lights[i]->turnOn();
 			else

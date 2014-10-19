@@ -1,9 +1,10 @@
 #include "Globals.h"
 
-Globals :: Globals(){
+Globals::Globals() {
+
 }
 
-void Globals :: updateDraw(GLenum m, GLenum s, float *b){
+void Globals::updateDraw(GLenum m, GLenum s, float *b) {
 	drawMode = m;
 	shading =s;
 	background[0] = b[0];
@@ -11,12 +12,12 @@ void Globals :: updateDraw(GLenum m, GLenum s, float *b){
 	background[2] = b[2];
 	background[3] = b[3];
 }
-void Globals :: updateCulli(GLenum f, GLenum o){
+void Globals::updateCulli(GLenum f, GLenum o) {
 	face = f;
 	order = o;
 }
 
-void Globals :: updateLight(bool d, bool l, bool e, float *a){
+void Globals::updateLight(bool d, bool l, bool e, float *a) {
 	doublesided = d;
 	local = l;
 	enabled = e;

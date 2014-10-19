@@ -4,7 +4,8 @@
 #include "Node.h"
 #include "Graph.h"
 
-Node::Node(){
+Node::Node() {
+
 }
 
 Node::Node(string nodeID) {
@@ -16,7 +17,7 @@ Node::Node(string nodeID) {
 
 }
 
-void Node::setApp(Appearance *p){
+void Node::setApp(Appearance *p) {
 
 	this->app = p;
 }
@@ -25,15 +26,15 @@ float* Node::getMatrix() {
 	return transforms;
 }
 
-void Node::addPrimitive(Primitives* p){
+void Node::addPrimitive(Primitives* p) {
 	primitives.push_back(p);
 }
 
-void Node::addDescend(string n){
+void Node::addDescend(string n) {
 	children.push_back(n);
 }
 
-string Node:: getID(){
+string Node:: getID() {
 	return nodeID;
 }
 
@@ -45,20 +46,20 @@ vector<Primitives*> Node::getPrimitives() {
 	return primitives;
 }
 
-void Node::ApplyApp(){
+void Node::ApplyApp() {
 	if(app!= NULL)
-	app->apply();
+		app->apply();
 }
 
-vector<Node*> Node::getNChilds(){
-return nodeChilds;
+vector<Node*> Node::getNChilds() {
+	return nodeChilds;
 }
 
-void Node::setChilds(vector<Node*> n){
+void Node::setChilds(vector<Node*> n) {
 	nodeChilds = n;
 }
 
-Appearance * Node:: getApp(){
+Appearance * Node:: getApp() {
 	return app;
 }
 

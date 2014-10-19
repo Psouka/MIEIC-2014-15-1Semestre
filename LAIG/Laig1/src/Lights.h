@@ -5,13 +5,11 @@
 #include "CGFobject.h"
 #include <string>
 
-class Light : public CGFlight
-{
+class Light: public CGFlight {
 	string id_s;
 	string type;
 	bool marker;
 	
-
 public:
 	int active;
 	Light();

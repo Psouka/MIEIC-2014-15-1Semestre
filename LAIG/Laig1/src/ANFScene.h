@@ -8,15 +8,13 @@
 #include "Textures.h"
 #include "Appearance.h"
 #include "Graph.h"
-//#include "TPinterface.h"
 
-class ANFScene : public CGFscene
-{
+class ANFScene : public CGFscene {
 public:
 	//interface
 	int drawMode;
 	int Active_Camera;
-	ANFScene(){}
+	ANFScene() {}
 	ANFScene(char *filename);
 	~ANFScene();
 	static TiXmlElement *findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val);
@@ -36,14 +34,15 @@ public:
 	vector <Light*> getLights();
 	vector <Camera*> getCameras();
 	void changeCamera();
-	
-	
+
 protected:
 	vector <Camera*> cameras;
 	vector <Light*> lights;
 	vector <Texture*> textures;
 	vector <Appearance*> apps;
+
 	Globals ANFGlobals;
+
 	Graph* ANFGraph;
 
 	TiXmlDocument* doc;
@@ -53,7 +52,7 @@ protected:
 	TiXmlElement* lightElement;
 	TiXmlElement* texturesElement;
 	TiXmlElement* appearancesElement;
-    TiXmlElement* graphElement;
+	TiXmlElement* graphElement;
 
 };
 #endif

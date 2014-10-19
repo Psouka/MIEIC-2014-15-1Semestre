@@ -4,9 +4,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-ANFScene :: ANFScene(char *filename)
-	:  CGFscene()
-{
+ANFScene::ANFScene(char *filename): CGFscene() {
+
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
@@ -18,7 +17,7 @@ ANFScene :: ANFScene(char *filename)
 
 	}
 
-	TiXmlElement* anfElement= doc->FirstChildElement( "anf" );
+	TiXmlElement* anfElement = doc->FirstChildElement( "anf" );
 
 	if (anfElement == NULL)
 	{
@@ -50,7 +49,8 @@ ANFScene :: ANFScene(char *filename)
 
 }
 
-int ANFScene :: parseCameras(){
+int ANFScene::parseCameras() {
+
 	if(camerasElement == NULL)
 		printf("Camera block not found!\n");
 	else {
@@ -194,7 +194,7 @@ int ANFScene :: parseCameras(){
 
 }
 
-int ANFScene:: parseGlobals(){
+int ANFScene::parseGlobals() {
 
 	if(globalsElement == NULL)
 		printf("Globals block not found!\n");
@@ -218,17 +218,17 @@ int ANFScene:: parseGlobals(){
 			{
 				GLenum drawmode, drawshading;
 
-				if(strcmp(mode,"fill")==0){
+				if(strcmp(mode,"fill")==0) {
 					drawMode = 0;
 					drawmode = GL_FILL;
 				}
-				else if(strcmp(mode,"line")==0){
+				else if(strcmp(mode,"line")==0) {
 					drawMode = 1;
 					drawmode = GL_LINE;
 				}
-				else if(strcmp(mode,"point")==0){
-				drawMode = 2;
-				drawmode = GL_POINT;
+				else if(strcmp(mode,"point")==0) {
+					drawMode = 2;
+					drawmode = GL_POINT;
 				}
 				printf("\n	Drawmode: %s", mode);
 
@@ -303,7 +303,7 @@ int ANFScene:: parseGlobals(){
 
 			valString =(char *)gElement->Attribute("doublesided");
 
-			if(valString){
+			if(valString) {
 				if(strcmp(valString,"true")==0)
 					doublesided = true;
 				else
@@ -316,7 +316,7 @@ int ANFScene:: parseGlobals(){
 
 			valString =(char *)gElement->Attribute("local");
 
-			if(valString){
+			if(valString) {
 				if(strcmp(valString,"true")==0)
 					local= true;
 				else
@@ -328,7 +328,7 @@ int ANFScene:: parseGlobals(){
 
 			valString =(char *)gElement->Attribute("enabled");
 
-			if(valString){
+			if(valString) {
 				if(strcmp(valString,"true")==0)
 					enabled = true;
 				else
@@ -361,7 +361,7 @@ int ANFScene:: parseGlobals(){
 	return 0;
 }
 
-int ANFScene :: parseLights(){
+int ANFScene::parseLights() {
 
 	if(lightElement == NULL)
 		printf("Lighting block not found!\n");
@@ -376,7 +376,7 @@ int ANFScene :: parseLights(){
 		bool marker, enable;
 		Light *Ltemp;
 		int idlight = GL_LIGHT0;
-		while(lElement){
+		while(lElement) {
 
 			printf("\n[LIGHTS]");
 
@@ -405,7 +405,7 @@ int ANFScene :: parseLights(){
 			}
 
 
-			if(ValString = (char *)lElement->Attribute("enabled")){
+			if(ValString = (char *)lElement->Attribute("enabled")) {
 
 				if(strcmp(ValString,"true") == 0)
 					enable = true;
@@ -419,7 +419,7 @@ int ANFScene :: parseLights(){
 				printf("LIGHTS ENABLE ERROR");
 
 
-			if(ValString = (char *)lElement->Attribute("marker")){
+			if(ValString = (char *)lElement->Attribute("marker")) {
 				if(strcmp(ValString,"true") == 0)
 					marker = true;
 				else
@@ -486,7 +486,7 @@ int ANFScene :: parseLights(){
 				printf("LIGHTS SPECULAR COMPONENT ERROR");
 
 
-			if(strcmp(type,"spot") == 0){
+			if(strcmp(type,"spot") == 0) {
 
 
 				ValString = (char *)lElement->Attribute("target");
@@ -537,7 +537,8 @@ int ANFScene :: parseLights(){
 	return 0;
 }
 
-int ANFScene :: parseTextures(){
+int ANFScene::parseTextures() {
+
 	if(globalsElement == NULL)
 		printf("Textures block not found!\n");
 	else {
@@ -552,7 +553,7 @@ int ANFScene :: parseTextures(){
 		float texlength_s , texlength_t;
 
 
-		while(tElement){
+		while(tElement) {
 
 			if(id =(char *)tElement->Attribute("id"))
 				printf("\n	id: %s",id);
@@ -590,7 +591,8 @@ int ANFScene :: parseTextures(){
 	return 0;
 }
 
-int ANFScene :: parseAppearences(){
+int ANFScene::parseAppearences() {
+
 	if(appearancesElement == NULL)
 		printf("Appearence block not found!\n");
 	else {
@@ -631,7 +633,7 @@ int ANFScene :: parseAppearences(){
 
 
 			printf("\n(Components)");
-			while(compElement){
+			while(compElement) {
 
 				type = (char *)compElement->Attribute("type");
 				valString = (char *)compElement->Attribute("value");
@@ -698,7 +700,8 @@ int ANFScene :: parseAppearences(){
 	return 0;
 }
 
-int ANFScene :: parseGraph(){
+int ANFScene::parseGraph() {
+
 	if(graphElement == NULL)
 		printf("Graph block not found!\n");
 	else {
@@ -722,7 +725,7 @@ int ANFScene :: parseGraph(){
 			ANFGraph = new Graph(string(ValString));
 		}
 
-		while(nodeElement){
+		while(nodeElement) {
 
 			transformsElement=nodeElement->FirstChildElement("transforms");
 			appearanceref=nodeElement->FirstChildElement("appearanceref");
@@ -947,17 +950,17 @@ int ANFScene :: parseGraph(){
 	return 0;
 }
 
-Texture* ANFScene ::findTexture(string id){
+Texture* ANFScene::findTexture(string id) {
 
-	for(unsigned int i = 0; i < textures.size(); i++){
+	for(unsigned int i = 0; i < textures.size(); i++) {
 		if(textures[i]->getId() == id)
 			return textures[i];
 	}
 	return NULL;
 }
 
-Appearance* ANFScene :: findApp(string id){
-	for(unsigned int i = 0; i < apps.size(); i++){
+Appearance* ANFScene::findApp(string id) {
+	for(unsigned int i = 0; i < apps.size(); i++) {
 		if(apps[i]->getAppId() == id)
 			return apps[i];
 	}
@@ -965,7 +968,7 @@ Appearance* ANFScene :: findApp(string id){
 	return NULL;
 }
 
-vector<Node*> ANFScene ::getNodes(vector<string> n){
+vector<Node*> ANFScene::getNodes(vector<string> n) {
 	vector<Node*> retorno;
 
 	for(unsigned int i = 0; i <n.size();i++)
@@ -995,7 +998,7 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 	return child;
 }
 
-void ANFScene::init(){
+void ANFScene::init() {
 
 	srand((time(NULL)));
 
@@ -1030,7 +1033,7 @@ void ANFScene::init(){
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 }
 
-void  ANFScene::FillChildren(Node* node){
+void  ANFScene::FillChildren(Node* node) {
 	vector<Node*> nodes = getNodes(node->getChildren());
 	node->setChilds(nodes);
 
@@ -1040,15 +1043,15 @@ void  ANFScene::FillChildren(Node* node){
 
 }
 
-vector <Light*> ANFScene::getLights(){
+vector <Light*> ANFScene::getLights() {
 	return lights;
 }
 
-vector <Camera*> ANFScene::getCameras(){
+vector <Camera*> ANFScene::getCameras() {
 	return cameras;
 }
 
-void ANFScene::changeCamera(){
+void ANFScene::changeCamera() {
 
 	if(Active_Camera == 0)
 		initCameras();
@@ -1056,7 +1059,7 @@ void ANFScene::changeCamera(){
 		CGFscene::activeCamera = cameras[(Active_Camera -1)];
 }
 
-void ANFScene:: display(){
+void ANFScene:: display() {
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
@@ -1085,7 +1088,7 @@ void ANFScene:: display(){
 
 void ANFScene::process(Node* node,Appearance * app) {
 
-//	if(node->getID() == "lamp_connection_1")
+	//	if(node->getID() == "lamp_connection_1")
 	//	system("pause");
 
 	if(node == NULL)
@@ -1118,7 +1121,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();
 
-		if(nodes[i]->getApp()->get_text_ref() != "inherit")
+		if(nodes[i]->getApp()->getTextRef() != "inherit")
 		{
 			nodes[i]->ApplyApp();
 			process(nodes[i],nodes[i]->getApp());

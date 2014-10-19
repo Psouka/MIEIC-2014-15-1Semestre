@@ -3,12 +3,13 @@
 
 #include <string>
 #include "CGFtexture.h"
+
 using namespace std;
 
-class Texture : public CGFtexture
-{
+class Texture : public CGFtexture {
+
 	string id, file;
-	
+
 public:
 	float tex_s, tex_t;
 	Texture(string id);

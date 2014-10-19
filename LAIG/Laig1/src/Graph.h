@@ -12,6 +12,7 @@ class Graph {
 	typedef map<string, Node*> graphMap;
 	graphMap graph;
 	string root;
+
 public:
 	Graph();
 	Graph(string root);

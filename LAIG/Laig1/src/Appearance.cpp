@@ -4,27 +4,26 @@
 #include <iostream>
 
 
-Appearance :: Appearance(float*a,float *d,float *s, float shi, string id, string textureref)
-:CGFappearance(a,d,s,shi){
+Appearance::Appearance(float*a,float *d,float *s, float shi, string id, string textureref): CGFappearance(a,d,s,shi) {
 	this->id = id;
 	this->textureref = textureref;
 }
 
-Appearance ::Appearance(string text_ref){
+Appearance::Appearance(string text_ref) {
 	this->textureref = text_ref;
 }
 
-string  Appearance ::get_text_ref(){
+string Appearance::getTextRef() {
 return textureref;
 }
 
 
-string  Appearance ::getAppId(){
+string Appearance::getAppId() {
 return id;
 }
 
-void Appearance ::setAppTexture(Texture * t){
-	if(t->getId() != "NULL"){
+void Appearance::setAppTexture(Texture * t) {
+	if(t->getId() != "NULL") {
 	this->setTexture(t);
 	this->setTextureWrap(GL_REPEAT,GL_REPEAT);
 	}
