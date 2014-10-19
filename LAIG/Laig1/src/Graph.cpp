@@ -5,7 +5,8 @@
 #include "Graph.h"
 #include "Node.h"
 
-Graph::Graph(){
+Graph::Graph() {
+
 }
 
 Graph::Graph(string root) {
@@ -16,14 +17,14 @@ Graph::graphMap Graph::getGraph() {
 	return this->graph;
 }
 
-void Graph:: addNode(Node* n){
+void Graph:: addNode(Node* n) {
 	graph[n->getID()] = n;
 }
 
-void draw(){
+void draw() {
 
 }
 
-string Graph :: getRoot(){
+string Graph::getRoot() {
 	return root;
 }

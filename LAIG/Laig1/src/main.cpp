@@ -1,7 +1,7 @@
 #include "ANFScene.h"
 #include "TPinterface.h"
 
-int main(int argc, char* argv[]){
+int main(int argc, char* argv[]) {
 
 	CGFapplication app = CGFapplication();
 	try {

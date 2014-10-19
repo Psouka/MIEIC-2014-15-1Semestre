@@ -10,14 +10,14 @@
 
 using namespace std;
 
-class Node
-{
+class Node {
 	string nodeID;
 	vector<string> children;
 	vector<Node*> nodeChilds;
 	vector<Primitives *> primitives;
 	float transforms[16];
 	Appearance * app;
+
 public:
 	Node();
 	Node(string ID);
