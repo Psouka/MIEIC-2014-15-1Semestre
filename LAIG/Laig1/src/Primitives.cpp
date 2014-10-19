@@ -88,40 +88,55 @@ Cylinder :: Cylinder(float base, float top, float height, int slices, int stacks
 }
 
 void Cylinder :: draw(Texture* t){
+	
+	GLUquadricObj *disk, *disk1;
+	GLUquadricObj *cylind;
+
+	cylind = gluNewQuadric();
+    disk = gluNewQuadric();
+	disk1 = gluNewQuadric();
+
+	//Bot
 	glPushMatrix();
-	glRotated(90,1,0,0);
+	glRotatef(180,0,1,0);
+	gluQuadricNormals(disk, GLU_SMOOTH);
+	gluQuadricTexture(disk, GL_TRUE);
+	glEnable(GL_TEXTURE_2D);
+	if(t != NULL){
+		glBindTexture(GL_TEXTURE_2D, t->getTexId());
+	}else{}
+    gluDisk(disk, 0, base, slices, slices);
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+	
 
 
-	// Base
-
-	glBegin(GL_POLYGON);
-	glNormal3d(0, -1, 0);
-	for (int i = 0; i < slices; i++) {
-		glTexCoord2d((cos(angle * i) / 2) + 0.5, (sin(angle * i) / 2) + 0.5);
-		glVertex3d(cos(angle * i + PI/2)*base, 0, sin(angle * i + PI/2)*base);
-	}
-	glEnd();
-
-	// Topo
-
-	glBegin(GL_POLYGON);
-	glNormal3d(0, 1, 0);
-	for (int i = slices; i > 0; i--) {
-		glTexCoord2d((cos(angle * i) / 2) - 0.5, (sin(angle * i) / 2) - 0.5);
-		glVertex3d(cos(angle * i + PI/2)*top, height, sin(angle * i + PI/2)*top);
-	}
-	glEnd();
-
+	//Cilindro
+	glPushMatrix();
+	gluQuadricNormals(cylind, GLU_SMOOTH);
+	gluQuadricTexture(cylind, GL_TRUE);
+	glEnable(GL_TEXTURE_2D);
+	if(t != NULL){
+	glBindTexture(GL_TEXTURE_2D, t->getTexId());
+	}else{}
+	gluCylinder(cylind, base, top, height, slices, stacks);
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 
-	// Lados
-	GLUquadricObj *qObj = gluNewQuadric();
-	gluQuadricNormals(qObj, GLU_SMOOTH);
-	gluQuadricTexture(qObj, GL_TRUE);
-	glEnable(GL_TEXTURE_2D);
-	gluCylinder(qObj, base, top, height, slices, stacks);
-}
 
+	//Top
+	glPushMatrix();
+	glTranslatef(0,0,this->height);
+	gluQuadricNormals(disk1, GLU_SMOOTH);
+	gluQuadricTexture(disk1, GL_TRUE);
+	glEnable(GL_TEXTURE_2D);
+	if(t != NULL){
+	glBindTexture(GL_TEXTURE_2D, t->getTexId());
+	}else{}
+	gluDisk(disk1, 0, top, slices, slices);
+	glDisable(GL_TEXTURE_2D);
+	glPopMatrix();
+}
 Sphere :: Sphere(float radius, int slices, int stacks)
 	:Primitives(){
 		this->radius = radius;
@@ -134,6 +149,9 @@ void Sphere :: draw(Texture* t){
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricTexture(qObj, GL_TRUE);
 	glEnable(GL_TEXTURE_2D);
+	if(t != NULL){
+	glBindTexture(GL_TEXTURE_2D, t->getTexId());
+	}else{}
 	gluSphere(qObj, radius, slices, stacks);
 }
 
@@ -145,49 +163,47 @@ Torus :: Torus(float inner, float outer, int slices, int loops)
 		this->loops = loops;
 }
 
-void Torus :: draw(Texture* t){
-		int i, j;
-		GLfloat theta, phi, theta1;
-		GLfloat cosTheta, sinTheta;
-		GLfloat cosTheta1, sinTheta1;
-		GLfloat ringDelta, sideDelta;
-
-		ringDelta = 2.0 * PI / loops;
-		sideDelta = 2.0 * PI / slices;
-
-		theta = 0.0;
-		cosTheta = 1.0;
-		sinTheta = 0.0;
-		for (i = loops - 1; i >= 0; i--) {
-			theta1 = theta + ringDelta;
-			cosTheta1 = cos(theta1);
-			sinTheta1 = sin(theta1);
-			glBegin(GL_QUAD_STRIP);
-			phi = 0.0;
-			for (j = slices; j >= 0; j--) {
-				GLfloat cosPhi, sinPhi, dist;
-
-				phi += sideDelta;
-				cosPhi = cos(phi);
-				sinPhi = sin(phi);
-				dist = outer + inner * cosPhi;
-				//v = arccos (Y/R)/2p
-//u = [arccos ((X/(R + r*cos(2 pv))]2p
 
 
-				glNormal3f(cosTheta1 * cosPhi, -sinTheta1  *cosPhi, sinPhi);
-				glTexCoord2d(acos((-sinTheta1  *dist))/inner / 2*PI,acos((cosTheta1  *dist)/(inner + cosTheta1) * 2*PI));
-				glVertex3f(cosTheta1  *dist, -sinTheta1  *dist, inner * sinPhi);
+void Torus :: draw(Texture* t)  {
+    float vNormal[3];
+    double majorStep = 2.0f*PI / loops;
+    double minorStep = 2.0f*PI / slices;
+    int i, j;
 
+    for (i=0; i<loops; ++i) 
+            {
+            double a0 = i * majorStep;
+            double a1 = a0 + majorStep;
+            GLfloat x0 = (GLfloat) cos(a0);
+            GLfloat y0 = (GLfloat) sin(a0);
+            GLfloat x1 = (GLfloat) cos(a1);
+            GLfloat y1 = (GLfloat) sin(a1);
 
-				glNormal3f(cosTheta  *cosPhi, -sinTheta  *cosPhi, sinPhi);
-				glTexCoord2d(acos((-sinTheta1 * dist))/inner / 2*PI,acos((cosTheta1  *dist)/(inner + cosTheta1) * 2*PI));
-				glVertex3f(cosTheta  *dist, -sinTheta * dist,  inner * sinPhi);
-			}
-			glEnd();
-			theta = theta1;
-			cosTheta = cosTheta1;
-			sinTheta = sinTheta1;
-}
+            glBegin(GL_TRIANGLE_STRIP);
+            for (j=0; j<=slices; ++j) 
+                    {
+                    double b = j * minorStep;
+                    GLfloat c = (GLfloat) cos(b);
+                    GLfloat r = inner * c + outer;
+                    GLfloat z = inner * (GLfloat) sin(b);
 
-}
+                    // First point
+                    glTexCoord2f((float)(i)/(float)(loops), (float)(j)/(float)(slices));
+                    vNormal[0] = x0*c;
+                    vNormal[1] = y0*c;
+                    vNormal[2] = z/inner;
+                   // gltNormalizeVector(vNormal);
+                    glNormal3fv(vNormal);
+                    glVertex3f(x0*r, y0*r, z);
+
+                    glTexCoord2f((float)(i+1)/(float)(loops), (float)(j)/(float)(slices));
+                    vNormal[0] = x1*c;
+                    vNormal[1] = y1*c;
+                    vNormal[2] = z/inner;
+                    glNormal3fv(vNormal);
+                    glVertex3f(x1*r, y1*r, z);
+                    }
+            glEnd();
+            }
+	}

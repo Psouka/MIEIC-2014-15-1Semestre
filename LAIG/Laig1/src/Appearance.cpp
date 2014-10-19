@@ -26,6 +26,7 @@ return id;
 void Appearance ::setAppTexture(Texture * t){
 	if(t->getId() != "NULL"){
 	this->setTexture(t);
-	this->setTextureWrap(GL_REPEAT,GL_REPEAT);}
+	this->setTextureWrap(GL_REPEAT,GL_REPEAT);
+	}
 	APPTexture = t;
 }
