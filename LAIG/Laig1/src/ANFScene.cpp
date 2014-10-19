@@ -1085,6 +1085,9 @@ void ANFScene:: display(){
 
 void ANFScene::process(Node* node,Appearance * app) {
 
+//	if(node->getID() == "lamp_connection_1")
+	//	system("pause");
+
 	if(node == NULL)
 	{
 		printf("\nNode nao encontrado");
