@@ -62,5 +62,7 @@ SpotLight :: SpotLight(string id_s,unsigned int iID, float* p, string t,bool m, 
 
 void SpotLight :: updateL(){
 	glLightf(this->id,GL_SPOT_EXPONENT,exponent);
+	glLightf(this->id,GL_SPOT_CUTOFF,angle);
+	glLightfv(this->id,GL_SPOT_DIRECTION,target);
 	this->update();
 }
