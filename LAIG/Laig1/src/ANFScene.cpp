@@ -7,7 +7,6 @@
 ANFScene :: ANFScene(char *filename)
 	:  CGFscene()
 {
-	drawMode = 0;
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
@@ -216,12 +215,18 @@ int ANFScene:: parseGlobals(){
 			{
 				GLenum drawmode, drawshading;
 
-				if(strcmp(mode,"fill")==0)
+				if(strcmp(mode,"fill")==0){
+					drawMode = 0;
 					drawmode = GL_FILL;
-				else if(strcmp(mode,"line")==0)
+				}
+				else if(strcmp(mode,"line")==0){
+					drawMode = 1;
 					drawmode = GL_LINE;
-				else if(strcmp(mode,"point")==0)
-					drawmode = GL_POINT;
+				}
+				else if(strcmp(mode,"point")==0){
+				drawMode = 2;
+				drawmode = GL_POINT;
+				}
 				printf("\n	Drawmode: %s", mode);
 
 				if(strcmp(shading,"flat")==0)
@@ -1096,9 +1101,13 @@ void ANFScene::process(Node* node,Appearance * app) {
 	for(unsigned int a = 0; a < prim.size(); a++) {
 		prim[a]->draw(app->APPTexture);
 	}
-	if (drawMode) glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	if(drawMode == 0)
+		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
+	else if (drawMode == 1)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	else
-		glPolygonMode( GL_FRONT_AND_BACK, ANFGlobals.drawMode);
+		glPolygonMode( GL_FRONT_AND_BACK, GL_POINT);
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		glPushMatrix();

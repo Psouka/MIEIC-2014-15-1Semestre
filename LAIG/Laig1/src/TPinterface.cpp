@@ -44,6 +44,7 @@ void TPinterface::initGUI()
 
 	textureList->add_item (0, "Fill");
 	textureList->add_item (1, "Wireframe");
+	textureList->add_item (2, "Point");
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl)

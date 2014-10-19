@@ -30,12 +30,10 @@ void PerspectiveCamera::updateProjectionMatrix (int width, int height){
 
 
 void OrthoCamera:: applyView(){
-	
 	updateProjectionMatrix(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 }
 
 void OrthoCamera::updateProjectionMatrix (int width, int height){
-	
 	float aspect = (float) width / (float) height;
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
