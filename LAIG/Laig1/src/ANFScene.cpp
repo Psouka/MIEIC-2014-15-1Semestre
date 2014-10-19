@@ -741,8 +741,8 @@ int ANFScene::parseGraph() {
 				printf("\nID NODE ERROR");
 
 			Nodetemp = new Node(string(ValString));
+			if(transformsElement)
 			transformElement=transformsElement->FirstChildElement();
-
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 
@@ -1031,6 +1031,8 @@ void ANFScene::init() {
 	changeCamera();
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
+
+
 }
 
 void  ANFScene::FillChildren(Node* node) {
@@ -1088,8 +1090,6 @@ void ANFScene:: display() {
 
 void ANFScene::process(Node* node,Appearance * app) {
 
-	//	if(node->getID() == "lamp_connection_1")
-	//	system("pause");
 
 	if(node == NULL)
 	{
