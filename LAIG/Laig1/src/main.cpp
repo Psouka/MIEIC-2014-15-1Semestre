@@ -9,9 +9,9 @@ int main(int argc, char* argv[]){
 		app.init(&argc, argv);
 
 		if(argc > 1)
-			app.setScene(Scene =new ANFScene(argv[1]));
+			app.setScene(Scene = new ANFScene(argv[1]));
 		else
-			app.setScene(Scene =new ANFScene("snowman.anf"));
+			app.setScene(Scene = new ANFScene("LAIG_TP1_ANF_T01_G03_v2.anf"));
 
 		app.setInterface(new TPinterface(Scene));
 
