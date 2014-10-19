@@ -16,6 +16,7 @@ public:
 	Texture();
 	string getFile();
 	string getId();
+	int getTexId();
 
 };
 

@@ -24,3 +24,7 @@ string Texture ::getFile(){
 string Texture ::getId(){
 	return id;
 }
+
+int Texture ::getTexId(){
+	return texID;
+}
