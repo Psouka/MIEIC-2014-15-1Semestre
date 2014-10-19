@@ -13,6 +13,8 @@ ANFScene :: ANFScene(char *filename)
 	if ( !loadOkay )
 	{
 		printf( "Could not load file '%s'. Error='%s'. Exiting.\n", filename, doc->ErrorDesc() );
+		system("pause");
+		exit(1);
 
 	}
 
@@ -21,7 +23,8 @@ ANFScene :: ANFScene(char *filename)
 	if (anfElement == NULL)
 	{
 		printf("Main anf block element not found! Exiting!\n");
-
+		system("pause");
+		exit(1);
 	}
 
 	globalsElement = anfElement->FirstChildElement( "globals" );

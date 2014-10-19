@@ -69,5 +69,3 @@ void TPinterface::processGUI(GLUI_Control *ctrl)
 		break;
 	}
 }
-
-
