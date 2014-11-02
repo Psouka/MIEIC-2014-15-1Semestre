@@ -1032,7 +1032,6 @@ void ANFScene::init() {
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
-
 }
 
 void  ANFScene::FillChildren(Node* node) {
@@ -1042,6 +1041,7 @@ void  ANFScene::FillChildren(Node* node) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		FillChildren(nodes[i]);
 	}
+
 
 }
 

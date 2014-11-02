@@ -74,6 +74,7 @@ void Triangle::draw(Texture* t) {
 	glTexCoord2f(0.5,1);
 	glVertex3f(x3,y3,z3);
 	glEnd();
+
 	glPopMatrix();
 }
 
