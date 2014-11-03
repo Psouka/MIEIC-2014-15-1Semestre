@@ -1,3 +1,4 @@
+:-use_module(library(random)).
 board(        
 [[0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -20,12 +21,7 @@ board(
 % A para células com peão do jogador 1 sem parede por baixo
 % B para células com peão do jogador 2 sem parede por baixo
 
-%input para a jogada     
-getMov(Xi,Yi,Xf,Yf) :-
-                        print('\nCoordenada X da peca a mover : '),read(Yi),
-                        print('\nCoordenada Y da peca a mover : '),read(Xi),
-                        print('\nCoordenada X da casa destino : '),read(Yf),
-                        print('\nCoordenada Y da casa destino : '),read(Xf).
+
 
 
 %----------------------------------------------------------------------------
@@ -50,13 +46,13 @@ printline([H|T]):- write(H), printline(T).
 
 %print board
 drawWalls([H|T],C):- write('  |'), printline(H), write('|'), nl, draw(T,C).
-drawWalls([],C).
+drawWalls([],_).
 draw([H|T],C):-  write(C), NewC is C+1,write('.|'), printline(H), write('|'), nl,drawWalls(T,NewC).
-draw([],C).
-drawBoard(B):- printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
+draw([],_).
+drawBoard(B):- nl,printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
         printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']),
         nl, draw(B,0),
-        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']).
+        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']), nl,nl.
 
 
 %----------------------------------------------------------------------------
@@ -122,6 +118,49 @@ replace(List, _, _,_, List).
 
 
 
+%---------------------------------------------------------------
+%check move
+
+checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :- fail.
+
+checkMov(B,X,Y).
+%-----------------------------------------------------------------------
+%input para a jogada
+getMov(B,Xi,Yi,Xf,Yf) :- nl,
+                        print('\nCoordenada X da peca a mover : '),read(Yi),
+                        print('\nCoordenada Y da peca a mover : '),read(Xi),
+                        print('\nCoordenada X da casa destino : '),read(Yf),
+                        print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(B,Xi,Yi,Xf,Yf), ! .
+getMov(Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(Xi,Yi,Xf,Yf).
+
+getPiece(B,X,Y):- nl,
+                        print('\nCoordenada X da : '),read(Y),
+                        print('\nCoordenada Y da : '),read(X),checkMov(B,X,Y), ! .
+getPiece(B,X,Y) :- nl,write('Posicao nao permitida'),getPiece(B,X,Y).
+
+mov(B,1) :- getPiece(B,_,_).
+mov(B,2) :- getMov(B,_,_,_,_).
+mov(B,_) :- selectMov(B,_).
+   
+
+selectMov(B,R) :- print('\n[1]Colocar peao\n[2]Mover peao\n'),read(R), mov(B,R).
+%-------------------------------------------------------------------
+%make move
+makeMov(Xi,Yi,Xf,Yf) .
+
+
+%-----------------------------------------------------------------------
+%into
+getIntro(P) :- write('\nTurno do jogador: '), write(P), nl.
+
+%------------------------------------------------------------------------
+%creat Random Start
+randomPlayer(P) :- random(1, 3,NrP), NrP == 1,!, P = 'A'. 
+randomPlayer(P) :- P = 'B'.
+
+%-----------------------------------------------------------------------
 %Start
 play :-  board(B), drawBoard(B).
 
@@ -133,7 +172,7 @@ fines:-
 
 mainMenu:-
 	nl,nl,
-	write('============================================'),nl,
+	write('----------------------------------------'),nl,
 	write('Fines Game'),nl,nl,
 	write('1- Play'), nl,
 	write('2- Exit'), nl.
@@ -144,3 +183,7 @@ mainMenuOption(X):-
 		X = 2 -> write('Goodbye!');
 		(write('Wrong command!'),nl,fines)
 	).
+
+play(B,P) :- getIntro(P), drawBoard(B), selectMov(B,R), P =='A',!,play(B,'B').
+play(B,P) :- P = 'A',play(B,P).
+start:-  board(B), randomPlayer(P),play(B,P).
