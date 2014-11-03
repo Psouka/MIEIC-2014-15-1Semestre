@@ -20,12 +20,7 @@ board(
 % A para células com peão do jogador 1 sem parede por baixo
 % B para células com peão do jogador 2 sem parede por baixo
 
-%input para a jogada     
-getMov(Xi,Yi,Xf,Yf) :-
-                        print('\nCoordenada X da peca a mover : '),read(Yi),
-                        print('\nCoordenada Y da peca a mover : '),read(Xi),
-                        print('\nCoordenada X da casa destino : '),read(Yf),
-                        print('\nCoordenada Y da casa destino : '),read(Xf).
+
 
 
 %----------------------------------------------------------------------------
@@ -53,10 +48,10 @@ drawWalls([H|T],C):- write('  |'), printline(H), write('|'), nl, draw(T,C).
 drawWalls([],C).
 draw([H|T],C):-  write(C), NewC is C+1,write('.|'), printline(H), write('|'), nl,drawWalls(T,NewC).
 draw([],C).
-drawBoard(B):- printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
+drawBoard(B):- nl,printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
         printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']),
         nl, draw(B,0),
-        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']).
+        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']), nl,nl.
 
 
 %----------------------------------------------------------------------------
@@ -113,5 +108,33 @@ replace(List, _, _,_, List).
 
 
 
+%---------------------------------------------------------------
+%check move
+
+checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(Xinicial, Yinicial, Xfinal, Yfinal) :- fail.
+
+%-----------------------------------------------------------------------
+%input para a jogada     
+getMov(Xi,Yi,Xf,Yf) :- nl,
+                        print('\nCoordenada X da peca a mover : '),read(Yi),
+                        print('\nCoordenada Y da peca a mover : '),read(Xi),
+                        print('\nCoordenada X da casa destino : '),read(Yf),
+                        print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(Xi,Yi,Xf,Yf), ! .
+getMov(Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(Xi,Yi,Xf,Yf).
+
+%-------------------------------------------------------------------
+%make move
+makeMov(Xi,Yi,Xf,Yf) .
+
+
+%-----------------------------------------------------------------------
+%into
+getIntro(P) :- write('Turno do jogador: '), write(P), nl.
+
+%-----------------------------------------------------------------------
 %Start
-play :-  board(B), drawBoard(B).
+play(B,P) :- getIntro(P), drawBoard(B), getMov(Xi,Yi,Xf,Yf), P =='A',!,play(B,'B').
+play(B,P) :- P = 'A',play(B,P).
+start:-  board(B), play(B,'A').
