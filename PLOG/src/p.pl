@@ -77,6 +77,16 @@ elementAt(Board, Xindex, Yindex, Element):-
         elementAt(Linha, Xindex, Element).
 
 %----------------------------------------------------------------------------
+% Change player turn
+
+changeActivePlayer(P, P1) :-
+    P = 1,
+    P1 is 2.
+changeActivePlayer(P, P1) :-
+    P = 2,
+    P1 is 1.
+
+%----------------------------------------------------------------------------
 % Writes Turn
 print_turn(1):-
         write('Blue turn: '),
@@ -84,7 +94,6 @@ print_turn(1):-
 print_turn(2):-
         write('Red turn: '),
         nl.
-
 
 %----------------------------------------------------------------------------
 % Replaces the value of the element in the index Index to Elem 
@@ -115,3 +124,23 @@ replace(List, _, _,_, List).
 
 %Start
 play :-  board(B), drawBoard(B).
+
+% ---------------------------------MAIN MENU------------------------------------
+fines:-
+	mainMenu,
+	read(X),
+	mainMenuOption(X).
+
+mainMenu:-
+	nl,nl,
+	write('============================================'),nl,
+	write('Fines Game'),nl,nl,
+	write('1- Play'), nl,
+	write('2- Exit'), nl.
+
+mainMenuOption(X):-
+	(
+		X = 1 -> play;
+		X = 2 -> write('Goodbye!');
+		(write('Wrong command!'),nl,fines)
+	).
