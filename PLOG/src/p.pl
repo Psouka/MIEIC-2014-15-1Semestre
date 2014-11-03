@@ -46,9 +46,9 @@ printline([H|T]):- write(H), printline(T).
 
 %print board
 drawWalls([H|T],C):- write('  |'), printline(H), write('|'), nl, draw(T,C).
-drawWalls([],C).
+drawWalls([],_).
 draw([H|T],C):-  write(C), NewC is C+1,write('.|'), printline(H), write('|'), nl,drawWalls(T,NewC).
-draw([],C).
+draw([],_).
 drawBoard(B):- nl,printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
         printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']),
         nl, draw(B,0),
@@ -116,6 +116,7 @@ checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal).
 checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
 checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :- fail.
 
+checkMov(B,X,Y).
 %-----------------------------------------------------------------------
 %input para a jogada
 getMov(B,Xi,Yi,Xf,Yf) :- nl,
@@ -125,10 +126,13 @@ getMov(B,Xi,Yi,Xf,Yf) :- nl,
                         print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(B,Xi,Yi,Xf,Yf), ! .
 getMov(Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(Xi,Yi,Xf,Yf).
 
-getPiece(B,X,Y).
+getPiece(B,X,Y):- nl,
+                        print('\nCoordenada X da : '),read(Y),
+                        print('\nCoordenada Y da : '),read(X),checkMov(B,X,Y), ! .
+getPiece(B,X,Y) :- nl,write('Posicao nao permitida'),getPiece(B,X,Y).
 
-mov(B,1) :- getPiece(B,X,Y).
-mov(B,2) :- getMov(B,Xi,Yi,Xf,Yf).
+mov(B,1) :- getPiece(B,_,_).
+mov(B,2) :- getMov(B,_,_,_,_).
 mov(B,_) :- selectMov(B,_).
    
 
@@ -140,7 +144,7 @@ makeMov(Xi,Yi,Xf,Yf) .
 
 %-----------------------------------------------------------------------
 %into
-getIntro(P) :- write('Turno do jogador: '), write(P), nl.
+getIntro(P) :- write('\nTurno do jogador: '), write(P), nl.
 
 %------------------------------------------------------------------------
 %creat Random Start
