@@ -1,3 +1,4 @@
+:-use_module(library(random)).
 board(        
 [[0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -133,8 +134,15 @@ makeMov(Xi,Yi,Xf,Yf) .
 %into
 getIntro(P) :- write('Turno do jogador: '), write(P), nl.
 
+%------------------------------------------------------------------------
+%creat Random Start
+randomPlayer(P) :- random(1, 3,NrP), NrP == 1,!, P = 'A'. 
+randomPlayer(P) :- P = 'B'.
+
+
+
 %-----------------------------------------------------------------------
 %Start
 play(B,P) :- getIntro(P), drawBoard(B), getMov(Xi,Yi,Xf,Yf), P =='A',!,play(B,'B').
 play(B,P) :- P = 'A',play(B,P).
-start:-  board(B), play(B,'A').
+start:-  board(B), randomPlayer(P),play(B,P).
