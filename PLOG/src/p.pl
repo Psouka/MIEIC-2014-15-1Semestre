@@ -112,19 +112,27 @@ replace(List, _, _,_, List).
 %---------------------------------------------------------------
 %check move
 
-checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
-checkMov(Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
-checkMov(Xinicial, Yinicial, Xfinal, Yfinal) :- fail.
+checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(Xinicial, Yinicial, Xfinal, Yfinal).
+checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :- fail.
 
 %-----------------------------------------------------------------------
-%input para a jogada     
-getMov(Xi,Yi,Xf,Yf) :- nl,
+%input para a jogada
+getMov(B,Xi,Yi,Xf,Yf) :- nl,
                         print('\nCoordenada X da peca a mover : '),read(Yi),
                         print('\nCoordenada Y da peca a mover : '),read(Xi),
                         print('\nCoordenada X da casa destino : '),read(Yf),
-                        print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(Xi,Yi,Xf,Yf), ! .
+                        print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(B,Xi,Yi,Xf,Yf), ! .
 getMov(Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(Xi,Yi,Xf,Yf).
 
+getPiece(B,X,Y).
+
+mov(B,1) :- getPiece(B,X,Y).
+mov(B,2) :- getMov(B,Xi,Yi,Xf,Yf).
+mov(B,_) :- selectMov(B,_).
+   
+
+selectMov(B,R) :- print('\n[1]Colocar peao\n[2]Mover peao\n'),read(R), mov(B,R).
 %-------------------------------------------------------------------
 %make move
 makeMov(Xi,Yi,Xf,Yf) .
@@ -139,10 +147,8 @@ getIntro(P) :- write('Turno do jogador: '), write(P), nl.
 randomPlayer(P) :- random(1, 3,NrP), NrP == 1,!, P = 'A'. 
 randomPlayer(P) :- P = 'B'.
 
-
-
 %-----------------------------------------------------------------------
 %Start
-play(B,P) :- getIntro(P), drawBoard(B), getMov(Xi,Yi,Xf,Yf), P =='A',!,play(B,'B').
+play(B,P) :- getIntro(P), drawBoard(B), selectMov(B,R), P =='A',!,play(B,'B').
 play(B,P) :- P = 'A',play(B,P).
 start:-  board(B), randomPlayer(P),play(B,P).
