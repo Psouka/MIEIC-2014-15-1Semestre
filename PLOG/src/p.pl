@@ -1,6 +1,8 @@
 :-use_module(library(random)).
+:-use_module(library(lists)).
 board(        
-[[0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
+[
+ [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -12,7 +14,8 @@ board(
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0]]
+ [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0]
+]
 ).
 
 
@@ -56,31 +59,24 @@ drawBoard(B):- nl,printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
 
 
 %----------------------------------------------------------------------------
-% Index is invalid, (index > size)
-elementAt([],_,-1).
+% 
+elementAt([], _, -1):-!, fail.
 
-elementAt([Element|_], 0, Element).
- 
- 
-% Returns Element as the element of the list in index Index
-elementAt([_|T], Index, Element):-
-        NIndex = Index-1,
-        elementAt(T, NIndex, Element). 
+elementAt([Elem|_], Elem, 0).
 
-% Returns Element as the element of the list of lists at [Yindex][Xindex]     
-elementAt(Board, Xindex, Yindex, Element):-
-        elementAt(Board, Yindex, Linha),
-        elementAt(Linha, Xindex, Element).
+elementAt([_|T], Elem, X):-
+        elementAt(T, Elem, NX),
+        X is NX+1.
+        
+elementAt([], _, _, -1):-!, fail.
 
-%----------------------------------------------------------------------------
-% Change player turn
+elementAt([H|_], Elem, X, 0):-
+        elementAt(H, Elem, X).
 
-changeActivePlayer(P, P1) :-
-    P = 1,
-    P1 is 2.
-changeActivePlayer(P, P1) :-
-    P = 2,
-    P1 is 1.
+elementAt([_|T], Elem, X, Y):-
+          elementAt(T, Elem, X, NY),
+          Y is NY+1.
+
 
 %----------------------------------------------------------------------------
 % Writes Turn
@@ -91,30 +87,24 @@ print_turn(2):-
         write('Red turn: '),
         nl.
 
+
 %----------------------------------------------------------------------------
 % Replaces the value of the element in the index Index to Elem 
-replace([_|T], 0, Elem, [Elem|T]).
+replace( [L|Ls] , 0 , Y , Z , [R|Ls] ) :- 
+  replace_column(L,Y,Z,R)                
+  .                                       
+replace( [L|Ls] , X , Y , Z , [L|Rs] ) :- 
+  X > 0 ,                                
+  X1 is X-1 ,                            
+  replace( Ls , X1 , Y , Z , Rs )         
+  .                                       
 
-replace([H|T], Index, Elem, [H|R]):- 
-        Index > -1, 
-        NIndex is Index-1, 
-        replace(T, NIndex, Elem, R), 
-        !.
-
-replace(List, _, _, List).
-
-
-% Replaces the value of the element in (IndexX, IndexY) to Elem
-replace([H|T], IndexX, 0, Elem, [X|T]):-
-        replace(H, IndexX, Elem, X).
-                                          
-replace([H|T], IndexX, IndexY, Elem, [H|R]):-
-        IndexY > -1, 
-        NIndexY is IndexY-1, 
-        replace(T, IndexX, NIndexY, Elem, R), 
-        !.
-        
-replace(List, _, _,_, List).    
+replace_column( [_|Cs] , 0 , Z , [Z|Cs] ) . 
+replace_column( [C|Cs] , Y , Z , [C|Rs] ) :-
+  Y > 0 ,                                    
+  Y1 is Y-1 ,                              
+  replace_column( Cs , Y1 , Z , Rs )       
+  .                                          
 
 
 
@@ -133,11 +123,12 @@ getMov(B,Xi,Yi,Xf,Yf) :- nl,
                         print('\nCoordenada Y da peca a mover : '),read(Xi),
                         print('\nCoordenada X da casa destino : '),read(Yf),
                         print('\nCoordenada Y da casa destino : '),read(Xf), checkMov(B,Xi,Yi,Xf,Yf), ! .
+
 getMov(Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(Xi,Yi,Xf,Yf).
 
 getPiece(B,X,Y):- nl,
-                        print('\nCoordenada X da : '),read(Y),
-                        print('\nCoordenada Y da : '),read(X),checkMov(B,X,Y), ! .
+                        print('\nCoordenada X da peca: '),read(Y),
+                        print('\nCoordenada Y da peca: '),read(X),checkMov(B,X,Y), ! .
 getPiece(B,X,Y) :- nl,write('Posicao nao permitida'),getPiece(B,X,Y).
 
 mov(B,1) :- getPiece(B,_,_).
@@ -160,30 +151,19 @@ getIntro(P) :- write('\nTurno do jogador: '), write(P), nl.
 randomPlayer(P) :- random(1, 3,NrP), NrP == 1,!, P = 'A'. 
 randomPlayer(P) :- P = 'B'.
 
+%------------------------------------------------------------------------
+%check if is a closed area
+
+checkCLosedArea(B,X,Y):- nrP = 0.
+
+
+
 %-----------------------------------------------------------------------
 %Start
-play :-  board(B), drawBoard(B).
-
-% ---------------------------------MAIN MENU------------------------------------
-fines:-
-	mainMenu,
-	read(X),
-	mainMenuOption(X).
-
-mainMenu:-
-	nl,nl,
-	write('----------------------------------------'),nl,
-	write('Fines Game'),nl,nl,
-	write('1- Play'), nl,
-	write('2- Exit'), nl.
-
-mainMenuOption(X):-
-	(
-		X = 1 -> play;
-		X = 2 -> write('Goodbye!');
-		(write('Wrong command!'),nl,fines)
-	).
-
-play(B,P) :- getIntro(P), drawBoard(B), selectMov(B,R), P =='A',!,play(B,'B').
+play(B,P) :- getIntro(P), drawBoard(B), selectMov(B,_), P =='A',!,play(B,'B').
 play(B,P) :- P = 'A',play(B,P).
 start:-  board(B), randomPlayer(P),play(B,P).
+
+
+
+test:- board(B),replace(B, 12, 12,1,NewB),drawBoard(NewB) .
