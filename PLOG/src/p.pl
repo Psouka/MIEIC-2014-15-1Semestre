@@ -224,11 +224,7 @@ checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
                   NrP4 is 0),
         Visited = V4,
         NrP is NrI + NrP1 + NrP2 + NrP3 + NrP4
-<<<<<<< HEAD
         .
-=======
-        .  
->>>>>>> origin/master
 
 checkArea(0, _, _, T, T).
 %-----------------------------------------------------------------------
@@ -289,11 +285,6 @@ mainMenuOption(X):-
 play(B,P,R) :- getIntro(P), drawBoard(B), selectMov(B,R), R == 3, !,P =='A',!,play(B,'B',R).
 play(B,P,R) :- R == 3, !,P = 'A',play(B,P,R).
 play(_,_,_) .
-<<<<<<< HEAD
-=======
-
-start:-  board(B), randomPlayer(P),play(B,P,_).
->>>>>>> origin/master
 
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
