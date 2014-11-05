@@ -148,20 +148,33 @@ addNrP('A',NrP) :- NrP is 1.
 addNrP('B',NrP) :- NrP is 1.
 addNrP(_,NrP) :- NrP is 0.
 
-checkArea(NrP,X,Y,ToVisit,Visited):- checkLimit(X,Y),elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,addNrP(Elem,NrI),
+checkWall(B,X,Y,Xx,Yy) :- Nx is X + Xx, Ny is Y + Yy,  elementAt(B,Elem,Nx,Ny), Elem == ' '.
+
+checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,addNrP(Elem,NrI),
         replace(ToVisit,X,Y,'X',V0),
-        Nx is X+1,
-        checkArea(NrP1,Nx,Y,V0,V1),
-         Ny is Y +1,
-       checkArea(NrP3,X,Ny,V1,V2),
-        Nx2 is X-1,
-       checkArea(NrP2,Nx2,Y,V2,V3),
-        Ny2 is Y-1,
-        checkArea(NrP4,X,Ny2,V3,V4),
+        ( checkWall(V0,X,Y,1,0)->
+           Nx is X+2,
+        checkArea(NrP1,Nx,Y,V0,V1) ;
+                  V1 = V0,
+                  NrP1 is 0), 
+        ( checkWall(V0,X,Y,0,1)->
+           Ny is Y +2,
+        checkArea(NrP2,X,Ny,V1,V2) ;
+                  V2 = V1,
+                  NrP2 is 0),
+         ( checkWall(V0,X,Y,-1,0)->
+           Nx2 is X-2,
+        checkArea(NrP3,Nx2,Y,V2,V3) ;
+                  V3 = V2,
+                  NrP3 is 0),
+        ( checkWall(V0,X,Y,0,-1)->
+           Ny2 is Y -2,
+        checkArea(NrP4,X,Ny2,V3,V4) ;
+                  V4 = V3,
+                  NrP4 is 0),
         Visited = V4,
         NrP is NrI + NrP1 + NrP2 + NrP3 + NrP4
         .  
-
 
 checkArea(0, _, _, T, T).
 %-----------------------------------------------------------------------
@@ -183,8 +196,8 @@ mov(B,2) :- getMov(B,_,_,_,_).
 mov(B,_) :- selectMov(B,_).
     
 
-selectMov(B,R) :- print('\n[1]Colocar peao\n[2]Mover peao\n'),read(R), mov(B,R).
-
+selectMov(B,R) :- print('\n[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(B,R).
+selectMov(_,_) :-write('\nBye!!').
 
 %-----------------------------------------------------------------------
 %into
@@ -219,9 +232,11 @@ mainMenuOption(X):-
 		(write('Wrong command!'),nl,fines)
 	).
 
-play(B,P) :- getIntro(P), drawBoard(B), selectMov(B,_), P =='A',!,play(B,'B').
-play(B,P) :- P = 'A',play(B,P).
-start:-  board(B), randomPlayer(P),play(B,P).
+play(B,P,R) :- getIntro(P), drawBoard(B), selectMov(B,R), R == 3, !,P =='A',!,play(B,'B',R).
+play(B,P,R) :- R == 3, !,P = 'A',play(B,P,R).
+play(_,_,_) .
+
+start:-  board(B), randomPlayer(P),play(B,P,_).
 
 
 test:- board(B),checkArea(NrP,0,0,B,C), drawBoard(C) ,write(NrP).
