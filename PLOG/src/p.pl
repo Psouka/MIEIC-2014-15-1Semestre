@@ -125,10 +125,6 @@ replace([H|T], IndexX, IndexY, Elem, [H|R]):-
         
 replace(List, _, _,_, List).            
 
-%-------------------------------------------------------------------
-%make move
-makeMov(B,Xi,Yi,Xf,Yf,NewB).
-
 
 %---------------------------------------------------------------
 %check move
@@ -173,14 +169,20 @@ checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
     ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
 .
         
-getWallPos(X,Y,Wall,NewX,NewY):- (   Wall == 1 -> NewX is X, NewY is Y-1
-;   Wall == 2 -> NewX is X, NewY is Y+1
-;   Wall == 3 -> NewX is X -1, NewY is Y
-;   Wall == 4 -> NewX is X +1, NewY is Y
+getWallPos(X,Y,Wall,NewX,NewY):- (Wall == 1 -> NewX is X, NewY is Y-1,!
+;   Wall == 2 -> NewX is X, NewY is Y+1,!
+;   Wall == 3 -> NewX is X -1, NewY is Y,!
+;   Wall == 4 -> NewX is X +1, NewY is Y,!
 ).
 
-checkMov(P,B,Xinicial, Yinicial, Xfinal, Yfinal,Wall) :- elementAt(B, Elem, Xinicial, Yinicial),write(Elem), Elem == P,!,
-        elementAt(B, Elem2, Xfinal, Yfinal),write(Elem2), Elem2 == 0, !,
+getWallPos(_,_,_,_,_).
+
+writeWall(B,X,Y,NewB):- mod(Y,2) =:= 0,!,replace(B,X,Y,'|',NewB).
+writeWall(B,X,Y,NewB):-replace(B,X,Y,'-',NewB).
+
+
+checkMov(P,B,Xinicial, Yinicial, Xfinal, Yfinal,Wall) :- elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
+        elementAt(B, Elem2, Xfinal, Yfinal), Elem2 == 0, !,
         checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R), R \= 0,!,
         getWallPos(Xfinal,Yfinal,Wall,Wx,Wy),
         elementAt(B,Elem3,Wx,Wy), Elem3 == ' ',!
@@ -241,17 +243,20 @@ checkArea(0, _, _, T, T).
 %-----------------------------------------------------------------------
 %input para a jogada
 getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,
-                        print('\nColuna da peca a mover : '),read(Xi),
-                        print('\nLinha da peca a mover : '),read(Yi),
-                        print('\nColuna da casa destino : '),read(Xf),
-                        print('\nLinha da casa destino : '),read(Yf),
+                        print('Coluna da peca a mover '),read(Xi),
+                        print('Linha da peca a mover '),read(Yi),
+                        print('Coluna da casa destino '),read(Xf),
+                        print('Linha da casa destino '),read(Yf),
                         Xi2 is Xi *2,
                         Xf2 is Xf *2,
                         Yi2 is Yi *2,
                         Yf2 is Yf *2,
                         print('\nParede em:\n[1]Cima\n[2]Baixo\n[3]Lado Esquerdo\n[4]Lado Direito\n'), read(Wall)
                         ,checkMov(P,B,Xi2,Yi2,Xf2,Yf2,Wall), !,
-                         replace(B,Xi2,Yi2,0,B1),replace(B1,Xf2,Yf2,P,NewB).
+                         replace(B,Xi2,Yi2,0,B1),replace(B1,Xf2,Yf2,P,B2),
+                         getWallPos(Xf2,Yf2,Wall,Wx,Wy),
+                         writeWall(B2,Wx,Wy,NewB)
+                         .
 
 
 getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,write('Jogada nao permitida'),getMov(P,B,Xi,Yi,Xf,Yf,NewB).
@@ -320,7 +325,7 @@ play(_,_,_) .
 
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
-
+test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
 test:- board(B),checkArea(NrP,2,2,B,C), drawBoard(C) ,write(NrP).
 test2:- board(B),checkCurve(B,0, 10, 0, 0,R), write(R).
