@@ -312,6 +312,9 @@ not(true):-fail.
 not(fail):-true.
 
 play(B,P,R) :- 
+        (
+        checkEndGame(B,0,0) -> fail
+        ;true),
         getIntro(P), drawBoard(B), selectMov(P,B,R,NewB),
         (
         R == 3 -> true
@@ -320,7 +323,7 @@ play(B,P,R) :-
         )
         .
 
-play(_,_,_) .
+play(_,_,_):-print('Game Over').
 
 
 start:-  board(B), randomPlayer(P),play(B,P,_).
