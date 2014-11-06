@@ -1,6 +1,6 @@
 :-use_module(library(random)).
 board(        
-[['X','|',0,' ',0,' ',0,' ',0,' ',0,' ',0],
+[[' ','|',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  ['-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -173,12 +173,23 @@ checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
     ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
 .
         
-checkMov(B,Xinicial, Yinicial, Xfinal, Yfinal) :-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal),!, checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R).
-checkMov(_,_, _, _, _) :- fail.
+getWallPos(X,Y,Wall,NewX,NewY):- (   Wall == 1 -> NewX is X, NewY is Y-1
+;   Wall == 2 -> NewX is X, NewY is Y+1
+;   Wall == 3 -> NewX is X -1, NewY is Y
+;   Wall == 4 -> NewX is X +1, NewY is Y
+).
+
+checkMov(P,B,Xinicial, Yinicial, Xfinal, Yfinal,Wall) :- elementAt(B, Elem, Xinicial, Yinicial),write(Elem), Elem == P,!,
+        elementAt(B, Elem2, Xfinal, Yfinal),write(Elem2), Elem2 == 0, !,
+        checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R), R \= 0,!,
+        getWallPos(Xfinal,Yfinal,Wall,Wx,Wy),
+        elementAt(B,Elem3,Wx,Wy), Elem3 == ' ',!
+        .
+checkMov(_,_,_,_,_,_,_) :- fail.
 
 
 %colocar um peao
-checkMov(B,X,Y) :- checkLimit(X,Y),elementAt(B, Elem, X, Y), Elem \= ' ', !, checkArea(NrP,X,Y,B,_), NrP > 1,!.
+checkMov(B,X,Y) :- elementAt(B, Elem, X, Y),write(Elem), Elem == 0, !, checkArea(NrP,X,Y,B,_),write(NrP), NrP > 1,!.
 checkMov(_,_,_) :-fail.
 
 
@@ -229,24 +240,34 @@ checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
 checkArea(0, _, _, T, T).
 %-----------------------------------------------------------------------
 %input para a jogada
-getMov(B,Xi,Yi,Xf,Yf) :- nl,
+getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,
                         print('\nColuna da peca a mover : '),read(Xi),
                         print('\nLinha da peca a mover : '),read(Yi),
                         print('\nColuna da casa destino : '),read(Xf),
-                        print('\nLinha da casa destino : '),read(Yf), checkMov(B,Xi,Yi,Xf,Yf), ! .
-getMov(B,Xi,Yi,Xf,Yf) :- nl,write('Jogada nao permitida'),getMov(B,Xi,Yi,Xf,Yf).
+                        print('\nLinha da casa destino : '),read(Yf),
+                        Xi2 is Xi *2,
+                        Xf2 is Xf *2,
+                        Yi2 is Yi *2,
+                        Yf2 is Yf *2,
+                        print('\nParede em:\n[1]Cima\n[2]Baixo\n[3]Lado Esquerdo\n[4]Lado Direito\n'), read(Wall)
+                        ,checkMov(P,B,Xi2,Yi2,Xf2,Yf2,Wall), !,
+                         replace(B,Xi2,Yi2,0,B1),replace(B1,Xf2,Yf2,P,NewB).
 
-getPiece(B,X,Y):- nl,
-                        print('\nColuna da peca: '),read(X),
-                        print('\nLinha da peca: '),read(Y),checkMov(B,X,Y), ! .
-getPiece(B,X,Y) :- nl,write('Posicao nao permitida'),getPiece(B,X,Y).
 
-mov(B,1) :- getPiece(B,_,_).
-mov(B,2) :- getMov(B,_,_,_,_).
-mov(B,_) :- selectMov(B,_).
+getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,write('Jogada nao permitida'),getMov(P,B,Xi,Yi,Xf,Yf,NewB).
+
+getPiece(P,B,X,Y,NewB):-  print('\nColuna da peca: '),read(X),
+                        print('\nLinha da peca: '),read(Y),
+                        X2 is X *2, Y2 is Y*2,checkMov(B,X2,Y2), !, replace(B,X2,Y2,P,NewB).
+
+getPiece(P,B,_,_,NewB) :- nl,write('Posicao nao permitida'),getPiece(P,B,_,_,NewB).
+
+mov(P,B,1,NewB) :- getPiece(P,B,_,_,NewB).
+mov(P,B,2,NewB) :- getMov(P,B,_,_,_,_,NewB).
+mov(P,B,_,NewB) :- selectMov(P,B,_,NewB).
     
 
-selectMov(B,R) :- print('\n[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(B,R).
+selectMov(P,B,R,NewB) :- print('\n[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(P,B,R,NewB).
 selectMov(_,_) :-write('\nBye!!').
 
 %-----------------------------------------------------------------------
@@ -282,11 +303,23 @@ mainMenuOption(X):-
 		(write('Wrong command!'),nl,fines)
 	).
 
-play(B,P,R) :- getIntro(P), drawBoard(B), selectMov(B,R), R == 3, !,P =='A',!,play(B,'B',R).
-play(B,P,R) :- R == 3, !,P = 'A',play(B,P,R).
+not(true):-fail.
+not(fail):-true.
+
+play(B,P,R) :- 
+        getIntro(P), drawBoard(B), selectMov(P,B,R,NewB),
+        (
+        R == 3 -> true
+        ;P =='A' -> play(NewB,'B',_)
+        ;P == 'B' -> play(NewB,'A',_)
+        )
+        .
+
 play(_,_,_) .
 
+
 start:-  board(B), randomPlayer(P),play(B,P,_).
+
 
 test3:- board(B), checkEndGame(B,0,0).
 test:- board(B),checkArea(NrP,2,2,B,C), drawBoard(C) ,write(NrP).
