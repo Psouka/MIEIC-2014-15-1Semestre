@@ -241,8 +241,10 @@ checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
 
 checkArea(0, _, _, T, T).
 
-%ceckWinner
+%checkWinner
 %------------------------------------------------------
+checkWinner(B,NrB,NrA,Winner):-
+        .
 
 checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
         ( Elem \= 0, Symbol = Elem
