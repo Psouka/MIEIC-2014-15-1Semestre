@@ -1,7 +1,7 @@
 :-use_module(library(random)).
 board(        
 [[0,' ','A','|',0,' ',0,' ',0,' ',0,' ',0],
- ['-',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+ [' ',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
@@ -369,9 +369,8 @@ not(fail):-true.
 
 play(B,P,R) :- 
         (
-        checkEndGame(B,0,0) -> fail
-        ;true),
-        getIntro(P), drawBoard(B), selectMov(P,B,R,NewB),
+        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), R is 3
+        ; getIntro(P), drawBoard(B), selectMov(P,B,R,NewB)),
         (
         R == 3 -> true
         ;P =='A' -> play(NewB,'B',_)
