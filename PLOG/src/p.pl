@@ -1,12 +1,12 @@
 :-use_module(library(random)).
 board(        
-[['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
+[[0,' ','A','|',0,' ',0,' ',0,' ',0,' ',0],
  ['-',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- ['A',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
+ [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -241,12 +241,30 @@ checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
 
 checkArea(0, _, _, T, T).
 
-%checkWinner
+%getWinner
 %------------------------------------------------------
-checkWinner(B,NrB,NrA,Winner):-
+getWinner(B,X,Y,NrA,NrB,Winner):-
+        checkSizeArea(NrP,Symbol,X,Y,B,Visited),
+        (
+         Symbol == 'A' -> NrA2 is NrA +NrP, NrB2 is NrB
+        ;Symbol == 'B' -> NrB2 is NrB +NrP, NrA2 is NrA
+        ;NrA2 is NrA, NrB2 is NrB
+           )
+        ,
+        (
+        Y \=12, X \= 12 -> Nx is X +2,getWinner(Visited,Nx,Y,NrA2,NrB2,Winner)
+        ;X == 12,Y == 10 -> (
+         NrA >NrB -> Winner = 'A'
+        ;NrB >NrA -> Winner = 'B'
+        ;Winner = 'No one'
+           )
+        ;X == 12, Y <12 -> Ny is Y+2,Nx is 0,getWinner(Visited,Nx,Ny,NrA2,NrB,Winner)
+)
+         
         .
 
-checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
+checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y),
+        (Elem \= 'X' ->
         ( Elem \= 0, Symbol = Elem
         ;true),
         replace(ToVisit,X,Y,'X',V0),
@@ -272,6 +290,8 @@ checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Ele
                   NrP4 is 0),
         Visited = V4,
         NrP is 1 + NrP1 + NrP2 + NrP3 + NrP4
+        ;NrP = 0, Visited = ToVisit
+        )
         .
 
 checkSizeArea(0,_,_,_, T, T).
@@ -365,7 +385,8 @@ play(_,_,_):-print('Game Over').
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
 testV :- A = 'B', A = 'B', write(A).
-test5:- board(B), checkSizeArea(NrP,Symbol,0,0,B,C), drawBoard(C) ,write(NrP),write(Symbol).
+test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), drawBoard(C) ,write(NrP),write(Symbol).
+test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
 test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
 test:- board(B),checkArea(NrP,0,0,B,C), drawBoard(C) ,write(NrP).
