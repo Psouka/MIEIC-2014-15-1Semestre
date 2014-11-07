@@ -1,7 +1,7 @@
 :-use_module(library(random)).
 board(        
-[[' ','|',0,' ',0,' ',0,' ',0,' ',0,' ',0],
- ['-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+[['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
+ ['-',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
@@ -191,7 +191,7 @@ checkMov(_,_,_,_,_,_,_) :- fail.
 
 
 %colocar um peao
-checkMov(B,X,Y) :- elementAt(B, Elem, X, Y),write(Elem), Elem == 0, !, checkArea(NrP,X,Y,B,_),write(NrP), NrP > 1,!.
+checkMov(B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrP,X,Y,B,_), NrP > 1,!.
 checkMov(_,_,_) :-fail.
 
 
@@ -240,6 +240,40 @@ checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
         .
 
 checkArea(0, _, _, T, T).
+
+%ceckWinner
+%------------------------------------------------------
+
+checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,
+        ( Elem \= 0, Symbol = Elem
+        ;true),
+        replace(ToVisit,X,Y,'X',V0),
+        ( checkWall(V0,X,Y,1,0)->
+           Nx is X+2,
+        checkSizeArea(NrP1,Symbol,Nx,Y,V0,V1) ;
+                  V1 = V0,
+                  NrP1 is 0), 
+        ( checkWall(V0,X,Y,0,1)->
+           Ny is Y +2,
+        checkSizeArea(NrP2,Symbol,X,Ny,V1,V2) ;
+                  V2 = V1,
+                  NrP2 is 0),
+         ( checkWall(V0,X,Y,-1,0)->
+           Nx2 is X-2,
+       checkSizeArea(NrP3,Symbol,Nx2,Y,V2,V3) ;
+                  V3 = V2,
+                  NrP3 is 0),
+        ( checkWall(V0,X,Y,0,-1)->
+           Ny2 is Y -2,
+        checkSizeArea(NrP4,Symbol,X,Ny2,V3,V4) ;
+                  V4 = V3,
+                  NrP4 is 0),
+        Visited = V4,
+        NrP is 1 + NrP1 + NrP2 + NrP3 + NrP4
+        .
+
+checkSizeArea(0,_,_,_, T, T).
+
 %-----------------------------------------------------------------------
 %input para a jogada
 getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,
@@ -272,7 +306,7 @@ mov(P,B,2,NewB) :- getMov(P,B,_,_,_,_,NewB).
 mov(P,B,_,NewB) :- selectMov(P,B,_,NewB).
     
 
-selectMov(P,B,R,NewB) :- print('\n[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(P,B,R,NewB).
+selectMov(P,B,R,NewB) :- print('[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(P,B,R,NewB).
 selectMov(_,_) :-write('\nBye!!').
 
 %-----------------------------------------------------------------------
@@ -328,7 +362,9 @@ play(_,_,_):-print('Game Over').
 
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
+testV :- A = 'B', A = 'B', write(A).
+test5:- board(B), checkSizeArea(NrP,Symbol,0,0,B,C), drawBoard(C) ,write(NrP),write(Symbol).
 test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
-test:- board(B),checkArea(NrP,2,2,B,C), drawBoard(C) ,write(NrP).
+test:- board(B),checkArea(NrP,0,0,B,C), drawBoard(C) ,write(NrP).
 test2:- board(B),checkCurve(B,0, 10, 0, 0,R), write(R).
