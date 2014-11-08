@@ -1,12 +1,12 @@
 :-use_module(library(random)).
 board(        
-[[0,' ','A','|',0,' ',0,' ',0,' ',0,' ',0],
+[['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
+ ['B',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -137,9 +137,13 @@ replace(List, _, _,_, List).
 
 checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
         (
-           Xinicial > Xfinal, checkWall(B,Xinicial,Yinicial,-1,0)
+           Xinicial > Xfinal, checkWall(B,Xinicial,Yinicial,-1,0),
+           TestX is Xinicial -2,elementAt(B,Elem1,TestX,Yinicial),
+           Elem1 == 0
         -> Nx is Xinicial - 2, checkInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
-        ;  Xinicial < Xfinal, checkWall(B,Xinicial,Yinicial,1,0)
+        ;  Xinicial < Xfinal, checkWall(B,Xinicial,Yinicial,1,0),
+        TestX2 is Xinicial +2,elementAt(B,Elem2,TestX2,Yinicial),
+           Elem2 == 0
         -> Nx is Xinicial + 2, checkInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
         ; Xinicial == Xfinal, Yinicial \= Yfinal
         -> checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
@@ -152,9 +156,13 @@ checkInLine(_,_,_,_,_,_).
         
 checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
         (
-           Yinicial > Yfinal, checkWall(B,Xinicial,Yinicial,0,-1)
+           Yinicial > Yfinal, checkWall(B,Xinicial,Yinicial,0,-1),
+        TestY1 is Yinicial -2,elementAt(B,Elem1,Xinicial,TestY1),
+           Elem1 == 0
         -> Ny is Yinicial - 2, checkInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
-        ;  Yinicial < Yfinal, checkWall(B,Xinicial,Yinicial,0,1)
+        ;  Yinicial < Yfinal, checkWall(B,Xinicial,Yinicial,0,1),
+        TestY2 is Yinicial +2,elementAt(B,Elem2,Xinicial,TestY2),
+           Elem2 == 0
         -> Ny is Yinicial + 2, checkInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
         ; Xinicial \= Xfinal, Yinicial == Yfinal
         -> checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
@@ -429,4 +437,6 @@ test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), drawBoard(C) ,write(NrP),
 test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
 test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
-test2:- board(B),checkCurve(B,0, 10, 0, 0,R), write(R).
+test2:- board(B),checkInCol(B,0,4,0,12,R),write(R).
+
+testt:-board(B), elementAt(B,0,8,Elem),write(Elem).
