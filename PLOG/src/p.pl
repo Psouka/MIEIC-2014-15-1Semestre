@@ -6,7 +6,7 @@ board(
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
+ [' ',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -191,14 +191,18 @@ checkMov(_,_,_,_,_,_,_) :- fail.
 
 
 %colocar um peao
-checkMov(B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrP,X,Y,B,_), NrP > 1,!.
-checkMov(_,_,_) :-fail.
+checkMov(P,B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrA,NrB,X,Y,B,_),
+        (
+           P == 'A', NrA == 0, NrB == 1 -> fail
+        ;P == 'B', NrA == 1, NrB == 0 -> fail
+        ;true
+           ).
 
 
 %Check EndGame
 checkEndGame(T,X,Y):-
-        checkArea(NrP,X,Y,T,Visited),!,
-        NrP <2,!,
+        checkArea(NrA,NrB,X,Y,T,Visited),!,
+        NrA + NrB <2,!,
         (
         Y \=12, X \= 12 -> Nx is X +2,checkEndGame(Visited,Nx,Y)
         ;X == 12,Y == 10 -> true
@@ -211,35 +215,46 @@ addNrP('A',NrP) :- NrP is 1.
 addNrP('B',NrP) :- NrP is 1.
 addNrP(_,NrP) :- NrP is 0.
 
+addNrP('A',NrA,NrB) :- NrA is 1, NrB is 0.
+addNrP('B',NrA,NrB) :- NrA is 0, NrB is 1.
+addNrP(_,NrA,NrB) :- NrA is 0, NrB is 0.
+
 checkWall(B,X,Y,Xx,Yy) :- Nx is X + Xx, Ny is Y + Yy,  elementAt(B,Elem,Nx,Ny), Elem == ' '.
 
-checkArea(NrP,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,addNrP(Elem,NrI),
+
+checkArea(NrA,NrB,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y), Elem \= 'X',!,addNrP(Elem,NrAI,NrBI),
         replace(ToVisit,X,Y,'X',V0),
         ( checkWall(V0,X,Y,1,0)->
            Nx is X+2,
-        checkArea(NrP1,Nx,Y,V0,V1) ;
+        checkArea(NrA1,NrB1,Nx,Y,V0,V1) ;
                   V1 = V0,
-                  NrP1 is 0), 
+                  NrA1 is 0,
+                  NrB1 is 0), 
         ( checkWall(V0,X,Y,0,1)->
            Ny is Y +2,
-        checkArea(NrP2,X,Ny,V1,V2) ;
+        checkArea(NrA2,NrB2,X,Ny,V1,V2) ;
                   V2 = V1,
-                  NrP2 is 0),
+                  NrA2 is 0,
+                  NrB2 is 0),
          ( checkWall(V0,X,Y,-1,0)->
            Nx2 is X-2,
-        checkArea(NrP3,Nx2,Y,V2,V3) ;
+        checkArea(NrA3,NrB3,Nx2,Y,V2,V3) ;
                   V3 = V2,
-                  NrP3 is 0),
+                  NrA3 is 0,
+                  NrB3 is 0),
         ( checkWall(V0,X,Y,0,-1)->
            Ny2 is Y -2,
-        checkArea(NrP4,X,Ny2,V3,V4) ;
+        checkArea(NrA4,NrB4,X,Ny2,V3,V4) ;
                   V4 = V3,
-                  NrP4 is 0),
+                  NrA4 is 0,
+                  NrB4 is 0),
         Visited = V4,
-        NrP is NrI + NrP1 + NrP2 + NrP3 + NrP4
+        NrA is NrAI + NrA1 + NrA2 + NrA3 + NrA4,
+        NrB is NrBI + NrB1 + NrB2 + NrB3 + NrB4
         .
 
-checkArea(0, _, _, T, T).
+checkArea(0,0, _, _, T, T).
+
 
 %getWinner
 %------------------------------------------------------
@@ -319,7 +334,7 @@ getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,write('Jogada nao permitida'),getMov(P,B,Xi,Y
 
 getPiece(P,B,X,Y,NewB):-  print('\nColuna da peca: '),read(X),
                         print('\nLinha da peca: '),read(Y),
-                        X2 is X *2, Y2 is Y*2,checkMov(B,X2,Y2), !, replace(B,X2,Y2,P,NewB).
+                        X2 is X *2, Y2 is Y*2,checkMov(P,B,X2,Y2), !, replace(B,X2,Y2,P,NewB).
 
 getPiece(P,B,_,_,NewB) :- nl,write('Posicao nao permitida'),getPiece(P,B,_,_,NewB).
 
@@ -346,23 +361,23 @@ play :-  board(B), drawBoard(B).
 
 % ---------------------------------MAIN MENU------------------------------------
 fines:-
-	mainMenu,
-	read(X),
-	mainMenuOption(X).
+        mainMenu,
+        read(X),
+        mainMenuOption(X).
 
 mainMenu:-
-	nl,nl,
-	write('----------------------------------------'),nl,
-	write('Fines Game'),nl,nl,
-	write('1- Play'), nl,
-	write('2- Exit'), nl.
+        nl,nl,
+        write('----------------------------------------'),nl,
+        write('Fines Game'),nl,nl,
+        write('1- Play'), nl,
+        write('2- Exit'), nl.
 
 mainMenuOption(X):-
-	(
-		X = 1 -> play;
-		X = 2 -> write('Goodbye!');
-		(write('Wrong command!'),nl,fines)
-	).
+        (
+                X = 1 -> play;
+                X = 2 -> write('Goodbye!');
+                (write('Wrong command!'),nl,fines)
+        ).
 
 not(true):-fail.
 not(fail):-true.
@@ -384,9 +399,9 @@ play(_,_,_):-print('Game Over').
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
 testV :- A = 'B', A = 'B', write(A).
+test7:- board(B),checkArea(NrA,NrB,12,12,B,Visited), write(NrA),write(NrB),drawBoard(Visited).
 test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), drawBoard(C) ,write(NrP),write(Symbol).
 test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
 test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
-test:- board(B),checkArea(NrP,0,0,B,C), drawBoard(C) ,write(NrP).
 test2:- board(B),checkCurve(B,0, 10, 0, 0,R), write(R).
