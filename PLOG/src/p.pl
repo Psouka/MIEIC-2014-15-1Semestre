@@ -6,7 +6,7 @@ board(
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- [' ',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
+ [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -169,7 +169,8 @@ checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
     ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
 .
         
-getWallPos(X,Y,Wall,NewX,NewY):- (Wall == 1 -> NewX is X, NewY is Y-1,!
+getWallPos(X,Y,Wall,NewX,NewY):- (
+Wall == 1 -> NewX is X, NewY is Y-1,!
 ;   Wall == 2 -> NewX is X, NewY is Y+1,!
 ;   Wall == 3 -> NewX is X -1, NewY is Y,!
 ;   Wall == 4 -> NewX is X +1, NewY is Y,!
@@ -181,13 +182,42 @@ writeWall(B,X,Y,NewB):- mod(Y,2) =:= 0,!,replace(B,X,Y,'|',NewB).
 writeWall(B,X,Y,NewB):-replace(B,X,Y,'-',NewB).
 
 
-checkMov(P,B,Xinicial, Yinicial, Xfinal, Yfinal,Wall) :- elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
+checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :- elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
         elementAt(B, Elem2, Xfinal, Yfinal), Elem2 == 0, !,
-        checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R), R \= 0,!,
+        checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R),!, R \= 0,!,
         getWallPos(Xfinal,Yfinal,Wall,Wx,Wy),
-        elementAt(B,Elem3,Wx,Wy), Elem3 == ' ',!
+        elementAt(B,Elem3,Wx,Wy), Elem3 == ' ',!,
+        replace(B,Xfinal,Yfinal,P,NewB),
+        replace(NewB,Xinicial,Yinicial,0,NewB2),
+        writeWall(NewB2,Wx,Wy,TestB),!,
+        (
+           mod(Wy,2) =:= 0 -> Wx1 is Wx+1,Wx2 is Wx -1,checkArea(NrA1,NrB1,Wx1,Wy,TestB,_),checkArea(NrA2,NrB2,Wx2,Wy,TestB,_)
+        ,
+                             (
+                                NrA1 == 0, NrB1 > 1-> fail
+                             ;  NrB1 == 0, NrA1 > 1-> fail
+                             ;  NrA1 == 0, NrB1 == 0 -> fail
+                             ;  NrA2 == 0, NrB2 > 1-> fail
+                             ;  NrB2 == 0, NrA2 > 1-> fail
+                             ;  NrA2 == 0, NrB2 == 0 -> fail
+                             ;true
+                                )
+        ;
+        Wy1 is Wy+1,Wy2 is Wy-1,
+                              checkArea(NrA1,NrB1,Wx,Wy1,TestB,_),checkArea(NrA2,NrB2,Wx,Wy2,TestB,_),
+         (
+                                NrA1 == 0, NrB1 > 1-> fail
+                             ;  NrB1 == 0, NrA1 > 1-> fail
+                             ;  NrA1 == 0, NrB1 == 0 -> fail
+                             ;  NrA2 == 0, NrB2 > 1-> fail
+                             ;  NrB2 == 0, NrA2 > 1-> fail
+                             ;  NrA2 == 0, NrB2 == 0 -> fail
+                             ;true
+                                )
+           ),
+        FinalB = TestB
         .
-checkMov(_,_,_,_,_,_,_) :- fail.
+checkMov(_,B,_,_,_,_,_,B) :- fail.
 
 
 %colocar um peao
@@ -210,10 +240,6 @@ checkEndGame(T,X,Y):-
 ).
 
 checkEndGame(_,_,_):-fail.
- 
-addNrP('A',NrP) :- NrP is 1.
-addNrP('B',NrP) :- NrP is 1.
-addNrP(_,NrP) :- NrP is 0.
 
 addNrP('A',NrA,NrB) :- NrA is 1, NrB is 0.
 addNrP('B',NrA,NrB) :- NrA is 0, NrB is 1.
@@ -323,10 +349,7 @@ getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,
                         Yi2 is Yi *2,
                         Yf2 is Yf *2,
                         print('\nParede em:\n[1]Cima\n[2]Baixo\n[3]Lado Esquerdo\n[4]Lado Direito\n'), read(Wall)
-                        ,checkMov(P,B,Xi2,Yi2,Xf2,Yf2,Wall), !,
-                         replace(B,Xi2,Yi2,0,B1),replace(B1,Xf2,Yf2,P,B2),
-                         getWallPos(Xf2,Yf2,Wall,Wx,Wy),
-                         writeWall(B2,Wx,Wy,NewB)
+                        ,checkMov(P,B,Xi2,Yi2,Xf2,Yf2,Wall,NewB), !
                          .
 
 
@@ -397,6 +420,8 @@ play(_,_,_):-print('Game Over').
 
 
 start:-  board(B), randomPlayer(P),play(B,P,_).
+
+test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), drawBoard(NewB).
 
 testV :- A = 'B', A = 'B', write(A).
 test7:- board(B),checkArea(NrA,NrB,12,12,B,Visited), write(NrA),write(NrB),drawBoard(Visited).
