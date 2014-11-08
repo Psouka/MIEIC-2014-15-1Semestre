@@ -135,38 +135,38 @@ replace(List, _, _,_, List).
 %;   otherwise
 %).
 
-ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
+checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
         (
            Xinicial > Xfinal, checkWall(B,Xinicial,Yinicial,-1,0)
-        -> Nx is Xinicial - 2, ceckInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
+        -> Nx is Xinicial - 2, checkInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
         ;  Xinicial < Xfinal, checkWall(B,Xinicial,Yinicial,1,0)
-        -> Nx is Xinicial + 2, ceckInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
+        -> Nx is Xinicial + 2, checkInLine(B,Nx, Yinicial, Xfinal, Yfinal,R)
         ; Xinicial == Xfinal, Yinicial \= Yfinal
-        -> ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
+        -> checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
         ; Xinicial == Xfinal, Yinicial == Yfinal -> R is 1
         ;R is 0
         )
         .
 
-ceckInLine(_,_,_,_,_,_).       
+checkInLine(_,_,_,_,_,_).       
         
-ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
+checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
         (
            Yinicial > Yfinal, checkWall(B,Xinicial,Yinicial,0,-1)
-        -> Ny is Yinicial - 2, ceckInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
+        -> Ny is Yinicial - 2, checkInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
         ;  Yinicial < Yfinal, checkWall(B,Xinicial,Yinicial,0,1)
-        -> Ny is Yinicial + 2, ceckInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
+        -> Ny is Yinicial + 2, checkInCol(B,Xinicial, Ny, Xfinal, Yfinal,R)
         ; Xinicial \= Xfinal, Yinicial == Yfinal
-        -> ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
+        -> checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R1), R is R1
         ; Xinicial == Xfinal, Yinicial == Yfinal -> R is 1
         ;R is 0
         )
         .
 
-ceckInCol(_,_,_,_,_,_).  
+checkInCol(_,_,_,_,_,_).  
 
 checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
-    ceckInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), ceckInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
+    checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
 .
         
 getWallPos(X,Y,Wall,NewX,NewY):- (
