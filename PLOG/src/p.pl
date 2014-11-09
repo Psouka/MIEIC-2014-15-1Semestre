@@ -86,12 +86,13 @@ printDown([],[]):-write('|\n').
 printDown(Up,[H|_]):-printDownAux(Up,H).
 
 
-printBoardAux([],_).
+
 
 printBoardAux2([_|T],C):- C < 6,!,NewC is C+1,printBoardAux(T,NewC).
 printBoardAux2(_,_).
 
 printBoardAux([H|T],C):- C < 7,!, H \=[],!,write(' |'), printUp(H),write(C),write('|'),printMid(H),write(' |'),printDown(H,T),printBoardAux2(T,C).
+printBoardAux([],_).
 printBoardAux(_,_).
 
 %----------------------------------------------------------------------------
