@@ -48,17 +48,51 @@ printline([H|T]):- write(H), printline(T).
 
 
 %----------------------------------------------------------------------------
+%printBoard
+printBoard(B):- nl
+                    ,write('    0     1     2     3     4     5     6  \n')
+                    ,write('  _____ _____ _____ _____ _____ _____ _____'),nl,printBoardAux(B,0).
 
-%print board
-drawWalls([H|T],C):- write('  |'), printline(H), write('|'), nl, draw(T,C).
-drawWalls([],_).
-draw([H|T],C):-  write(C), NewC is C+1,write('.|'), printline(H), write('|'), nl,drawWalls(T,NewC).
-draw([],_).
-drawBoard(B):- nl,printline(['   ',0,' ',1,' ',2,' ',3,' ',4,' ',5, ' ',6]), nl,
-        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']),
-        nl, draw(B,0),
-        printline(['   ','-','-','-','-','-','-','-','-','-','-','-', '-','-']), nl,nl.
+drawSymb(0):- write('     ').
+drawSymb('|'):-write('|').
+drawSymb(' '):-write(' ').
+drawSymb(C) :- write('  '),write(C),write('  ').
 
+printAuxUp('|'):-write('|').
+printAuxUp(' '):-write(' ').
+printAuxUp(_):- write('     ').
+
+printUp([]):-write('|\n').
+printUp([H|T]) :-printAuxUp(H), printUp(T).
+
+printMid([]):-write('|\n').
+printMid([H|T]):-drawSymb(H),printMid(T).
+
+printAuxDown('|',' '):-write('|').
+printAuxDown(' ',' '):-write(' ').
+printAuxDown(_,' '):-write('     ').
+printAuxDown(_,'-'):-write('_____').
+
+printAuxDown('|'):-write('|').
+printAuxDown(' '):-write(' ').
+printAuxDown(_):-write('_____').
+
+
+printDownAux([],[]):-write('|\n').
+printDownAux([H|T],[X|Z]):- printAuxDown(H,X),printDownAux(T,Z).
+
+printDown([H|T],[]):- H\= [],!,printAuxDown(H),printDown(T,[]).
+printDown([],[]):-write('|\n').
+printDown(Up,[H|_]):-printDownAux(Up,H).
+
+
+printBoardAux([],_).
+
+printBoardAux2([_|T],C):- C < 6,!,NewC is C+1,printBoardAux(T,NewC).
+printBoardAux2(_,_).
+
+printBoardAux([H|T],C):- C < 7,!, H \=[],!,write(' |'), printUp(H),write(C),write('|'),printMid(H),write(' |'),printDown(H,T),printBoardAux2(T,C).
+printBoardAux(_,_).
 
 %----------------------------------------------------------------------------
 % Returns Element as the element of the list of lists at [Yindex][Xindex]     
@@ -375,11 +409,11 @@ mov(P,B,_,NewB) :- selectMov(P,B,_,NewB).
     
 
 selectMov(P,B,R,NewB) :- print('[1]Colocar peao\n[2]Mover peao\n[3]Exit\n'),read(R),R \= 3,!, mov(P,B,R,NewB).
-selectMov(_,_) :-write('\nBye!!').
+selectMov(_,_,3,_) :-write('\nBye!!').
 
 %-----------------------------------------------------------------------
 %into
-getIntro(P) :- write('\nTurno do jogador: '), write(P), nl.
+getIntro(P) :- write('\n        Turno do jogador: '), write(P), nl.
 
 %------------------------------------------------------------------------
 %creat Random Start
@@ -388,7 +422,7 @@ randomPlayer(P) :- P = 'B'.
 
 %-----------------------------------------------------------------------
 %Start
-play :-  board(B), drawBoard(B).
+play :-  board(B), printBoard(B).
 
 % ---------------------------------MAIN MENU------------------------------------
 fines:-
@@ -416,27 +450,24 @@ not(fail):-true.
 play(B,P,R) :- 
         (
         checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), R is 3
-        ; getIntro(P), drawBoard(B), selectMov(P,B,R,NewB)),
+        ; getIntro(P), printBoard(B), !,selectMov(P,B,R,NewB)),
         (
-        R == 3 -> true
+        R == 3 -> print('\nGame Over')
         ;P =='A' -> play(NewB,'B',_)
         ;P == 'B' -> play(NewB,'A',_)
         )
         .
 
-play(_,_,_):-print('Game Over').
-
-
 start:-  board(B), randomPlayer(P),play(B,P,_).
 
-test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), drawBoard(NewB).
+test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), printBoard(NewB).
 
 testV :- A = 'B', A = 'B', write(A).
-test7:- board(B),checkArea(NrA,NrB,12,12,B,Visited), write(NrA),write(NrB),drawBoard(Visited).
-test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), drawBoard(C) ,write(NrP),write(Symbol).
+test7:- board(B),checkArea(NrA,NrB,12,12,B,Visited), write(NrA),write(NrB),printBoard(Visited).
+test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), printBoard(C) ,write(NrP),write(Symbol).
 test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
-test4:- board(B), getMov('A',B,0,3,1,3,NewB), drawBoard(NewB).
+test4:- board(B), getMov('A',B,0,3,1,3,NewB), printBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
 test2:- board(B),checkInCol(B,0,4,0,12,R),write(R).
 
-testt:-board(B), elementAt(B,0,8,Elem),write(Elem).
+draw:- board(B), printBoard(B).
