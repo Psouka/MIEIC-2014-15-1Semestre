@@ -414,7 +414,7 @@ selectMov(_,_,3,_) :-write('\nBye!!').
 
 %-----------------------------------------------------------------------
 %into
-getIntro(P) :- write('\n        Turno do jogador: '), write(P), nl.
+getIntro(P) :- write('\n             Turno do jogador: '), write(P), nl.
 
 %------------------------------------------------------------------------
 %creat Random Start
