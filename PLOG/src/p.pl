@@ -16,10 +16,26 @@ board(
 ).
 
 
-% para paredes: ' ' se nao tiver, '-' se tiver
+% para paredes: ' ' se nao tiver, '-' se tive
 % 0 para celulas neutras
 % A para células com peão do jogador 1 sem parede por baixo
 % B para células com peão do jogador 2 sem parede por baixo
+
+%------------------------------------------------------------------------
+%BotPlay
+
+creatBotP(X,Y,[[X,Y]]).
+
+botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- random(1,3,Play), Play == 1,!, botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
+botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP).
+
+botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
+
+
+botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP):-random(0,7,X),X2 is X *2,random(0,7,Y),Y2 is Y*2,
+        checkMov('B',B,X2,Y2),!, NewNrP is NrP +1,replace(B,X2,Y2,'B',NewB), creatBotP(X2,Y2,PList),append(BotP,PList,NewBotP).
+
+botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP).
 
 %----------------------------------------------------------------------------
 % check mov limit
@@ -86,8 +102,6 @@ printDown([],[]):-write('|\n').
 printDown(Up,[H|_]):-printDownAux(Up,H).
 
 
-
-
 printBoardAux2([_|T],C):- C < 6,!,NewC is C+1,printBoardAux(T,NewC).
 printBoardAux2(_,_).
 
@@ -136,8 +150,8 @@ print_turn(2):-
         nl.
 
 %----------------------------------------------------------------------------
-% Replaces the value of the element in the index Index to Elem 
-replace([_|T], 0, Elem, [Elem|T]).
+% Replaces the value of the element in the index Index to Elem
+ replace([_|T], 0, Elem, [Elem|T]).
 
 replace([H|T], Index, Elem, [H|R]):- 
         Index > -1, 
@@ -247,7 +261,7 @@ checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :- elementAt(B, Elem, 
                                 )
         ;
         Wy1 is Wy+1,Wy2 is Wy-1,
-                              checkArea(NrA1,NrB1,Wx,Wy1,TestB,_),checkArea(NrA2,NrB2,Wx,Wy2,TestB,_),
+                              checkArea(NrA1,NrB1,Wx,Wy1,TestB,_),checkArea(NrA2,NrB2,Wx,Wy2,TestB,_),!,
          (
                                 NrA1 == 0, NrB1 > 1-> fail
                              ;  NrB1 == 0, NrA1 > 1-> fail
@@ -421,10 +435,6 @@ getIntro(P) :- write('\n             Turno do jogador: '), write(P), nl.
 randomPlayer(P) :- random(1, 3,NrP), NrP == 1,!, P = 'A'. 
 randomPlayer(P) :- P = 'B'.
 
-%-----------------------------------------------------------------------
-%Start
-play :-  board(B), printBoard(B).
-
 % ---------------------------------MAIN MENU------------------------------------
 fines:-
         mainMenu,
@@ -440,7 +450,7 @@ mainMenu:-
 
 mainMenuOption(X):-
         (
-                X = 1 -> play;
+                X = 1 -> start;
                 X = 2 -> write('Goodbye!');
                 (write('Wrong command!'),nl,fines)
         ).
@@ -469,6 +479,6 @@ test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), printBoard(C) ,write(NrP)
 test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
 test4:- board(B), getMov('A',B,0,3,1,3,NewB), printBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
-test2:- board(B),checkInCol(B,0,4,0,12,R),write(R).
+test2:- board(B),checkMov('B',B,0,6,0,2,1,FinalB), printBoard(FinalB).
 
 draw:- board(B), printBoard(B).
