@@ -1,7 +1,7 @@
 :-use_module(library(random)).
 board(        
 [['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
- [' ',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+ ['-',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
@@ -18,8 +18,8 @@ board(
 
 % para paredes: ' ' se nao tiver, '-' se tive
 % 0 para celulas neutras
-% A para células com peão do jogador 1 sem parede por baixo
-% B para células com peão do jogador 2 sem parede por baixo
+% A para cï¿½lulas com peï¿½o do jogador 1 sem parede por baixo
+% B para cï¿½lulas com peï¿½o do jogador 2 sem parede por baixo
 
 %------------------------------------------------------------------------
 %BotPlay
@@ -29,33 +29,24 @@ creatBotP(X,Y,[[X,Y]]).
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- random(1,3,Play), Play == 1,!, botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP).
 
-botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
 
+checkNotIsol(N):- N >1.
+botMovAux(B,X,Y,NewX,NewY,NewB):- random(0,7,NewX),NewX2 is NewX*2,
+        random(0,7,NewY),NewY2 is NewY * 2,
+        random(0,5,Wall),checkMov('B',B,X,Y, NewX2, NewY2, Wall, NewB),!.
+
+botMovAux(B,X,Y,NewX,NewY,NewB):- botMovAux(B,X,Y,NewX,NewY,NewB).
+
+botMov(B,BotP,NrP,NewB,NewBotP):- random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),
+        checkArea(NrA,NrB,X,Y,B, _), !,NrPeoes is NrA + NrB,checkNotIsol(NrPeoes), !,botMovAux(B,X,Y,NewX,NewY,NewB),creatBotP(NewX,NewY,NewP),
+        replace(BotP,P, NewP,NewBotP).
+
+botMov(B,BotP,NrP,NewB,NewBotP,NewNrP):- botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
 
 botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP):-random(0,7,X),X2 is X *2,random(0,7,Y),Y2 is Y*2,
         checkMov('B',B,X2,Y2),!, NewNrP is NrP +1,replace(B,X2,Y2,'B',NewB), creatBotP(X2,Y2,PList),append(BotP,PList,NewBotP).
 
 botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP).
-
-%----------------------------------------------------------------------------
-% check mov limit
-checkLimit(Xinicial, Yinicial, Xfinal, Yfinal):-
-        Xinicial > -1,
-        Xinicial < 7,
-        Xfinal > -1,
-        Xfinal < 7,
-        Yinicial > -1,
-        Yinicial < 7,
-        Yfinal > -1,
-        Yfinal < 7.
-
-checkLimit(X,Y):-
-       X > -1,
-        X < 13,
-       Y> -1,
-       Y< 13.
-
-
 
 %----------------------------------------------------------------------------
 %print lists
@@ -177,13 +168,6 @@ replace(List, _, _,_, List).
 
 %---------------------------------------------------------------
 %check move
-
-%(   If1 -> Then1
-%;   If2 -> Then2
-%;   ...
-%;   otherwise
-%).
-
 checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
         (
            Xinicial > Xfinal, checkWall(B,Xinicial,Yinicial,-1,0),
@@ -225,19 +209,24 @@ checkInCol(_,_,_,_,_,_).
 checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R):-
     checkInLine(B,Xinicial, Yinicial, Xfinal, Yfinal,R3), checkInCol(B,Xinicial, Yinicial, Xfinal, Yfinal,R4), R is  R3 + R4
 .
-        
-getWallPos(X,Y,Wall,NewX,NewY):- (
-Wall == 1 -> NewX is X, NewY is Y-1,!
-;   Wall == 2 -> NewX is X, NewY is Y+1,!
-;   Wall == 3 -> NewX is X -1, NewY is Y,!
-;   Wall == 4 -> NewX is X +1, NewY is Y,!
-).
+
+
+getWallPos(X,Y,1,NewX,NewY):-NewX is X, NewY is Y-1.
+getWallPos(X,Y,2,NewX,NewY):-NewX is X, NewY is Y+1.
+getWallPos(X,Y,3,NewX,NewY):-NewX is X -1, NewY is Y.
+getWallPos(X,Y,4,NewX,NewY):-NewX is X +1, NewY is Y.
+
 
 getWallPos(_,_,_,_,_).
 
 writeWall(B,X,Y,NewB):- mod(Y,2) =:= 0,!,replace(B,X,Y,'|',NewB).
 writeWall(B,X,Y,NewB):-replace(B,X,Y,'-',NewB).
 
+
+checkMovAux(0,1).
+checkMovAux(1,0).
+checkMovAux(A,B):- A > 0, B > 0.
+checkMovAux(A1,B1,A2,B2) :- checkMovAux(A1,B1), checkMovAux(A2,B2).
 
 checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :- elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
         elementAt(B, Elem2, Xfinal, Yfinal), Elem2 == 0, !,
@@ -249,28 +238,11 @@ checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :- elementAt(B, Elem, 
         writeWall(NewB2,Wx,Wy,TestB),!,
         (
            mod(Wy,2) =:= 0 -> Wx1 is Wx+1,Wx2 is Wx -1,checkArea(NrA1,NrB1,Wx1,Wy,TestB,_),checkArea(NrA2,NrB2,Wx2,Wy,TestB,_)
-        ,
-                             (
-                                NrA1 == 0, NrB1 > 1-> fail
-                             ;  NrB1 == 0, NrA1 > 1-> fail
-                             ;  NrA1 == 0, NrB1 == 0 -> fail
-                             ;  NrA2 == 0, NrB2 > 1-> fail
-                             ;  NrB2 == 0, NrA2 > 1-> fail
-                             ;  NrA2 == 0, NrB2 == 0 -> fail
-                             ;true
-                                )
+        ,checkMovAux(NrA1,NrB1,NrA2,NrB2)
         ;
         Wy1 is Wy+1,Wy2 is Wy-1,
                               checkArea(NrA1,NrB1,Wx,Wy1,TestB,_),checkArea(NrA2,NrB2,Wx,Wy2,TestB,_),!,
-         (
-                                NrA1 == 0, NrB1 > 1-> fail
-                             ;  NrB1 == 0, NrA1 > 1-> fail
-                             ;  NrA1 == 0, NrB1 == 0 -> fail
-                             ;  NrA2 == 0, NrB2 > 1-> fail
-                             ;  NrB2 == 0, NrA2 > 1-> fail
-                             ;  NrA2 == 0, NrB2 == 0 -> fail
-                             ;true
-                                )
+         checkMovAux(NrA1,NrB1,NrA2,NrB2)
            ),
         FinalB = TestB
         .
@@ -278,23 +250,32 @@ checkMov(_,B,_,_,_,_,_,B) :- fail.
 
 
 %colocar um peao
-checkMov(P,B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrA,NrB,X,Y,B,_),
-        (
-           P == 'A', NrA == 0, NrB == 1 -> fail
-        ;P == 'B', NrA == 1, NrB == 0 -> fail
-        ;true
-           ).
+
+
+checkMovAux('A',0,NrB):- NrB >1.
+checkMovAux('A',NrA,0):- NrA >1.
+checkMovAux('A',NrA,NrB):-NrA \= 0, NrB \= 1.
+
+checkMovAux('B',0,NrB):- NrB >1.
+checkMovAux('B',NrA,0):- NrA >1.
+checkMovAux('B',NrA,NrB):-NrA \= 1, NrB \= 0.
+
+checkMov('A',B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrA,NrB,X,Y,B,_),!,
+        checkMovAux('A',NrA,NrB),!.
+        
+checkMov('B',B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrA,NrB,X,Y,B,_),!,
+       checkMovAux('B',NrA,NrB).
+
 
 
 %Check EndGame
+checkEndGame(T,12,10):- checkArea(NrA,NrB,12,10,T,_),!,NrA + NrB <2,!.
+
+checkEndGame(T,12,Y):- Y < 12, !, checkArea(NrA,NrB,12,Y,T,Visited),!,NrA + NrB <2,!,Ny is Y+2,Nx is 0, checkEndGame(Visited,Nx,Ny).
+
 checkEndGame(T,X,Y):-
         checkArea(NrA,NrB,X,Y,T,Visited),!,
-        NrA + NrB <2,!,
-        (
-        Y \=12, X \= 12 -> Nx is X +2,checkEndGame(Visited,Nx,Y)
-        ;X == 12,Y == 10 -> true
-        ;   X == 12, Y <12 -> Ny is Y+2,Nx is 0, checkEndGame(Visited,Nx,Ny)
-).
+        NrA + NrB <2,!, Nx is X +2,checkEndGame(Visited,Nx,Y).
 
 checkEndGame(_,_,_):-fail.
 
@@ -341,24 +322,25 @@ checkArea(0,0, _, _, T, T).
 
 %getWinner
 %------------------------------------------------------
+
+getWinnerAux(NrA,NrB,Winner):-NrA>NrB,!,Winner = 'A'.
+getWinnerAux(NrA,NrB,Winner):-NrA<NrB,!,Winner = 'B'.
+getWinnerAux(_,_,Winner):- Winner = 'No one'.
+
+getWinnerAux2('A',NrA,NrB,NrP,NrA2,NrB2):-NrA2 is NrA +NrP, NrB2 is NrB.
+getWinnerAux2('B',NrA,NrB,NrP,NrA2,NrB2):-NrB2 is NrB +NrP, NrA2 is NrA.
+getWinnerAux2(_,NrA,NrB,_,NrA2,NrB2):-NrA2 is NrA, NrB2 is NrB.
+
+getWinner(B,12,10,NrA,NrB,Winner):-  checkSizeArea(NrP,Symbol,12,10,B,_),
+        getWinnerAux2(Symbol,NrA,NrB,NrP,NrA2,NrB2),getWinnerAux(NrA2,NrB2,Winner).
+
+getWinner(B,12,Y,NrA,NrB,Winner):-  Y < 12,!,checkSizeArea(NrP,Symbol,12,Y,B,Visited),
+        getWinnerAux2(Symbol,NrA,NrB,NrP,NrA2,NrB2),Ny is Y+2,Nx is 0,getWinner(Visited,Nx,Ny,NrA2,NrB2,Winner).
+
 getWinner(B,X,Y,NrA,NrB,Winner):-
         checkSizeArea(NrP,Symbol,X,Y,B,Visited),
-        (
-         Symbol == 'A' -> NrA2 is NrA +NrP, NrB2 is NrB
-        ;Symbol == 'B' -> NrB2 is NrB +NrP, NrA2 is NrA
-        ;NrA2 is NrA, NrB2 is NrB
-           )
-        ,
-        (
-        Y \=12, X \= 12 -> Nx is X +2,getWinner(Visited,Nx,Y,NrA2,NrB2,Winner)
-        ;X == 12,Y == 10 -> (
-         NrA >NrB -> Winner = 'A'
-        ;NrB >NrA -> Winner = 'B'
-        ;Winner = 'No one'
-           )
-        ;X == 12, Y <12 -> Ny is Y+2,Nx is 0,getWinner(Visited,Nx,Ny,NrA2,NrB,Winner)
-)
-         
+        getWinnerAux2(Symbol,NrA,NrB,NrP,NrA2,NrB2)
+        ,Nx is X +2,getWinner(Visited,Nx,Y,NrA2,NrB2,Winner)
         .
 
 checkSizeArea(NrP,Symbol,X,Y,ToVisit,Visited):- elementAt(ToVisit,Elem,X,Y),
@@ -469,21 +451,25 @@ mainMenuOption(1, 2):- difficultyMenu, read(Z), mainMenuBot(Z).
 
 mainMenuBot(Z):- Z = true.
 
-not(true):-fail.
-not(fail):-true.
 
-play(B,P,R) :- 
+
+play(B,'A',R) :- R \= 3,!,
         (
-        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), R is 3
-        ; getIntro(P), printBoard(B), !,selectMov(P,B,R,NewB)),
-        (
-        R == 3 -> print('\nGame Over')
-        ;P =='A' -> play(NewB,'B',_)
-        ;P == 'B' -> play(NewB,'A',_)
-        )
+        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), NewR is 3
+        ; getIntro('A'), printBoard(B), !,selectMov('A',B,NewR,NewB)),
+        play(NewB,'B',NewR)
         .
 
-playerVsPlayer:-  board(B), randomPlayer(P),play(B,P,_).
+play(B,'B',R) :-R \= 3,!,
+        (
+        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), NewR is 3
+        ; getIntro('B'), printBoard(B), !,selectMov('B',B,NewR,NewB)),
+        play(NewB,'A',NewR)
+        .
+
+play(_,_,3):- print('\nGame Over').
+
+playerVsPlayer:-  board(B), randomPlayer(P),play(B,P,1).
 
 test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), printBoard(NewB).
 
@@ -495,4 +481,6 @@ test4:- board(B), getMov('A',B,0,3,1,3,NewB), printBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
 test2:- board(B),checkMov('B',B,0,6,0,2,1,FinalB), printBoard(FinalB).
 
-draw:- board(B), printBoard(B).
+testBot :-board(B),creatBotP(12,6,BotP),botMov(B,BotP,1,NewB,_), printBoard(NewB).
+
+test1:- board(B),checkMov('B',B,2,0).

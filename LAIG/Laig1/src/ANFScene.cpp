@@ -32,6 +32,7 @@ ANFScene::ANFScene(char *filename): CGFscene() {
 	texturesElement =  anfElement->FirstChildElement( "textures" );
 	appearancesElement =  anfElement->FirstChildElement( "appearances" );
 	graphElement =  anfElement->FirstChildElement( "graph" );
+	animationElement = anfElement->FirstChildElement( "animations ");
 
 
 	this->parseGlobals();
@@ -46,6 +47,8 @@ ANFScene::ANFScene(char *filename): CGFscene() {
 	printf("\n\n[APPEARENCES] DONE\n\n");
 	this->parseGraph();
 	printf("\n\n[GRAPH] DONE\n\n");
+	this->parseAnimations();
+	printf("\n\n[ANIMATIONS] DONE\n\n");
 
 }
 
@@ -698,6 +701,124 @@ int ANFScene::parseAppearences() {
 
 	}
 	return 0;
+}
+
+/*<animations>
+<!-- pode não existir qualquer nó “animation” se a cena não tiver animações -->
+<!-- span é o tempo, em segundos, que a animação deve demorar *
+<!-- nesta versão do formato ANF, type pode ter o valor “linear” ou "circular" -->
+      <animation id=”ss” span=”ff” type=”linear”>
+            <controlpoint xx=”ff” yy=”ff” zz=”ff />
+                  ...
+      </animation>
+      <animation id=”ss” span=”ff” type=”circular” center="ff ff ff" radius="ff" startang="ff" rotang="ff" />
+</animations> */
+
+int ANFScene::parseAnimations() {
+	
+	if(animationElement == NULL)
+		printf("Animations block not found!\n");
+	else {
+		printf("\n[ANIMATIONS]");
+		TiXmlElement* animationElement=animationElement->FirstChildElement("animations");
+		char* valString = NULL;
+		char* animID;
+		float span, controlPoints[3], 
+
+		while()
+		{
+
+			if(appid = (char *)appearanceElement->Attribute("id"))
+				printf("\n	Attribute: %s",appid);
+			else
+			{
+				printf("APPEARENCES ID ERROR\n");
+				return -1;
+			}
+
+			if(appearanceElement->QueryFloatAttribute("shininess",&shininess) ==TIXML_SUCCESS)
+				printf("\n	Shininess:%f",shininess);
+			else
+				printf("APPEARENCES SHININESS ERROR\n");
+
+			if(textref = (char *)appearanceElement->Attribute("textureref"))
+			{
+				printf("\n	Textureref: %s",textref);
+			}
+			else
+				textref = "";
+
+
+			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
+
+
+			printf("\n(Components)");
+			while(compElement) {
+
+				type = (char *)compElement->Attribute("type");
+				valString = (char *)compElement->Attribute("value");
+
+				if(strcmp(type,"ambient") == 0)
+				{
+
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&ambient[0], &ambient[1], &ambient[2], &ambient[3])==4)
+					{
+						printf("\n	Ambient: <%f %f %f %f>", ambient[0],ambient[1],ambient[2],ambient[3]);
+					}
+					else
+						printf("APPEARENCES AMBIENT ERROR\n");
+
+
+				}
+
+
+				else if(strcmp(type,"diffuse")== 0)
+				{
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&diffuse[0], &diffuse[1], &diffuse[2], &diffuse[3])==4)
+					{
+						printf("\n	Diffuse: <%f %f %f %f>", diffuse[0],diffuse[1],diffuse[2],diffuse[3]);
+					}
+
+
+					else
+						printf("APPEARENCES DIFFUSE ERROR\n");
+
+				}
+
+
+				else if(strcmp(type,"specular")== 0)
+				{
+					if(valString &&sscanf_s(valString,"%f %f %f %f",&specular[0], &specular[1], &specular[2], &specular[3])==4)
+					{
+						printf("\n	Specular: <%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
+					}
+
+
+					else
+						printf("APPEARENCES SPECULAR ERROR\n");
+
+				}
+
+
+				compElement = compElement->NextSiblingElement();
+			}
+
+			temp = new Appearance(ambient,diffuse,specular,shininess,string(appid),string(textref));
+			ttemp = findTexture(textref);
+			if(ttemp != NULL)
+				temp->setAppTexture(ttemp);
+			else
+				temp->setAppTexture(new Texture("NULL"));
+
+			apps.push_back(temp);
+
+			appearanceElement = appearanceElement->NextSiblingElement();
+			printf("\n\n");
+		}
+
+	}
+	return 0;
+
 }
 
 int ANFScene::parseGraph() {

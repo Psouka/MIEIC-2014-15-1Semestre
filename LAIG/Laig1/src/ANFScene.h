@@ -8,6 +8,7 @@
 #include "Textures.h"
 #include "Appearance.h"
 #include "Graph.h"
+#include "Animation.h"
 
 class ANFScene : public CGFscene {
 public:
@@ -24,6 +25,7 @@ public:
 	int parseTextures();
 	int parseAppearences();
 	int parseGraph();
+	int parseAnimations();
 	Texture *findTexture(string id);
 	Appearance* findApp(string id);
 	vector<Node*> getNodes(vector<string> n);
@@ -40,6 +42,7 @@ protected:
 	vector <Light*> lights;
 	vector <Texture*> textures;
 	vector <Appearance*> apps;
+	vector <Animation*> anim;
 
 	Globals ANFGlobals;
 
@@ -53,6 +56,7 @@ protected:
 	TiXmlElement* texturesElement;
 	TiXmlElement* appearancesElement;
 	TiXmlElement* graphElement;
+	TiXmlElement* animationElement;
 
 };
 #endif
