@@ -439,7 +439,9 @@ randomPlayer(P) :- P = 'B'.
 fines:-
         mainMenu,
         read(X),
-        mainMenuOption(X).
+        gameModeMenu,
+        read(Y),
+        mainMenuOption(X, Y).
 
 mainMenu:-
         nl,nl,
@@ -448,12 +450,24 @@ mainMenu:-
         write('1- Play'), nl,
         write('2- Exit'), nl.
 
-mainMenuOption(X):-
-        (
-                X = 1 -> start;
-                X = 2 -> write('Goodbye!');
-                (write('Wrong command!'),nl,fines)
-        ).
+gameModeMenu:- 
+        nl,nl,
+        write('Game Mode: '), nl, nl,
+        write('1 - Player vs Player'), nl,
+        write('2 - Bot vs Player'), nl,
+        write('3 - Bot vs Bot'), nl.
+
+difficultyMenu:-
+        nl,nl,
+        write('Difficulty: '), nl, nl,
+        write('1 - Easy'), nl,
+        write('2 - Hard'), nl.
+
+mainMenuOption(1, 1):- playerVsPlayer.
+
+mainMenuOption(1, 2):- difficultyMenu, read(Z), mainMenuBot(Z).
+
+mainMenuBot(Z):- Z = true.
 
 not(true):-fail.
 not(fail):-true.
@@ -469,7 +483,7 @@ play(B,P,R) :-
         )
         .
 
-start:-  board(B), randomPlayer(P),play(B,P,_).
+playerVsPlayer:-  board(B), randomPlayer(P),play(B,P,_).
 
 test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), printBoard(NewB).
 
