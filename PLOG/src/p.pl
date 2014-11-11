@@ -1,12 +1,12 @@
 :-use_module(library(random)).
 board(        
-[['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
- [' ',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
+[[0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
- ['B',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
+ [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
+ [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+ ['A',' ',0,' ',0,' ',0,' ',0,' ',0,' ','B'],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -24,9 +24,10 @@ board(
 %------------------------------------------------------------------------
 %BotPlay
 
+creatBotC(X,Y,[X,Y]).
 creatBotP(X,Y,[[X,Y]]).
 
-botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- random(1,3,Play), Play == 1,!, botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
+botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- random(1,4,Play), Play \= 2,!, botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP).
 
 
@@ -38,8 +39,8 @@ botMovAux(B,X,Y,NewX,NewY,NewB):- random(0,7,NewX2),NewX is NewX2*2,
 
 botMovAux(B,X,Y,NewX,NewY,NewB):- botMovAux(B,X,Y,NewX,NewY,NewB).
 
-botMov(B,BotP,NrP,NewB,NewBotP):- !,random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),!,
-        checkArea(NrA,NrB,X,Y,B, _), !,NrPeoes is NrA + NrB,checkNotIsol(NrPeoes), !,botMovAux(B,X,Y,NewX,NewY,NewB),creatBotP(NewX,NewY,NewP),
+botMov(B,BotP,NrP,NewB,NewBotP,NrP):- random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),!,
+        checkArea(NrA,NrB,X,Y,B, _), !,NrPeoes is NrA + NrB,checkNotIsol(NrPeoes), !,botMovAux(B,X,Y,NewX,NewY,NewB),creatBotC(NewX,NewY,NewP),
         replace(BotP,P, NewP,NewBotP).
 
 botMov(B,BotP,NrP,NewB,NewBotP,NewNrP):- botMov(B,BotP,NrP,NewB,NewBotP,NewNrP).
@@ -57,6 +58,11 @@ printline([H|T]):- write(H), printline(T).
 
 %----------------------------------------------------------------------------
 %printBoard
+printline([]).
+printline([H|T]):- write(H), printline(T).
+
+
+
 printBoard(B):- nl
                     ,write('    0     1     2     3     4     5     6  \n')
                     ,write('  _____ _____ _____ _____ _____ _____ _____'),nl,printBoardAux(B,0).
@@ -255,10 +261,14 @@ checkMov(_,B,_,_,_,_,_,B) :- fail.
 
 checkMovAux('A',0,NrB):- NrB >1.
 checkMovAux('A',NrA,0):- NrA >1.
+checkMovAux('A',NrA,NrB):- NrA == 0, NrB \=1.
+checkMovAux('A',NrA,NrB):- NrA \= 0, NrB ==1.
 checkMovAux('A',NrA,NrB):-NrA \= 0, NrB \= 1.
 
 checkMovAux('B',0,NrB):- NrB >1.
 checkMovAux('B',NrA,0):- NrA >1.
+checkMovAux('B',NrA,NrB):- NrA == 1, NrB \=0.
+checkMovAux('B',NrA,NrB):- NrA \= 1, NrB ==0.
 checkMovAux('B',NrA,NrB):-NrA \= 1, NrB \= 0.
 
 checkMov('A',B,X,Y) :- elementAt(B, Elem, X, Y),Elem == 0, !,checkArea(NrA,NrB,X,Y,B,_),!,
@@ -396,7 +406,7 @@ getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,
 getMov(P,B,Xi,Yi,Xf,Yf,NewB) :- nl,write('Jogada nao permitida'),getMov(P,B,Xi,Yi,Xf,Yf,NewB).
 
 getPiece(P,B,X,Y,NewB):-  print('\nColuna da peca: '),read(X),
-                        print('\nLinha da peca: '),read(Y),
+                        print('Linha da peca: '),read(Y),
                         X2 is X *2, Y2 is Y*2,checkMov(P,B,X2,Y2), !, replace(B,X2,Y2,P,NewB).
 
 getPiece(P,B,_,_,NewB) :- nl,write('Posicao nao permitida'),getPiece(P,B,_,_,NewB).
@@ -472,6 +482,26 @@ play(_,_,3):- print('\nGame Over').
 
 playerVsPlayer:-  board(B), randomPlayer(P),play(B,P,1).
 
+
+playVsBot(B,'A',BotPs,NrPBots,R) :- R \= 3,!,
+        (
+        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), NewR is 3
+        ; getIntro('A'), printBoard(B), !,selectMov('A',B,NewR,NewB)),
+        playVsBot(NewB,'B',BotPs,NrPBots,NewR)
+        .
+
+playVsBot(B,'B',BotPs,NrPBots,R) :-R \= 3,!,
+        (
+        checkEndGame(B,0,0) -> getWinner(B,0,0,0,0,Winner),write('The Winner is '),write(Winner), NewR is 3
+        ; botPlay(B,BotPs,NrPBots,NewB,NewBotPs,NewNrPBots),NewR is 4),
+        playVsBot(NewB,'A',NewBotPs,NewNrPBots,NewR)
+        .
+
+playVsBot(_,_,_,_,3):- print('\nGame Over').
+
+
+playerVsBot:- board(B),creatBotP(12,6,BotPs), playVsBot(B,'A',BotPs,1,1).
+
 test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), printBoard(NewB).
 
 testV :- A = 'B', A = 'B', write(A).
@@ -482,7 +512,6 @@ test4:- board(B), getMov('A',B,12,6,10,8,NewB), printBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
 test2:- board(B),checkMov('B',B,12,6,6,12,2,FinalB), printBoard(FinalB).
 
-testBot :-board(B),creatBotP(12,6,BotP),botMov(B,BotP,1,NewB,_), printBoard(NewB).
-testBot2:- board(B),botMovAux(B,12,6,NewX,NewY,NewB).
+testBot :-board(B),creatBotP(12,6,BotP),botPlay(B,BotP,1,NewB,_,_), printBoard(NewB).
 
-test1:- board(B),checkMov('B',B,2,0).
+test1:- board(B),checkMov('B',B,6,6).
