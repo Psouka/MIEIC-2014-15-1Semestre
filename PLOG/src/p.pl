@@ -1,7 +1,7 @@
 :-use_module(library(random)).
 board(        
 [['A',' ',0,'|',0,' ',0,' ',0,' ',0,' ',0],
- ['-',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
+ [' ',' ','-',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
  [0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
@@ -31,13 +31,14 @@ botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNr
 
 
 checkNotIsol(N):- N >1.
-botMovAux(B,X,Y,NewX,NewY,NewB):- random(0,7,NewX),NewX2 is NewX*2,
-        random(0,7,NewY),NewY2 is NewY * 2,
-        random(0,5,Wall),checkMov('B',B,X,Y, NewX2, NewY2, Wall, NewB),!.
+botMovAux(B,X,Y,NewX,NewY,NewB):- random(0,7,NewX2),NewX is NewX2*2,
+        random(0,7,NewY2),NewY is NewY2 * 2,
+        random(1,5,Wall),
+        checkMov('B',B,X,Y, NewX, NewY, Wall, NewB),!.
 
 botMovAux(B,X,Y,NewX,NewY,NewB):- botMovAux(B,X,Y,NewX,NewY,NewB).
 
-botMov(B,BotP,NrP,NewB,NewBotP):- random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),
+botMov(B,BotP,NrP,NewB,NewBotP):- !,random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),!,
         checkArea(NrA,NrB,X,Y,B, _), !,NrPeoes is NrA + NrB,checkNotIsol(NrPeoes), !,botMovAux(B,X,Y,NewX,NewY,NewB),creatBotP(NewX,NewY,NewP),
         replace(BotP,P, NewP,NewBotP).
 
@@ -228,10 +229,10 @@ checkMovAux(1,0).
 checkMovAux(A,B):- A > 0, B > 0.
 checkMovAux(A1,B1,A2,B2) :- checkMovAux(A1,B1), checkMovAux(A2,B2).
 
-checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :- elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
+checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB) :-elementAt(B, Elem, Xinicial, Yinicial), Elem == P,!,
         elementAt(B, Elem2, Xfinal, Yfinal), Elem2 == 0, !,
         checkCurve(B,Xinicial, Yinicial, Xfinal, Yfinal,R),!, R \= 0,!,
-        getWallPos(Xfinal,Yfinal,Wall,Wx,Wy),
+        getWallPos(Xfinal,Yfinal,Wall,Wx,Wy),!,
         elementAt(B,Elem3,Wx,Wy), Elem3 == ' ',!,
         replace(B,Xfinal,Yfinal,P,NewB),
         replace(NewB,Xinicial,Yinicial,0,NewB2),
@@ -477,10 +478,11 @@ testV :- A = 'B', A = 'B', write(A).
 test7:- board(B),checkArea(NrA,NrB,12,12,B,Visited), write(NrA),write(NrB),printBoard(Visited).
 test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), printBoard(C) ,write(NrP),write(Symbol).
 test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
-test4:- board(B), getMov('A',B,0,3,1,3,NewB), printBoard(NewB).
+test4:- board(B), getMov('A',B,12,6,10,8,NewB), printBoard(NewB).
 test3:- board(B), checkEndGame(B,0,0).
-test2:- board(B),checkMov('B',B,0,6,0,2,1,FinalB), printBoard(FinalB).
+test2:- board(B),checkMov('B',B,12,6,6,12,2,FinalB), printBoard(FinalB).
 
 testBot :-board(B),creatBotP(12,6,BotP),botMov(B,BotP,1,NewB,_), printBoard(NewB).
+testBot2:- board(B),botMovAux(B,12,6,NewX,NewY,NewB).
 
 test1:- board(B),checkMov('B',B,2,0).

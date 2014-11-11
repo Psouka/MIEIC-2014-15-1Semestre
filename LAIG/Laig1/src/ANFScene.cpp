@@ -723,7 +723,7 @@ int ANFScene::parseAnimations() {
 		TiXmlElement* animationElement=animationElement->FirstChildElement("animations");
 		char* valString = NULL;
 		char* animID;
-		float span, controlPoints[3], 
+		float span, controlPoints[3], center[3], 
 
 		while()
 		{
