@@ -2,29 +2,28 @@
 #define _ANIMATION_
 
 #include "CGFscene.h"
+#include <string>
+#include <vector>
+using namespace std;
 
 class Animation {
 	string id;
 	float span;
 
 public:
-	Animation(string id);
+	Animation(string id,float span);
 };
 
 class LinearAnimation : public Animation {
-	float* controlPoint;
-
+	vector<float*> controlPoint;
 public:
-	LinearAnimation(string id, float span, string type, float* controlPoint);
+	LinearAnimation(string id, float span,vector<float*> controlPoint);
 };
 
 class CircularAnimation : public Animation {
-
-	float* center[3], radius, startAng, rotAng;
-
+	float center[3], radius, startAng, rotAng;
 public:
-
-	CircularAnimation(string id, float span, string type, float* center, float radius, float startAng, float rotAng);
+	CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng);
 };
 
 #endif

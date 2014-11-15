@@ -707,113 +707,131 @@ int ANFScene::parseAppearences() {
 <!-- pode não existir qualquer nó “animation” se a cena não tiver animações -->
 <!-- span é o tempo, em segundos, que a animação deve demorar *
 <!-- nesta versão do formato ANF, type pode ter o valor “linear” ou "circular" -->
-      <animation id=”ss” span=”ff” type=”linear”>
-            <controlpoint xx=”ff” yy=”ff” zz=”ff />
-                  ...
-      </animation>
-      <animation id=”ss” span=”ff” type=”circular” center="ff ff ff" radius="ff" startang="ff" rotang="ff" />
+<animation id=”ss” span=”ff” type=”linear”>
+<controlpoint xx=”ff” yy=”ff” zz=”ff />
+...
+</animation>
+<animation id=”ss” span=”ff” type=”circular” center="ff ff ff" radius="ff" startang="ff" rotang="ff" />
 </animations> */
 
 int ANFScene::parseAnimations() {
-	
+
 	if(animationElement == NULL)
 		printf("Animations block not found!\n");
 	else {
 		printf("\n[ANIMATIONS]");
 		TiXmlElement* animationElement=animationElement->FirstChildElement("animations");
+		TiXmlElement* aElement=animationElement->FirstChildElement("animation");
+		TiXmlElement* controlElement;
 		char* valString = NULL;
-		char* animID;
-		float span, controlPoints[3], center[3], 
+		char* animID, *type;
+		float span, controlPointsAux[3], center[3],radius,startang,rotang;
+		vector <float*> controlPoint;
 
-		while()
+		while(aElement)
 		{
 
-			if(appid = (char *)appearanceElement->Attribute("id"))
-				printf("\n	Attribute: %s",appid);
-			else
+			if(animID = (char *) aElement->Attribute("id"))
 			{
-				printf("APPEARENCES ID ERROR\n");
-				return -1;
+				printf("\n	Animationid: %s",animID);
 			}
-
-			if(appearanceElement->QueryFloatAttribute("shininess",&shininess) ==TIXML_SUCCESS)
-				printf("\n	Shininess:%f",shininess);
 			else
-				printf("APPEARENCES SHININESS ERROR\n");
+				printf("\nERROR ID");
 
-			if(textref = (char *)appearanceElement->Attribute("textureref"))
+
+			valString = (char *) aElement->Attribute("span");
+			if(valString && sscanf_s(valString,"%f",&span)==1)
 			{
-				printf("\n	Textureref: %s",textref);
+				printf("\n	Span: %s",animID);
 			}
 			else
-				textref = "";
+				printf("\nERROR SPAN\n");		
+
+			type = (char *) aElement->Attribute("type");
 
 
-			TiXmlElement* compElement=appearanceElement->FirstChildElement("component");
+			if(strcmp(type,"linear")==0)
+			{
+				controlElement=aElement->FirstChildElement("controlpoint");
+				vector<float *> vControPoint;
 
+				while(controlElement){
 
-			printf("\n(Components)");
-			while(compElement) {
+					printf("\n	ControlPoint: ");
 
-				type = (char *)compElement->Attribute("type");
-				valString = (char *)compElement->Attribute("value");
-
-				if(strcmp(type,"ambient") == 0)
-				{
-
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&ambient[0], &ambient[1], &ambient[2], &ambient[3])==4)
+					valString = (char *) controlElement->Attribute("xx");
+					if(valString && sscanf_s(valString,"%f",&controlPointsAux[0])==1)
 					{
-						printf("\n	Ambient: <%f %f %f %f>", ambient[0],ambient[1],ambient[2],ambient[3]);
+						printf("%s",valString);
 					}
 					else
-						printf("APPEARENCES AMBIENT ERROR\n");
+						printf("\nERROR CONTROL XX\n");	
 
-
-				}
-
-
-				else if(strcmp(type,"diffuse")== 0)
-				{
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&diffuse[0], &diffuse[1], &diffuse[2], &diffuse[3])==4)
+					valString = (char *) controlElement->Attribute("yy");
+					if(valString && sscanf_s(valString,"%f",&controlPointsAux[1])==1)
 					{
-						printf("\n	Diffuse: <%f %f %f %f>", diffuse[0],diffuse[1],diffuse[2],diffuse[3]);
+						printf("%s",valString);
 					}
-
-
 					else
-						printf("APPEARENCES DIFFUSE ERROR\n");
-
-				}
+						printf("\nERROR CONTROL YY\n");		
 
 
-				else if(strcmp(type,"specular")== 0)
-				{
-					if(valString &&sscanf_s(valString,"%f %f %f %f",&specular[0], &specular[1], &specular[2], &specular[3])==4)
+					valString = (char *) controlElement->Attribute("zz");
+					if(valString && sscanf_s(valString,"%f",&controlPointsAux[2])==1)
 					{
-						printf("\n	Specular: <%f %f %f %f>", specular[0],specular[1],specular[2],specular[3]);
+						printf("%s",valString);
 					}
-
-
 					else
-						printf("APPEARENCES SPECULAR ERROR\n");
+						printf("\nERROR CONTROL YY\n");		
 
+
+					vControPoint.push_back(controlPointsAux);
 				}
 
+				anim.push_back(new LinearAnimation(animID,span,vControPoint));
 
-				compElement = compElement->NextSiblingElement();
 			}
 
-			temp = new Appearance(ambient,diffuse,specular,shininess,string(appid),string(textref));
-			ttemp = findTexture(textref);
-			if(ttemp != NULL)
-				temp->setAppTexture(ttemp);
+			else if(strcmp(type,"circular")==0)
+			{
+				valString = (char *) aElement->Attribute("center");
+				if(valString && sscanf_s(valString,"%f %f %f",&center[0], &center[1], &center[2])==3)
+				{
+					printf("\n	Center: (%f,%f,%f)", center[0], center[1], center[2]);
+				}
+				else
+					printf("\nERROR TRANSLATE\n");		
+
+				valString = (char *) aElement->Attribute("radius");
+				if(valString && sscanf_s(valString,"%f",&radius)==1)
+				{
+					printf("\n	Radius :%s",valString);
+				}
+				else
+					printf("\nERROR RADIUS\n");	
+
+				valString = (char *) aElement->Attribute("startang");
+				if(valString && sscanf_s(valString,"%f",&startang)==1)
+				{
+					printf("\n	StartAng :%s",valString);
+				}
+				else
+					printf("\nERROR STARTANG\n");	
+
+				valString = (char *) aElement->Attribute("rotang");
+				if(valString && sscanf_s(valString,"%f",&rotang)==1)
+				{
+					printf("\n	RotAng :%s",valString);
+				}
+				else
+					printf("\nERROR ROTANG\n");	
+
+				anim.push_back(new CircularAnimation(animID,span,center,radius,startang,rotang));
+			}
 			else
-				temp->setAppTexture(new Texture("NULL"));
+				printf("\nERROR TYPE");
 
-			apps.push_back(temp);
-
-			appearanceElement = appearanceElement->NextSiblingElement();
-			printf("\n\n");
+			aElement = aElement->NextSiblingElement();
 		}
 
 	}
@@ -863,7 +881,7 @@ int ANFScene::parseGraph() {
 
 			Nodetemp = new Node(string(ValString));
 			if(transformsElement)
-			transformElement=transformsElement->FirstChildElement();
+				transformElement=transformsElement->FirstChildElement();
 			if(transformElement)
 			{	printf("\n	(Transforms)");
 
