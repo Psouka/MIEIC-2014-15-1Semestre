@@ -28,6 +28,7 @@ public:
 	int parseAnimations();
 	Texture *findTexture(string id);
 	Appearance* findApp(string id);
+	Animation* findAnimation(string id);
 	vector<Node*> getNodes(vector<string> n);
 	void init();
 	void display();

@@ -160,8 +160,6 @@ Torus::Torus(float inner, float outer, int slices, int loops): Primitives() {
 	this->loops = loops;
 }
 
-
-
 void Torus::draw(Texture* t)  {
 	float vNormal[3];
 	double majorStep = 2.0f*PI / loops;
@@ -203,4 +201,30 @@ void Torus::draw(Texture* t)  {
 		}
 		glEnd();
 	}
+}
+
+
+Plane ::Plane(unsigned int p)
+:parts(p){}
+
+void Plane ::draw(Texture* t){
+}
+
+Patch :: Patch(int o, int pU,int pV)
+:order(o),partsU(pU),partsV(pV){}
+
+void Patch ::draw(Texture* t){
+}
+
+Vehicle ::Vehicle()
+{}
+
+void Vehicle ::draw(Texture* t){
+}
+
+Flag ::Flag(Texture * t)
+:texture(t)
+{}
+
+void Flag ::draw(Texture* t){
 }

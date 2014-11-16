@@ -3,6 +3,10 @@
 Animation:: Animation(string id,float span)
 :id(id),span(span){}
 
+string Animation:: getId(){
+	return id;
+}
+
 LinearAnimation::LinearAnimation(string id, float span, vector<float*> controlPoint)
 	:Animation(id,span),controlPoint(controlPoint){}
 

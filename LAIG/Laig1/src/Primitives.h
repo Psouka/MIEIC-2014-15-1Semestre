@@ -73,5 +73,34 @@ public:
 	void draw(Texture* t);
 };
 
+class Plane : public Primitives{
+	unsigned int parts;
+public :
+	Plane(unsigned int p);
+	void draw(Texture* t);
+};
+
+class Patch : public Primitives{
+	int order, partsU,partsV;
+	string compute;
+	vector<float[3]> controlPoint;
+public:
+	Patch(int o, int pU,int pV);
+	void draw(Texture* t);
+};
+
+class Vehicle : public Primitives{
+
+public:
+	Vehicle();
+	void draw(Texture* t);
+};
+
+class Flag : public Primitives{
+	Texture* texture;
+public :
+	Flag(Texture * t);
+	void draw(Texture* t);
+};
 
 #endif

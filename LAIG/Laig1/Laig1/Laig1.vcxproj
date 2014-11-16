@@ -12,6 +12,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\ANFScene.cpp" />
+    <ClCompile Include="..\src\Animation.cpp" />
     <ClCompile Include="..\src\Appearance.cpp" />
     <ClCompile Include="..\src\Cameras.cpp" />
     <ClCompile Include="..\src\Globals.cpp" />
@@ -26,6 +27,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\ANFScene.h" />
+    <ClInclude Include="..\src\Animation.h" />
     <ClInclude Include="..\src\Appearance.h" />
     <ClInclude Include="..\src\Cameras.h" />
     <ClInclude Include="..\src\Globals.h" />

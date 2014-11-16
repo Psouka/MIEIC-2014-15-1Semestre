@@ -7,21 +7,26 @@
 #include <iostream>
 #include "CGFscene.h"
 #include "Appearance.h"
+#include "Animation.h"
 
 using namespace std;
 
 class Node {
+	bool displaylist;
 	string nodeID;
 	vector<string> children;
 	vector<Node*> nodeChilds;
 	vector<Primitives *> primitives;
 	float transforms[16];
 	Appearance * app;
+	Animation * anim;
+	
 
 public:
 	Node();
-	Node(string ID);
+	Node(string ID,bool displaylist);
 	void setApp(Appearance *p);
+	void setAnim(Animation *a);
 	void addPrimitive(Primitives* p);
 	void addDescend(string n);
 	string getID();

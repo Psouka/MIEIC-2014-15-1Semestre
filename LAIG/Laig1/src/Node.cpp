@@ -8,7 +8,8 @@ Node::Node() {
 
 }
 
-Node::Node(string nodeID) {
+Node::Node(string ID,bool displaylist) {
+	this->displaylist = displaylist;
 	this->nodeID = nodeID;
 	glPushMatrix();
 	glLoadIdentity();
@@ -18,8 +19,11 @@ Node::Node(string nodeID) {
 }
 
 void Node::setApp(Appearance *p) {
-
 	this->app = p;
+}
+
+void Node::setAnim(Animation *a){
+	this->anim = a;
 }
 
 float* Node::getMatrix() {

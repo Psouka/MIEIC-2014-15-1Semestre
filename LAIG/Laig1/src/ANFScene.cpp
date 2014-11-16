@@ -720,7 +720,6 @@ int ANFScene::parseAnimations() {
 		printf("Animations block not found!\n");
 	else {
 		printf("\n[ANIMATIONS]");
-		TiXmlElement* animationElement=animationElement->FirstChildElement("animations");
 		TiXmlElement* aElement=animationElement->FirstChildElement("animation");
 		TiXmlElement* controlElement;
 		char* valString = NULL;
@@ -848,10 +847,12 @@ int ANFScene::parseGraph() {
 		TiXmlElement *nodeElement=graphElement->FirstChildElement("node");
 
 		Node *Nodetemp;
+		bool displaylist;
 		char *ValString, *ValString2, *ValString3;
 		float angle, x0,x1, x2, x3, y1, y2,y3,z1, z2, z3;
 		TiXmlElement *transformsElement;
 		TiXmlElement* appearanceref;
+		TiXmlElement* animationref;
 		TiXmlElement* primitiveElement;
 		TiXmlElement* descendantElement;
 		TiXmlElement* pElement;
@@ -867,10 +868,11 @@ int ANFScene::parseGraph() {
 		while(nodeElement) {
 
 			transformsElement=nodeElement->FirstChildElement("transforms");
+			appearanceref=nodeElement->FirstChildElement("animationref");
 			appearanceref=nodeElement->FirstChildElement("appearanceref");
 			primitiveElement=nodeElement->FirstChildElement("primitives");
 			descendantElement=nodeElement->FirstChildElement("descendants");
-
+			animationref=nodeElement->FirstChildElement("animationref");
 
 			if(ValString = (char *) nodeElement->Attribute("id"))
 			{
@@ -879,7 +881,18 @@ int ANFScene::parseGraph() {
 			else
 				printf("\nID NODE ERROR");
 
-			Nodetemp = new Node(string(ValString));
+			if(ValString2 = (char *) nodeElement->Attribute("displaylist"))
+			{
+				if(strcmp(ValString2,"true") == 0)
+					displaylist = true;
+				else
+					displaylist = false;
+			}
+			else
+				printf("\nID NODE ERROR");
+
+			Nodetemp = new Node(string(ValString),displaylist);
+
 			if(transformsElement)
 				transformElement=transformsElement->FirstChildElement();
 			if(transformElement)
@@ -939,6 +952,21 @@ int ANFScene::parseGraph() {
 				transformElement=transformElement->NextSiblingElement();
 			}
 			}
+
+			if(animationref)
+			{
+				ValString=(char *) animationref->Attribute("id");
+
+				if (ValString)
+				{
+						Nodetemp->setAnim(findAnimation(string(ValString)));
+					
+					printf("\n	Animationref: %s", ValString);
+				}
+				else
+					printf("ERROR PARSING ANIMATIONREF\n");
+			}
+
 
 			if(appearanceref)
 			{
@@ -1097,6 +1125,17 @@ Texture* ANFScene::findTexture(string id) {
 	}
 	return NULL;
 }
+
+
+Animation* ANFScene::findAnimation(string id){
+	for(unsigned int i = 0; i < anim.size(); i++) {
+		if(anim[i]->getId()== id)
+			return anim[i];
+	}
+
+	return NULL;
+}
+
 
 Appearance* ANFScene::findApp(string id) {
 	for(unsigned int i = 0; i < apps.size(); i++) {

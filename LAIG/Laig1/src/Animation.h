@@ -12,6 +12,7 @@ class Animation {
 
 public:
 	Animation(string id,float span);
+	string getId();
 };
 
 class LinearAnimation : public Animation {
