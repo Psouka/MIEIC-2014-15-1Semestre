@@ -203,6 +203,7 @@ void Torus::draw(Texture* t)  {
 	}
 }
 
+Plane ::Plane(){}
 
 Plane ::Plane(unsigned int p)
 :parts(p){}
@@ -210,8 +211,8 @@ Plane ::Plane(unsigned int p)
 void Plane ::draw(Texture* t){
 }
 
-Patch :: Patch(int o, int pU,int pV)
-:order(o),partsU(pU),partsV(pV){}
+Patch ::Patch(int o, int pU,int pV, string c, vector<float*> controlPoint)
+	:order(o),partsU(pU),partsV(pV),compute(c),controlPoint(controlPoint){}
 
 void Patch ::draw(Texture* t){
 }
@@ -223,7 +224,7 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(Texture * t)
-:texture(t)
+:Plane(),texture(t)
 {}
 
 void Flag ::draw(Texture* t){

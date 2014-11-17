@@ -1088,6 +1088,49 @@ int ANFScene::parseGraph() {
 				}
 
 
+				// <plane parts=”ii” />
+
+				else if (strcmp(pElement->Value(),"plane")==0)
+				{
+					if (pElement->QueryFloatAttribute("parts",&x0)==TIXML_SUCCESS)
+					{
+						Nodetemp->addPrimitive(new Plane(x0));
+						printf("\n	Plane:%d",x0);
+					}
+					else
+						printf("\nERROR PLANE");
+				}
+
+				// <vehicle />
+
+				else if (strcmp(pElement->Value(),"vehicle")==0)
+				{
+					Nodetemp->addPrimitive(new Vehicle());
+					printf("\n	Vehicle");
+				}
+
+
+				// <flag texture=”ss” />
+				else if (strcmp(pElement->Value(),"flag")==0)
+				{
+					ValString = (char *) pElement->Attribute("texture");
+					Nodetemp->addPrimitive(new Flag(findTexture(string(ValString))));
+					printf("\n	Flag: %s",ValString);
+				}
+
+				/* <patch order=”ii” partsU=”ii” partsV=”ii” compute=”ss”>
+				<controlpoint x=”ff” y=”ff” z=”ff” />
+				…
+				</patch>*/
+
+				else if (strcmp(pElement->Value(),"patch")==0)
+				{
+					ValString = (char *) pElement->Attribute("texture");
+					Nodetemp->addPrimitive(new Flag(findTexture(string(ValString))));
+					printf("\n	Flag: %s",ValString);
+				}
+
+
 				pElement = pElement->NextSiblingElement();
 			}
 			}
@@ -1126,7 +1169,6 @@ Texture* ANFScene::findTexture(string id) {
 	return NULL;
 }
 
-
 Animation* ANFScene::findAnimation(string id){
 	for(unsigned int i = 0; i < anim.size(); i++) {
 		if(anim[i]->getId()== id)
@@ -1135,7 +1177,6 @@ Animation* ANFScene::findAnimation(string id){
 
 	return NULL;
 }
-
 
 Appearance* ANFScene::findApp(string id) {
 	for(unsigned int i = 0; i < apps.size(); i++) {
@@ -1283,7 +1324,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 	else
 		glPolygonMode( GL_FRONT_AND_BACK, GL_POINT);
 
-	if(node->getDisplayList() && !node->getDisplayListGen){
+	if(node->getDisplayList() && !node->getDisplayListGen()){
 
 		if(node->getdlID() == NULL) {
 
