@@ -37,11 +37,11 @@
         </lights>
 
          <textures>       
-              <texture id="texture_floor" file="floor.jpg" texlength_s="1" texlength_t="1" />
+              <texture id="texture_floor" file="floor.jpg" texlength_s="20" texlength_t="20" />
               <texture id="texture_chair" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
                 <texture id="texture_table" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
               <texture id="texture_ball" file="ball.jpg" texlength_s="1" texlength_t="1"/>
-              <texture id="texture_wall" file="wall.jpg" texlength_s="1" texlength_t="1"/>
+              <texture id="texture_wall" file="wall.jpg" texlength_s="20" texlength_t="20"/>
         </textures>
 
         <appearances>
