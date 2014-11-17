@@ -10,7 +10,7 @@ Node::Node() {
 
 Node::Node(string ID,bool displaylist) {
 	this->displaylist = displaylist;
-	this->nodeID = nodeID;
+	this->nodeID = ID;
 	this->displaylistGen = false;
 	this->dlID = NULL;
 	glPushMatrix();
