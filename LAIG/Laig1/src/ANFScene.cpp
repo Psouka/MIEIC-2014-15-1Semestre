@@ -959,8 +959,8 @@ int ANFScene::parseGraph() {
 
 				if (ValString)
 				{
-						Nodetemp->setAnim(findAnimation(string(ValString)));
-					
+					Nodetemp->setAnim(findAnimation(string(ValString)));
+
 					printf("\n	Animationref: %s", ValString);
 				}
 				else
@@ -1276,19 +1276,6 @@ void ANFScene::process(Node* node,Appearance * app) {
 		exit(1);
 	}
 
-	glMultMatrixf(node->getMatrix());
-
-	//processar texturas e aparencia
-	vector<string> temp  = node->getChildren();
-	unsigned int i = temp.size();
-
-	vector<Node*> nodes = node->getNChilds();
-
-	vector<Primitives*> prim = node->getPrimitives();
-	for(unsigned int a = 0; a < prim.size(); a++) {
-		prim[a]->draw(app->APPTexture);
-	}
-
 	if(drawMode == 0)
 		glPolygonMode( GL_FRONT_AND_BACK, GL_FILL);
 	else if (drawMode == 1)
@@ -1296,20 +1283,75 @@ void ANFScene::process(Node* node,Appearance * app) {
 	else
 		glPolygonMode( GL_FRONT_AND_BACK, GL_POINT);
 
-	for(unsigned int i = 0; i < nodes.size(); i++) {
-		glPushMatrix();
+	if(node->getDisplayList() && !node->getDisplayListGen){
 
-		if(nodes[i]->getApp()->getTextRef() != "inherit")
-		{
-			nodes[i]->ApplyApp();
-			process(nodes[i],nodes[i]->getApp());
+		if(node->getdlID() == NULL) {
+
+			node->setdlID(glGenLists(1));
+
+			glNewList(node->getdlID(), GL_COMPILE);
+
+			glMultMatrixf(node->getMatrix());
+
+			//processar texturas e aparencia
+			vector<string> temp  = node->getChildren();
+			unsigned int i = temp.size();
+
+			vector<Node*> nodes = node->getNChilds();
+
+			vector<Primitives*> prim = node->getPrimitives();
+			for(unsigned int a = 0; a < prim.size(); a++) {
+				prim[a]->draw(app->APPTexture);
+			}
+
+			for(unsigned int i = 0; i < nodes.size(); i++) {
+				glPushMatrix();
+				nodes[i]->setDisplayListGen(true);
+				if(nodes[i]->getApp()->getTextRef() != "inherit")
+				{
+					nodes[i]->ApplyApp();
+					process(nodes[i],nodes[i]->getApp());
+				}
+				else
+				{
+					app->apply();
+					process(nodes[i],app);
+				}
+				glPopMatrix();
+			}
 		}
-		else
-		{
-			app->apply();
-			process(nodes[i],app);
+		else {
+			glCallList(node->getdlID());
 		}
-		glPopMatrix();
 	}
+	else {
+		glMultMatrixf(node->getMatrix());
 
+		//processar texturas e aparencia
+		vector<string> temp  = node->getChildren();
+		unsigned int i = temp.size();
+
+		vector<Node*> nodes = node->getNChilds();
+
+		vector<Primitives*> prim = node->getPrimitives();
+		for(unsigned int a = 0; a < prim.size(); a++) {
+			prim[a]->draw(app->APPTexture);
+		}
+
+		for(unsigned int i = 0; i < nodes.size(); i++) {
+			glPushMatrix();
+			nodes[i]->setDisplayListGen(true);
+			if(nodes[i]->getApp()->getTextRef() != "inherit")
+			{
+				nodes[i]->ApplyApp();
+				process(nodes[i],nodes[i]->getApp());
+			}
+			else
+			{
+				app->apply();
+				process(nodes[i],app);
+			}
+			glPopMatrix();
+		}
+	}
 }

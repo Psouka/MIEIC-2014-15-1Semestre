@@ -11,12 +11,35 @@ Node::Node() {
 Node::Node(string ID,bool displaylist) {
 	this->displaylist = displaylist;
 	this->nodeID = nodeID;
+	this->displaylistGen = false;
+	this->dlID = NULL;
 	glPushMatrix();
 	glLoadIdentity();
 	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
 	glPopMatrix();
-
 }
+
+GLuint Node::getdlID() {
+	return dlID;
+}
+
+void Node::setdlID(GLuint id) {
+	this->dlID = id;
+}
+
+
+bool Node::getDisplayList() {
+	return displaylist;
+}
+
+bool Node::getDisplayListGen() {
+	return displaylistGen;
+}
+
+void Node::setDisplayListGen(bool dlGen) {
+	this->displaylistGen = dlGen;
+}
+
 
 void Node::setApp(Appearance *p) {
 	this->app = p;

@@ -13,6 +13,7 @@ using namespace std;
 
 class Node {
 	bool displaylist;
+	bool displaylistGen;
 	string nodeID;
 	vector<string> children;
 	vector<Node*> nodeChilds;
@@ -20,11 +21,17 @@ class Node {
 	float transforms[16];
 	Appearance * app;
 	Animation * anim;
+	GLuint dlID;
 	
 
 public:
 	Node();
 	Node(string ID,bool displaylist);
+	GLuint getdlID();
+	void setdlID(GLuint id);
+	bool getDisplayList();
+	bool getDisplayListGen();
+	void setDisplayListGen(bool dlGen);
 	void setApp(Appearance *p);
 	void setAnim(Animation *a);
 	void addPrimitive(Primitives* p);
