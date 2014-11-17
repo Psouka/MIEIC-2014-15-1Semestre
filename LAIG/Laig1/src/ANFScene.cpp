@@ -45,10 +45,10 @@ ANFScene::ANFScene(char *filename): CGFscene() {
 	printf("\n\n[TEXTURAS] DONE\n");
 	this->parseAppearences();
 	printf("\n\n[APPEARENCES] DONE\n\n");
-	this->parseGraph();
-	printf("\n\n[GRAPH] DONE\n\n");
 	this->parseAnimations();
 	printf("\n\n[ANIMATIONS] DONE\n\n");
+	this->parseGraph();
+	printf("\n\n[GRAPH] DONE\n\n");
 
 }
 
@@ -791,6 +791,7 @@ int ANFScene::parseAnimations() {
 				}
 
 				anim.push_back(new LinearAnimation(animID,span,controlPoint));
+				controlPoint.clear();
 
 			}
 
@@ -851,9 +852,10 @@ int ANFScene::parseGraph() {
 
 		Node *Nodetemp;
 		bool displaylist;
+		float order, partsU, partsV;
 		char *ValString, *ValString2, *ValString3;
 		float angle, x0,x1, x2, x3, y1, y2,y3,z1, z2, z3;
-		TiXmlElement *transformsElement;
+		TiXmlElement* transformsElement;
 		TiXmlElement* appearanceref;
 		TiXmlElement* animationref;
 		TiXmlElement* primitiveElement;
@@ -861,6 +863,10 @@ int ANFScene::parseGraph() {
 		TiXmlElement* pElement;
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
+		TiXmlElement* controlElement;
+		vector<vector <float>> controlPoint;
+		vector<float>controlPointAux;
+
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
 		{
@@ -892,7 +898,7 @@ int ANFScene::parseGraph() {
 					displaylist = false;
 			}
 			else
-				printf("\nID NODE ERROR");
+				displaylist = false;
 
 			Nodetemp = new Node(string(ValString),displaylist);
 
@@ -1128,8 +1134,33 @@ int ANFScene::parseGraph() {
 
 				else if (strcmp(pElement->Value(),"patch")==0)
 				{
-					ValString = (char *) pElement->Attribute("texture");
-					Nodetemp->addPrimitive(new Flag(findTexture(string(ValString))));
+					ValString = (char *) pElement->Attribute("compute");
+
+					if (pElement->QueryFloatAttribute("order",&order)==TIXML_SUCCESS && 
+						pElement->QueryFloatAttribute("partsU",&partsU)==TIXML_SUCCESS &&
+						pElement->QueryFloatAttribute("partsV",&partsV)==TIXML_SUCCESS)
+					{
+						printf("\n	Patch: Order %d, PartsU %d, PartsV &d, Compute %s",order,partsU,partsV,ValString);
+					}
+
+					controlElement = pElement->FirstChildElement("controlpoint");
+
+					while(controlElement)
+					{
+						if (controlElement->QueryFloatAttribute("x",&controlPointAux[0])==TIXML_SUCCESS && 
+							controlElement->QueryFloatAttribute("y",&controlPointAux[1])==TIXML_SUCCESS &&
+							controlElement->QueryFloatAttribute("z",&controlPointAux[2])==TIXML_SUCCESS)
+						{
+							printf("\n	Control Point: X:%f, Y:%f,Z:%f",controlPointAux[0],controlPointAux[1],controlPointAux[2]);
+						}
+
+						controlPoint.push_back(controlPointAux);
+						controlElement = controlElement->NextSiblingElement();
+					}
+					Nodetemp->addPrimitive(new Patch(order,partsU,partsV,string(ValString),controlPoint));
+
+					controlPointAux.clear();
+					controlPoint.clear();
 					printf("\n	Flag: %s",ValString);
 				}
 
@@ -1252,18 +1283,19 @@ void ANFScene::init() {
 
 	changeCamera();
 
+	printf("\nAQUI1\n");
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
-
+	printf("\nAQUI2\n");
 }
 
 void  ANFScene::FillChildren(Node* node) {
+
 	vector<Node*> nodes = getNodes(node->getChildren());
 	node->setChilds(nodes);
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		FillChildren(nodes[i]);
 	}
-
 
 }
 
@@ -1303,6 +1335,8 @@ void ANFScene:: display() {
 
 		lights[i]->updateL();
 	}
+
+
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
 
@@ -1311,7 +1345,6 @@ void ANFScene:: display() {
 }
 
 void ANFScene::process(Node* node,Appearance * app) {
-
 
 	if(node == NULL)
 	{
