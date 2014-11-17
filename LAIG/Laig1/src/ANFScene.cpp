@@ -1318,6 +1318,8 @@ void ANFScene::process(Node* node,Appearance * app) {
 					process(nodes[i],app);
 				}
 				glPopMatrix();
+
+				glEndList();
 			}
 		}
 		else {
