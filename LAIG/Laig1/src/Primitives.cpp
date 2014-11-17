@@ -211,7 +211,7 @@ Plane ::Plane(unsigned int p)
 void Plane ::draw(Texture* t){
 }
 
-Patch ::Patch(int o, int pU,int pV, string c, vector<float*> controlPoint)
+Patch ::Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint)
 	:order(o),partsU(pU),partsV(pV),compute(c),controlPoint(controlPoint){}
 
 void Patch ::draw(Texture* t){

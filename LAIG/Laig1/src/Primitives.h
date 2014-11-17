@@ -84,9 +84,9 @@ public :
 class Patch : public Primitives{
 	int order, partsU,partsV;
 	string compute;
-	vector<float*> controlPoint;
+	vector<vector<float>> controlPoint;
 public:
-	Patch(int o, int pU,int pV, string c, vector<float*> controlPoint);
+	Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint);
 	void draw(Texture* t);
 };
 
