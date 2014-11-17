@@ -45,10 +45,10 @@ ANFScene::ANFScene(char *filename): CGFscene() {
 	printf("\n\n[TEXTURAS] DONE\n");
 	this->parseAppearences();
 	printf("\n\n[APPEARENCES] DONE\n\n");
-	this->parseGraph();
-	printf("\n\n[GRAPH] DONE\n\n");
 	this->parseAnimations();
 	printf("\n\n[ANIMATIONS] DONE\n\n");
+	this->parseGraph();
+	printf("\n\n[GRAPH] DONE\n\n");
 
 }
 
@@ -1135,7 +1135,7 @@ int ANFScene::parseGraph() {
 				else if (strcmp(pElement->Value(),"patch")==0)
 				{
 					ValString = (char *) pElement->Attribute("compute");
-					
+
 					if (pElement->QueryFloatAttribute("order",&order)==TIXML_SUCCESS && 
 						pElement->QueryFloatAttribute("partsU",&partsU)==TIXML_SUCCESS &&
 						pElement->QueryFloatAttribute("partsV",&partsV)==TIXML_SUCCESS)
@@ -1147,15 +1147,12 @@ int ANFScene::parseGraph() {
 
 					while(controlElement)
 					{
-					
-					
-					
 						if (controlElement->QueryFloatAttribute("x",&controlPointAux[0])==TIXML_SUCCESS && 
-						controlElement->QueryFloatAttribute("y",&controlPointAux[1])==TIXML_SUCCESS &&
-						controlElement->QueryFloatAttribute("z",&controlPointAux[2])==TIXML_SUCCESS)
-					{
-						printf("\n	Control Point: X:%f, Y:%f,Z:%f",controlPointAux[0],controlPointAux[1],controlPointAux[2]);
-					}
+							controlElement->QueryFloatAttribute("y",&controlPointAux[1])==TIXML_SUCCESS &&
+							controlElement->QueryFloatAttribute("z",&controlPointAux[2])==TIXML_SUCCESS)
+						{
+							printf("\n	Control Point: X:%f, Y:%f,Z:%f",controlPointAux[0],controlPointAux[1],controlPointAux[2]);
+						}
 
 						controlPoint.push_back(controlPointAux);
 						controlElement = controlElement->NextSiblingElement();
@@ -1286,8 +1283,9 @@ void ANFScene::init() {
 
 	changeCamera();
 
+	printf("\nAQUI1\n");
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
-
+	printf("\nAQUI2\n");
 }
 
 void  ANFScene::FillChildren(Node* node) {
@@ -1297,7 +1295,6 @@ void  ANFScene::FillChildren(Node* node) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		FillChildren(nodes[i]);
 	}
-
 
 }
 
@@ -1337,6 +1334,8 @@ void ANFScene:: display() {
 
 		lights[i]->updateL();
 	}
+
+
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
 
@@ -1345,7 +1344,6 @@ void ANFScene:: display() {
 }
 
 void ANFScene::process(Node* node,Appearance * app) {
-
 
 	if(node == NULL)
 	{

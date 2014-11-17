@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 		if(argc > 1)
 			app.setScene(Scene = new ANFScene(argv[1]));
 		else
-			app.setScene(Scene = new ANFScene("LAIG_TP1_ANF_T01_G02_v3.anf"));
+			app.setScene(Scene = new ANFScene("my_scene.anf"));
 
 		app.setInterface(new TPinterface(Scene));
 
