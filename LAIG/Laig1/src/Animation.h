@@ -8,7 +8,7 @@ using namespace std;
 
 class Animation {
 	string id;
-	float span;
+	float span, transX, transY, transZ;
 
 public:
 	Animation(string id,float span);
@@ -16,15 +16,19 @@ public:
 };
 
 class LinearAnimation : public Animation {
-	vector<float*> controlPoint;
+	vector<vector<float>> controlPoint;
 public:
-	LinearAnimation(string id, float span,vector<float*> controlPoint);
+	LinearAnimation(string id, float span, vector<vector<float>> controlPoint);
+	void update(unsigned long t);
+	void apply();
 };
 
 class CircularAnimation : public Animation {
 	float center[3], radius, startAng, rotAng;
 public:
 	CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng);
+	void update(unsigned long t);
+	void apply();
 };
 
 #endif

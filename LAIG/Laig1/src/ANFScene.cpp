@@ -725,7 +725,7 @@ int ANFScene::parseAnimations() {
 		char* valString = NULL;
 		char* animID, *type;
 		float span, controlPointsAux[3], center[3],radius,startang,rotang;
-		vector <float*> controlPoint;
+		vector<vector <float>> controlPoint;
 
 		while(aElement)
 		{
@@ -752,7 +752,7 @@ int ANFScene::parseAnimations() {
 			if(strcmp(type,"linear")==0)
 			{
 				controlElement=aElement->FirstChildElement("controlpoint");
-				vector<float *> vControPoint;
+				vector<float> vControPoint;
 
 				while(controlElement){
 
@@ -783,11 +783,14 @@ int ANFScene::parseAnimations() {
 					else
 						printf("\nERROR CONTROL YY\n");		
 
+					vControPoint.push_back(controlPointsAux[0]);
+					vControPoint.push_back(controlPointsAux[1]);
+					vControPoint.push_back(controlPointsAux[2]);
 
-					vControPoint.push_back(controlPointsAux);
+					controlPoint.push_back(vControPoint);
 				}
 
-				anim.push_back(new LinearAnimation(animID,span,vControPoint));
+				anim.push_back(new LinearAnimation(animID,span,controlPoint));
 
 			}
 
@@ -1334,7 +1337,6 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 			glMultMatrixf(node->getMatrix());
 
-			//processar texturas e aparencia
 			vector<string> temp  = node->getChildren();
 			unsigned int i = temp.size();
 
@@ -1370,7 +1372,6 @@ void ANFScene::process(Node* node,Appearance * app) {
 	else {
 		glMultMatrixf(node->getMatrix());
 
-		//processar texturas e aparencia
 		vector<string> temp  = node->getChildren();
 		unsigned int i = temp.size();
 
