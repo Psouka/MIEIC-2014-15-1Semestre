@@ -74,6 +74,9 @@ public:
 };
 
 class Plane : public Primitives{
+	static const GLfloat ctrlpoints[4][3];
+	static const GLfloat normals[4][3];
+	static const GLfloat textures[4][2];
 	unsigned int parts;
 public :
 	Plane(unsigned int p  = 10);

@@ -206,7 +206,40 @@ void Torus::draw(Texture* t)  {
 Plane ::Plane(unsigned int p)
 :Primitives(),parts(p){}
 
+const GLfloat Plane::ctrlpoints[4][3] = {
+										 { 0.5, 0.0, -0.5}, 
+										 { 0.5, 0.0, 0.5},
+										 {-0.5, 0.0, -0.5}, 
+										 {-0.5, 0.0, 0.5}};
+
+const GLfloat Plane::normals[4][3] = {{ 0.0, 0.0, 1.0},
+										 { 0.0, 0.0, 1.0}, 
+										 { 0.0, 0.0, 1.0},
+										 { 0.0, 0.0, 1.0} };
+
+const GLfloat Plane::textures[4][2] = {{ 0.0, 0.0},
+										 { 0.0, 1.0}, 
+										 { 1.0, 0.0},
+										 { 1.0, 1.0} };
+
 void Plane ::draw(Texture* t){
+	
+	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 2, 0.0, 1.0, 3*2, 2,  &ctrlpoints[0][0]);
+	
+	glMap2f(GL_MAP2_NORMAL,   0.0, 1.0, 3, 2, 0.0, 1.0, 3*2, 2,  &normals[0][0]);
+	
+	glMap2f(GL_MAP2_TEXTURE_COORD_2,  0.0, 1.0, 2, 2, 0.0, 1.0, 2*2, 2,  &textures[0][0]);
+
+	glEnable(GL_MAP2_VERTEX_3);
+	glEnable(GL_MAP2_NORMAL);
+	glEnable(GL_MAP2_COLOR_4);
+	glEnable(GL_MAP2_TEXTURE_COORD_2);
+
+	glMapGrid2f(parts, 0.0, 1.0, parts, 0.0, 1.0); 
+
+	glEvalMesh2(GL_FILL, 0, parts, 0, parts);
+	
+	glDisable(GL_AUTO_NORMAL);
 }
 
 Patch ::Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint)
