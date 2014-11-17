@@ -1289,6 +1289,7 @@ void ANFScene::init() {
 }
 
 void  ANFScene::FillChildren(Node* node) {
+
 	vector<Node*> nodes = getNodes(node->getChildren());
 	node->setChilds(nodes);
 
