@@ -898,7 +898,7 @@ int ANFScene::parseGraph() {
 					displaylist = false;
 			}
 			else
-				printf("\nID NODE ERROR");
+				displaylist = false;
 
 			Nodetemp = new Node(string(ValString),displaylist);
 

@@ -203,10 +203,8 @@ void Torus::draw(Texture* t)  {
 	}
 }
 
-Plane ::Plane(){}
-
 Plane ::Plane(unsigned int p)
-:parts(p){}
+:Primitives(),parts(p){}
 
 void Plane ::draw(Texture* t){
 }

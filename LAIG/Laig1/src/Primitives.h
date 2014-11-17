@@ -76,8 +76,7 @@ public:
 class Plane : public Primitives{
 	unsigned int parts;
 public :
-	Plane();
-	Plane(unsigned int p);
+	Plane(unsigned int p  = 10);
 	void draw(Texture* t);
 };
 
