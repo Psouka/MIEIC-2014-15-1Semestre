@@ -9,7 +9,6 @@ TPinterface::TPinterface(ANFScene* S): CGFinterface() {
 	Scene = S;
 }
 
-
 void TPinterface::initGUI() {
 	lights = Scene->getLights();
 	cameras = Scene->getCameras();
@@ -41,6 +40,11 @@ void TPinterface::initGUI() {
 	textureList->add_item (0, "Fill");
 	textureList->add_item (1, "Wireframe");
 	textureList->add_item (2, "Point");
+
+	GLUI_Panel * windPanel = addPanel("Wind: ", 1);
+	GLUI_Spinner* winrot =addSpinnerToPanel( windPanel,"",  2, &(Scene->globalWind), 4);
+
+
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -61,6 +65,10 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		break;
 	case 3:
 		printf("\nDraw Mode Changed");
+		break;
+	case 4:
+		printf("\nWind Changed");
+		Scene->setGlobalWind();
 		break;
 	}
 }

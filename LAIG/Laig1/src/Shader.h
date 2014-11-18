@@ -12,10 +12,9 @@ public:
 	virtual void unbind();
 
 	void setTime(float time);
-
+	int wind;
 protected:
 	int baseTextureLoc;
-	int wind;
 	int windLoc;
 	float deltaTime;
 	int deltaTimeLoc;
