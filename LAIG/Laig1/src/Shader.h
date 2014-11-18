@@ -5,10 +5,10 @@
 #include "CGFapplication.h"
 
 class Shader : public CGFshader{
-	friend class Flag;
+	CGFtexture *Texture;
 public:
-	Shader();
-	virtual void bind(CGFtexture *Texture);
+	Shader(CGFtexture *Texture);
+	virtual void bind();
 	virtual void unbind();
 
 	void setTime(float time);

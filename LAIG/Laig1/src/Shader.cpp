@@ -1,9 +1,10 @@
 #include <GL/glew.h>
 #include "Shader.h"
 
-Shader :: Shader(){
+Shader :: Shader(CGFtexture *Texture)
+:Texture(Texture){
 
-	init("FlagShader.vert", "FlagShader.frag");
+init("data/shader.vert", "data/shader.frag");
 
 	CGFshader::bind();
 
@@ -17,7 +18,7 @@ Shader :: Shader(){
 	// initialize in memory
 	this->startTime = 0.0;
 	this->deltaTime = 0.0;
-	this->wind = 10;
+	this->wind = 0;
 
 	windLoc = glGetUniformLocation(id(), "wind");
 	glUniform1f(windLoc, wind);
@@ -30,7 +31,7 @@ Shader :: Shader(){
 }
 
 
-void Shader::bind(CGFtexture *Texture)
+void Shader::bind()
 {
 	CGFshader::bind();
 
@@ -43,8 +44,6 @@ void Shader::bind(CGFtexture *Texture)
 
 	// apply/activate the texture you want, so that it is bound to GL_TEXTURE0
 	Texture->apply();
-
-
 }
 
 void Shader::unbind(){

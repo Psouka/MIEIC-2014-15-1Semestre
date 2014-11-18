@@ -6,8 +6,7 @@
 #define PI 3.14159265359
 
 
-Primitives::Primitives(): CGFobject() {
-
+Primitives::Primitives():CGFobject() {
 }
 
 Rectangle::Rectangle(float x1,float y1, float x2, float y2): Primitives() {
@@ -308,13 +307,13 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(CGFtexture * t)
-:Plane(60),texture(t),shader(new Shader()){
+:Plane(60),shader(new Shader(t)){
 
 }
 
 void Flag ::draw(Texture* t)
 {
-	this->shader->bind(texture);
+	this->shader->bind();
 
 	Plane::draw(t);
 
