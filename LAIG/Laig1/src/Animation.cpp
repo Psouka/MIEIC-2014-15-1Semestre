@@ -9,12 +9,12 @@ void normalize(vector<float> &vec) {
 }
 
 
-Animation:: Animation(string id,float span)
+Animation::Animation(string id,float span)
 	:id(id),span(span){
 
 }
 
-string Animation:: getId(){
+string Animation::getId(){
 	return id;
 }
 
@@ -92,7 +92,7 @@ void LinearAnimation::update(unsigned long t) {
 
 }
 
-CircularAnimation :: CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng)
+CircularAnimation::CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng)
 	:Animation(id,span),radius(radius),startAng(startAng),rotAng(rotAng) {
 
 		this->center[0] = center[0];
@@ -108,10 +108,8 @@ void CircularAnimation::apply() {
 
 }
 
-
-
 NoAnimation::NoAnimation()
 :Animation("",0){
 }
-void NoAnimation:: update(unsigned long t){}
-void NoAnimation:: apply(){}
+void NoAnimation::update(unsigned long t){}
+void NoAnimation::apply(){}

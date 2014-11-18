@@ -6,7 +6,7 @@
 
 using namespace std;
 
-class Texture : public CGFtexture {
+class Texture:public CGFtexture {
 
 	string id, file;
 

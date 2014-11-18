@@ -112,7 +112,7 @@ int ANFScene::parseCameras() {
 
 					if(initial && sscanf_s(initial,"%f %f %f",&target[0], &target[1], &target[2])==3)
 					{
-						printf("\n	target : (%f,%f,%f)", target[0], target[1], target[2]);
+						printf("\n	target:(%f,%f,%f)", target[0], target[1], target[2]);
 
 					}
 					else
@@ -241,7 +241,7 @@ int ANFScene::parseGlobals() {
 					drawshading = GL_SMOOTH;
 				printf("\n	Shading: %s", shading);
 
-				printf("\n	Background  : (%f,%f,%f,%f)", bg[0], bg[1], bg[2], bg[3]);
+				printf("\n	Background :(%f,%f,%f,%f)", bg[0], bg[1], bg[2], bg[3]);
 
 				ANFGlobals.updateDraw(drawmode,drawshading,bg);
 
@@ -492,7 +492,7 @@ int ANFScene::parseLights() {
 				ValString = (char *)lElement->Attribute("target");
 				if(ValString &&sscanf_s(ValString,"%f %f %f %f",&target[0], &target[1], &target[2])==3)
 				{
-					printf("\n	Target : %s",ValString);
+					printf("\n	Target:%s",ValString);
 				}
 				else
 					printf("LIGHTS TARGET ERROR");
@@ -500,8 +500,8 @@ int ANFScene::parseLights() {
 				if (lElement->QueryFloatAttribute("exponent",&exponent)==TIXML_SUCCESS && 
 					lElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
 				{
-					printf("\n	Angle : %f",angle);
-					printf("\n	Exponent : %f",exponent);
+					printf("\n	Angle:%f",angle);
+					printf("\n	Exponent:%f",exponent);
 				}
 				else
 					printf("LIGHTS angle/exponent ERROR");
@@ -1325,7 +1325,7 @@ void ANFScene::update(unsigned long t) {
 	}
 }
 
-void ANFScene:: display() {
+void ANFScene::display() {
 
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 

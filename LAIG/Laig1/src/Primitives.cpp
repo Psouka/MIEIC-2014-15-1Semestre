@@ -203,7 +203,7 @@ void Torus::draw(Texture* t)  {
 	}
 }
 
-Plane ::Plane(unsigned int p)
+Plane::Plane(unsigned int p)
 	:Primitives(),parts(p){}
 
 const GLfloat Plane::ctrlpoints[4][3] = {
@@ -222,7 +222,7 @@ const GLfloat Plane::textures[4][2] = {{ 0.0, 0.0},
 { 1.0, 0.0},
 { 1.0, 1.0} };
 
-void Plane ::draw(Texture* t){
+void Plane::draw(Texture* t){
 
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 2, 0.0, 1.0, 3*2, 2,  &ctrlpoints[0][0]);
 
@@ -244,7 +244,7 @@ void Plane ::draw(Texture* t){
 
 
 
-Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
+Patch::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 	:order(o),partsU(pU),partsV(pV){
 
 		if(c == "fill")
@@ -274,7 +274,7 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 
 }
 
-void Patch ::draw(Texture* t){
+void Patch::draw(Texture* t){
 
 	glFrontFace(GL_CW);
 	glEnable(GL_AUTO_NORMAL);
@@ -301,18 +301,18 @@ void Patch ::draw(Texture* t){
 	glDisable(GL_AUTO_NORMAL);
 }
 
-Vehicle ::Vehicle()
+Vehicle::Vehicle()
 {}
 
-void Vehicle ::draw(Texture* t){
+void Vehicle::draw(Texture* t){
 }
 
-Flag ::Flag(Texture * t)
+Flag::Flag(Texture * t)
 :Plane(100),texture(t),shader(new Shader()){
 
 }
 
-void Flag ::draw(Texture* t)
+void Flag::draw(Texture* t)
 {
 	this->shader->bind(texture);
 

@@ -17,7 +17,7 @@ Graph::graphMap Graph::getGraph() {
 	return this->graph;
 }
 
-void Graph:: addNode(Node* n) {
+void Graph::addNode(Node* n) {
 	graph[n->getID()] = n;
 }
 

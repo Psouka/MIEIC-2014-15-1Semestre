@@ -61,7 +61,7 @@ distribution.
    TiXmlString is an emulation of a subset of the std::string template.
    Its purpose is to allow compiling TinyXML on compilers with no or poor STL support.
    Only the member functions relevant to the TinyXML project have been implemented.
-   The buffer allocation is made by a simplistic power of 2 like mechanism : if we increase
+   The buffer allocation is made by a simplistic power of 2 like mechanism:if we increase
    a string and there's no more room, we allocate a buffer twice as big as we need.
 */
 class TiXmlString
@@ -75,26 +75,26 @@ class TiXmlString
 
 
 	// TiXmlString empty constructor
-	TiXmlString () : rep_(&nullrep_)
+	TiXmlString ():rep_(&nullrep_)
 	{
 	}
 
 	// TiXmlString copy constructor
-	TiXmlString ( const TiXmlString & copy) : rep_(0)
+	TiXmlString ( const TiXmlString & copy):rep_(0)
 	{
 		init(copy.length());
 		memcpy(start(), copy.data(), length());
 	}
 
 	// TiXmlString constructor, based on a string
-	TIXML_EXPLICIT TiXmlString ( const char * copy) : rep_(0)
+	TIXML_EXPLICIT TiXmlString ( const char * copy):rep_(0)
 	{
 		init( static_cast<size_type>( strlen(copy) ));
 		memcpy(start(), copy, length());
 	}
 
 	// TiXmlString constructor, based on a string
-	TIXML_EXPLICIT TiXmlString ( const char * str, size_type len) : rep_(0)
+	TIXML_EXPLICIT TiXmlString ( const char * str, size_type len):rep_(0)
 	{
 		init(len);
 		memcpy(start(), str, len);
@@ -295,7 +295,7 @@ TiXmlString operator + (const char* a, const TiXmlString & b);
    TiXmlOutStream is an emulation of std::ostream. It is based on TiXmlString.
    Only the operators that we need for TinyXML have been developped.
 */
-class TiXmlOutStream : public TiXmlString
+class TiXmlOutStream:public TiXmlString
 {
 public :
 

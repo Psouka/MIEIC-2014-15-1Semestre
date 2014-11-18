@@ -4,7 +4,7 @@
 #include "CGFscene.h"
 #include "Textures.h"
 
-class Appearance : public CGFappearance {
+class Appearance:public CGFappearance {
 	string id, textureref;
 public:
 	Texture *APPTexture;

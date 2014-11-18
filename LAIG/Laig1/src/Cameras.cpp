@@ -25,7 +25,7 @@ void PerspectiveCamera::updateProjectionMatrix (int width, int height) {
 }
 
 
-void OrthoCamera:: applyView() {
+void OrthoCamera::applyView() {
 	updateProjectionMatrix(glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 }
 

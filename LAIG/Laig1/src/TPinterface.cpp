@@ -1,10 +1,10 @@
 #include "TPinterface.h"
 
 
-TPinterface:: TPinterface(): CGFinterface() {
+TPinterface::TPinterface(): CGFinterface() {
 }
 
-TPinterface:: TPinterface(ANFScene* S): CGFinterface() {
+TPinterface::TPinterface(ANFScene* S): CGFinterface() {
 	testVar=0;
 	Scene = S;
 }

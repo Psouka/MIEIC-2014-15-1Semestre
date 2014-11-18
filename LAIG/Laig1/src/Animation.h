@@ -19,7 +19,7 @@ protected:
 	string id;
 };
 
-class LinearAnimation : public Animation {
+class LinearAnimation:public Animation {
 	vector<vector<float>> controlPoint;
 	float distance, rotation;
 	int idPC;
@@ -31,7 +31,7 @@ public:
 	void apply();
 };
 
-class CircularAnimation : public Animation {
+class CircularAnimation:public Animation {
 	float center[3], radius, startAng, rotAng;
 public:
 	CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng);
@@ -40,7 +40,7 @@ public:
 	void apply();
 };
 
-class NoAnimation : public Animation{
+class NoAnimation:public Animation{
 
 public:
 	NoAnimation();

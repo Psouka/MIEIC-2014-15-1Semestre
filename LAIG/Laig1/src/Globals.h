@@ -32,7 +32,7 @@ public:
 
 <!-- Parametros de culling -->
 <!-- Valores para cullface: "none", "back" , "front" ou "both" -->
-<!-- Valores para cullorder : "ccw" ou "cw" -->
+<!-- Valores para cullorder:"ccw" ou "cw" -->
 <culling face="ss" order="ss" />
 
 <!-- Parametros de iluminacao; seguem os parametros do OpenGL  -->

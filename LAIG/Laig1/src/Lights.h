@@ -24,7 +24,7 @@ public:
 };
 
 
-class SpotLight : public Light{
+class SpotLight:public Light{
 	float target[3];
 	float exponent;
 

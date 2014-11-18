@@ -66,7 +66,7 @@ void Node::addDescend(string n) {
 	children.push_back(n);
 }
 
-string Node:: getID() {
+string Node::getID() {
 	return nodeID;
 }
 
@@ -91,7 +91,7 @@ void Node::setChilds(vector<Node*> n) {
 	nodeChilds = n;
 }
 
-Appearance * Node:: getApp() {
+Appearance * Node::getApp() {
 	return app;
 }
 

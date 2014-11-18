@@ -10,7 +10,7 @@
 #include "Graph.h"
 #include "Animation.h"
 
-class ANFScene : public CGFscene {
+class ANFScene:public CGFscene {
 public:
 	//interface
 	int drawMode;
