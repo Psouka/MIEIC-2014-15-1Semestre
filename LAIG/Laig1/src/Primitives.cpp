@@ -307,8 +307,7 @@ Vehicle::Vehicle()
 void Vehicle::draw(Texture* t){
 }
 
-Flag::Flag(Texture * t)
-:Plane(100),texture(t),shader(new Shader()){
+Flag::Flag(CGFtexture * t):Plane(60),texture(t),shader(new Shader()){
 
 }
 

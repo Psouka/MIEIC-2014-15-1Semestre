@@ -112,11 +112,11 @@ public:
 	void update(unsigned long t){};
 };
 
-class Flag:public Plane{
-	Texture* texture;
+class Flag:public Plane {
+	CGFtexture* texture;
 	Shader* shader;
 public :
-	Flag(Texture * t);
+	Flag(CGFtexture * t);
 	void draw(Texture* t);
 	void update(unsigned long t);
 	void setWind(int wind);

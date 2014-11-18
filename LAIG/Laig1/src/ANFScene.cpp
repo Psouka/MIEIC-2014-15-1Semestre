@@ -1122,7 +1122,10 @@ int ANFScene::parseGraph() {
 				else if (strcmp(pElement->Value(),"flag")==0)
 				{
 					ValString = (char *) pElement->Attribute("texture");
-					Nodetemp->addPrimitive(new Flag(findTexture(string(ValString))));
+					Flag* Flagerino = new Flag(new CGFtexture(ValString));
+					
+					Nodetemp->addPrimitive(Flagerino);
+					Flags.push_back(Flagerino);
 					printf("\n	Flag: %s",ValString);
 				}
 
@@ -1317,12 +1320,16 @@ void ANFScene::changeCamera() {
 }
 
 void ANFScene::update(unsigned long t) {
+
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	vector<Node*> nodes = root->getNChilds();
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		nodes[i]->getAnim()->update(t);
 	}
+
+	for(unsigned int i = 0; i < Flags.size();i++)
+		Flags[i]->update(t);
 }
 
 void ANFScene::display() {
