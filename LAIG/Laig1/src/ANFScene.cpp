@@ -1380,6 +1380,9 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 			glMultMatrixf(node->getMatrix());
 
+			if(node->getAnim() != NULL) 
+				node->getAnim()->apply();
+
 			vector<string> temp  = node->getChildren();
 			unsigned int i = temp.size();
 
@@ -1405,8 +1408,9 @@ void ANFScene::process(Node* node,Appearance * app) {
 				}
 				glPopMatrix();
 
-				glEndList();
+				
 			}
+			glEndList();
 		}
 		else {
 			glCallList(node->getdlID());
