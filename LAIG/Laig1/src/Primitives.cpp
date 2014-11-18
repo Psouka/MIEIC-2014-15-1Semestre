@@ -242,6 +242,8 @@ void Plane ::draw(Texture* t){
 	glDisable(GL_AUTO_NORMAL);
 }
 
+
+
 Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 	:order(o),partsU(pU),partsV(pV){
 
@@ -252,38 +254,33 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 		else if(c == "line")
 			compute = GL_LINE;
 
+		this->texCoords = new float[controlPoint.size()/3 * 2];
+		float step = 1.0 / order;
+		for(int i = 0; i < controlPoint.size()/3; i++)
+		{
+			int offset = i * 2;
+			int sOffset = i % (order + 1);
+			int tOffset = i / (order + 1);
+			float s = sOffset * step;
+			float t = tOffset * step;
+			texCoords[offset] = s;
+			texCoords[offset+1] = t;
+		}
+
 		int floatpos = 0;
 		controlPoints = new GLfloat[controlPoint.size()];
 		for(unsigned int i = 0; i < controlPoint.size(); i++,floatpos++)
 			controlPoints[floatpos] = controlPoint[i];
+
 }
 
 void Patch ::draw(Texture* t){
 
 	glFrontFace(GL_CW);
 	glEnable(GL_AUTO_NORMAL);
-	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order+1, 0.0, 1.0, 3*(order+1), order+1,  &controlPoints[0]);
+	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order+1, 0.0, 1.0, 3*(order+1), order+1,  &controlPoints[0]);	
 
-	GLfloat* text;
-
-	if(order==1){
-		GLfloat tmp[4][2] = {   {0.0, 1}, {1,1}, 
-		{0.0, 0.0}, {1, 0.0}};
-		text = *tmp;
-	}else if(order==2){
-		GLfloat tmp[9][2] = {	{0.0,1},	{1/2, 1},	{1,1},
-		{0.0,1/2},	{1/2, 1/2},	{1, 1/2},
-		{0.0,0.0},	{1/2,0.0},	{1,0.0}};
-		text = *tmp;
-	}else if(order==3){
-		GLfloat tmp[16][2] = {	{0.0,1},	{1/3, 1},	{2*1/3,1},		{1,1},
-		{0.0,2*1/3},{1/3,2*1/3},{2*1/3,2*1/3},	{1,2*1/3},
-		{0.0,1/3},	{1/3,1/3},	{2*1/3,1/3},	{1,1/3},
-		{0.0,0.0},	{1/3,0.0},	{2*1/3,0.0},	{1,0.0}};
-		text = *tmp;
-	}
-
-	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, (order+1), 0.0, 1.0, (order+1)*2, (order+1), &text[0]);
+	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, (order+1), 0.0, 1.0, (order+1)*2, (order+1), &texCoords[0]);
 
 	// os interpoladores activam-se:
 	glEnable(GL_MAP2_VERTEX_3);
