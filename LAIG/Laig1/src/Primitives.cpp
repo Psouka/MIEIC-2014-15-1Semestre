@@ -308,8 +308,9 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(Texture * t)
-	:Plane(),texture(t)
-{}
+:Plane(100),texture(t){
+
+}
 
 void Flag ::draw(Texture* t){
 }
