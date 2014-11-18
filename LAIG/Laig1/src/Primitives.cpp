@@ -260,18 +260,48 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 
 void Patch ::draw(Texture* t){
 
-	glEnable(GL_MAP2_VERTEX_3);
-	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order,  0.0, 1.0, 3 * order, order,controlPoints);
-
+	glFrontFace(GL_CW);
 	glEnable(GL_AUTO_NORMAL);
+	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order+1, 0.0, 1.0, 3*(order+1), order+1,  &controlPoints[0]);
+
+	GLfloat* text;
+
+	if(order==1){
+		GLfloat tmp[4][2] = {   {0.0, 1}, {1,1}, 
+		{0.0, 0.0}, {1, 0.0}};
+		text = *tmp;
+	}else if(order==2){
+		GLfloat tmp[9][2] = {	{0.0,1},	{1/2, 1},	{1,1},
+		{0.0,1/2},	{1/2, 1/2},	{1, 1/2},
+		{0.0,0.0},	{1/2,0.0},	{1,0.0}};
+		text = *tmp;
+	}else if(order==3){
+		GLfloat tmp[16][2] = {	{0.0,1},	{1/3, 1},	{2*1/3,1},		{1,1},
+		{0.0,2*1/3},{1/3,2*1/3},{2*1/3,2*1/3},	{1,2*1/3},
+		{0.0,1/3},	{1/3,1/3},	{2*1/3,1/3},	{1,1/3},
+		{0.0,0.0},	{1/3,0.0},	{2*1/3,0.0},	{1,0.0}};
+		text = *tmp;
+	}
+
+	glMap2f(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, 2, (order+1), 0.0, 1.0, (order+1)*2, (order+1), &text[0]);
+
+	// os interpoladores activam-se:
+	glEnable(GL_MAP2_VERTEX_3);
+	glEnable(GL_MAP2_NORMAL);
 	glEnable(GL_MAP2_TEXTURE_COORD_2);
-	glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0); 
-	glShadeModel(GL_SMOOTH);
-	glEnable(GL_LIGHTING);
 
-	glEvalMesh2(compute, 0, this->partsU, 0, this->partsV);
+	// para este conjunto de interpoladores:
+	//    na direccao U, serao efectuadas divisoes em 40 passos
+	//        quando a variável U varia de 0 a 1
+	//    na direccao V, serao efectuadas divisoes em 60 passos
+	//        quando a variável U varia de 0 a 1
+	glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 
-	glDisable(GL_MAP2_VERTEX_3);
+	glShadeModel(GL_SMOOTH); 
+
+	glEvalMesh2(compute, 0, partsU, 0, partsV);
+
+	glDisable(GL_AUTO_NORMAL);
 }
 
 Vehicle ::Vehicle()

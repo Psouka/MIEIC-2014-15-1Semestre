@@ -89,6 +89,7 @@ class Patch : public Primitives{
 	int order, partsU,partsV;
 	GLenum compute;
 	float* controlPoints;
+	float* texCoords;
 public:
 	Patch(int o, int pU,int pV, string c, vector<float> controlPoint);
 	void draw(Texture* t);
