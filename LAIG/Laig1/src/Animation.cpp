@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+# define PI 3.14159265358979323846
+
 void normalize(vector<float> &vec) {
 	float normal = sqrtf(pow(vec[0], 2) + pow(vec[1], 2) + pow(vec[2], 2));
 
@@ -7,7 +9,6 @@ void normalize(vector<float> &vec) {
 		vec[i] = vec[i] / normal;
 	}
 }
-
 
 Animation::Animation(string id,float span)
 	:id(id),span(span){
@@ -33,62 +34,68 @@ LinearAnimation::LinearAnimation(string id, float span, vector<vector<float>> co
 		this->transY = this->controlPoint[this->idPC][0];
 		this->transZ = this->controlPoint[this->idPC][0];
 
+		this->stop = false;
+
 }
 
 void LinearAnimation::apply() {
-	glRotated(rotation, 0, 1, 0);
-	glTranslated(this->transX, this->transY, this->transZ);
+	if(!stop) {
+		glRotatef(rotation, 0, 1, 0);
+		glTranslatef(this->transX, this->transY, this->transZ);
+	}
 }
 
 void LinearAnimation::update(unsigned long t) {
 
-	//vector da deslocação
-	vector<float> temp;
-	temp.push_back(controlPoint[idPC+1][0] - controlPoint[idPC][0]);
-	temp.push_back(controlPoint[idPC+1][1] - controlPoint[idPC][1]);
-	temp.push_back(controlPoint[idPC+1][2] - controlPoint[idPC][2]);
-	
-	//calcular o angulo em relação ao eixo dos yy
+	if(!stop) {
+		//vector da deslocação
+		vector<float> temp;
+		temp.push_back(controlPoint[idPC+1][0] - controlPoint[idPC][0]);
+		temp.push_back(controlPoint[idPC+1][1] - controlPoint[idPC][1]);
+		temp.push_back(controlPoint[idPC+1][2] - controlPoint[idPC][2]);
 
-	float prodEsc = temp[0] * 0 + temp[2] * 1;
-	float norma = sqrtf(pow(temp[0], 2) + pow(temp[2], 2));
-	rotation = acos(prodEsc/norma);
+		//calcular o angulo em relação ao eixo dos yy
 
-	//calcular a velocidade 
-	unsigned long elapsed = t - time;
+		float prodEsc = temp[0] * 0 + temp[2] * 1;
+		float norma = sqrtf(pow(temp[0], 2) + pow(temp[2], 2));
+		rotation = acos(prodEsc/norma);
 
-	float vel = (distance/(span*1000))*(elapsed);
+		//calcular a velocidade 
+		unsigned long elapsed = t - time;
 
-	normalize(temp);
+		float vel = (distance/(span*1000))*(elapsed);
 
-	//posição por unidade de tempo
-	for(unsigned i = 0; i < temp.size(); i++) {
-		temp[i] = temp[i] * vel;
+		normalize(temp);
+
+		//posição por unidade de tempo
+		for(unsigned i = 0; i < temp.size(); i++) {
+			temp[i] = temp[i] * vel;
+		}
+
+		//se passar do ponto de controlo ignora o resto do incremento
+		if(abs((transX + temp[0]) > abs(controlPoint[idPC+1][0])) ||
+			abs((transX + temp[1]) > abs(controlPoint[idPC+1][1])) ||
+			abs((transX + temp[2]) > abs(controlPoint[idPC+1][2]))) {
+				transX = controlPoint[idPC+1][0];
+				transY = controlPoint[idPC+1][1];
+				transZ = controlPoint[idPC+1][2];
+		}
+		else { //incremento da translacção
+			transX = transX + temp[0];
+			transY = transY + temp[1];
+			transZ = transZ + temp[2];
+		}
+
+		if(transX == controlPoint[idPC+1][0] && transY == controlPoint[idPC+1][1] && transZ == controlPoint[idPC+1][2]) 
+			idPC++;
+
+		if(idPC == controlPoint.size() -1) {
+			stop = true;
+		}
+
+		//actualizar o tempo
+		time = t;
 	}
-
-	//se passar do ponto de controlo ignora o resto do incremento
-	if(abs((transX + temp[0]) > abs(controlPoint[idPC+1][0])) ||
-		abs((transX + temp[1]) > abs(controlPoint[idPC+1][1])) ||
-		abs((transX + temp[2]) > abs(controlPoint[idPC+1][2]))) {
-			transX = controlPoint[idPC+1][0];
-			transY = controlPoint[idPC+1][1];
-			transZ = controlPoint[idPC+1][2];
-	}
-	else { //incremento da translacção
-		transX = transX + temp[0];
-		transY = transY + temp[1];
-		transZ = transZ + temp[2];
-	}
-
-	if(transX == controlPoint[idPC+1][0] && transY == controlPoint[idPC+1][1] && transZ == controlPoint[idPC+1][2]) 
-		idPC++;
-
-	if(idPC == controlPoint.size() -1) {
-		idPC = 0;
-	}
-
-	//actualizar o tempo
-	time = t;
 
 }
 
@@ -98,18 +105,46 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 		this->center[0] = center[0];
 		this->center[1] = center[1];
 		this->center[2] = center[2];
+
+		this->transX = center[0] + this->radius*cos(this->startAng);
+		this->transY = center[1] + 0;
+		this->transZ = center[2] + this->radius*sin(this->startAng);
+
+		this->distance = 2*PI*this->radius;
+
+		this->velAng = this->distance / (this->span*1000);
+
+		this->stop = false;
 }
 
 void CircularAnimation::update(unsigned long t) {
+	if(!stop) {
 
+		unsigned long elapsed = t - time;
+		rotation += velAng * elapsed;
+
+		float angle = (startAng + rotation) * PI/180;
+
+		transX = center[0] + radius*cos(angle);
+		transY = center[1] + 0;
+		transZ = center[2] + radius*sin(angle);
+
+		time = t;
+
+		if(abs(rotation) >= abs(startAng + rotation)) {
+			stop = true;
+		}
+	}
 }
 
 void CircularAnimation::apply() {
 
+	glRotatef(rotation, 0, 1, 0);
+	glTranslatef(this->transX, this->transY, this->transZ);
 }
 
 NoAnimation::NoAnimation()
-:Animation("",0){
+	:Animation("",0){
 }
 void NoAnimation::update(unsigned long t){}
 void NoAnimation::apply(){}
