@@ -267,10 +267,10 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 			texCoords[offset+1] = t;
 		}
 
-		int floatpos = 0;
+
 		controlPoints = new GLfloat[controlPoint.size()];
-		for(unsigned int i = 0; i < controlPoint.size(); i++,floatpos++)
-			controlPoints[floatpos] = controlPoint[i];
+		for(unsigned int i = 0; i < controlPoint.size(); i++)
+			controlPoints[i] = controlPoint[i];
 
 }
 
@@ -308,9 +308,27 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(Texture * t)
-:Plane(100),texture(t){
+:Plane(100),texture(t),shader(new Shader()){
 
 }
 
-void Flag ::draw(Texture* t){
+void Flag ::draw(Texture* t)
+{
+	this->shader->bind(texture);
+
+	Plane::draw(t);
+
+	this->shader->unbind();
+}
+
+void Flag::update(unsigned long t)
+{
+	float time_s = t * 0.001; 
+
+	this->shader->setTime(time_s);
+}
+
+void Flag::setWind(int wind)
+{
+	this->shader->wind = wind;
 }
