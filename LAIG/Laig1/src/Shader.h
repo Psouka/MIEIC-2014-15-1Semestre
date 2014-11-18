@@ -4,7 +4,7 @@
 #include "CGFshader.h"
 #include "CGFapplication.h"
 
-class Shader : public CGFshader {
+class Shader : public CGFshader{
 	friend class Flag;
 public:
 	Shader();
