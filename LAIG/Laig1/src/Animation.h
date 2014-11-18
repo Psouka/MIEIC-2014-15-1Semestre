@@ -19,6 +19,7 @@ class LinearAnimation : public Animation {
 	vector<vector<float>> controlPoint;
 public:
 	LinearAnimation(string id, float span, vector<vector<float>> controlPoint);
+	void init(unsigned long t);
 	void update(unsigned long t);
 	void apply();
 };
@@ -27,6 +28,7 @@ class CircularAnimation : public Animation {
 	float center[3], radius, startAng, rotAng;
 public:
 	CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng);
+	void init(unsigned long t);
 	void update(unsigned long t);
 	void apply();
 };

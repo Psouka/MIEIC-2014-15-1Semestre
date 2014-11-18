@@ -149,7 +149,7 @@ void Sphere::draw(Texture* t) {
 	gluQuadricTexture(qObj, GL_TRUE);
 	glEnable(GL_TEXTURE_2D);
 	if(t != NULL)
-	glBindTexture(GL_TEXTURE_2D, t->getTexId());
+		glBindTexture(GL_TEXTURE_2D, t->getTexId());
 	gluSphere(qObj, radius, slices, stacks);
 }
 
@@ -204,30 +204,30 @@ void Torus::draw(Texture* t)  {
 }
 
 Plane ::Plane(unsigned int p)
-:Primitives(),parts(p){}
+	:Primitives(),parts(p){}
 
 const GLfloat Plane::ctrlpoints[4][3] = {
-										 { 0.5, 0.0, -0.5}, 
-										 { 0.5, 0.0, 0.5},
-										 {-0.5, 0.0, -0.5}, 
-										 {-0.5, 0.0, 0.5}};
+	{ 0.5, 0.0, -0.5}, 
+	{ 0.5, 0.0, 0.5},
+	{-0.5, 0.0, -0.5}, 
+	{-0.5, 0.0, 0.5}};
 
 const GLfloat Plane::normals[4][3] = {{ 0.0, 0.0, 1.0},
-										 { 0.0, 0.0, 1.0}, 
-										 { 0.0, 0.0, 1.0},
-										 { 0.0, 0.0, 1.0} };
+{ 0.0, 0.0, 1.0}, 
+{ 0.0, 0.0, 1.0},
+{ 0.0, 0.0, 1.0} };
 
 const GLfloat Plane::textures[4][2] = {{ 0.0, 0.0},
-										 { 0.0, 1.0}, 
-										 { 1.0, 0.0},
-										 { 1.0, 1.0} };
+{ 0.0, 1.0}, 
+{ 1.0, 0.0},
+{ 1.0, 1.0} };
 
 void Plane ::draw(Texture* t){
-	
+
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, 2, 0.0, 1.0, 3*2, 2,  &ctrlpoints[0][0]);
-	
+
 	glMap2f(GL_MAP2_NORMAL,   0.0, 1.0, 3, 2, 0.0, 1.0, 3*2, 2,  &normals[0][0]);
-	
+
 	glMap2f(GL_MAP2_TEXTURE_COORD_2,  0.0, 1.0, 2, 2, 0.0, 1.0, 2*2, 2,  &textures[0][0]);
 
 	glEnable(GL_MAP2_VERTEX_3);
@@ -238,11 +238,11 @@ void Plane ::draw(Texture* t){
 	glMapGrid2f(parts, 0.0, 1.0, parts, 0.0, 1.0); 
 
 	glEvalMesh2(GL_FILL, 0, parts, 0, parts);
-	
+
 	glDisable(GL_AUTO_NORMAL);
 }
 
-Patch ::Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint)
+Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 	:order(o),partsU(pU),partsV(pV){
 
 		if(c == "fill")
@@ -253,22 +253,21 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint
 			compute = GL_LINE;
 
 		int floatpos = 0;
-		for(int i = 0; i < controlPoint.size(); i++)
-			for(int a = 0; a < controlPoint[i].size(); a++,floatpos++)
-				controlPoints[floatpos] = controlPoint[i][a];
+		for(unsigned int i = 0; i < controlPoint.size(); i++,floatpos++)
+			controlPoints[floatpos] = controlPoint[i];
 }
 
 void Patch ::draw(Texture* t){
 
 	glEnable(GL_MAP2_VERTEX_3);
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order,  0.0, 1.0, 3 * order, order,controlPoints);
-	
+
 	glEnable(GL_AUTO_NORMAL);
 
 	glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0); 
 
 	glEnable(GL_LIGHTING);
-	
+
 	glEvalMesh2(compute, 0, this->partsU, 0, this->partsV);
 
 	glDisable(GL_MAP2_VERTEX_3);
@@ -281,7 +280,7 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(Texture * t)
-:Plane(),texture(t)
+	:Plane(),texture(t)
 {}
 
 void Flag ::draw(Texture* t){

@@ -90,7 +90,7 @@ class Patch : public Primitives{
 	GLenum compute;
 	float* controlPoints;
 public:
-	Patch(int o, int pU,int pV, string c, vector<vector<float>> controlPoint);
+	Patch(int o, int pU,int pV, string c, vector<float> controlPoint);
 	void draw(Texture* t);
 };
 

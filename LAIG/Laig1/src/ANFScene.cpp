@@ -864,8 +864,8 @@ int ANFScene::parseGraph() {
 		TiXmlElement* transformElement;
 		TiXmlElement* dElement;
 		TiXmlElement* controlElement;
-		vector<vector <float>> controlPoint;
-		vector<float>controlPointAux;
+		vector<float> controlPoint;
+		vector<float>controlPointAux(3);
 
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
@@ -1154,7 +1154,9 @@ int ANFScene::parseGraph() {
 							printf("\n	Control Point: X:%f, Y:%f,Z:%f",controlPointAux[0],controlPointAux[1],controlPointAux[2]);
 						}
 
-						controlPoint.push_back(controlPointAux);
+						controlPoint.push_back(controlPointAux[0]);
+						controlPoint.push_back(controlPointAux[1]);
+						controlPoint.push_back(controlPointAux[2]);
 						controlElement = controlElement->NextSiblingElement();
 					}
 					Nodetemp->addPrimitive(new Patch(order,partsU,partsV,string(ValString),controlPoint));
