@@ -23,6 +23,11 @@ GLuint Node::getdlID() {
 	return dlID;
 }
 
+Animation* Node::getAnim() {
+	return anim;
+}
+
+
 void Node::setdlID(GLuint id) {
 	this->dlID = id;
 }

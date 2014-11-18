@@ -292,9 +292,6 @@ int ANFScene::parseGlobals() {
 				printf("Error parsing culling\n");
 				return -1;
 			}
-
-
-
 		}
 
 
@@ -1285,12 +1282,12 @@ void ANFScene::init() {
 
 	changeCamera();
 
-	printf("\nAQUI1\n");
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
-	printf("\nAQUI2\n");
+
+	setUpdatePeriod(100);
 }
 
-void  ANFScene::FillChildren(Node* node) {
+void ANFScene::FillChildren(Node* node) {
 
 	vector<Node*> nodes = getNodes(node->getChildren());
 	node->setChilds(nodes);
@@ -1315,6 +1312,15 @@ void ANFScene::changeCamera() {
 		initCameras();
 	else
 		CGFscene::activeCamera = cameras[(Active_Camera -1)];
+}
+
+void ANFScene::update(unsigned long t) {
+	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
+	vector<Node*> nodes = root->getNChilds();
+
+	for(unsigned int i = 0; i < nodes.size(); i++) {
+		nodes[i]->getAnim()->update(t);
+	}
 }
 
 void ANFScene:: display() {
@@ -1406,6 +1412,9 @@ void ANFScene::process(Node* node,Appearance * app) {
 	}
 	else {
 		glMultMatrixf(node->getMatrix());
+
+		if(node->getAnim() != NULL) 
+			node->getAnim()->apply();
 
 		vector<string> temp  = node->getChildren();
 		unsigned int i = temp.size();

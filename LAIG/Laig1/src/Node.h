@@ -47,6 +47,7 @@ public:
 	vector<Node*> getNChilds();
 	void setChilds(vector<Node*> n);
 	Appearance * getApp();
+	Animation * getAnim();
 };
 
 #endif

@@ -7,16 +7,23 @@
 using namespace std;
 
 class Animation {
-	string id;
-	float span, transX, transY, transZ;
 
 public:
 	Animation(string id,float span);
 	string getId();
+	virtual void update(unsigned long t) = 0;
+	virtual void apply() = 0;
+
+protected:
+	float transX, transY, transZ, time, span;
+	string id;
 };
 
 class LinearAnimation : public Animation {
 	vector<vector<float>> controlPoint;
+	float distance, rotation;
+	int idPC;
+
 public:
 	LinearAnimation(string id, float span, vector<vector<float>> controlPoint);
 	void init(unsigned long t);

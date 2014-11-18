@@ -32,6 +32,7 @@ public:
 	vector<Node*> getNodes(vector<string> n);
 	void init();
 	void display();
+	void update(unsigned long t);
 	void process(Node* node,Appearance * app);
 	void FillChildren(Node* node);
 	vector <Light*> getLights();
