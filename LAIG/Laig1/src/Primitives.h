@@ -81,7 +81,7 @@ public:
 	void update(unsigned long t){};
 };
 
-class Plane:public Primitives{
+class Plane : public Primitives{
 	static const GLfloat ctrlpoints[4][3];
 	static const GLfloat normals[4][3];
 	static const GLfloat textures[4][2];
@@ -94,7 +94,7 @@ public :
 
 
 
-class Patch:public Primitives{
+class Patch : public Primitives{
 	int order, partsU,partsV;
 	GLenum compute;
 	float* controlPoints;
@@ -105,14 +105,14 @@ public:
 	void update(unsigned long t){};
 };
 
-class Vehicle:public Primitives{
+class Vehicle : public Primitives{
 public:
 	Vehicle();
 	void draw(Texture* t);
 	void update(unsigned long t){};
 };
 
-class Flag:public Plane {
+class Flag : public Plane{
 	CGFtexture* texture;
 	Shader* shader;
 public :

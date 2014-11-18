@@ -1,23 +1,15 @@
-﻿Build started 16/11/2014 00:17:49.
-     1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Rebuild target(s)).
-     1>_PrepareForClean:
-         Deleting file "Debug\Laig1.lastbuildstate".
-       InitializeBuildStatus:
-         Creating "Debug\Laig1.unsuccessfulbuild" because "AlwaysCreate" was specified.
+﻿Build started 18/11/2014 22:47:13.
+     1>Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Touching "Debug\Laig1.unsuccessfulbuild".
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\Programas\CGRA_Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp ..\src\Animation.cpp ..\src\Appearance.cpp ..\src\Cameras.cpp ..\src\Globals.cpp ..\src\Graph.cpp ..\src\Lights.cpp ..\src\main.cpp ..\src\Node.cpp ..\src\Primitives.cpp ..\src\Textures.cpp ..\src\tinystr.cpp ..\src\TPinterface.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ID:\Programas\CGRA_Libraries\include /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\ANFScene.cpp ..\src\Graph.cpp ..\src\Node.cpp ..\src\Primitives.cpp ..\src\Shader.cpp ..\src\TPinterface.cpp ..\src\main.cpp
+         main.cpp
          TPinterface.cpp
-         tinystr.cpp
-         Textures.cpp
+         Shader.cpp
          Primitives.cpp
          Node.cpp
-         main.cpp
-         Lights.cpp
          Graph.cpp
-         Globals.cpp
-         Cameras.cpp
-         Appearance.cpp
-         Animation.cpp
          ANFScene.cpp
          Generating Code...
        Link:
@@ -31,6 +23,7 @@
          Debug\main.obj
          Debug\Node.obj
          Debug\Primitives.obj
+         Debug\Shader.obj
          Debug\Textures.obj
          Debug\tinystr.obj
          Debug\TPinterface.obj
@@ -43,6 +36,7 @@
      1>CGFlibd.lib(CGFlight.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFlight.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
      1>CGFlibd.lib(CGFobject.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFobject.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
      1>CGFlibd.lib(CGFscene.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFscene.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
+     1>CGFlibd.lib(CGFshader.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFshader.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
      1>CGFlibd.lib(CGFtexture.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(CGFtexture.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
      1>CGFlibd.lib(imagetools.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(imagetools.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
      1>CGFlibd.lib(stb_image.obj) : warning LNK4099: PDB 'vc110.pdb' was not found with 'CGFlibd.lib(stb_image.obj)' or at 'D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Debug\vc110.pdb'; linking object as if no debug info
@@ -53,8 +47,8 @@
        FinalizeBuildStatus:
          Deleting file "Debug\Laig1.unsuccessfulbuild".
          Touching "Debug\Laig1.lastbuildstate".
-     1>Done Building Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" (Rebuild target(s)).
+     1>Done Building Project "D:\Workspace-GitHub\MIEIC-2014-15-1Semestre\LAIG\Laig1\Laig1\Laig1.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:08.47
+Time Elapsed 00:00:05.89

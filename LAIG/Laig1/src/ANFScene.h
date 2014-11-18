@@ -13,6 +13,7 @@
 class ANFScene:public CGFscene {
 public:
 	//interface
+	int globalWind;
 	int drawMode;
 	int Active_Camera;
 	ANFScene() {}
@@ -38,6 +39,7 @@ public:
 	vector <Light*> getLights();
 	vector <Camera*> getCameras();
 	void changeCamera();
+	void setGlobalWind();
 
 protected:
 	vector <Camera*> cameras;

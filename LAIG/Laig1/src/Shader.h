@@ -4,7 +4,7 @@
 #include "CGFshader.h"
 #include "CGFapplication.h"
 
-class Shader : public CGFshader {
+class Shader : public CGFshader{
 	friend class Flag;
 public:
 	Shader();
@@ -12,10 +12,9 @@ public:
 	virtual void unbind();
 
 	void setTime(float time);
-
+	int wind;
 protected:
 	int baseTextureLoc;
-	int wind;
 	int windLoc;
 	float deltaTime;
 	int deltaTimeLoc;

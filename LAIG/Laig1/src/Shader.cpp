@@ -3,7 +3,7 @@
 
 Shader :: Shader(){
 
-	init("data/Shader.vert", "data/Shader.frag");
+	init("FlagShader.vert", "FlagShader.frag");
 
 	CGFshader::bind();
 
@@ -17,7 +17,7 @@ Shader :: Shader(){
 	// initialize in memory
 	this->startTime = 0.0;
 	this->deltaTime = 0.0;
-	this->wind = 5;
+	this->wind = 10;
 
 	windLoc = glGetUniformLocation(id(), "wind");
 	glUniform1f(windLoc, wind);
@@ -44,12 +44,6 @@ void Shader::bind(CGFtexture *Texture)
 	// apply/activate the texture you want, so that it is bound to GL_TEXTURE0
 	Texture->apply();
 
-	// do the same for other textures
-	//glActiveTexture(GL_TEXTURE1);
-
-	//secTexture->apply();
-
-	glActiveTexture(GL_TEXTURE0);
 
 }
 

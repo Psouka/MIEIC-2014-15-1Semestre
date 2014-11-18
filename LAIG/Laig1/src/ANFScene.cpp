@@ -1259,6 +1259,8 @@ void ANFScene::init() {
 
 	srand((time(NULL)));
 
+	globalWind = 10;
+
 	if(ANFGlobals.enabled)
 		glEnable(GL_LIGHTING);
 	else
@@ -1319,6 +1321,10 @@ void ANFScene::changeCamera() {
 		CGFscene::activeCamera = cameras[(Active_Camera -1)];
 }
 
+void ANFScene::setGlobalWind(){
+	for(unsigned int i = 0; i <Flags.size(); i++)
+		Flags[i]->setWind(globalWind);
+}
 void ANFScene::update(unsigned long t) {
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];

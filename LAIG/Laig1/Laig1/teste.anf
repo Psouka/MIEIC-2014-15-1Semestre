@@ -45,54 +45,6 @@
             <component type="diffuse" value="1 1 1 1" />
             <component type="specular" value="1 1 1 1" />
         </appearance>
-
-        <appearance id="ground" shininess="20" textureref="ground" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0.5 0.5 0.5 1" />
-            <component type="specular" value="0 0 0 1" />
-        </appearance>
-
-        <appearance id="wood" shininess="10" textureref="pine-tree-bark" >
-               <component type="ambient" value="0 0 0 1" />
-               <component type="diffuse" value="0.55 0.3 0.14 1" />
-               <component type="specular" value="0.55 0.3 0.14 1" />
-        </appearance>
-
-        <appearance id="leaves" shininess="10" textureref="pine-tree-needle" >
-               <component type="ambient" value="0 0 0 1" />
-               <component type="diffuse" value="0.36 0.58 0.06 1" />
-               <component type="specular" value="0.18 0.29 0.03 1" />
-        </appearance>
-
-        <appearance id="red-aluminum" shininess="120" textureref="aluminum" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0.8 0.1 0.1 1" />
-            <component type="specular" value="0.7 0.7 0.7 1" />
-        </appearance>
-
-        <appearance id="aluminum" shininess="120" textureref="aluminum" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0.8 0.8 0.8 1" />
-            <component type="specular" value="1 1 1 1" />
-        </appearance>
-
-        <appearance id="black-rubber" shininess="20" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0 0 0 1" />
-            <component type="specular" value="0.1 0.1 0.1 1" />
-        </appearance>
-
-        <appearance id="metal" shininess="120" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0.7 0.7 0.7 1" />
-            <component type="specular" value="1 1 1 1" />
-        </appearance>
-
-        <appearance id="airplane-propeller" shininess="120" textureref="airplane-propeller" >
-            <component type="ambient" value="0 0 0 1" />
-            <component type="diffuse" value="0.5 0.5 0.5 1" />
-            <component type="specular" value="1 1 1 1" />
-        </appearance>
     </appearances>
     
     <!-- bloco do grafo; "rootid" identifica o no de raiz -->
@@ -104,7 +56,7 @@
               <transform type="scale" factor="10 10 10" /> 
             </transforms>
 
-            <appearanceref id="ground" />
+            <appearanceref id="defaultAppearance" />
 
             <primitives>
               <!--  <plane parts="5" /> -->
@@ -121,10 +73,6 @@
           <controlpoint x="4.0" y="2.0" z="0.0" />
           <controlpoint x="4.0" y="4.0" z="0.0" />
           
-          <!--
-          <controlpoint x="8" y="2" z="0" />
-          <controlpoint x="10" y="0" z="0" />
-          <controlpoint x="10" y="2" z="0" />
 
           </patch>
           -->
