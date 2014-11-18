@@ -253,6 +253,7 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 			compute = GL_LINE;
 
 		int floatpos = 0;
+		controlPoints = new GLfloat[controlPoint.size()];
 		for(unsigned int i = 0; i < controlPoint.size(); i++,floatpos++)
 			controlPoints[floatpos] = controlPoint[i];
 }
