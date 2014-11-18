@@ -40,4 +40,12 @@ public:
 	void apply();
 };
 
+class NoAnimation : public Animation{
+
+public:
+	NoAnimation();
+	virtual void update(unsigned long t);
+	virtual void apply();
+};
+
 #endif

@@ -256,7 +256,7 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 
 		this->texCoords = new float[controlPoint.size()/3 * 2];
 		float step = 1.0 / order;
-		for(int i = 0; i < controlPoint.size()/3; i++)
+		for(unsigned int i = 0; i < controlPoint.size()/3; i++)
 		{
 			int offset = i * 2;
 			int sOffset = i % (order + 1);

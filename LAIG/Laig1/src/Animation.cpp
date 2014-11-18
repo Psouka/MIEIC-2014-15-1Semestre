@@ -84,7 +84,7 @@ void LinearAnimation::update(unsigned long t) {
 		idPC++;
 
 	if(idPC == controlPoint.size() -1) {
-		idPC == 0;
+		idPC = 0;
 	}
 
 	//actualizar o tempo
@@ -108,3 +108,10 @@ void CircularAnimation::apply() {
 
 }
 
+
+
+NoAnimation::NoAnimation()
+:Animation("",0){
+}
+void NoAnimation:: update(unsigned long t){}
+void NoAnimation:: apply(){}

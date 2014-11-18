@@ -972,6 +972,8 @@ int ANFScene::parseGraph() {
 				else
 					printf("ERROR PARSING ANIMATIONREF\n");
 			}
+			else
+				Nodetemp->setAnim(new NoAnimation());
 
 
 			if(appearanceref)
@@ -1208,7 +1210,7 @@ Animation* ANFScene::findAnimation(string id){
 			return anim[i];
 	}
 
-	return NULL;
+	return new NoAnimation();
 }
 
 Appearance* ANFScene::findApp(string id) {
