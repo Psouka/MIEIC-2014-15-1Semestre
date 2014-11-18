@@ -264,9 +264,9 @@ void Patch ::draw(Texture* t){
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order,  0.0, 1.0, 3 * order, order,controlPoints);
 
 	glEnable(GL_AUTO_NORMAL);
-
+	glEnable(GL_MAP2_TEXTURE_COORD_2);
 	glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0); 
-
+	glShadeModel(GL_SMOOTH);
 	glEnable(GL_LIGHTING);
 
 	glEvalMesh2(compute, 0, this->partsU, 0, this->partsV);

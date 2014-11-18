@@ -107,7 +107,26 @@
             <appearanceref id="ground" />
 
             <primitives>
-                <plane parts="5" />
+              <!--  <plane parts="5" /> -->
+               <patch order="2" partsU="10" partsV="10" compute="fill">
+          <controlpoint x="0.0" y="0.0" z="0.0" />
+          <controlpoint x="0.0" y="2.0" z="0.0" />
+          <controlpoint x="0.0" y="4.0" z="0.0" />
+          
+          <controlpoint x="2.0" y="0.0" z="2.0" />
+          <controlpoint x="2.0" y="2.0" z="4.0" />
+          <controlpoint x="2.0" y="4.0" z="2.0" />  
+          
+          <controlpoint x="4.0" y="0.0" z="0.0" />
+          <controlpoint x="4.0" y="2.0" z="0.0" />
+          <controlpoint x="4.0" y="4.0" z="0.0" />
+          
+          <!--
+          <controlpoint x="8" y="2" z="0" />
+          <controlpoint x="10" y="0" z="0" />
+          <controlpoint x="10" y="2" z="0" />
+          -->
+       </patch>
             </primitives>
 
             <descendants>
