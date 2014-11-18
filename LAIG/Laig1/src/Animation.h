@@ -15,27 +15,25 @@ public:
 	virtual void apply() = 0;
 
 protected:
-	float transX, transY, transZ, time, span;
+	float transX, transY, transZ, time, span, distance, rotation;
 	string id;
+	bool stop;
 };
 
 class LinearAnimation:public Animation {
 	vector<vector<float>> controlPoint;
-	float distance, rotation;
 	int idPC;
 
 public:
 	LinearAnimation(string id, float span, vector<vector<float>> controlPoint);
-	void init(unsigned long t);
 	void update(unsigned long t);
 	void apply();
 };
 
 class CircularAnimation:public Animation {
-	float center[3], radius, startAng, rotAng;
+	float center[3], radius, startAng, rotAng, velAng;
 public:
 	CircularAnimation(string id, float span, float* center, float radius, float startAng, float rotAng);
-	void init(unsigned long t);
 	void update(unsigned long t);
 	void apply();
 };
