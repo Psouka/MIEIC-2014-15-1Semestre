@@ -3,7 +3,7 @@
 
 Shader :: Shader(){
 
-	init("data/flagShader.vert", "data/flagShader.frag");
+	init("data/Shader.vert", "data/Shader.frag");
 
 	CGFshader::bind();
 
@@ -17,7 +17,7 @@ Shader :: Shader(){
 	// initialize in memory
 	this->startTime = 0.0;
 	this->deltaTime = 0.0;
-	this->wind = 0;
+	this->wind = 5;
 
 	windLoc = glGetUniformLocation(id(), "wind");
 	glUniform1f(windLoc, wind);

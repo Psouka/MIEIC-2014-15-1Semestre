@@ -45,6 +45,7 @@ protected:
 	vector <Texture*> textures;
 	vector <Appearance*> apps;
 	vector <Animation*> anim;
+	vector <Flag *> Flags;
 
 	Globals ANFGlobals;
 
