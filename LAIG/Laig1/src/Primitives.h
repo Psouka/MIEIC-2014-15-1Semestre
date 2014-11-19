@@ -98,6 +98,7 @@ class Patch : public Primitives{
 	float* controlPoints;
 	float* texCoords;
 public:
+	~Patch();
 	Patch(int o, int pU,int pV, string c, vector<float> controlPoint);
 	void draw(Texture* t);
 	void update(unsigned long t){};
@@ -114,6 +115,7 @@ class Flag : public Plane{
 	CGFtexture* texture;
 	Shader* shader;
 public :
+	~Flag();
 	Flag(CGFtexture * t);
 	void draw(Texture* t);
 	void update(unsigned long t);

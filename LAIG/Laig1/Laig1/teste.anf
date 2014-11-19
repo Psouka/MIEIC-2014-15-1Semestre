@@ -37,11 +37,11 @@
         </lights>
 
          <textures>       
-              <texture id="texture_floor" file="floor.jpg" texlength_s="1" texlength_t="1" />
+              <texture id="texture_floor" file="floor.jpg" texlength_s="20" texlength_t="20" />
               <texture id="texture_chair" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
                 <texture id="texture_table" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
               <texture id="texture_ball" file="ball.jpg" texlength_s="1" texlength_t="1"/>
-              <texture id="texture_wall" file="wall.jpg" texlength_s="1" texlength_t="1"/>
+              <texture id="texture_wall" file="wall.jpg" texlength_s="20" texlength_t="20"/>
         </textures>
 
         <appearances>
@@ -94,6 +94,7 @@
             <flag texture="flag.jpg" />
           </primitives>
           <descendants>
+            <noderef id ="patch"/>
           	<noderef id="pyr"/>
           	<noderef id="floor"/>
             <noderef id="table" />
@@ -104,6 +105,36 @@
             <noderef id="wall2" />
           </descendants>
             </node>
+
+<node id="patch">
+        <transforms>
+            <transform type="translate" to="8.5 5 12" />
+          </transforms>
+          <appearanceref id="floor" />
+          <primitives>
+            <patch order="2" partsU="10" partsV="10" compute="fill">
+          <controlpoint x="0.0" y="0.0" z="0.0" />
+          <controlpoint x="0.0" y="2.0" z="0.0" />
+          <controlpoint x="0.0" y="4.0" z="0.0" />
+          
+          <controlpoint x="2.0" y="0.0" z="2.0" />
+          <controlpoint x="2.0" y="2.0" z="4.0" />
+          <controlpoint x="2.0" y="4.0" z="2.0" />  
+          
+          <controlpoint x="4.0" y="0.0" z="0.0" />
+          <controlpoint x="4.0" y="2.0" z="0.0" />
+          <controlpoint x="4.0" y="4.0" z="0.0" />
+          
+          <!--
+          <controlpoint x="8" y="2" z="0" />
+          <controlpoint x="10" y="0" z="0" />
+          <controlpoint x="10" y="2" z="0" />
+          -->
+       </patch>
+           </primitives>
+        </node>
+
+            
         <node id="pyr">
         <transforms>
             <transform type="translate" to="8.5 5 12" />

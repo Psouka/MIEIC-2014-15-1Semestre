@@ -21,7 +21,7 @@ void Rectangle::draw(Texture* t) {
 	float xT,yT;
 	if(t->getId() != "NULL")
 	{
-		float lenT = t->tex_s, heiT = t->tex_s, lenO = x2-x1,heiO = y2-y1;
+		float lenT = t->tex_s, heiT = t->tex_t, lenO = x2-x1,heiO = y2-y1;
 		xT = lenO/lenT;
 		yT = heiO/heiT;
 	}
@@ -239,10 +239,13 @@ void Plane ::draw(Texture* t){
 	glEvalMesh2(GL_FILL, 0, parts, 0, parts);
 }
 
-
+Patch :: ~Patch(){
+	delete(controlPoints);
+	delete(texCoords);
+}
 
 Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
-	:order(o),partsU(pU),partsV(pV){
+	:Primitives(),order(o),partsU(pU),partsV(pV){
 
 		if(c == "fill")
 			compute = GL_FILL;
@@ -290,17 +293,21 @@ void Patch ::draw(Texture* t){
 	//        quando a variável U varia de 0 a 1
 	glMapGrid2f(partsU, 0.0, 1.0, partsV, 0.0, 1.0);
 
-	glShadeModel(GL_SMOOTH); 
 
 	glEvalMesh2(compute, 0, partsU, 0, partsV);
 
-	glDisable(GL_AUTO_NORMAL);
 }
 
-Vehicle ::Vehicle()
-{}
+Vehicle ::Vehicle(){
+
+}
 
 void Vehicle ::draw(Texture* t){
+}
+
+Flag :: ~Flag(){
+	delete(shader);
+	delete(texture);
 }
 
 Flag ::Flag(CGFtexture * t)
