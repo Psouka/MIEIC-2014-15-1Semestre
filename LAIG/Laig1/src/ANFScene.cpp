@@ -1370,7 +1370,7 @@ void ANFScene::update(unsigned long t) {
 			if(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getStop() && nodes[i]->getActiveAnim() != nodes[i]->getAnimsVector().size() - 1) {
 				if(!compareVectors(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos(), nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos())) {
 					vector<Animation*> temp = nodes[i]->getAnimsVector();
-					vector<vector<float>> tempV;
+					vector<vector<float>> tempV(2);
 					tempV[0] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos();
 					tempV[1] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos();
 					Animation* tempA = new LinearAnimation("temp", 5, tempV);
