@@ -237,8 +237,6 @@ void Plane ::draw(Texture* t){
 	glMapGrid2f(parts, 0.0, 1.0, parts, 0.0, 1.0); 
 
 	glEvalMesh2(GL_FILL, 0, parts, 0, parts);
-
-	glDisable(GL_AUTO_NORMAL);
 }
 
 
@@ -275,7 +273,6 @@ Patch ::Patch(int o, int pU,int pV, string c, vector<float> controlPoint)
 
 void Patch ::draw(Texture* t){
 
-	glFrontFace(GL_CW);
 	glEnable(GL_AUTO_NORMAL);
 	glMap2f(GL_MAP2_VERTEX_3, 0.0, 1.0, 3, order+1, 0.0, 1.0, 3*(order+1), order+1,  &controlPoints[0]);	
 
@@ -307,7 +304,7 @@ void Vehicle ::draw(Texture* t){
 }
 
 Flag ::Flag(CGFtexture * t)
-:Plane(60),shader(new Shader(t)){
+	:Plane(60),shader(new Shader(t)){
 
 }
 
