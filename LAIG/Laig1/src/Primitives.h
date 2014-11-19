@@ -92,8 +92,6 @@ public :
 	void update(unsigned long t){};
 };
 
-
-
 class Patch : public Primitives{
 	int order, partsU,partsV;
 	GLenum compute;
