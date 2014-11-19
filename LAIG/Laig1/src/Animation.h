@@ -16,13 +16,14 @@ public:
 	virtual void init(unsigned long t) = 0;
 	bool getStop();
 	vector<float> getFinalPos();
+	vector<float> getInitialPos();
 
 
 protected:
 	float time, span, distance, rotation;
 	string id;
 	bool stop, start;
-	vector<float> finalPos;
+	vector<float> finalPos, initialPos;
 
 };
 

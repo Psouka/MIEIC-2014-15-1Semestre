@@ -31,6 +31,10 @@ vector<float> Animation::getFinalPos() {
 	return finalPos;
 }
 
+vector<float> Animation::getInitialPos() {
+	return initialPos;
+}
+
 
 void LinearAnimation::init(unsigned long t) {
 	this->distance = 0;
@@ -53,6 +57,7 @@ LinearAnimation::LinearAnimation(string id, float span, vector<vector<float>> co
 	:Animation(id,span),controlPoint(controlPoint){
 		start = false;
 		this->finalPos = this->controlPoint[controlPoint.size() -1];
+		this->initialPos = this->controlPoint[0];
 
 }
 
@@ -135,6 +140,11 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 		temp[1] = this->center[1];
 		temp[2] = this->center[2]+this->radius*sin(rotAng);
 		this->finalPos = temp;
+		vector<float> temp1(3);
+		temp1[0] = this->center[0]+this->radius*cos(startAng);
+		temp1[1] = this->center[1];
+		temp1[2] = this->center[2]+this->radius*sin(startAng);
+		this->initialPos = temp1;
 }
 
 void CircularAnimation::init(unsigned long t) {

@@ -953,18 +953,18 @@ int ANFScene::parseGraph() {
 			{printf("\n	(AnimationRefs)");
 			while(animationref) {
 				if(animationref) {
-				ValString=(char *) animationref->Attribute("id");
+					ValString=(char *) animationref->Attribute("id");
 
-				if (ValString)
-				{
-					if(findAnimation(string(ValString))->getId() != "")
-						animsV.push_back(findAnimation(string(ValString)));
+					if (ValString)
+					{
+						if(findAnimation(string(ValString))->getId() != "")
+							animsV.push_back(findAnimation(string(ValString)));
 
-					printf("\n	Animationref: %s", ValString);
-				}
-				else
-					printf("ERROR PARSING ANIMATIONREF\n");
-				animationref = animationref->NextSiblingElement();
+						printf("\n	Animationref: %s", ValString);
+					}
+					else
+						printf("ERROR PARSING ANIMATIONREF\n");
+					animationref = animationref->NextSiblingElement();
 				}
 			}
 			Nodetemp->setAnimsVector(animsV);
@@ -1368,18 +1368,17 @@ void ANFScene::update(unsigned long t) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		for(unsigned int j = 0; j < nodes[i]->getAnimsVector().size(); j++) {
 			if(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getStop() && nodes[i]->getActiveAnim() != nodes[i]->getAnimsVector().size() - 1) {
-				if(!compareVectors(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos(), nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos())) {
+				if(!compareVectors(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos(), nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getInitialPos())) {
 					vector<Animation*> temp = nodes[i]->getAnimsVector();
 					vector<vector<float>> tempV(2);
 					tempV[0] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos();
-					tempV[1] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos();
+					tempV[1] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getInitialPos();
 					Animation* tempA = new LinearAnimation("temp", 5, tempV);
 					vector<Animation*>::iterator it = temp.begin();
 					temp.insert(it + nodes[i]->getActiveAnim(), tempA);
 					nodes[i]->setAnimsVector(temp);
 				}
-				else
-					nodes[i]->setActiveAnim(nodes[i]->getActiveAnim() + 1);
+				else nodes[i]->setActiveAnim(nodes[i]->getActiveAnim() + 1);
 			}
 			nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->update(t);
 		}
