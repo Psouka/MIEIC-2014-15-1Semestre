@@ -430,11 +430,14 @@ Vehicle ::Vehicle(){
 
 void Vehicle ::draw(Texture* t){
 	
-	//text_top->apply();
+	text_top->apply();
 
 	for(unsigned int i = 0; i < top.size(); i++)
 		top[i]->draw(t);
 		
+
+	
+	text_bot->apply();
 	int ang = 0;
 	float transl = 1.5;
 	for(int i = 0; i < 4; i++,ang += 90)
@@ -468,10 +471,9 @@ void Vehicle ::draw(Texture* t){
 	glPopMatrix();
 
 
-	text_bot->apply();
 
 	//cilindros
-
+	text_bot->apply();
 	glPushMatrix();
 	glRotated(-90,1,0,0);
 	glTranslated(1.5,1.5,-2);

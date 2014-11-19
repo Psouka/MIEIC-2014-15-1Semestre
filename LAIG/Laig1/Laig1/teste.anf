@@ -111,7 +111,7 @@
           </transforms>
           <appearanceref id="default" />
           <primitives>
-            <vehiclePlane/>
+            <vehicle/>
            </primitives>
         </node>
 
