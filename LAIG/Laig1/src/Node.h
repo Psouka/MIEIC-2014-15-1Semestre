@@ -20,9 +20,9 @@ class Node {
 	vector<Primitives *> primitives;
 	float transforms[16];
 	Appearance * app;
-	Animation * anim;
 	GLuint dlID;
-	
+	vector<Animation*> animsV;
+	int activeAnim;
 
 public:
 	Node();
@@ -33,7 +33,6 @@ public:
 	bool getDisplayListGen();
 	void setDisplayListGen(bool dlGen);
 	void setApp(Appearance *p);
-	void setAnim(Animation *a);
 	void addPrimitive(Primitives* p);
 	void addDescend(string n);
 	string getID();
@@ -47,7 +46,10 @@ public:
 	vector<Node*> getNChilds();
 	void setChilds(vector<Node*> n);
 	Appearance * getApp();
-	Animation * getAnim();
+	vector<Animation*> getAnimsVector();
+	void setAnimsVector(vector<Animation*> animsv);
+	int getActiveAnim();
+	void setActiveAnim(int animN);
 };
 
 #endif

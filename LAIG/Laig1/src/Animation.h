@@ -14,9 +14,10 @@ public:
 	virtual void update(unsigned long t) = 0;
 	virtual void apply() = 0;
 	virtual void init(unsigned long t) = 0;
+	bool getStop();
 
 protected:
-	float transX, transY, transZ, time, span, distance, rotation;
+	float time, span, distance, rotation;
 	string id;
 	bool stop, start;
 };
@@ -24,6 +25,7 @@ protected:
 class LinearAnimation:public Animation {
 	vector<vector<float>> controlPoint;
 	int idPC;
+	float transX, transY, transZ;
 
 public:
 	LinearAnimation(string id, float span, vector<vector<float>> controlPoint);

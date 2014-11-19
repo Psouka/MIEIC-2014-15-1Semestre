@@ -13,18 +13,31 @@ Node::Node(string ID,bool displaylist) {
 	this->nodeID = ID;
 	this->displaylistGen = false;
 	this->dlID = NULL;
+	this->activeAnim = 0;
 	glPushMatrix();
 	glLoadIdentity();
 	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
 	glPopMatrix();
 }
 
+int Node::getActiveAnim() {
+	return activeAnim;
+}
+
+void Node::setActiveAnim(int animN) {
+	this->activeAnim = animN;
+}
+
 GLuint Node::getdlID() {
 	return dlID;
 }
 
-Animation* Node::getAnim() {
-	return anim;
+vector<Animation*> Node::getAnimsVector() {
+	return animsV;
+}
+
+void Node::setAnimsVector(vector<Animation*> animsV) {
+	this->animsV = animsV;
 }
 
 
@@ -48,10 +61,6 @@ void Node::setDisplayListGen(bool dlGen) {
 
 void Node::setApp(Appearance *p) {
 	this->app = p;
-}
-
-void Node::setAnim(Animation *a){
-	this->anim = a;
 }
 
 float* Node::getMatrix() {

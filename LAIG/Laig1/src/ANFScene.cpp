@@ -835,10 +835,8 @@ int ANFScene::parseAnimations() {
 
 			aElement = aElement->NextSiblingElement();
 		}
-
 	}
 	return 0;
-
 }
 
 int ANFScene::parseGraph() {
@@ -865,6 +863,7 @@ int ANFScene::parseGraph() {
 		TiXmlElement* controlElement;
 		vector<float> controlPoint;
 		vector<float>controlPointAux(3);
+		vector<Animation*> animsV;
 
 
 		if(ValString = (char *) graphElement->Attribute("rootid"))
@@ -962,21 +961,30 @@ int ANFScene::parseGraph() {
 			}
 
 			if(animationref)
-			{
+			{printf("\n	(AnimationRefs)");
+			while(animationref) {
+				if(animationref) {
 				ValString=(char *) animationref->Attribute("id");
 
 				if (ValString)
 				{
-					Nodetemp->setAnim(findAnimation(string(ValString)));
+					if(findAnimation(string(ValString))->getId() != "")
+						animsV.push_back(findAnimation(string(ValString)));
 
 					printf("\n	Animationref: %s", ValString);
 				}
 				else
 					printf("ERROR PARSING ANIMATIONREF\n");
+				animationref = animationref->NextSiblingElement();
+				}
 			}
-			else
-				Nodetemp->setAnim(new NoAnimation());
-
+			Nodetemp->setAnimsVector(animsV);
+			}
+			else {
+				animsV.push_back(new NoAnimation());
+				Nodetemp->setAnimsVector(animsV);
+			}
+			animsV.clear();
 
 			if(appearanceref)
 			{
@@ -1125,7 +1133,7 @@ int ANFScene::parseGraph() {
 				{
 					ValString = (char *) pElement->Attribute("texture");
 					Flag* Flagerino = new Flag(new CGFtexture(ValString));
-					
+
 					Nodetemp->addPrimitive(Flagerino);
 					Flags.push_back(Flagerino);
 					printf("\n	Flag: %s",ValString);
@@ -1334,7 +1342,12 @@ void ANFScene::update(unsigned long t) {
 	vector<Node*> nodes = root->getNChilds();
 
 	for(unsigned int i = 0; i < nodes.size(); i++) {
-		nodes[i]->getAnim()->update(t);
+		for(unsigned int j = 0; j < nodes[i]->getAnimsVector().size(); j++) {
+			if(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getStop() && nodes[i]->getActiveAnim() != nodes[i]->getAnimsVector().size() - 1) {
+				nodes[i]->setActiveAnim(nodes[i]->getActiveAnim() + 1);
+			}
+			nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->update(t);
+		}
 	}
 
 	for(unsigned int i = 0; i < Flags.size();i++)
@@ -1397,8 +1410,8 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 			glMultMatrixf(node->getMatrix());
 
-			if(node->getAnim()->getId() != "") 
-				node->getAnim()->apply();
+			if(node->getAnimsVector()[0]->getId() != "") 
+				node->getAnimsVector()[node->getActiveAnim()]->apply();
 
 			vector<string> temp  = node->getChildren();
 			unsigned int i = temp.size();
@@ -1425,7 +1438,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 				}
 				glPopMatrix();
 
-				
+
 			}
 			glEndList();
 		}
@@ -1436,9 +1449,8 @@ void ANFScene::process(Node* node,Appearance * app) {
 	else {
 		glMultMatrixf(node->getMatrix());
 
-		if(node->getAnim()->getId() != "") {
-			node->getAnim()->apply();
-		}
+		if(node->getAnimsVector()[0]->getId() != "") 
+			node->getAnimsVector()[node->getActiveAnim()]->apply();
 
 		vector<string> temp  = node->getChildren();
 		unsigned int i = temp.size();
@@ -1452,7 +1464,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 		for(unsigned int i = 0; i < nodes.size(); i++) {
 			glPushMatrix();
-			nodes[i]->setDisplayListGen(true);
+			nodes[i]->setDisplayListGen(true); //TODO dunno if it's supposed to be there, check later
 			if(nodes[i]->getApp()->getTextRef() != "inherit")
 			{
 				nodes[i]->ApplyApp();

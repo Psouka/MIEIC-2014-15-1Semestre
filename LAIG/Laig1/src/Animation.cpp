@@ -22,6 +22,10 @@ string Animation::getId(){
 	return id;
 }
 
+bool Animation::getStop() {
+	return stop;
+}
+
 void LinearAnimation::init(unsigned long t) {
 	this->distance = 0;
 
@@ -33,8 +37,8 @@ void LinearAnimation::init(unsigned long t) {
 
 	this->idPC = 0;
 	this->transX = this->controlPoint[this->idPC][0];
-	this->transY = this->controlPoint[this->idPC][0];
-	this->transZ = this->controlPoint[this->idPC][0];
+	this->transY = this->controlPoint[this->idPC][1];
+	this->transZ = this->controlPoint[this->idPC][2];
 	this->start = true;
 	this->stop = false;
 	this->time = t;
@@ -46,8 +50,8 @@ LinearAnimation::LinearAnimation(string id, float span, vector<vector<float>> co
 }
 
 void LinearAnimation::apply() {
-	glRotatef(rotation, 0, 1, 0);
 	glTranslatef(this->transX, this->transY, this->transZ);
+	glRotatef(rotation, 0, 1, 0);
 }
 
 void LinearAnimation::update(unsigned long t) {
@@ -66,9 +70,13 @@ void LinearAnimation::update(unsigned long t) {
 
 		//calcular o angulo em relação ao eixo dos yy
 
-		float prodEsc = temp[0] * 0 + temp[2] * 1;
-		float norma = sqrtf(pow(temp[0], 2) + pow(temp[2], 2));
-		rotation = acos(prodEsc/norma);
+		if(temp[0] !=0 && temp[1] != 0) {
+			float prodEsc = temp[0] * 0 + temp[2] * 1;
+			float norma = sqrtf(pow(temp[0], 2) + pow(temp[2], 2));
+			rotation = acos(prodEsc/norma);
+		}
+		else 
+			rotation = 0;
 
 		//calcular a velocidade 
 		unsigned long elapsed = t - time;
@@ -88,13 +96,12 @@ void LinearAnimation::update(unsigned long t) {
 		transZ = transZ + temp[2];
 
 		//se passar do ponto de controlo ignora o resto do incremento
-		if(abs((transX + temp[0]) > abs(controlPoint[idPC+1][0])))
+		if(abs((transX) > abs(controlPoint[idPC+1][0])))
 			transX = controlPoint[idPC+1][0];
-		if(abs((transY + temp[1]) > abs(controlPoint[idPC+1][1])))
+		if(abs((transY) > abs(controlPoint[idPC+1][1])))
 			transY = controlPoint[idPC+1][1];
-		if(abs((transZ + temp[2]) > abs(controlPoint[idPC+1][2])))
+		if(abs((transZ) > abs(controlPoint[idPC+1][2])))
 			transZ = controlPoint[idPC+1][2];
-
 
 		if(transX == controlPoint[idPC+1][0] && transY == controlPoint[idPC+1][1] && transZ == controlPoint[idPC+1][2]) 
 			idPC++;
@@ -105,6 +112,8 @@ void LinearAnimation::update(unsigned long t) {
 
 		//actualizar o tempo
 		time = t;
+		printf("rot: %f\nVel: %f\nTransX: %f\nTransY: %f\nTransZ: %f\n", rotation, vel, transX, transY, transZ);
+
 	}
 
 }
@@ -122,10 +131,6 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 void CircularAnimation::init(unsigned long t) {
 
 	this->rotation = startAng;
-
-	this->transX = center[0] + this->radius*cos(this->startAng);
-	this->transY = center[1] + 0;
-	this->transZ = center[2] + this->radius*sin(this->startAng);
 
 	this->velAng = rotAng / (span*1000);
 
@@ -145,23 +150,23 @@ void CircularAnimation::update(unsigned long t) {
 	if(!stop) {
 
 		unsigned long elapsed = t - time;
+		time = t;
+
 		rotation += velAng * elapsed;
 
 		float angle = (startAng + rotation) * PI/180;
 
-		time = t;
-
-		if(abs(rotation) > abs(startAng+rotAng)) {
+		if(abs(rotation) >= abs(startAng+rotAng)) {
+			rotation = rotAng;
 			stop = true;
 		}
-
 	}
 }
 
 void CircularAnimation::apply() {
-
+	glTranslatef(center[0], center[1], center[2]);
 	glRotatef(rotation, 0, 1, 0);
-	glTranslatef(radius + center[0], center[1], center[2]);
+	glTranslatef(radius, 0, 0);
 }
 
 NoAnimation::NoAnimation()
