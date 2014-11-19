@@ -32,7 +32,7 @@ ANFScene::ANFScene(char *filename): CGFscene() {
 	texturesElement =  anfElement->FirstChildElement( "textures" );
 	appearancesElement =  anfElement->FirstChildElement( "appearances" );
 	graphElement =  anfElement->FirstChildElement( "graph" );
-	animationElement = anfElement->FirstChildElement( "animations ");
+	animationElement = anfElement->FirstChildElement( "animations");
 
 
 	this->parseGlobals();
@@ -721,7 +721,7 @@ int ANFScene::parseAnimations() {
 		TiXmlElement* controlElement;
 		char* valString = NULL;
 		char* animID, *type;
-		float span, controlPointsAux[3], center[3],radius,startang,rotang;
+		float span, center[3],radius,startang,rotang;
 		vector<vector <float>> controlPoint;
 
 		while(aElement)
@@ -750,7 +750,7 @@ int ANFScene::parseAnimations() {
 			{
 				controlElement=aElement->FirstChildElement("controlpoint");
 				vector<float> vControPoint;
-
+				float controlPointsAux[3];
 				while(controlElement){
 
 					printf("\n	ControlPoint: ");
@@ -785,6 +785,8 @@ int ANFScene::parseAnimations() {
 					vControPoint.push_back(controlPointsAux[2]);
 
 					controlPoint.push_back(vControPoint);
+					vControPoint.clear();
+					controlElement = controlElement->NextSiblingElement();
 				}
 
 				anim.push_back(new LinearAnimation(animID,span,controlPoint));
@@ -1393,7 +1395,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 			glMultMatrixf(node->getMatrix());
 
-			if(node->getAnim() != NULL) 
+			if(node->getAnim()->getId() != "") 
 				node->getAnim()->apply();
 
 			vector<string> temp  = node->getChildren();
@@ -1432,8 +1434,9 @@ void ANFScene::process(Node* node,Appearance * app) {
 	else {
 		glMultMatrixf(node->getMatrix());
 
-		if(node->getAnim() != NULL) 
+		if(node->getAnim()->getId() != "") {
 			node->getAnim()->apply();
+		}
 
 		vector<string> temp  = node->getChildren();
 		unsigned int i = temp.size();
