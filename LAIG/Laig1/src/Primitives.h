@@ -105,6 +105,9 @@ public:
 };
 
 class Vehicle : public Primitives{
+	CGFappearance * text_top;
+	CGFappearance * text_bot;
+
 	vector<Patch*> top;
 	vector<Rectangle*>bot;
 	vector<Cylinder*>mid;

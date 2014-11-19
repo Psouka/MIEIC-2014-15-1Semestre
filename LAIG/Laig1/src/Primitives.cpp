@@ -312,6 +312,11 @@ Vehicle ::~Vehicle(){
 
 
 Vehicle ::Vehicle(){
+
+	this->text_top = new CGFappearance("rainbow.jpg",1,1);
+	this->text_bot = new CGFappearance("box.jpg",1,1);
+
+
 	vector<float> controlPoint;
 
 	controlPoint.push_back(0.0);
@@ -421,13 +426,12 @@ Vehicle ::Vehicle(){
 
 	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
 
-
-
-
 }
 
 void Vehicle ::draw(Texture* t){
 	
+	//text_top->apply();
+
 	for(unsigned int i = 0; i < top.size(); i++)
 		top[i]->draw(t);
 		
@@ -464,6 +468,8 @@ void Vehicle ::draw(Texture* t){
 	glPopMatrix();
 
 
+	text_bot->apply();
+
 	//cilindros
 
 	glPushMatrix();
@@ -492,12 +498,6 @@ void Vehicle ::draw(Texture* t){
 	glTranslated(1.5,-1.5,-2);
 	mid[0]->draw(t);
 	glPopMatrix();
-
-
-
-	
-
-
 
 }
 
