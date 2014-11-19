@@ -60,7 +60,7 @@
 
             <primitives>
               <!--  <plane parts="5" /> -->
- <!-- <patch order="2" partsU="10" partsV="10" compute="fill">
+  <patch order="2" partsU="10" partsV="10" compute="fill">
           <controlpoint x="0.0" y="0.0" z="0.0" />
           <controlpoint x="0.0" y="2.0" z="0.0" />
           <controlpoint x="0.0" y="4.0" z="0.0" />
@@ -75,7 +75,7 @@
           
 
           </patch>
-          -->
+          
           <flag texture="flag.jpg" />
        
             </primitives>

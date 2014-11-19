@@ -1291,7 +1291,7 @@ void ANFScene::init() {
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
-	setUpdatePeriod(100);
+	setUpdatePeriod(50);
 }
 
 void ANFScene::FillChildren(Node* node) {
@@ -1325,6 +1325,7 @@ void ANFScene::setGlobalWind(){
 	for(unsigned int i = 0; i <Flags.size(); i++)
 		Flags[i]->setWind(globalWind);
 }
+
 void ANFScene::update(unsigned long t) {
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
@@ -1336,6 +1337,7 @@ void ANFScene::update(unsigned long t) {
 
 	for(unsigned int i = 0; i < Flags.size();i++)
 		Flags[i]->update(t);
+
 }
 
 void ANFScene::display() {
