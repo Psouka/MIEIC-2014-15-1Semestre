@@ -700,17 +700,6 @@ int ANFScene::parseAppearences() {
 	return 0;
 }
 
-/*<animations>
-<!-- pode não existir qualquer nó “animation” se a cena não tiver animações -->
-<!-- span é o tempo, em segundos, que a animação deve demorar *
-<!-- nesta versão do formato ANF, type pode ter o valor “linear” ou "circular" -->
-<animation id=”ss” span=”ff” type=”linear”>
-<controlpoint xx=”ff” yy=”ff” zz=”ff />
-...
-</animation>
-<animation id=”ss” span=”ff” type=”circular” center="ff ff ff" radius="ff" startang="ff" rotang="ff" />
-</animations> */
-
 int ANFScene::parseAnimations() {
 
 	if(animationElement == NULL)
@@ -1173,7 +1162,6 @@ int ANFScene::parseGraph() {
 					}
 					Nodetemp->addPrimitive(new Patch(order,partsU,partsV,string(ValString),controlPoint));
 
-					controlPointAux.clear();
 					controlPoint.clear();
 					printf("\n	Flag: %s",ValString);
 				}

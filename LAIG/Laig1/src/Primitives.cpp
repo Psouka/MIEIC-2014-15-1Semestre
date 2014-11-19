@@ -299,10 +299,114 @@ void Patch ::draw(Texture* t){
 }
 
 Vehicle ::Vehicle(){
+	vector<float> controlPoint;
 
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(7.0);
+	controlPoint.push_back(0.0);
+
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(0.0);
+
+	controlPoint.push_back(2.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+	
+	/////////////////////////////////////
+
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(5.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(8.0);
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(5.0);
+
+	////////////////////////////////////////
+
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(7.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(-8.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(-2.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+
+	/*
+	          <controlpoint x="0.0" y="7.0" z="0.0" />
+          <controlpoint x="8.0" y="8.0" z="0.0" />
+          <controlpoint x="2.0" y="0.0" z="0.0" />
+
+          <controlpoint x="0.0" y="5.0" z="0.0" />
+          <controlpoint x="0.0" y="8.0" z="8.0" />
+          <controlpoint x="0.0" y="0.0" z="5.0" />
+
+           <controlpoint x="0.0" y="7.0" z="0.0" />
+          <controlpoint x="-8.0" y="8.0" z="0.0" />
+          <controlpoint x="-2.0" y="0.0" z="0.0" />
+	*/
+
+	top.push_back(new Patch(2, 10,10, "fill", controlPoint));
+
+	controlPoint.clear();
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(7.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(-8.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(-2.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+	
+	
+	/////////////////////////////////////
+
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(5.0);
+	controlPoint.push_back(0.0);
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(-8.0);
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(-5.0);
+
+	////////////////////////////////////////
+	
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(7.0);
+	controlPoint.push_back(0.0);
+
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(8.0);
+	controlPoint.push_back(0.0);
+
+	controlPoint.push_back(2.0);
+	controlPoint.push_back(0.0);
+	controlPoint.push_back(0.0);
+
+	top.push_back(new Patch(2, 10,10, "fill", controlPoint));
 }
 
 void Vehicle ::draw(Texture* t){
+
+	for(int i = 0; i < top.size(); i++)
+		top[i]->draw(t);
 }
 
 Flag :: ~Flag(){

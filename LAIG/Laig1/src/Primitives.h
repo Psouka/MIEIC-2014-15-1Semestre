@@ -105,6 +105,9 @@ public:
 };
 
 class Vehicle : public Primitives{
+	vector<Patch*> top;
+	vector<Rectangle*>bot;
+	vector<Cylinder*>mid;
 public:
 	Vehicle();
 	void draw(Texture* t);
