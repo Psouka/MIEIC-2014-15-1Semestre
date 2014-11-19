@@ -37,7 +37,7 @@
         </lights>
 
          <textures>       
-              <texture id="texture_floor" file="floor.jpg" texlength_s="20" texlength_t="20" />
+              <texture id="texture_floor" file="dirt.jpg" texlength_s="20" texlength_t="20" />
               <texture id="texture_chair" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
                 <texture id="texture_table" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
               <texture id="texture_ball" file="ball.jpg" texlength_s="1" texlength_t="1"/>
@@ -95,14 +95,8 @@
           </primitives>
           <descendants>
             <noderef id ="patch"/> <!--
-          	<noderef id="pyr"/>
+          	<noderef id="tent"/>
           	<noderef id="floor"/>
-            <noderef id="table" />
-            <noderef id="chair" />
-            <noderef id="chair2"/>
-            <noderef id="ball" />
-            <noderef id="wall" />
-            <noderef id="wall2" /> -->
           </descendants>
             </node>
 
@@ -116,7 +110,7 @@
         </node>
 
             
-        <node id="pyr">
+        <node id="tent">
         <transforms>
             <transform type="translate" to="8.5 5 12" />
           </transforms>
@@ -136,187 +130,6 @@
             <rectangle xy1="0.0 0.0" xy2="20.0 20.0" />
           </primitives>
         </node>
-
-
-        <node id="wall">
-          <transforms>
-          </transforms>
-          <appearanceref id="wall" />
-          <primitives>        
-            <rectangle xy1="0.0 0.0" xy2="20.0 20.0" />
-          </primitives>
-        </node>
-
-
-        <node id="wall2">
-          <transforms>
-            <transform type="translate" to="0.0 0.0 20.0" />
-             <transform type="rotate" axis="y" angle="90.0"/>
-          </transforms>
-          <appearanceref id="wall" />
-          <primitives>        
-            <rectangle xy1="0.0 0.0" xy2="20.0 20.0" />
-          </primitives>
-        </node>
-
-        <node id="ball">
-        	<animationref id="lin"/>
-          <transforms>
-            <transform type="translate" to="0.0 0.0 0.0" />
-          </transforms>
-          <appearanceref id="ball" />
-          <primitives>
-            <sphere radius="1" slices="20" stacks="20" />
-          </primitives>
-        </node>
-
-
-         <node id="table">
-          <transforms>
-            <transform type="translate" to="8.5 0.5 8.5" />
-          </transforms>
-          <appearanceref id="table" />
-          <descendants>
-            <noderef id="table_top" />
-            <noderef id="table_leg1" />
-            <noderef id="table_leg2" />
-            <noderef id="table_leg3" />
-            <noderef id="table_leg4" />
-          </descendants>
-        </node>
-
-         <node id="table_leg1">
-          <transforms>
-            <transform type="translate" to="-3.25 1.75 -1.75" />
-            <transform type="scale" factor="0.5 3.5 0.5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="table_leg2">
-          <transforms>
-            <transform type="translate" to="3.25 1.75 -1.75" />
-            <transform type="scale" factor="0.5 3.5 0.5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="table_leg3">
-          <transforms>
-            <transform type="translate" to="-3.25 1.75 1.75" />
-            <transform type="scale" factor="0.5 3.5 0.5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="table_leg4">
-          <transforms>
-            <transform type="translate" to="3.25 1.75 1.75" />
-            <transform type="scale" factor="0.5 3.5 0.5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="table_top">
-          <transforms>
-            <transform type="translate" to="0 3.5 0" />
-            <transform type="scale" factor="8 0.5 5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-
-        <node id="chair">
-          <transforms>
-            <transform type="translate" to="8.5 0.0 5.0" />
-            <transform type="scale" factor="1 1.25 1" />
-          </transforms>
-          <appearanceref id="chair" />
-          <descendants>
-            <noderef id="chair_top" />
-            <noderef id="chair_leg1" />
-            <noderef id="chair_leg2" />
-            <noderef id="chair_leg3" />
-            <noderef id="chair_leg4" />
-          </descendants>
-        </node>
-
-        <node id="chair2">
-          <transforms>
-            <transform type="translate" to="8.5 0.0 12.0" />
-            <transform type="scale" factor="1 1.25 1" />
-          </transforms>
-          <appearanceref id="chair" />
-          <descendants>
-            <noderef id="chair_top" />
-            <noderef id="chair_leg1" />
-            <noderef id="chair_leg2" />
-            <noderef id="chair_leg3" />
-            <noderef id="chair_leg4" />
-          </descendants>
-        </node>
-
-        <node id="chair_leg1">
-          <transforms>
-            <transform type="translate" to="0.9 0.75 -0.9" />
-            <transform type="scale" factor="0.2 1.5 0.2" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="chair_leg2">
-          <transforms>
-            <transform type="translate" to="0.9 0.75 0.9" />
-            <transform type="scale" factor="0.2 1.5 0.2" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="chair_leg3">
-          <transforms>
-            <transform type="translate" to="-0.9 0.75 -0.9" />
-            <transform type="scale" factor="0.2 1.5 0.2" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="chair_leg4">
-          <transforms>
-            <transform type="translate" to="-0.9 0.75 0.9" />
-            <transform type="scale" factor="0.2 1.5 0.2" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-        <node id="chair_top">
-          <transforms>
-            <transform type="translate" to="0.0 1.6 0.0" />
-            <transform type="scale" factor="2.0 0.2 2.0" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="unit_cube" />
-          </descendants>
-        </node>
-
 
          <node id="unit_cube">
           <transforms>
