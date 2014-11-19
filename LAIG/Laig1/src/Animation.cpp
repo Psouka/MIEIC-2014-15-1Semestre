@@ -131,9 +131,9 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 		this->center[2] = center[2];
 		this->radius = radius;
 		vector<float> temp;
-		temp[0] = this->center[0] + this->radius;
+		temp[0] = this->center[0]+this->radius*cos(rotAng);
 		temp[1] = this->center[1];
-		temp[2] = this->center[2];
+		temp[2] = this->center[2]+this->radius*sin(rotAng);
 		this->finalPos = temp;
 }
 
