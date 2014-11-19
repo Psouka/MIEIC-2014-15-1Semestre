@@ -309,8 +309,6 @@ Vehicle ::~Vehicle(){
 		delete(bot[i]);
 }
 
-
-
 Vehicle ::Vehicle(){
 
 	this->text_top = new CGFappearance("rainbow.jpg",1,1);
@@ -429,7 +427,7 @@ Vehicle ::Vehicle(){
 }
 
 void Vehicle ::draw(Texture* t){
-	
+	glTranslated(0,5,0);
 	text_top->apply();
 
 	for(unsigned int i = 0; i < top.size(); i++)
