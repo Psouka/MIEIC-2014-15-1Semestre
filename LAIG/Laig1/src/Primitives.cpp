@@ -305,7 +305,7 @@ Vehicle ::Vehicle(){
 	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(7.0);
 	controlPoint.push_back(8.0);
 	controlPoint.push_back(0.0);
 
@@ -316,16 +316,16 @@ Vehicle ::Vehicle(){
 	/////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(5.0);
+	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 	
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(8.0);
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(14.0);
 	
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(5.0);
+	controlPoint.push_back(2.0);
 
 	////////////////////////////////////////
 
@@ -333,7 +333,7 @@ Vehicle ::Vehicle(){
 	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 	
-	controlPoint.push_back(-8.0);
+	controlPoint.push_back(-7.0);
 	controlPoint.push_back(8.0);
 	controlPoint.push_back(0.0);
 	
@@ -358,12 +358,13 @@ Vehicle ::Vehicle(){
 	top.push_back(new Patch(2, 10,10, "fill", controlPoint));
 
 	controlPoint.clear();
+
 	
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 	
-	controlPoint.push_back(-8.0);
+	controlPoint.push_back(-7.0);
 	controlPoint.push_back(8.0);
 	controlPoint.push_back(0.0);
 	
@@ -375,16 +376,16 @@ Vehicle ::Vehicle(){
 	/////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(5.0);
+	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 	
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(8.0);
-	controlPoint.push_back(-8.0);
+	controlPoint.push_back(-14.0);
 	
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(-5.0);
+	controlPoint.push_back(-2.0);
 
 	////////////////////////////////////////
 	
@@ -392,7 +393,7 @@ Vehicle ::Vehicle(){
 	controlPoint.push_back(7.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(7.0);
 	controlPoint.push_back(8.0);
 	controlPoint.push_back(0.0);
 
@@ -401,12 +402,40 @@ Vehicle ::Vehicle(){
 	controlPoint.push_back(0.0);
 
 	top.push_back(new Patch(2, 10,10, "fill", controlPoint));
+
+
+	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
+	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
+	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
+	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
+
+
 }
 
 void Vehicle ::draw(Texture* t){
 
 	for(int i = 0; i < top.size(); i++)
 		top[i]->draw(t);
+
+	int ang = 0;
+	float transl = 1.5;
+	for(int i = 0; i < 4; i++,ang += 90)
+	{
+		
+		glPushMatrix();
+		glRotated(ang,0,1,0);
+		glTranslated(0,0,transl);
+		bot[i]->draw(t);
+		glPopMatrix();
+		
+		glPushMatrix();
+		glRotated(ang,0,1,0);
+		glRotated(180,1,0,0);
+		glTranslated(0,0,transl);
+		bot[i]->draw(t);
+		glPopMatrix();
+	}
+
 }
 
 Flag :: ~Flag(){

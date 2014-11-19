@@ -94,7 +94,7 @@
             <flag texture="flag.jpg" />
           </primitives>
           <descendants>
-            <noderef id ="patch"/>
+            <noderef id ="patch"/> <!--
           	<noderef id="pyr"/>
           	<noderef id="floor"/>
             <noderef id="table" />
@@ -102,15 +102,14 @@
             <noderef id="chair2"/>
             <noderef id="ball" />
             <noderef id="wall" />
-            <noderef id="wall2" />
+            <noderef id="wall2" /> -->
           </descendants>
             </node>
 
 <node id="patch">
         <transforms>
-            <transform type="translate" to="8.5 5 12" />
           </transforms>
-          <appearanceref id="floor" />
+          <appearanceref id="wall" />
           <primitives>
             <vehicle/>
  <!--           <patch order="2" partsU="10" partsV="10" compute="fill">
