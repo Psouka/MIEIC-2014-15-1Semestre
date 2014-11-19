@@ -127,15 +127,21 @@ void CircularAnimation::init(unsigned long t) {
 	this->transY = center[1] + 0;
 	this->transZ = center[2] + this->radius*sin(this->startAng);
 
-	this->distance = 2*PI*this->radius;
+	this->velAng = rotAng / (span*1000);
 
-	this->velAng = this->distance / (this->span*1000);
+	this->start = true;
 
 	this->time = t;
 }
 
 
 void CircularAnimation::update(unsigned long t) {
+
+	if(!start) {
+		init(t);
+		return;
+	}
+
 	if(!stop) {
 
 		unsigned long elapsed = t - time;
@@ -143,22 +149,19 @@ void CircularAnimation::update(unsigned long t) {
 
 		float angle = (startAng + rotation) * PI/180;
 
-		transX = center[0] + radius*cos(angle);
-		transY = center[1] + 0;
-		transZ = center[2] + radius*sin(angle);
-
 		time = t;
 
-		if(abs(rotation) >= abs(startAng + rotation)) {
+		if(abs(rotation) > abs(startAng+rotAng)) {
 			stop = true;
 		}
+
 	}
 }
 
 void CircularAnimation::apply() {
 
 	glRotatef(rotation, 0, 1, 0);
-	glTranslatef(this->transX, this->transY, this->transZ);
+	glTranslatef(radius + center[0], center[1], center[2]);
 }
 
 NoAnimation::NoAnimation()
