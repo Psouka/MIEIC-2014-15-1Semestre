@@ -15,11 +15,15 @@ public:
 	virtual void apply() = 0;
 	virtual void init(unsigned long t) = 0;
 	bool getStop();
+	vector<float> getFinalPos();
+
 
 protected:
 	float time, span, distance, rotation;
 	string id;
 	bool stop, start;
+	vector<float> finalPos;
+
 };
 
 class LinearAnimation:public Animation {
@@ -32,6 +36,12 @@ public:
 	void update(unsigned long t);
 	void apply();
 	void init(unsigned long t);
+	vector<float> getTrans() {
+		vector<float> temp;
+		temp.push_back(transX);
+		temp.push_back(transY);
+		temp.push_back(transZ);
+	}
 };
 
 class CircularAnimation:public Animation {
@@ -41,6 +51,15 @@ public:
 	void update(unsigned long t);
 	void apply();
 	void init(unsigned long t);
+	float getRotation() {
+		return rotation;
+	}
+	float* getCenter() {
+		return center;
+	}
+	float getRadius() {
+		return radius;
+	}
 };
 
 class NoAnimation:public Animation{

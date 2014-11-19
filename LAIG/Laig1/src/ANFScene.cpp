@@ -1351,6 +1351,15 @@ void ANFScene::setGlobalWind(){
 		Flags[i]->setWind(globalWind);
 }
 
+bool compareVectors(vector<float> v1, vector<float> v2) {
+	for(unsigned int i = 0; i < v1.size(); i++) {
+		if(v1[i] != v2[i])
+			return false;
+	}
+	return true;
+}
+
+
 void ANFScene::update(unsigned long t) {
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
@@ -1359,7 +1368,18 @@ void ANFScene::update(unsigned long t) {
 	for(unsigned int i = 0; i < nodes.size(); i++) {
 		for(unsigned int j = 0; j < nodes[i]->getAnimsVector().size(); j++) {
 			if(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getStop() && nodes[i]->getActiveAnim() != nodes[i]->getAnimsVector().size() - 1) {
-				nodes[i]->setActiveAnim(nodes[i]->getActiveAnim() + 1);
+				if(!compareVectors(nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos(), nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos())) {
+					vector<Animation*> temp = nodes[i]->getAnimsVector();
+					vector<vector<float>> tempV;
+					tempV[0] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->getFinalPos();
+					tempV[1] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos();
+					Animation* tempA = new LinearAnimation("temp", 5, tempV);
+					vector<Animation*>::iterator it = nodes[i]->getAnimsVector().begin();
+					temp.insert(it+nodes[i]->getActiveAnim(), tempA);
+					nodes[i]->setAnimsVector(temp);
+				}
+				else
+					nodes[i]->setActiveAnim(nodes[i]->getActiveAnim() + 1);
 			}
 			nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim()]->update(t);
 		}

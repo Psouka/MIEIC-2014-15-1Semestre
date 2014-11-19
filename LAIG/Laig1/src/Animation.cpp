@@ -27,6 +27,11 @@ bool Animation::getStop() {
 	return stop;
 }
 
+vector<float> Animation::getFinalPos() {
+	return finalPos;
+}
+
+
 void LinearAnimation::init(unsigned long t) {
 	this->distance = 0;
 
@@ -47,6 +52,8 @@ void LinearAnimation::init(unsigned long t) {
 LinearAnimation::LinearAnimation(string id, float span, vector<vector<float>> controlPoint)
 	:Animation(id,span),controlPoint(controlPoint){
 		start = false;
+		this->finalPos = this->controlPoint[controlPoint.size() -1];
+
 }
 
 void LinearAnimation::apply() {
@@ -112,8 +119,6 @@ void LinearAnimation::update(unsigned long t) {
 
 		//actualizar o tempo
 		time = t;
-		printf("rot: %f\nVel: %f\nTransX: %f\nTransY: %f\nTransZ: %f\n", rotation, vel, transX, transY, transZ);
-
 	}
 
 }
@@ -124,6 +129,12 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 		this->center[0] = center[0];
 		this->center[1] = center[1];
 		this->center[2] = center[2];
+		this->radius = radius;
+		vector<float> temp;
+		temp[0] = this->center[0] + this->radius;
+		temp[1] = this->center[1];
+		temp[2] = this->center[2];
+		this->finalPos = temp;
 }
 
 void CircularAnimation::init(unsigned long t) {
@@ -136,7 +147,6 @@ void CircularAnimation::init(unsigned long t) {
 
 	this->time = t;
 }
-
 
 void CircularAnimation::update(unsigned long t) {
 
