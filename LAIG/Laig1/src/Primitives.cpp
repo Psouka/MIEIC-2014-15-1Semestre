@@ -417,7 +417,11 @@ Vehicle ::Vehicle(){
 	top.push_back(new Patch(2, 10,10, "fill", controlPoint));
 
 
+	mid.push_back(new Cylinder(0.05,0.05,2.5,5,5));
+
 	bot.push_back(new Rectangle(-1.5,-5,1.5,-2));
+
+
 
 
 }
@@ -458,6 +462,40 @@ void Vehicle ::draw(Texture* t){
 	glTranslated(0,3.5,5);
 	bot[0]->draw(t);
 	glPopMatrix();
+
+
+	//cilindros
+
+	glPushMatrix();
+	glRotated(-90,1,0,0);
+	glTranslated(1.5,1.5,-2);
+	mid[0]->draw(t);
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glRotated(-90,1,0,0);
+	glTranslated(-1.5,1.5,-2);
+	mid[0]->draw(t);
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glRotated(-90,1,0,0);
+	glTranslated(-1.5,-1.5,-2);
+	mid[0]->draw(t);
+	glPopMatrix();
+
+
+	glPushMatrix();
+	glRotated(-90,1,0,0);
+	glTranslated(1.5,-1.5,-2);
+	mid[0]->draw(t);
+	glPopMatrix();
+
+
+
+	
 
 
 
