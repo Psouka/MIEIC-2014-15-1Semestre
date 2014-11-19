@@ -468,8 +468,6 @@ void Vehicle ::draw(Texture* t){
 	bot[0]->draw(t);
 	glPopMatrix();
 
-
-
 	//cilindros
 	text_bot->apply();
 	glPushMatrix();
