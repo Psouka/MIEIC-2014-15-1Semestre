@@ -7,6 +7,7 @@
 class Shader : public CGFshader{
 	CGFtexture *Texture;
 public:
+	~Shader();
 	Shader(CGFtexture *Texture);
 	virtual void bind();
 	virtual void unbind();

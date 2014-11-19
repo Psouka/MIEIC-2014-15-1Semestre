@@ -1247,6 +1247,33 @@ vector<Node*> ANFScene::getNodes(vector<string> n) {
 ANFScene::~ANFScene()
 {
 	delete(doc);
+	delete(ANFGraph);
+	delete(globalsElement); 
+	delete(camerasElement); 
+	delete(lightElement);
+	delete(texturesElement);
+	delete(appearancesElement);
+	delete(graphElement);
+	delete(animationElement);
+
+	for(unsigned int i = 0; i<cameras.size(); i++)
+		delete(cameras[i]);
+
+	for(unsigned int i = 0; i<lights.size(); i++)
+		delete(lights[i]);
+
+	for(unsigned int i = 0;i< textures.size(); i++)
+		delete(textures[i]);
+
+	for(unsigned int i = 0; i<apps.size(); i++)
+		delete(apps[i]);
+
+	for(unsigned int i = 0;i< anim.size(); i++)
+		delete(anim[i]);
+
+	for(unsigned int i = 0; i<Flags.size(); i++)
+		delete(Flags[i]);
+
 }
 
 TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val)

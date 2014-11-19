@@ -1,6 +1,10 @@
 #include <GL/glew.h>
 #include "Shader.h"
 
+Shader :: ~Shader(){
+delete(Texture);
+}
+
 Shader :: Shader(CGFtexture *Texture)
 :Texture(Texture){
 

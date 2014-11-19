@@ -1,5 +1,14 @@
 #include "TPinterface.h"
 
+TPinterface::~TPinterface(){
+	delete(Scene);
+
+	for(unsigned int i = 0; i < lights.size(); i++)
+		delete(lights[i]);
+
+	for(unsigned int i = 0; i < cameras.size(); i++)
+		delete(cameras[i]);
+}
 
 TPinterface::TPinterface(): CGFinterface() {
 }

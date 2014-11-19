@@ -4,6 +4,19 @@
 #include "Node.h"
 #include "Graph.h"
 
+Node:: ~Node(){
+	for(unsigned int i = 0; i <nodeChilds.size(); i++)
+		delete(nodeChilds[i]);
+
+	for(unsigned int i = 0; i <primitives.size(); i++)
+		delete(primitives[i]);
+
+	delete(app);
+	
+	for(unsigned int i = 0; i <animsV.size(); i++)
+		delete(animsV[i]);
+}
+
 Node::Node() {
 
 }

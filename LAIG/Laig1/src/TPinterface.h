@@ -11,6 +11,7 @@ class TPinterface: public CGFinterface {
 	std::vector<Camera *> cameras;
 
 public:
+	~TPinterface();
 	TPinterface();
     TPinterface(ANFScene* S);
     virtual void initGUI();

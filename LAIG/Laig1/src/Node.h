@@ -25,6 +25,7 @@ class Node {
 	int activeAnim;
 
 public:
+	~Node();
 	Node();
 	Node(string ID,bool displaylist);
 	GLuint getdlID();
