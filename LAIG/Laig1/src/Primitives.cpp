@@ -298,6 +298,19 @@ void Patch ::draw(Texture* t){
 
 }
 
+
+Vehicle ::~Vehicle(){
+	for(unsigned int i = 0; i < top.size(); i++)
+		delete(top[i]);
+
+	for(unsigned int i = 0; i < mid.size(); i++)
+		delete(mid[i]);
+	for(unsigned int i = 0; i < bot.size(); i++)
+		delete(bot[i]);
+}
+
+
+
 Vehicle ::Vehicle(){
 	vector<float> controlPoint;
 
@@ -411,7 +424,7 @@ Vehicle ::Vehicle(){
 
 void Vehicle ::draw(Texture* t){
 	
-	for(int i = 0; i < top.size(); i++)
+	for(unsigned int i = 0; i < top.size(); i++)
 		top[i]->draw(t);
 		
 	int ang = 0;

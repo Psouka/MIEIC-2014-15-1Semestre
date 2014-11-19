@@ -6,20 +6,17 @@
 
 class Shader : public CGFshader{
 	CGFtexture *Texture;
+	int windLoc;
+	float deltaTime;
+	int deltaTimeLoc;
+	float startTime;
 public:
 	~Shader();
 	Shader(CGFtexture *Texture);
 	virtual void bind();
 	virtual void unbind();
-
 	void setTime(float time);
 	int wind;
-protected:
-	int baseTextureLoc;
-	int windLoc;
-	float deltaTime;
-	int deltaTimeLoc;
-	float startTime;
 };
 
 #endif

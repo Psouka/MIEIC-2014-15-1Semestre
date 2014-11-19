@@ -109,6 +109,7 @@ class Vehicle : public Primitives{
 	vector<Rectangle*>bot;
 	vector<Cylinder*>mid;
 public:
+	~Vehicle();
 	Vehicle();
 	void draw(Texture* t);
 	void update(unsigned long t){};
