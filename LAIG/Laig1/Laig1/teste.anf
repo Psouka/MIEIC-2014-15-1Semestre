@@ -5,7 +5,6 @@
             <lighting doublesided="true" local="true" enabled="true" ambient="0.8 0.8 0.8 1.0" />
         </globals>
 
-
       <cameras initial="landscapex" >
          <ortho id="landscapex" direction="x" near="-10" far="10" left="-10" right="10" top="10" bottom="-10" />
          <ortho id="landscapez" direction="z" near="-10" far="10" left="-10" right="10" top="10" bottom="-10" />
@@ -33,15 +32,10 @@
                    <component type="diffuse" value="0.7 0.7 0.7 1.0" />
                    <component type="specular" value="0.7 0.7 0.7 1.0" />
                 </light>
-    			
         </lights>
 
          <textures>       
-              <texture id="texture_floor" file="dirt.jpg" texlength_s="20" texlength_t="20" />
-              <texture id="texture_chair" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
-                <texture id="texture_table" file="wooden.jpg" texlength_s="1" texlength_t="1"/>
-              <texture id="texture_ball" file="ball.jpg" texlength_s="1" texlength_t="1"/>
-              <texture id="texture_wall" file="rainbow.jpg" texlength_s="20" texlength_t="20"/>
+              <texture id="texture_floor" file="grass.jpg" texlength_s="20" texlength_t="20" />
         </textures>
 
         <appearances>
@@ -55,169 +49,84 @@
           <component type="diffuse" value="0.3 0.3 0.3 1" />
           <component type="specular" value="0.4 0.4 0.4 1" />
         </appearance>
-         <appearance id="table" shininess="60" textureref="texture_table">
-            <component type="ambient" value="0.2 0.2 0.2 0.2" />
-            <component type="diffuse" value="0.8 0.8 0.8 0.8" />
-            <component type="specular" value="0 0 0 0" />
-          </appearance>
-          <appearance id="chair" shininess="60" textureref="texture_chair">
-            <component type="ambient" value="0.2 0.2 0.2 0.2" />
-            <component type="diffuse" value="0.8 0.8 0.8 0.8" />
-            <component type="specular" value="0 0 0 0" />
-          </appearance>
-          <appearance id="ball" shininess="50" textureref="texture_ball">
-          <component type="ambient" value="0.4 0.4 0.4 1" />
-          <component type="diffuse" value="0.3 0.3 0.3 1" />
-          <component type="specular" value="0.4 0.4 0.4 1" />
-        </appearance>
-          <appearance id="wall" shininess="100" textureref="texture_wall">
-          <component type="ambient" value="0.6 0.6 0.6 1" />
-          <component type="diffuse" value="0.6 0.6 0.6 1" />
-          <component type="specular" value="0.6 0.6 0.6 1" />
-        </appearance>
       </appearances>
 
       <animations>
-      	<animation id="lin" span="10.0" type="linear">
+        <animation id="lin" span="5.0" type="linear">
+            <controlpoint xx="8" yy="12" zz="8" />
+            <controlpoint xx="4" yy="12" zz="4" />
+            <controlpoint xx="2" yy="8" zz="2" />
+            <controlpoint xx="0" yy="4" zz="0" />
             <controlpoint xx="0" yy="0" zz="0" />
-            <controlpoint xx="3" yy="1" zz="3" />
-            <controlpoint xx="8.5" yy="5" zz="8.5" />
-      	</animation>
+        </animation>
+        <animation id="circ" span="5.0" type="circular" center="4 12 4" radius="70" startang="0" rotang="180" />
       </animations>
 
         <graph rootid="scene">
-            <node id="scene">
+        
+
+        <node id="scene">
           <transforms>
           </transforms>
           <appearanceref id="default" />
           <primitives>
-            <flag texture="flag.jpg" />
           </primitives>
           <descendants>
-            <noderef id ="patch"/> <!--
-          	<noderef id="tent"/>
-          	<noderef id="floor"/>
+            <noderef id="floor"/>
+            <noderef id="balloon"/>
+            <noderef id="flagstick"/>
+            <noderef id="flagFEUP"/>
           </descendants>
             </node>
 
-<node id="patch">
-        <transforms>
-          </transforms>
-          <appearanceref id="default" />
-          <primitives>
-            <vehicle/>
-           </primitives>
-        </node>
-
-            
-        <node id="tent">
-        <transforms>
-            <transform type="translate" to="8.5 5 12" />
-          </transforms>
-          <appearanceref id="floor" />
-          <primitives>
-          <pyramid cxy= "0.0 0.0" baseH="2.0 4.0"/>
-           </primitives>
-        </node>
 
         <node id="floor">
           <transforms>
             <transform type="translate" to="0.0 0.0 20.0" />
             <transform type="rotate" axis="x" angle="-90.0"/>
           </transforms>
-          <appearanceref id="floor" />
+          <appearanceref id="floor"/>
           <primitives>        
-            <rectangle xy1="0.0 0.0" xy2="20.0 20.0" />
+            <rectangle xy1="-100.0 -100.0" xy2="100.0 100.0" />
           </primitives>
         </node>
 
-         <node id="unit_cube">
+        <node id="balloon">
           <transforms>
           </transforms>
-          <appearanceref id="inherit" />
-          <descendants>
-            <noderef id="my_unit_cube_Front" />
-            <noderef id="my_unit_cube_Right" />
-            <noderef id="my_unit_cube_Left" />
-            <noderef id="my_unit_cube_Back" />
-            <noderef id="my_unit_cube_Top" />
-            <noderef id="my_unit_cube_Bottom" />
-          </descendants>
-        </node>
-        <node id="my_unit_cube_Front">
-          <transforms>
-            <transform type="translate" to="0 0 0.5" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+          <animationref id="circ" />
+          <animationref id="lin" />
+          <appearanceref id="default" />
+          <primitives>        
+            <vehicle/>
           </primitives>
-          <descendants>
-          </descendants>
         </node>
-        <node id="my_unit_cube_Right">
-          <transforms>
-            <transform type="translate" to="0.5 0 0" />
-            <transform type="rotate" axis="y" angle="90" />
-          </transforms>
 
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
-          </primitives>
-          <descendants>
-          </descendants>
-        </node>
-      
-        <node id="my_unit_cube_Back">
+         <node id="flagFEUP">
           <transforms>
-            <transform type="translate" to="0 0 -0.5" />
-            <transform type="rotate" axis="y" angle="180" />
-          </transforms>
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
-          </primitives>
-          <descendants>
-          </descendants>
-        </node>
-        <node id="my_unit_cube_Left">
-          <transforms>
-            <transform type="translate" to="-0.5 0 0" />
-            <transform type="rotate" axis="y" angle="-90" />
-          </transforms>
+            
+            <transform type="translate" to="5 5 5" />
 
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
-          </primitives>
-          <descendants>
-          </descendants>
-        </node>
-        <node id="my_unit_cube_Top">
-          <transforms>
-            <transform type="translate" to="0 0.5 0" />
-            <transform type="rotate" axis="x" angle="-90" />
+            <transform type="rotate" axis="z" angle="180.0"/>
+            <transform type="rotate" axis="x" angle="90.0"/>
           </transforms>
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+          <appearanceref id="default" />
+          <primitives>         
+            <flag texture="flag.jpg" />
           </primitives>
-          <descendants>
-          </descendants>
         </node>
-        <node id="my_unit_cube_Bottom">
-          <transforms>
-            <transform type="translate" to="0 -0.5 0" />
-            <transform type="rotate" axis="x" angle="90" />
-          </transforms>
 
-          <appearanceref id="inherit" />
-          <primitives>
-            <rectangle xy1="-0.5 -0.5" xy2="0.5 0.5" />
+        <node id="flagstick">
+          <transforms>
+            <transform type="translate" to="5 5 5.1" />
+            <transform type="rotate" axis="x" angle="90.0"/>
+          </transforms>
+          <appearanceref id="default" />
+          <primitives>        
+            <cylinder base="0.1" top="0.1" height="5" slices="10" stacks="10" />  
           </primitives>
-          <descendants>
-          </descendants>
         </node>
+
+
       </graph>
-    </anf>
+</anf>

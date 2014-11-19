@@ -1316,7 +1316,7 @@ void ANFScene::init() {
 
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
-	setUpdatePeriod(50);
+	setUpdatePeriod(60);
 }
 
 void ANFScene::FillChildren(Node* node) {
