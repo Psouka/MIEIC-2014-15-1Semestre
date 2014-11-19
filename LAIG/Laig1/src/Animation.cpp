@@ -16,6 +16,7 @@ Animation::Animation(string id,float span) {
 	this->id = id;
 	this->span = span;
 	this->start = false;
+	this->stop = false;
 }
 
 string Animation::getId(){
@@ -40,7 +41,6 @@ void LinearAnimation::init(unsigned long t) {
 	this->transY = this->controlPoint[this->idPC][1];
 	this->transZ = this->controlPoint[this->idPC][2];
 	this->start = true;
-	this->stop = false;
 	this->time = t;
 }
 
@@ -124,8 +124,6 @@ CircularAnimation::CircularAnimation(string id, float span, float* center, float
 		this->center[0] = center[0];
 		this->center[1] = center[1];
 		this->center[2] = center[2];
-
-		this->stop = false;
 }
 
 void CircularAnimation::init(unsigned long t) {
