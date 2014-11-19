@@ -320,11 +320,11 @@ Vehicle ::Vehicle(){
 	vector<float> controlPoint;
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(7.0);
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(12.0);
+	controlPoint.push_back(13.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(2.0);
@@ -334,12 +334,12 @@ Vehicle ::Vehicle(){
 	/////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(8.0);
-	controlPoint.push_back(14.0);
+	controlPoint.push_back(13.0);
+	controlPoint.push_back(19.0);
 
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(0.0);
@@ -348,11 +348,11 @@ Vehicle ::Vehicle(){
 	////////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(-7.0);
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(-12.0);
+	controlPoint.push_back(13.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(-2.0);
@@ -379,11 +379,11 @@ Vehicle ::Vehicle(){
 
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(-7.0);
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(-12.0);
+	controlPoint.push_back(13.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(-2.0);
@@ -394,12 +394,12 @@ Vehicle ::Vehicle(){
 	/////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(8.0);
-	controlPoint.push_back(-14.0);
+	controlPoint.push_back(13.0);
+	controlPoint.push_back(-19.0);
 
 	controlPoint.push_back(0.0);
 	controlPoint.push_back(0.0);
@@ -408,11 +408,11 @@ Vehicle ::Vehicle(){
 	////////////////////////////////////////
 
 	controlPoint.push_back(0.0);
-	controlPoint.push_back(7.0);
+	controlPoint.push_back(12.0);
 	controlPoint.push_back(0.0);
 
-	controlPoint.push_back(7.0);
-	controlPoint.push_back(8.0);
+	controlPoint.push_back(12.0);
+	controlPoint.push_back(13.0);
 	controlPoint.push_back(0.0);
 
 	controlPoint.push_back(2.0);
