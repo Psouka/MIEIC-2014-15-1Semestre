@@ -111,36 +111,7 @@
           </transforms>
           <appearanceref id="wall" />
           <primitives>
-            <vehicle/>
- <!--           <patch order="2" partsU="10" partsV="10" compute="fill">
-          <controlpoint x="0.0" y="7.0" z="0.0" />
-          <controlpoint x="8.0" y="8.0" z="0.0" />
-          <controlpoint x="2.0" y="0.0" z="0.0" />
-
-          <controlpoint x="0.0" y="5.0" z="0.0" />
-          <controlpoint x="0.0" y="8.0" z="8.0" />
-          <controlpoint x="0.0" y="0.0" z="5.0" />
-
-           <controlpoint x="0.0" y="7.0" z="0.0" />
-          <controlpoint x="-8.0" y="8.0" z="0.0" />
-          <controlpoint x="-2.0" y="0.0" z="0.0" />
-       </patch>
-
-         <patch order="2" partsU="10" partsV="10" compute="fill">
-
-           <controlpoint x="0.0" y="7.0" z="0.0" />
-          <controlpoint x="-8.0" y="8.0" z="0.0" />
-          <controlpoint x="-2.0" y="0.0" z="0.0" />
-
-          <controlpoint x="0.0" y="7.0" z="0.0" />
-          <controlpoint x="0.0" y="8.0" z="-8.0" />
-          <controlpoint x="0.0" y="0.0" z="-5.0" />
-
-          <controlpoint x="0.0" y="7.0" z="0.0" />
-          <controlpoint x="8.0" y="8.0" z="0.0" />
-          <controlpoint x="2.0" y="0.0" z="0.0" />
-
-       </patch> -->
+            <vehiclePlane/>
            </primitives>
         </node>
 
