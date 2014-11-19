@@ -1375,7 +1375,7 @@ void ANFScene::update(unsigned long t) {
 					tempV[1] = nodes[i]->getAnimsVector()[nodes[i]->getActiveAnim() + 1]->getFinalPos();
 					Animation* tempA = new LinearAnimation("temp", 5, tempV);
 					vector<Animation*>::iterator it = nodes[i]->getAnimsVector().begin();
-					temp.insert(it+nodes[i]->getActiveAnim(), tempA);
+					temp.insert(it+nodes[i]->getActiveAnim() + 1, tempA);
 					nodes[i]->setAnimsVector(temp);
 				}
 				else
