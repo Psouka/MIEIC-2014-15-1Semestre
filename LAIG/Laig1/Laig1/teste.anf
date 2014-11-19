@@ -5,11 +5,11 @@
             <lighting doublesided="true" local="true" enabled="true" ambient="0.8 0.8 0.8 1.0" />
         </globals>
 
-      <cameras initial="landscapex" >
+      <cameras initial="close" >
          <ortho id="landscapex" direction="x" near="-10" far="10" left="-10" right="10" top="10" bottom="-10" />
          <ortho id="landscapez" direction="z" near="-10" far="10" left="-10" right="10" top="10" bottom="-10" />
          <ortho id="landscapey" direction="y" near="-10" far="10" left="-10" right="10" top="10" bottom="-10" />
-         <perspective id="close" near="1.0" far="20.0" angle="65.0" pos="20 20 20" target="8.5 5 10" />
+         <perspective id="close" near="1.0" far="200.0" angle="65.0" pos="50 50 50" target="0 0 0" />
         </cameras>
 
 
