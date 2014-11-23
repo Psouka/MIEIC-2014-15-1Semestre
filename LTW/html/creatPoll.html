@@ -1,0 +1,86 @@
+
+<html lang="en">
+<head>
+  <script src="../resources/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="../js/page.js"></script>
+   <title>PollPage</title>
+   <link rel="shortcut icon" href="../resources/background.png"/>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/creatPoll.css" hreflang="en">
+</head>
+<body>
+    <div id ="container" class="container">
+        <div class="flat-form">
+            <ul class="tabs">
+                <li>
+                    <a href="#CreatPoll" class="active">Create Poll</a>
+                </li>
+                <li>
+                    <a href="#SearchPoll">Search Poll</a>
+                </li>
+            </ul>
+
+            <div id="CreatPoll" class="form-action show">
+                <h1>Creating Poll</h1>
+                <form method="post">
+                    <ul>
+                        <p>
+                    Question?
+                </p>
+                        <li>
+                            <input type="text" name="usernameL" placeholder="Question" required>
+                        </li>
+
+                         <p>
+                    Options:
+                </p>
+                        <li>
+                            <input type="text" name="option1" placeholder="Option 1" required>
+                        </li>
+                        <li>
+                            <input type="text" name="option2" placeholder="Option 2" required>
+                        </li>
+                        <li>
+                            <input type="text" name="option3" placeholder="Option 3" >
+                        </li>
+                        <li>
+                            <input type="text" name="option4" placeholder="Option 4" >
+                        </li>
+                        <li>
+                            <input type="submit" value="Creat" class="button" />
+                        </li>
+                    </ul>
+                </form>
+
+            </div>
+
+            <div id="SearchPoll" class="form-action hide">
+                <h1>Searching for Poll</h1>
+                <p>
+                    Give key words / Id's / Username
+                </p>
+                <form>
+                    <ul>
+                        <li>
+                            <input type="text" name="kWord" placeholder="Key Word" >
+                        </li>
+                         <li>
+                            <input type="text" name="searchID" placeholder="ID" >
+                        </li>
+                        <li>
+                            <input type="text" name="SearchUser" placeholder="Username" >
+                        </li>
+                        <li>
+                            <input type="submit" value="Search" class="button" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <footer>
+           <center> 2014 LTW  © All rights reserved to no one. </center>
+        <footer>
+</body>
+</html>
