@@ -8,6 +8,25 @@ body {
   font-family: 'Roboto';
 }
 
+.login {
+   background: #505050;  
+  position: absolute;
+    right: 15px;
+    top: 12px;
+}
+
+
+.login li {
+   float:center;
+   border : 3px;
+  color: #FFFFFF;
+  font-size: 20px;
+margin: 5;
+padding: 0;
+left: 10%;
+right: 10%;
+}
+
 .flat-form {
   background: #34495e;
   margin: 25px auto;
