@@ -2,7 +2,7 @@
 @import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
 
 body {
-  background: url(http://jsrun.it/assets/p/r/8/X/pr8Xi.png);  /*bg  1a1a1a  434240  */
+  background-image: url("../resources/background.png");
   color: white;
   font-family: 'Roboto';
 }
@@ -15,6 +15,7 @@ body {
   position: relative;
   font-family: 'Roboto';
 }
+
 .tabs {
   background: #505050;  
   height: 40px;
@@ -42,13 +43,7 @@ body {
   padding: 12px 22px 12px 22px;
 
 }
-.tabs li:last-child a {
-  border-right: none;
-  width: 174px;
-  padding-left: 0;
-  padding-right: 0;
-  text-align: center;
-}
+
 .tabs a.active {
   background: #505050; 
   border-right: none;
