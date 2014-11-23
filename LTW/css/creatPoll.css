@@ -17,15 +17,31 @@ body {
 
 
 .login li {
-   float:center;
+  float:center;
    border : 3px;
   color: #FFFFFF;
   font-size: 20px;
-margin: 5;
-padding: 0;
-left: 10%;
-right: 10%;
+  margin: 5;
+  padding: 0;
+  left: 10%;
+  right: 10%;
 }
+
+.buttonOut{
+  display: block;
+  background: #136899;
+  color: #ffffff;
+  text-align: center;
+}
+
+.buttonOut:hover {
+  background: #1e75aa;
+}
+
+.buttonOut:active {
+  background: #CC3300;
+}
+
 
 .flat-form {
   background: #34495e;
