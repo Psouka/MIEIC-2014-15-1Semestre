@@ -1,6 +1,5 @@
 <?php
-
-    $dbh = new PDO('sqlite:database.db');
+    $dbh = new PDO('sqlite:../db/database.db');
     $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $ip = 0;
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
@@ -10,17 +9,18 @@
         } else {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
+    $username = "test";
+    $userid = 0;
 
-    $stmt = $dbh->prepare('SELECT idUser FROM UserLogin WHERE IPUser = ?');
+    $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
     $stmt->execute(array($ip));
-    $username = 'test';
 
     while ($row = $stmt->fetch()) {
         if(in_array($ip, $row)) {
             $userid = $row['idUser'];
-            $stmt1 = $dbh->prepare('SELECT username FROM User WHERE idUser = ?');
+            $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
             $stmt1->execute(array($userid));
-            while ($row1 = $stmt->fetch()) {
+            while ($row1 = $stmt1->fetch()) {
                 if(in_array($userid, $row1)) {
                     $username = $row1['username'];
                 }
@@ -43,7 +43,7 @@
         <form action="logout.php" method="post">
             <ul class="Login"> 
                 <li>
-                     <p>$username</p>
+                     <p><center><?= $username ?></center></p>
                 </li>
                 <li>
                      <input type="submit" value="Log Out" class="buttonOut" />
