@@ -10,6 +10,7 @@
         $ip = $_SERVER['REMOTE_ADDR'];
     }
     $username = "test";
+    
     $userid = 0;
 
     $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
@@ -64,13 +65,14 @@
 
             <div id="CreatPoll" class="form-action show">
                 <h1>Creating Poll</h1>
-                <form method="post">
+                 <form action="../db/newpoll.php" method="post">
+               <?php  session_start();   $_SESSION['usernameOn'] = $username; ?>
                     <ul>
                         <p>
                     Question?
                 </p>
                         <li>
-                            <input type="text" name="usernameL" placeholder="Question" required>
+                            <input type="text" name="Question" placeholder="Question" required>
                         </li>
 
                          <p>

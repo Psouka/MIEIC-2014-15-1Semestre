@@ -28,4 +28,5 @@
 		echo('Something wrong :(');
 
 header( 'Location: ../page.html' ) ;
+
 ?>
