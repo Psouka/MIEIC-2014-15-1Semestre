@@ -55,15 +55,12 @@ body {
 
 .form-action h1 {
   font-size: 42px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
 }
 .form-action p {
   font-size: 12px;
   padding-bottom: 10px;
   line-height: 25px;
-}
-form {
-  padding-right: 20px !important;
 }
 
 form input[type=text],
