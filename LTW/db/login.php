@@ -38,5 +38,6 @@
 	if($check == 0)
 		echo('Sorry bro, wrong username or password :(');
 
-header( 'Location: ../page.html' ) ;
+header( 'Location: ../html/createPoll.php' );
+exit();
 ?>

@@ -44,4 +44,7 @@ if($username != 'test')
 }
 else
 	echo('U WUT MATE');
+
+header( 'Location: ../html/createPoll.php' );
+exit();
 ?>

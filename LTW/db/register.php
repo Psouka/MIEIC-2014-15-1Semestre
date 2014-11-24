@@ -31,4 +31,7 @@
 		printf ("YAY, Welcome to the Big Dick Club %s!", $username);
 	}
 
+
+header( 'Location: ../page.html' );
+exit();
 ?>

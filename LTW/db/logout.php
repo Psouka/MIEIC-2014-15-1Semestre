@@ -1,10 +1,11 @@
 <?php
-
+session_start(); 
 	$dbh = new PDO('sqlite:database.db');
 
-	$username = $_POST['usernameOut'];
-	$ip = $_POST['ipOut'];
 
+	$username = $_SESSION['usernameOn'];
+	$ip = $_SESSION['ipOut'];
+if($username != 'test'){
 	$check = 0;
 	$stmt = $dbh->prepare('SELECT username, IPUser FROM UserLogin WHERE username = ?');
 	$stmt->execute(array($username, $password));
@@ -26,7 +27,7 @@
 	}
 	if($check == 0)
 		echo('Something wrong :(');
-
+}
 header( 'Location: ../page.html' ) ;
-
+exit();
 ?>

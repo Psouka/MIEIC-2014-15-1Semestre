@@ -40,8 +40,10 @@
         <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
 </head>
 <body>
+    <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
     <div class="Login">
-        <form action="logout.php" method="post">
+        <form action="../db/logout.php" method="post">
+
             <ul class="Login"> 
                 <li>
                      <p><center><?= $username ?></center></p>
@@ -66,7 +68,6 @@
             <div id="CreatPoll" class="form-action show">
                 <h1>Creating Poll</h1>
                  <form action="../db/newpoll.php" method="post">
-               <?php  session_start();   $_SESSION['usernameOn'] = $username; ?>
                     <ul>
                         <p>
                     Question?
