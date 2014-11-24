@@ -24,16 +24,5 @@
 	if($check == 0)
 		echo('Sorry bro, wrong username or password :(');
 
+header( 'Location: ../page.html' ) ;
 ?>
-
-<html lang="en">
-  <head>
-    <title>Back to the form</title>
-    <meta charset="utf-8">
-  </head>
-
-  <body>
-  	<br>
- 	<a href="page.html"> ---Back--- </a>
-  </body>
-</html>
