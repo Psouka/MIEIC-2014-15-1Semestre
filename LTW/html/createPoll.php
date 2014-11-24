@@ -1,3 +1,33 @@
+<?php
+
+    $dbh = new PDO('sqlite:database.db');
+    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+    $ip = 0;
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+    }
+
+    $stmt = $dbh->prepare('SELECT idUser FROM UserLogin WHERE IPUser = ?');
+    $stmt->execute(array($ip));
+    $username = 'test';
+
+    while ($row = $stmt->fetch()) {
+        if(in_array($ip, $row)) {
+            $userid = $row['idUser'];
+            $stmt1 = $dbh->prepare('SELECT username FROM User WHERE idUser = ?');
+            $stmt1->execute(array($userid));
+            while ($row1 = $stmt->fetch()) {
+                if(in_array($userid, $row1)) {
+                    $username = $row1['username'];
+                }
+            }
+        }
+    }
+?>
 
 <html lang="en">
 <head>
@@ -6,14 +36,14 @@
    <title>PollPage</title>
    <link rel="shortcut icon" href="../resources/icon.ico"/>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/creatPoll.css" hreflang="en">
+        <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
 </head>
 <body>
     <div class="Login">
         <form action="logout.php" method="post">
             <ul class="Login"> 
                 <li>
-                     <p>Username</p>
+                     <p>$username</p>
                 </li>
                 <li>
                      <input type="submit" value="Log Out" class="buttonOut" />
@@ -59,7 +89,7 @@
                             <input type="text" name="option4" placeholder="Option 4" >
                         </li>
                         <li>
-                            <input type="submit" value="Creat" class="button" />
+                            <input type="submit" value="Create" class="button" />
                         </li>
                     </ul>
                 </form>
