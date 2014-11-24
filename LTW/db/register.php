@@ -14,6 +14,12 @@
  			echo "That username has already been taken <br>
  				  Please, choose another one";
  			break;
+ 		}
+ 		if (in_array($email, $row['email'])) {
+ 			$check = 1;
+ 			echo "That email has already been taken <br>
+ 				  Please, choose another one";
+ 			break;
  		}	
 
 	}
