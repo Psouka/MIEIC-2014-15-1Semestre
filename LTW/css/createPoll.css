@@ -31,6 +31,7 @@ body {
   display: block;
   background: #136899;
   color: #ffffff;
+  padding-right: 15px;
   text-align: center;
 }
 
@@ -47,7 +48,7 @@ body {
   background: #34495e;
   margin: 25px auto;
   width: 790px;
-  height: 640px;
+  height: 520px;
   position: relative;
   font-family: 'Roboto';
 }
@@ -127,6 +128,7 @@ form input{
   background: #136899;
   height: 40px;
   width: 80px;
+  padding-right: 15px;
   color: #ffffff;
   text-align: center;
 }

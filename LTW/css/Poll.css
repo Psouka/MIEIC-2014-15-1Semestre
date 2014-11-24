@@ -32,6 +32,7 @@ body {
   display: block;
   background: #136899;
   color: #ffffff;
+  padding-right: 15px;
   text-align: center;
 }
 
@@ -128,6 +129,7 @@ form input{
   background: #136899;
   height: 40px;
   width: 80px;
+  padding-right: 15px;
   color: #ffffff;
   text-align: center;
 }
