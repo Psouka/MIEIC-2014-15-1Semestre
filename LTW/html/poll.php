@@ -1,12 +1,17 @@
+<?php
+    $dbh = new PDO('sqlite:../db/database.db');
+    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+?>
 
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="../js/Poll.js"></script>
-   <title>PollPage</title>
+  <script type="text/javascript" src="../js/poll.js"></script>
+   <title>Pollerino</title>
    <link rel="shortcut icon" href="../resources/icon.ico"/>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
+        <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <body>
     <div class="Login">
@@ -97,7 +102,7 @@
                 <form>
                     <ul>
                         <li>
-                            <button>update</button>
+                            <button>Update</button>
                             <div id="vis"></div>
                         </li>
                     </ul>
