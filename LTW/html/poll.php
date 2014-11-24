@@ -14,9 +14,9 @@
         <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <body>
-    <div class="Login">
+    <div class="Logout">
         <form action="logout.php" method="post">
-            <ul class="Login"> 
+            <ul class="Logout"> 
                 <li>
                      <p>Username</p>
                 </li>
