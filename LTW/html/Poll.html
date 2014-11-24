@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="../js/page.js"></script>
+  <script type="text/javascript" src="../js/Poll.js"></script>
    <title>PollPage</title>
    <link rel="shortcut icon" href="../resources/icon.ico"/>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/creatPoll.css" hreflang="en">
+        <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
 </head>
 <body>
     <div class="Login">
@@ -30,9 +30,12 @@
                 <li>
                     <a href="#SearchPoll">Search Poll</a>
                 </li>
+                <li>
+                    <a href="#Poll">Search Poll</a>
+                </li>
             </ul>
 
-            <div id="CreatPoll" class="form-action show">
+            <div id="CreatPoll" class="form-action hide">
                 <h1>Creating Poll</h1>
                 <form method="post">
                     <ul>
@@ -84,6 +87,18 @@
                         </li>
                         <li>
                             <input type="submit" value="Search" class="button" />
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
+            <div id="Poll" class="form-action show">
+                <h1>Poll</h1>
+                <form>
+                    <ul>
+                        <li>
+                            <button>update</button>
+                            <div id="vis"></div>
                         </li>
                     </ul>
                 </form>

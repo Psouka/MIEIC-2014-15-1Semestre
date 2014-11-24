@@ -15,28 +15,15 @@
  				  Please, choose another one";
  			break;
  		}	
- 			
+
 	}
 	if($check == 0) {
-		$idAccount=0;
-		$id1 = $dbh->prepare("SELECT count(*) FROM account");
+		$id1 = $dbh->prepare("SELECT count(*) FROM User");
 		$id1->execute();
-		$id2 = $id1->fetch();
-		//echo $id3[0];
-		$stmt2 = $dbh->prepare('INSERT INTO account (idAccount, username, email, password) VALUES (?, ?, ?, ?)');
-		$stmt2->execute(array($id2[0], $username, $email, $password));
+		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password) VALUES (?, ?, ?)');
+		$stmt2->execute(array($username, $email, $password));
 		printf ("YAY, Welcome to the Big Dick Club %s!", $username);
 	}
+
+	header( 'Location: ../page.html' ) ;
 ?>
-
-<html lang="en">
-  <head>
-    <title>Back to the form</title>
-    <meta charset="utf-8">
-  </head>
-
-  <body>
-  	<br>
- 	<a href="page.html"> ---Back--- </a>
-  </body>
-</html>
