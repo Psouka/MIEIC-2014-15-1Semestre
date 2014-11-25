@@ -2,10 +2,10 @@
 <head>
         <meta charset="utf-8">
    <title>Pollerino</title>
-  <script src="resources/jquery-1.9.1.js"></script>
-  <script src="js/page.js"></script>
-   <link rel="shortcut icon" href="resources/icon.ico">
-   <link rel="stylesheet" href="css/page.css" hreflang="en">
+  <script src="../resources/jquery-1.9.1.js"></script>
+  <script src="../js/page.js"></script>
+   <link rel="shortcut icon" href="../resources/icon.ico">
+   <link rel="stylesheet" href="../css/page.css" hreflang="en">
 </head>
 <body>
     <div id ="container" class="container">
@@ -24,7 +24,7 @@
 
             <div id="login" class="form-action show">
                 <h1>Login on Pollerino</h1>
-                <form action="db/login.php" method="post">
+                <form action="../db/login.php" method="post">
                     <ul>
                         <li>
                             <input type="text" name="usernameL" placeholder="Username" required>
@@ -42,7 +42,7 @@
 
             <div id="register" class="form-action hide">
                 <h1>Register</h1>
-                 <form action="db/register.php" method="post">
+                 <form action="../db/register.php" method="post">
                     <ul>
                         <li>
                             <input type="text" id="username" name="usernameR" placeholder="Username" required><br>

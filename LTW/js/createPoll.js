@@ -3,7 +3,7 @@ var counter = 1;
 var limit = 6;
 function addInput(divName){
      if (counter == limit)  {
-          alert("You have reached the limit of adding " + counter + " inputs");
+          alert("You reached the limit of " + counter + " optionerinos!");
      }
      else {
           var newdiv = document.createElement('div');

@@ -52,6 +52,10 @@ body {
   font-family: 'Roboto';
 }
 
+.flat-form #SearchPoll{
+  height: 290px;
+}
+
 .tabs {
   background: #505050;  
   height: 40px;
@@ -92,11 +96,13 @@ body {
 .form-action h1 {
   font-size: 42px;
   padding-bottom: 10px;
+  text-align: center;
 }
 .form-action p {
   font-size: 20px;
   padding-bottom: 10px;
   line-height: 25px;
+  text-align: center;
 }
 form {
   padding-left: 20px !important;
@@ -130,7 +136,11 @@ form input{
   padding-right: 15px;
   color: #ffffff;
   text-align: center;
-  margin-top: 12px;
+  margin-top: -10px;
+}
+
+#SearchPoll .button {
+  margin-top: 0px;
 }
 
 .button:hover {
@@ -142,7 +152,5 @@ form input{
 }
 
 #container {
-  top:50%;
-  left:50%;
 
 }
