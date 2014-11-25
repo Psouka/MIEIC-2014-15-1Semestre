@@ -5,7 +5,17 @@ session_start();
 	$username = $_SESSION['usernameOn'];
 	$quest = $_POST['Question'];
 	$option = $_POST['myInputs'];
+	$image = $_POST['queryImage'];
 
+	$new_url;
+?>
+<html lang="en">
+<script src="../js/tiny.js" language="Javascript" type="text/javascript"></script>
+	<script type="text/javascript">
+  <?= $new_url =clone get_tiny_url($image);?>
+</script>
+</hmtl>
+<?php
 if($username != 'test')
 {
 
@@ -15,8 +25,8 @@ if($username != 'test')
 	$row = $stmt->fetch();
 
 
-	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question) VALUES (?, ?)');
-	$stmt->execute(array($row['idUser'], $quest));
+	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question,Image) VALUES (?, ?)');
+	$stmt->execute(array($row['idUser'], $quest,$new_url));
 
 
 
@@ -35,6 +45,7 @@ foreach ($option as $temp) {
 else
 	echo('U WUT MATE');
 
-header( 'Location: ../html/createPoll.php' );
-exit();
+echo($new_url);
+//header( 'Location: ../html/createPoll.php' );
+//exit();
 ?>

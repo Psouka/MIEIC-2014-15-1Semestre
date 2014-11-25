@@ -77,6 +77,16 @@
                             </li>
 
                              <p>
+                                 <p>
+                        Image?
+                    </p>
+                            <li>
+                                <input type="text" name="queryImage" placeholder="Image" required>
+                            </li>
+
+                             <p>
+
+
                         Options:
                     </p>
                     <p>
