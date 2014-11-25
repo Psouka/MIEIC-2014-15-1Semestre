@@ -35,9 +35,11 @@
  		}
  		//echo("asd");
 	}
-	if($check == 0)
-		echo('Sorry bro, wrong username or password :(');
 
+	if($check == 0)
+		header( 'Location: ../page.html' );
+	else
 header( 'Location: ../html/createPoll.php' );
+
 exit();
 ?>
