@@ -28,9 +28,9 @@
 		$id1->execute();
 		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password) VALUES (?, ?, ?)');
 		$stmt2->execute(array($username, $email, $password));
-		printf ("YAY, Welcome to the Big Dick Club %s!", $username);
-	}
 
+		//echo "<script type='text/javascript'>alert('Welcome!');</script>";
+	}
 
 header( 'Location: ../page.html' );
 exit();

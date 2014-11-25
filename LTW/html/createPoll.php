@@ -69,44 +69,42 @@
                 <h1>Creating Poll</h1>
                  <form action="../db/newpoll.php" method="post">
                     <ul>
-                        <p>
-                    Question?
-                </p>
-                        <li>
-                            <input type="text" name="Question" placeholder="Question" required>
-                        </li>
+                            <p>
+                        Question?
+                    </p>
+                            <li>
+                                <input type="text" name="Question" placeholder="Question" required>
+                            </li>
 
-                         <p>
-                    Options:
+                             <p>
+                        Options:
+                    </p>
+                    <p>
+                    <div id="dynamicInput">
+                        <script src="../js/createPoll.js" language="Javascript" type="text/javascript"></script>
+                        <input type="text" name="myInputs[]" placeholder="New Option..." required>
+                    </div>
+                    <script>
+                    addInput('dynamicInput');
+                    </script>
+                    <input type="button" value="Add another text input" class "button" onClick="addInput('dynamicInput');">
                 </p>
-                        <li>
-                            <input type="text" name="option1" placeholder="Option 1" required>
-                        </li>
-                        <li>
-                            <input type="text" name="option2" placeholder="Option 2" required>
-                        </li>
-                        <li>
-                            <input type="text" name="option3" placeholder="Option 3" >
-                        </li>
-                        <li>
-                            <input type="text" name="option4" placeholder="Option 4" >
-                        </li>
-                        <li>
+                <p>
+                <li>
                             <input type="submit" value="Create" class="button" />
                         </li>
-                    </ul>
-                </form>
-
-            </div>
-
-            <div id="SearchPoll" class="form-action hide">
-                <h1>Searching for Poll</h1>
-                <p>
-                    Give key words / Id's / Username
-                </p>
-                <form>
-                    <ul>
-                        <li>
+                        </p>
+                </ul>
+            </form>
+        </div>
+        <div id="SearchPoll" class="form-action hide">
+                    <h1>Searching for Poll</h1>
+                    <p>
+                        Give key words / Id's / Username
+                    </p>
+                    <form>
+                        <ul>
+                            <li>
                             <input type="text" name="kWord" placeholder="Key Word" >
                         </li>
                          <li>
