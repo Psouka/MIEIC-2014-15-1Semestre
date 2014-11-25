@@ -90,13 +90,13 @@
                     <input type="button" value="Add another text input" class "button" onClick="addInput('dynamicInput');">
                 </p>
                 <p>
-                <li>
-                            <input type="submit" value="Create" class="button" />
-                        </li>
-                        </p>
-                </ul>
-            </form>
-        </div>
+                    <li>
+                        <input type="submit" value="Create" class="button" />
+                    </li>
+                </p>
+            </ul>
+        </form>
+    </div>
         <div id="SearchPoll" class="form-action hide">
                     <h1>Searching for Poll</h1>
                     <p>

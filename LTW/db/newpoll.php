@@ -3,14 +3,11 @@ session_start();
 	$dbh = new PDO('sqlite:database.db');
 
 	$username = $_SESSION['usernameOn'];
+	$quest = $_POST['Question'];
+	$option = $_POST['myInputs'];
 
 if($username != 'test')
 {
-	$quest = $_POST['Question'];
-	$option1 = $_POST['option1'];
-	$option2 = $_POST['option2'];
-	$option3 = $_POST['option3'];
-	$option4 = $_POST['option4'];
 
 
 	$stmt = $dbh->prepare('SELECT idUser FROM User WHERE username = ?');
@@ -27,18 +24,11 @@ if($username != 'test')
 	$stmt->execute(array($quest));
 	$row = $stmt->fetch();
 
-
-	$stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
-	$stmt->execute(array($row['idUserQuery'], $option1));
-
-	$stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
-	$stmt->execute(array($row['idUserQuery'], $option2));
+foreach ($option as $temp) {
+    $stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
+	$stmt->execute(array($row['idUserQuery'], $temp));
+}
 	
-	$stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
-	$stmt->execute(array($row['idUserQuery'], $option3));
-
-	$stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
-	$stmt->execute(array($row['idUserQuery'], $option4));
 
 
 }
