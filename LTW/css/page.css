@@ -11,7 +11,7 @@ body {
   background: #34495e;
   margin: 25px auto;
   width: 390px;
-  height: 310px;
+  height: 350px;
   position: relative;
   font-family: 'Roboto';
 }
@@ -61,6 +61,8 @@ body {
 .form-action p {
   font-size: 12px;
   padding-bottom: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
   line-height: 25px;
 }
 
