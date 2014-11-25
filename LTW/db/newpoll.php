@@ -22,7 +22,7 @@ $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 	$new_url = get_tiny_url($image);
 
-echo('depois');
+
 if($username != 'test')
 {
 
