@@ -11,9 +11,20 @@ body {
   background: #34495e;
   margin: 25px auto;
   width: 390px;
-  height: 350px;
   position: relative;
   font-family: 'Roboto';
+}
+
+.flat-form #login {
+  height: 250px;
+}
+
+.flat-form #register {
+  height: 300px;
+}
+
+.flat-form #reset {
+  height: 250px;
 }
 
 .tabs {
@@ -101,6 +112,7 @@ form input[type=password] {
   padding-right: 5px;
   color: #ffffff;
   text-align: center;
+  margin-top: 12px;
 }
 
 .button:hover {
@@ -112,7 +124,5 @@ form input[type=password] {
 }
 
 #container {
-  top:50%;
-  left:50%;
-
+  padding-top: 15em;
 }

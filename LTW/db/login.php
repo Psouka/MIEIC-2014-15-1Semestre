@@ -37,7 +37,7 @@
 	}
 
 	if($check == 0)
-		header( 'Location: ../page.html' );
+		header( 'Location: ../html/page.php' );
 	else
 header( 'Location: ../html/createPoll.php' );
 

@@ -32,6 +32,6 @@
 		//echo "<script type='text/javascript'>alert('Welcome!');</script>";
 	}
 
-header( 'Location: ../page.html' );
+header( 'Location: ../html/page.php' );
 exit();
 ?>
