@@ -81,7 +81,8 @@
         </div>
     </div>
     <footer>
-           <center> 2014 LTW  © All righterinos reserved to no one. </center>
-        </footer>
+        <center> 2014 LTW  © All rights reserved to no one. </center>
+        </br> <center> Pls no copy pasterino </center>
+    </footer>
 </body>
 </html>

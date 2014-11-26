@@ -92,12 +92,13 @@
                     <p>
                     <div id="dynamicInput">
                         <script src="../js/createPoll.js" language="Javascript" type="text/javascript"></script>
-                        <input type="text" name="myInputs[]" placeholder="New Option..." required>
+                        <input type="text" name="inputs" placeholder="New Option..." required>
+                        <input type="button" name="deleteInput" value="−" class "buttonDel" onClick="deleteInput('dynamicInput');" required>
                     </div>
                     <script>
-                    addInput('dynamicInput');
+                        addInput('dynamicInput');
                     </script>
-                    <input type="button" value="Add another text input" class "button" onClick="addInput('dynamicInput');">
+                    <input type="button" value="Add another optionerino" class "button" onClick="addInput('dynamicInput');">
                 </p>
                 <p>
                     <li>
@@ -133,7 +134,8 @@
         </div>
     </div>
     <footer>
-           <center> 2014 LTW  © All rights reserved to no one. </center>
-        </footer>
+        <center> 2014 LTW  © All rights reserved to no one. </center>
+        </br> <center> Pls no copy pasterino </center>
+    </footer>
 </body>
 </html>
