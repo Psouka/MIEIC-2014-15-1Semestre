@@ -5,12 +5,10 @@ function searchUser(username) {
 }
 
 function searchId(id) {
-	alert(id);
   $.getJSON("../db/searchPoll.php", {'id': id}, PollsReceived);
 }
 
 function searchWord(Word) {
-	alert(Word);
   $.getJSON("../db/searchPoll.php", {'word': word}, PollsReceivedW);
 }
 
