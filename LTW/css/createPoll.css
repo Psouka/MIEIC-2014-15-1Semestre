@@ -10,9 +10,9 @@ body {
 
 .login {
    background: #505050;  
-  position: absolute;
-    right: 15px;
-    top: 12px;
+   position: absolute;
+   right: 15px;
+   top: 12px;
 }
 
 
@@ -52,7 +52,7 @@ body {
 }
 
 .flat-form #SearchPoll{
-  height: 290px;
+  height: 305px;
 }
 
 .tabs {
@@ -154,7 +154,7 @@ form input{
 }
 
 #SearchPoll .button {
-  margin-top: 0px;
+  margin-top: 10px;
 }
 
 .button:hover {
@@ -166,5 +166,5 @@ form input{
 }
 
 #container {
-  margin-top: 10em;
+  margin-top: 7em;
 }
