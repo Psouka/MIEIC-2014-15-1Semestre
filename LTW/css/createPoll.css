@@ -79,7 +79,7 @@ body {
   text-decoration: none;
   color: white;
   font-size: 16px;
-  padding: 12px 22px 12px 22px;
+  padding: 12px 22px 12px 42px;
 }
 
 .tabs a.active {
@@ -112,7 +112,7 @@ form input{
   outline: none;
 }
 
-form input[name='inputs'] {
+.newOpt {
   width: 92%;
   height: 40px;
   margin-bottom: 10px;
@@ -122,7 +122,7 @@ form input[name='inputs'] {
   outline: none;
 }
 
-form input[name='deleteInput'] {
+.buttonDel {
   padding-left: 0px;
   width: 7%;
   height: 40px;

@@ -1,6 +1,5 @@
 <?php
     $dbh = new PDO('sqlite:../db/database.db');
-    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
     $ip = 0;
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -92,13 +91,12 @@
                     <p>
                     <div id="dynamicInput">
                         <script src="../js/createPoll.js" language="Javascript" type="text/javascript"></script>
-                        <input type="text" name="inputs" placeholder="New Option..." required>
-                        <input type="button" name="deleteInput" value="−" class "buttonDel" onClick="deleteInput('dynamicInput');" required>
+                        <input type="text" name="inputs1" class="newOpt" placeholder="New Option..." required>
+                        <input type="button" name="deleteInput1" value="−" class="buttonDel" onClick="deleteInput(this);" required>
+                        <input type="text" name="inputs2" class="newOpt" placeholder="New Option..." required>
+                        <input type="button" name="deleteInput2" value="−" class="buttonDel" onClick="deleteInput(this);" required>
                     </div>
-                    <script>
-                        addInput('dynamicInput');
-                    </script>
-                    <input type="button" value="Add another optionerino" class "button" onClick="addInput('dynamicInput');">
+                    <input type="button" value="Add another optionerino" class="buttonAdd" onClick="addInput('dynamicInput');">
                 </p>
                 <p>
                     <li>
