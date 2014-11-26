@@ -125,6 +125,12 @@
                         <li>
                             <input type="submit" value="Search" class="button" />
                         </li>
+                        <p>
+                    <div id="dynamicSearch">
+                         <script src="../js/searchPoll.js" language="Javascript" type="text/javascript"></script>
+                    </div>
+                    <input type="button" value="SearchTest" class="button" onClick="searchUser('teste');">
+                </p>
                     </ul>
                 </form>
             </div>
