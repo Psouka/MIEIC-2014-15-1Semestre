@@ -38,7 +38,7 @@ else if(isset($_GET['word'])){
   $stmt->execute(array($userId));
   $Polls = $stmt->fetchAll();
   foreach ($Polls as $tempPoll)
-    if(strpos($word,$tempPoll['Question']))
+    if(strpos($word,$tempPoll['Question']) != false)
       $result[] = $tempPoll['Question'];  
 }
   echo json_encode($result);
