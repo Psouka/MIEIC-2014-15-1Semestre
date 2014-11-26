@@ -34,7 +34,7 @@
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="../js/page.js"></script>
-   <title>PollPage</title>
+   <title>Pollerino</title>
    <link rel="shortcut icon" href="../resources/icon.ico"/>
         <meta charset="utf-8">
         <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
@@ -70,7 +70,7 @@
                  <form action="../db/newpoll.php" method="post">
                     <ul>
                             <p>
-                        Question?
+                        Question:
                     </p>
                             <li>
                                 <input type="text" name="Question" placeholder="Question" required>
@@ -78,7 +78,7 @@
 
                              <p>
                                  <p>
-                        Image?
+                        Image:
                     </p>
                             <li>
                                 <input type="text" name="queryImage" placeholder="Image" required>
