@@ -107,6 +107,7 @@
         </form>
     </div>
         <div id="SearchPoll" class="form-action hide">
+            <form action="../db/searchPoll.php" method="post">
                     <h1>Searching for Poll</h1>
                     <p>
                         Give key words / Id's / Username
@@ -120,7 +121,7 @@
                             <input type="text" name="searchID" placeholder="ID" >
                         </li>
                         <li>
-                            <input type="text" name="SearchUser" placeholder="Username" >
+                            <input type="text" name="username" placeholder="Username" >
                         </li>
                         <li>
                             <input type="submit" value="Search" class="button" />
@@ -129,7 +130,7 @@
                     <div id="dynamicSearch">
                          <script src="../js/searchPoll.js" language="Javascript" type="text/javascript"></script>
                     </div>
-                    <input type="button" value="SearchTest" class="button" onClick="searchUser('teste');">
+                    <input type="button" value="SearchTest" class="button" onClick="searchUser('casa');">
                 </p>
                     </ul>
                 </form>
