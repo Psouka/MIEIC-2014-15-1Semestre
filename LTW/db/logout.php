@@ -1,28 +1,21 @@
 <?php
-
+session_start();
 	$dbh = new PDO('sqlite:database.db');
 
-	$userid = $_POST['usernameOut'];
-	$ip = $_POST['ipOut'];
+	$username = $_SESSION['usernameOn'];
+	$ip = $_SESSION['ipOut'];
 
 	$check = 0;
-	$stmt = $dbh->prepare('SELECT idUser FROM UserLogin');
-	$stmt->execute();
+	$stmt = $dbh->prepare('SELECT idUser FROM User WHERE username = ?');
+	$stmt->execute(array($username));
+	$row = $stmt->fetch();
 
-	while ($row = $stmt->fetch()) {
- 		if (in_array($userid, $row)) {
- 			if ($username === $row['username']) {
- 				$check = 1;
- 				printf ("Good Bye, %s!", $row['username']);
+	$id = $row['idUser'];
 
- 				$stmt1 = $dbh->prepare('DELETE FROM UserLogin WHERE username = ? and IPUser = ?');
- 				$stmt1->execute();
- 				break;
- 			}
- 		}
-	}
-	if($check == 0)
-		echo('Something wrong :(');
+
+	$stmt1 = $dbh->prepare('DELETE FROM UserLogin WHERE idUser = ? and IPUser = ?');
+ 	$stmt1->execute(array($id,$ip));
+
 
 header( 'Location: ../html/page.php' );
 ?>

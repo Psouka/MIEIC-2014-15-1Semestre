@@ -4,18 +4,18 @@
 	$email = $_POST['emailR'];
 	$password = $_POST['passwordR'];
 	$check = 0;
-	$stmt1 = $dbh->prepare('SELECT username FROM User WHERE username = ?');
-	$stmt1->execute(array($username));
+	$stmt1 = $dbh->prepare('SELECT `username`, `email` FROM User WHERE username = ? or email = ?');
+	$stmt1->execute(array($username,$email));
 	$result = $stmt1->fetchAll();
 	foreach ($result as $row) {
 
- 		if (in_array($username, $row)) {
+ 		if (in_array($username, $row['username'])) {
  			$check = 1;
  			echo "That username has already been taken <br>
  				  Please, choose another one";
  			break;
  		}
- 		if (in_array($email, $row['email'])) {
+ 		if ($email == $row['email']) {
  			$check = 1;
  			echo "That email has already been taken <br>
  				  Please, choose another one";
@@ -28,8 +28,6 @@
 		$id1->execute();
 		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password) VALUES (?, ?, ?)');
 		$stmt2->execute(array($username, $email, $password));
-
-		//echo "<script type='text/javascript'>alert('Welcome!');</script>";
 	}
 
 header( 'Location: ../html/page.php' );
