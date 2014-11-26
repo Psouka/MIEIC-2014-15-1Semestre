@@ -1435,7 +1435,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 		glPolygonMode( GL_FRONT_AND_BACK, GL_POINT);
 
 	if(node->getDisplayList() && !node->getDisplayListGen()){
-		//printf("\nOLEEEE\n");
+
 		if(node->getdlID() == NULL) {
 
 			node->setdlID(glGenLists(1));

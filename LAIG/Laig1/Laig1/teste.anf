@@ -59,7 +59,7 @@
         <controlpoint xx="4" yy="12" zz="4" />
             <controlpoint xx="8" yy="12" zz="8" />
         </animation>
-        <animation id="circ" span="10.0" type="circular" center="4 12 4" radius="4" startang="-60" rotang="180" />
+        <animation id="circ" span="10.0" type="circular" center="4 12 4" radius="4" startang="0" rotang="180" />
       </animations>
 
         <graph rootid="scene">        
@@ -94,6 +94,7 @@
           </transforms>
           <animationref id="lin" />
           <animationref id="circ" />
+           <animationref id="lin" />
           <appearanceref id="default" />
           <primitives>        
             <vehicle/>
