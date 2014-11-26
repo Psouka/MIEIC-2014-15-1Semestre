@@ -1,17 +1,22 @@
+<?php
+    $dbh = new PDO('sqlite:../db/database.db');
+    $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+
+?>
 
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="../js/page.js"></script>
-   <title>PollPage</title>
-   <link rel="shortcut icon" href="../resources/background.png"/>
+  <script type="text/javascript" src="../js/poll.js"></script>
+   <title>Pollerino</title>
+   <link rel="shortcut icon" href="../resources/icon.ico"/>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/creatPoll.css" hreflang="en">
+        <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <body>
-    <div class="Login">
+    <div class="Logout">
         <form action="logout.php" method="post">
-            <ul class="Login"> 
+            <ul class="Logout"> 
                 <li>
                      <p>Username</p>
                 </li>
@@ -30,9 +35,12 @@
                 <li>
                     <a href="#SearchPoll">Search Poll</a>
                 </li>
+                <li>
+                    <a href="#Poll">Search Poll</a>
+                </li>
             </ul>
 
-            <div id="CreatPoll" class="form-action show">
+            <div id="CreatPoll" class="form-action hide">
                 <h1>Creating Poll</h1>
                 <form method="post">
                     <ul>
@@ -66,7 +74,7 @@
 
             </div>
 
-            <div id="SearchPoll" class="form-action hide">
+            <div id="Poll" class="form-action hide">
                 <h1>Searching for Poll</h1>
                 <p>
                     Give key words / Id's / Username
@@ -89,10 +97,22 @@
                 </form>
             </div>
 
+            <div id="Poll" class="form-action show">
+                <h1>Poll</h1>
+                <form>
+                    <ul>
+                        <li>
+                            <button>Update</button>
+                            <div id="vis"></div>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+
         </div>
     </div>
     <footer>
            <center> 2014 LTW  © All rights reserved to no one. </center>
-        <footer>
+        </footer>
 </body>
 </html>

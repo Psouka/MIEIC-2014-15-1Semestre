@@ -6,7 +6,8 @@
 	$password = $_POST['passwordL'];
 
 	$check = 0;
-	$stmt = $dbh->prepare('SELECT username, password FROM User WHERE username = ? AND password = ?');
+	$ip = 0;
+	$stmt = $dbh->prepare('SELECT username, password, idUser FROM User WHERE username = ? AND password = ?');
 	$stmt->execute(array($username, $password));
 
 	while ($row = $stmt->fetch()) {
@@ -15,25 +16,30 @@
  			if ($password === $row['password']) {
  				$check = 1;
  				printf ("Welcome back, %s!", $row['username']);
+
+ 				if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+ 					$ip = $_SERVER['HTTP_CLIENT_IP'];
+ 				} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+ 					$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+ 				} else {
+ 					$ip = $_SERVER['REMOTE_ADDR'];
+ 				}
+
+ 				$stmt2 = $dbh->prepare('INSERT INTO UserLogin (idUser, IPUser) VALUES (?, ?)');
+ 				$stmt2->execute(array($row['idUser'], $ip));
+
+ 				printf ("Welcome back, %s!", $row['username']);
  				break;
  			}
  			//else echo("asd");
  		}
  		//echo("asd");
 	}
+
 	if($check == 0)
-		echo('Sorry bro, wrong username or password :(');
+		header( 'Location: ../html/page.php' );
+	else
+header( 'Location: ../html/createPoll.php' );
 
+exit();
 ?>
-
-<html lang="en">
-  <head>
-    <title>Back to the form</title>
-    <meta charset="utf-8">
-  </head>
-
-  <body>
-  	<br>
- 	<a href="page.html"> ---Back--- </a>
-  </body>
-</html>
