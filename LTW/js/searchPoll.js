@@ -31,6 +31,6 @@ var  a = document.createElement('a');
 var linkText = document.createTextNode(value);
 a.appendChild(linkText);
 a.title = value;
-a.href = "http://example.com";
+a.href = "../db/poll.php?Question=" + value;
 document.getElementById('dynamicSearch').appendChild(a);
 }
