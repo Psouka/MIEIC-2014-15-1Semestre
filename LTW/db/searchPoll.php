@@ -22,25 +22,27 @@ if(isset($_GET['username'])){
     $result[] = $tempPoll['Question'];    
 }
 
-else if(isset($_GET['id'])){
+if(isset($_GET['id'])){
   
   $id = $_GET['id'];
   $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE idUserQuery = ?');
   $stmt->execute(array($id));
-  $Poll = $stmt->fetchAll();
+  $Poll = $stmt->fetch();
 
    $result[] = $Poll['Question'];
 }
 
-else if(isset($_GET['word'])){
+if(isset($_GET['word'])){
 
   $word = $_GET['word'];
   $stmt = $db->prepare('SELECT Question FROM UserQuery');
-  $stmt->execute(array($userId));
+  $stmt->execute();
   $Polls = $stmt->fetchAll();
+
   foreach ($Polls as $tempPoll){ 
-    if(strpos($word,$tempPoll['Question']) != false)
-     {  $result[] = $tempPoll['Question'];  
+    if(strpos($tempPoll['Question'],$word) !== false)
+     {  
+      $result[] = $tempPoll['Question'];  
     }
     }
 }
