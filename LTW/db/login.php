@@ -39,7 +39,7 @@
 	if($check == 0)
 		header( 'Location: ../html/page.php' );
 	else
-header( 'Location: ../html/createPoll.php' );
+		header( 'Location: ../html/createPoll.php' );
 
-exit();
+	exit();
 ?>
