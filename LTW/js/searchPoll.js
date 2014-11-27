@@ -1,6 +1,5 @@
 
 function searchUser(username) {
-	alert(username);
   $.getJSON("../db/searchPoll.php", {'username': username}, PollsReceived);
 }
 
@@ -9,7 +8,7 @@ function searchId(id) {
 }
 
 function searchWord(Word) {
-  $.getJSON("../db/searchPoll.php", {'word': word}, PollsReceivedW);
+  $.getJSON("../db/searchPoll.php", {'word': word}, PollsReceived);
 }
 
 
