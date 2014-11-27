@@ -7,7 +7,7 @@ function searchId(id) {
   $.getJSON("../db/searchPoll.php", {'id': id}, PollsReceived);
 }
 
-function searchWord(Word) {
+function searchWord(word) {
   $.getJSON("../db/searchPoll.php", {'word': word}, PollsReceived);
 }
 
