@@ -43,6 +43,7 @@ body {
   margin: 0;
   padding: 0;
 }
+
 .tabs a {
   background: #505050; 
   display: block;
@@ -69,12 +70,23 @@ body {
   padding-bottom: 30px;
   text-align: center;
 }
-.form-action p {
+.form-action p.resetPw {
   font-size: 12px;
   padding-bottom: 10px;
   padding-left: 20px;
   padding-right: 20px;
   line-height: 25px;
+}
+
+.form-action p.error {
+  font-size: 12px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 20px;
+  line-height: 25px;
+  color: red;
+  display: inline-block;
+  margin-top: 20px;
 }
 
 form {

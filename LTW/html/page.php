@@ -8,6 +8,28 @@
    <link rel="stylesheet" href="../css/page.css" hreflang="en">
 </head>
 <body>
+<?php
+    session_start();
+    $errNum = 0;
+    $errMsg = 0;
+
+    if(isset($_SESSION['errNum'])) {
+        $errNum = $_SESSION['errNum'];
+    }
+    if(strcmp($errNum,'UserNotChars') === 0) {
+        $errMsg = 'Username cannot contain chars';
+    }
+    if(strcmp($errNum,'UserTaken') === 0) {
+        $errMsg = 'Username already taken';
+    }
+    if(strcmp($errNum,'EmailTaken') === 0) {
+        $errMsg = 'Email already in use';
+    }
+    if(strcmp($errNum,'WrongInputs') === 0) {
+        $errMsg = 'Wrong Username or Password';
+    }
+    unset($_SESSION['errNum']);
+    ?>
     <div id ="container" class="container">
         <div class="flat-form">
             <ul class="tabs">
@@ -22,7 +44,11 @@
                 </li>
             </ul>
 
+            <?php if((strcmp($errNum,'UserNotChars') === 0) or (strcmp($errNum,'UserTaken') === 0) or (strcmp($errNum,'EmailTaken') === 0)) : ?>
+            <div id="login" class="form-action hide">
+            <?php else : ?>
             <div id="login" class="form-action show">
+            <?php endif;?>
                 <h1>Login on Pollerino</h1>
                 <form action="../db/login.php" method="post">
                     <ul>
@@ -33,14 +59,20 @@
                             <input type="password" name="passwordL" placeholder="Password" required>
                         </li>
                         <li>
+                            <?php if(strcmp($errNum,'WrongInputs') === 0) : ?> 
+                                <p class="error"> <?= $errMsg ?> </p>
+                            <?php endif; ?>
                             <input type="submit" value="Login" class="button" />
                         </li>
                     </ul>
                 </form>
 
             </div>
-
+            <?php if((strcmp($errNum,'UserNotChars') === 0) or (strcmp($errNum,'UserTaken') === 0) or (strcmp($errNum,'EmailTaken') === 0)) : ?>
+            <div id="register" class="form-action show">
+            <?php else : ?>
             <div id="register" class="form-action hide">
+            <?php endif; ?>
                 <h1>Register</h1>
                  <form action="../db/register.php" method="post">
                     <ul>
@@ -54,6 +86,9 @@
                            <input type="password" id="password" name="passwordR" maxlength="8" placeholder="Password" required><br>
                         </li>
                         <li>
+                            <?php if((strcmp($errNum,'UserNotChars') === 0) or (strcmp($errNum,'UserTaken') === 0) or (strcmp($errNum,'EmailTaken') === 0)) : ?>
+                                <p class="error"> <?= $errMsg ?> </p>
+                            <?php endif; ?>
                             <input type="submit" value="Sign Up" class="button" />
                         </li>
                     </ul>
@@ -62,7 +97,7 @@
 
             <div id="reset" class="form-action hide">
                 <h1>Reset Password</h1>
-                <p>
+                <p class = "resetPw">
                     To reset your password enter your email
                     and we'll send you a link to reset your password.
                 </p>

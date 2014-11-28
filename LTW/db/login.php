@@ -1,17 +1,17 @@
 <?php
-
+	session_start();
+	
 	$dbh = new PDO('sqlite:database.db');
-
 	$username = $_POST['usernameL'];
 	$password = $_POST['passwordL'];
 
+	$errNum = 0;
 	$check = 0;
 	$ip = 0;
 	$stmt = $dbh->prepare('SELECT username, password, idUser FROM User WHERE username = ? AND password = ?');
 	$stmt->execute(array($username, sha1($password)));
 
 	while ($row = $stmt->fetch()) {
-		//print_r($row);
  		if (in_array($username, $row)) {
  			if (sha1($password) === $row['password']) {
  				$check = 1;
@@ -31,15 +31,17 @@
  				printf ("Welcome back, %s!", $row['username']);
  				break;
  			}
-
  		}
-
 	}
 
-	if($check == 0)
+	if($check == 0) {
+		$_SESSION['errNum'] = 'WrongInputs';
 		header( 'Location: ../html/page.php' );
-	else
+	}
+	else {
 		header( 'Location: ../html/createPoll.php' );
+		unset($_SESSION['errNum']);
+	}
 
 	exit();
 ?>
