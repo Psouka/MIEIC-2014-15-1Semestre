@@ -45,7 +45,7 @@ while ($row = $stmt->fetch()) {
 <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
     <div class="Logout">
-        <form action="creatPoll.php" method="post">
+        <form action="createPoll.php" method="post">
             <ul class="Home"> 
                 <li>
                    <p><?= $username ?></p>

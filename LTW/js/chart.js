@@ -1,14 +1,14 @@
 var dataVotes;
 var dataAwnsers;
 
-function drawChart(){
-	$.getJSON("../db/countVotes.php", {}, DataReceived);
+function drawChart(idQuery){
+	$.getJSON("../db/countVotes.php", {'idQuery' : idQuery}, DataReceived);
 }
 
 
 function DataReceived(data){
 	dataVotes = data;
-	$.getJSON("../db/getAnswers.php", {}, AwnsersReceived);
+	$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, AwnsersReceived);
 }
 
 functionAwnsersReceived(data){

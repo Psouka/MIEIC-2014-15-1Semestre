@@ -4,11 +4,11 @@ $dbh = new PDO('sqlite:../db/database.db');
 $idPoll = $_GET['idUserQuery'];
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  $ip = $_SERVER['HTTP_CLIENT_IP'];
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 } else {
-    $ip = $_SERVER['REMOTE_ADDR'];
+  $ip = $_SERVER['REMOTE_ADDR'];
 }
 $username = "test";
 
@@ -18,16 +18,16 @@ $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
 $stmt->execute(array($ip));
 
 while ($row = $stmt->fetch()) {
-    if(in_array($ip, $row)) {
-        $userid = $row['idUser'];
-        $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-        $stmt1->execute(array($userid));
-        while ($row1 = $stmt1->fetch()) {
-            if(in_array($userid, $row1)) {
-                $username = $row1['username'];
-            }
-        }
+  if(in_array($ip, $row)) {
+    $userid = $row['idUser'];
+    $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
+    $stmt1->execute(array($userid));
+    while ($row1 = $stmt1->fetch()) {
+      if(in_array($userid, $row1)) {
+        $username = $row1['username'];
+      }
     }
+  }
 }
 
 
@@ -43,52 +43,57 @@ while ($row = $stmt->fetch()) {
   <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <body>
-    <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-    <div class="Logout">
-        <form action="creatPoll.php" method="post">
-            <ul class="Home"> 
-                <li>
-                   <p><?= $username ?></p>
-               </li>
-               <li>
-                   <input type="submit" value="Home" class="buttonOut" />
-               </li>
-           </ul>   
-           <ul class="Logout"> 
-            <li>
-               <input type="submit" value="Log Out" class="buttonOut" />
-           </li>
-       </ul>      
-   </form>
+  <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
+  <div class="Logout">
+    <form action="createPoll.php" method="post">
+      <ul class="Home"> 
+        <li>
+         <p><?= $username ?></p>
+       </li>
+       <li>
+         <input type="submit" value="Home" class="buttonOut" />
+       </li>
+     </ul>   
+     <ul class="Logout"> 
+      <li>
+       <input type="submit" value="Log Out" class="buttonOut" />
+     </li>
+   </ul>      
+ </form>
 </div>
 <div id ="container" class="container">
-    <div class="flat-form">
-        <ul class="tabs">
-            <li>
-                <a href="#Poll" class="active">Poll Statistics</a>
-            </li>
+  <div class="flat-form">
+    <ul class="tabs">
+      <li>
+        <a href="#Poll" class="active">Poll Statistics</a>
+      </li>
+    </ul>
+
+    <div id="Poll" class="form-action show">
+      <h1>Poll</h1>
+      <form>
+        <ul>
+          <p>
+            Question?
+          </p>
+          <li>
+            <p> Questão aqui </p>
+          </li>
+
+          <p>
+            Options:
+          </p>
+          script js para por as respostas
         </ul>
-
-        <div id="Poll" class="form-action show">
-            <h1>Poll</h1>
-            <form>
-                <ul>
-                    <p>
-                        Question?
-                    </p>
-                    <li>
-                        <p> Questão aqui </p>
-                    </li>
-
-                    <p>
-                        Options:
-                    </p>
-                    script js para por as respostas
-                </ul>
-            </form>
-
-        </div>
+      </form>
     </div>
+    <div class="chart"></div>
+    <script src="../resources/d3.v3.min.js"  charset="utf-8"></script>
+    <script src="Marq_Msg.js"></script>
+    <script>
+    drawChart(2);
+    </script>
+  </div>
 </div>
 <footer>
  <center> 2014 LTW  © All rights reserved to no one. </center>
