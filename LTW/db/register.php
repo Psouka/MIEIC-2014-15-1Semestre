@@ -17,7 +17,7 @@
 	$result = $stmt1->fetchAll();
 	foreach ($result as $row) {
 
- 		if (in_array($username, $row['username'])) {
+ 		if ($username == $row['username']) {
  			$check = 1;
  			echo "That username has already been taken <br>
  				  Please, choose another one";

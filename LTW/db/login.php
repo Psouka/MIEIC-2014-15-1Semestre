@@ -31,9 +31,9 @@
  				printf ("Welcome back, %s!", $row['username']);
  				break;
  			}
- 			//else echo("asd");
+
  		}
- 		//echo("asd");
+
 	}
 
 	if($check == 0)

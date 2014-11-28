@@ -2,33 +2,33 @@
 $dbh = new PDO('sqlite:../db/database.db');
 
 $idPoll = $_GET['idUserQuery'];
-    $ip = 0;
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
-    $username = "test";
-    
-    $userid = 0;
+$ip = 0;
+if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+$username = "test";
 
-    $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
-    $stmt->execute(array($ip));
+$userid = 0;
 
-    while ($row = $stmt->fetch()) {
-        if(in_array($ip, $row)) {
-            $userid = $row['idUser'];
-            $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-            $stmt1->execute(array($userid));
-            while ($row1 = $stmt1->fetch()) {
-                if(in_array($userid, $row1)) {
-                    $username = $row1['username'];
-                }
+$stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
+$stmt->execute(array($ip));
+
+while ($row = $stmt->fetch()) {
+    if(in_array($ip, $row)) {
+        $userid = $row['idUser'];
+        $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
+        $stmt1->execute(array($userid));
+        while ($row1 = $stmt1->fetch()) {
+            if(in_array($userid, $row1)) {
+                $username = $row1['username'];
             }
         }
     }
+}
 
 
 ?>
@@ -37,10 +37,10 @@ $idPoll = $_GET['idUserQuery'];
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
   <script type="text/javascript" src="../js/poll.js"></script>
-   <title>Pollerino</title>
-   <link rel="shortcut icon" href="../resources/icon.ico"/>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="../css/poll.css" hreflang="en">
+  <title>Pollerino</title>
+  <link rel="shortcut icon" href="../resources/icon.ico"/>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
@@ -48,50 +48,51 @@ $idPoll = $_GET['idUserQuery'];
         <form action="creatPoll.php" method="post">
             <ul class="Home"> 
                 <li>
-                     <p><?= $username ?></p>
-                </li>
-                <li>
-                     <input type="submit" value="Home" class="buttonOut" />
-                </li>
-            </ul>   
-            <ul class="Logout"> 
-                <li>
-                     <input type="submit" value="Log Out" class="buttonOut" />
-                </li>
-            </ul>      
+                   <p><?= $username ?></p>
+               </li>
+               <li>
+                   <input type="submit" value="Home" class="buttonOut" />
+               </li>
+           </ul>   
+           <ul class="Logout"> 
+            <li>
+               <input type="submit" value="Log Out" class="buttonOut" />
+           </li>
+       </ul>      
+   </form>
+</div>
+<div id ="container" class="container">
+    <div class="flat-form">
+        <ul class="tabs">
+            <li>
+                <a href="#Poll" class="active">Poll Statistics</a>
+            </li>
+        </ul>
+
+        <div id="Poll" class="form-action show">
+            <h1>Poll</h1>
+            <form>
+                <ul>
+                    <p>
+                        Question?
+                    </p>
+                    <li>
+                        <p> Questão aqui </p>
+                    </li>
+
+                    <p>
+                        Options:
+                    </p>
+                    script js para por as respostas
+                </ul>
             </form>
-        </div>
-    <div id ="container" class="container">
-        <div class="flat-form">
-            <ul class="tabs">
-                <li>
-                    <a href="#Poll" class="active">Poll Statistics</a>
-                </li>
-            </ul>
 
-            <div id="Poll" class="form-action show">
-                <h1>Poll</h1>
-                <form>
-                    <ul>
-                        <p>
-                    Question?
-                </p>
-                        <li>
-                            <p> Questão aqui </p>
-                        </li>
-
-                         <p>
-                    Options:
-                </p>
-                        script js para por as respostas
-                    </ul>
-                </form>
-
-            </div>
         </div>
     </div>
-    <footer>
-           <center> 2014 LTW  © All rights reserved to no one. </center>
-        </footer>
+</div>
+<footer>
+ <center> 2014 LTW  © All rights reserved to no one. </center>
+</br> <center> Pls no copy pasterino </center>
+</footer>
 </body>
 </html>
