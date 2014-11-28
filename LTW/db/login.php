@@ -8,12 +8,12 @@
 	$check = 0;
 	$ip = 0;
 	$stmt = $dbh->prepare('SELECT username, password, idUser FROM User WHERE username = ? AND password = ?');
-	$stmt->execute(array($username, $password));
+	$stmt->execute(array($username, sha1($password)));
 
 	while ($row = $stmt->fetch()) {
 		//print_r($row);
  		if (in_array($username, $row)) {
- 			if ($password === $row['password']) {
+ 			if (sha1($password) === $row['password']) {
  				$check = 1;
  				printf ("Welcome back, %s!", $row['username']);
 
