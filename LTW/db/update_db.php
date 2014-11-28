@@ -2,7 +2,7 @@
   $db = new PDO('sqlite:database.db');
   $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-function get_tiny_url($url)  {  
+function get_tiny_url($url){  
 	$ch = curl_init();  
 	$timeout = 5;  
 	curl_setopt($ch,CURLOPT_URL,'http://tinyurl.com/api-create.php?url='.$url);  
@@ -12,12 +12,6 @@ function get_tiny_url($url)  {
 	curl_close($ch);  
 	return $data;  
 }
-/*
-UPDATE products 
-   SET price = 12 
- WHERE name = 'coke' AND price = 8;
-
-*/
 
    if(isset($_GET['idQuery']) and isset($_GET['newAnswer']) and isset($_GET['idAnswer'])){ 
 	$idQ = $_GET['idQuery'];

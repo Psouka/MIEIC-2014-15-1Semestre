@@ -3,6 +3,14 @@
 	$username = $_POST['usernameR'];
 	$email = $_POST['emailR'];
 	$password = $_POST['passwordR'];
+
+	if (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $username))
+	{
+		header( 'Location: ../html/page.php' );
+		exit();
+	}
+
+
 	$check = 0;
 	$stmt1 = $dbh->prepare('SELECT `username`, `email` FROM User WHERE username = ? or email = ?');
 	$stmt1->execute(array($username,$email));

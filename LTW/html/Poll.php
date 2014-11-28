@@ -1,7 +1,7 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 
-$Poll = $_GET['idUserQuery'];
+$idPoll = $_GET['idUserQuery'];
     $ip = 0;
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -67,13 +67,10 @@ $Poll = $_GET['idUserQuery'];
                 <li>
                     <a href="#Poll" class="active">Poll Statistics</a>
                 </li>
-                <li>
-                    <a href="#PollOptions">Manage Poll</a>
-                </li>
             </ul>
 
             <div id="Poll" class="form-action show">
-                <h1>Poll Statistics</h1>
+                <h1>Poll</h1>
                 <form>
                     <ul>
                         <p>
@@ -91,23 +88,10 @@ $Poll = $_GET['idUserQuery'];
                 </form>
 
             </div>
-
-            <div id="ManagePoll" class="form-action hide">
-                <h1>ManagePoll</h1>
-                <p>
-                    Apagar
-                </p> 
-                Script aqui
-                <form>
-                    cenas
-                </form>
-            </div>
-
         </div>
     </div>
     <footer>
            <center> 2014 LTW  © All rights reserved to no one. </center>
-        </br> <center> Pls no copy pasterino </center>
         </footer>
 </body>
 </html>
