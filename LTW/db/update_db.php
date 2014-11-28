@@ -39,16 +39,20 @@ UPDATE products
 
 	else if(isset($_GET['DeleteidQuery']))
 	{
-		//	$stmt1 = $dbh->prepare('DELETE FROM UserLogin WHERE IPUser = ?');
 		$idQ = $_GET['DeleteidQuery'];
 
 		$stmt = $dbh->prepare("DELETE FROM UserQuery WHERE idUserQuery = ?");
+		$stmt->execute(array($idQ));
+
+		$stmt = $dbh->prepare("DELETE FROM Answer WHERE idUserQuery = ?");
+		$stmt->execute(array($idQ));
+
+		$stmt = $dbh->prepare("DELETE FROM UserAnswer WHERE idUserQuery = ?");
 		$stmt->execute(array($idQ));
 	}
 
 	else if(isset($_GET['idQuery']) and isset($_GET['newImage']))
 	{
-		//	$stmt1 = $dbh->prepare('DELETE FROM UserLogin WHERE IPUser = ?');
 		$idQ = $_GET['idQuery'];
 		$newImage = $_GET['newImage'];
 		$newImage = get_tiny_url($newImage);
