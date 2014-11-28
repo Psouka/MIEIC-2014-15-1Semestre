@@ -41,27 +41,27 @@ while ($row = $stmt->fetch()) {
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
+  <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
 </head>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div class="Logout">
-    <form action="createPoll.php" method="post">
-      <ul class="Home"> 
-        <li>
-         <p><?= $username ?></p>
-       </li>
-       <li>
-         <input type="submit" value="Home" class="buttonOut" />
-       </li>
-     </ul>   
-     <ul class="Logout"> 
-      <li>
-       <input type="submit" value="Log Out" class="buttonOut" />
-     </li>
-   </ul>      
- </form>
-</div>
+  <div class="Login">
+            <ul class="Login"> 
+                <li>
+                     <p><center><?= $username ?></center></p>
+                </li>
+                <li>
+                  <form action="../html/createPoll.php" method="post">
+                     <input type="submit" value="Home" class="buttonOut" />
+                      </form>
+                </li>
+                <li>
+                  <form action="../db/logout.php" method="post">
+                     <input type="submit" value="Log Out" class="buttonOut" />
+                     </form>
+                </li>
+            </ul>         
+        </div>
 <div id ="container" class="container">
   <div class="flat-form">
     <ul class="tabs">

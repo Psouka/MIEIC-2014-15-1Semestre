@@ -1,7 +1,6 @@
+
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
-
-
-@import url(../resources/reset.css);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
 
 body {
   background-image: url("../resources/background.png");
@@ -11,15 +10,15 @@ body {
 
 .login {
    background: #505050;  
-  position: absolute;
-    right: 15px;
-    top: 12px;
+   position: absolute;
+   right: 15px;
+   top: 12px;
 }
 
 
 .login li {
   float:center;
-   border : 3px;
+  border : 3px;
   color: #FFFFFF;
   font-size: 20px;
   margin: 5;
@@ -44,14 +43,16 @@ body {
   background: #CC3300;
 }
 
-
 .flat-form {
   background: #34495e;
   margin: 25px auto;
   width: 790px;
-  height: 640px;
   position: relative;
   font-family: 'Roboto';
+}
+
+.flat-form #SearchPoll{
+  height: 305px;
 }
 
 .tabs {
@@ -78,8 +79,7 @@ body {
   text-decoration: none;
   color: white;
   font-size: 16px;
-  padding: 12px 22px 12px 22px;
-
+  padding: 12px 22px 12px 42px;
 }
 
 .tabs a.active {
@@ -87,7 +87,7 @@ body {
   border-right: none;
 }
 .form-action {
-  padding: 0 20px;
+  padding: 0 40px;
   position: relative;
 }
 
@@ -100,15 +100,34 @@ body {
   padding-bottom: 10px;
   line-height: 25px;
 }
-form {
-  padding-right: 20px !important;
-}
 
 form input{
   width: 100%;
   height: 40px;
   margin-bottom: 10px;
   padding-left: 15px;
+  background: #fff;
+  border: none;
+  color: #000000;  
+  outline: none;
+}
+
+.newOpt {
+  width: 92%;
+  height: 40px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: none;
+  color: #000000;  
+  outline: none;
+}
+
+.buttonDel {
+  padding-left: 0px;
+  width: 7%;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-left: 2px;
   background: #fff;
   border: none;
   color: #000000;  
@@ -123,7 +142,6 @@ form input{
 }
 
 .button {
-  float:right;
   border: none;
   display: block;
   background: #136899;
@@ -132,6 +150,11 @@ form input{
   padding-right: 15px;
   color: #ffffff;
   text-align: center;
+  margin-top: -10px;
+}
+
+#SearchPoll .button {
+  margin-top: 10px;
 }
 
 .button:hover {
@@ -143,29 +166,5 @@ form input{
 }
 
 #container {
-  top:50%;
-  left:50%;
-
-}
-
-
-#vis {
-  padding: 20px;
-  .bar {
-    padding: 3px;
-    margin: 1px;
-    position: relative;
-    background-color: #ccc;
-    color: #fff;
-    font-family: Helvetica, Arial, sans-serif;
-    text-align: right;
-    
-    i {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      font-style: normal;
-      font-size: 10px;
-    }
-  }
+  margin-top: 7em;
 }
