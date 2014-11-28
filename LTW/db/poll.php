@@ -21,12 +21,12 @@
     }
 
     
-    $stmt = $dbh->prepare('SELECT idUser FROM UserLogin WHERE IPUser = ?');
-    $stmt->execute(array($ip));
+    $stmt1 = $dbh->prepare('SELECT idUser FROM UserLogin WHERE IPUser = ?');
+    $stmt1->execute(array($ip));
 
-    if($row = $stmt->fetch()){
+    if($row = $stmt1->fetch()){
         
-        if($idU == $row['idUser'])
+        if($idU === $row['idUser'])
             {
                 header( 'Location: ../html/ManagePoll.php?idUserQuery='.$idQ);
         exit();

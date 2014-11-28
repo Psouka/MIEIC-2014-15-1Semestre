@@ -89,7 +89,7 @@ while ($row = $stmt->fetch()) {
     </div>
     <div class="chart"></div>
     <script src="../resources/d3.v3.min.js"  charset="utf-8"></script>
-    <script src="Marq_Msg.js"></script>
+    <script src="../js/chart.js"></script>
     <script>
     drawChart(2);
     </script>
