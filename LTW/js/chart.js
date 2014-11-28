@@ -1,19 +1,30 @@
-function drawChart(){
+var dataVotes;
+var dataAwnsers;
 
+function drawChart(){
+	$.getJSON("../db/countVotes.php", {}, DataReceived);
 }
 
 
-function  DataReceived(data) {
-  //var data = [4, 8, 15, 16, 23, 42, 50];
+function DataReceived(data){
+	dataVotes = data;
+	$.getJSON("../db/getAnswers.php", {}, AwnsersReceived);
+}
 
-var x = d3.scale.linear()
-    .domain([0, d3.max(data)])
-    .range([0, 420]);
+functionAwnsersReceived(data){
+	dataAwnsers = data;
+	drawC();
+}
 
-d3.select(".chart")
+function  drawC() {
+  var x = d3.scale.linear()
+  .domain([0, d3.max(data)])
+  .range([0, 420]);
+
+  d3.select(".chart")
   .selectAll("div")
-    .data(data)
+  .data(dataVotes)
   .enter().append("div")
-    .style("width", function(d) { return x(d) + "px"; })
-    .text(function(d) { return d; });$.each(data, resultPoll);
+  .style("width", function(d) { return x(d) + "px"; })
+  .text(function(d) { return dataAwnsers[dataVotes.indexOf(d)]; });
 }

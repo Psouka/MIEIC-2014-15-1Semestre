@@ -25,8 +25,7 @@ function  PollsReceived(data) {
 
 // Called for each line received
 function resultPoll(index, value) {
-alert('Poll');
-
+	
 var  a = document.createElement('a');
 var linkText = document.createTextNode(value);
 a.appendChild(linkText);
