@@ -36,11 +36,12 @@ while ($row = $stmt->fetch()) {
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="../js/poll.js"></script>
+    <script src="../resources/d3.v3.min.js"> </script>
+  <script type="text/javascript" src="../js/page.js"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/poll.css" hreflang="en">
+  <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
 </head>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
@@ -88,7 +89,6 @@ while ($row = $stmt->fetch()) {
       </form>
     </div>
     <div class="chart"></div>
-    <script src="../resources/d3.v3.min.js"  charset="utf-8"> </script>
     <script src="../js/chart.js">
     drawChart(2);
     </script>
