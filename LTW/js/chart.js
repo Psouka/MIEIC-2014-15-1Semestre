@@ -11,7 +11,7 @@ function DataReceived(data){
 	$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, AwnsersReceived);
 }
 
-functionAwnsersReceived(data){
+function AwnsersReceived(data){
 	dataAwnsers = data;
 	drawC();
 }

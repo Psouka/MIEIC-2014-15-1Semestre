@@ -88,9 +88,8 @@ while ($row = $stmt->fetch()) {
       </form>
     </div>
     <div class="chart"></div>
-    <script src="../resources/d3.v3.min.js"  charset="utf-8"></script>
-    <script src="../js/chart.js"></script>
-    <script>
+    <script src="../resources/d3.v3.min.js"  charset="utf-8"> </script>
+    <script src="../js/chart.js">
     drawChart(2);
     </script>
   </div>
