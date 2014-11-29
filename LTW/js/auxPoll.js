@@ -1,14 +1,14 @@
 var seeOptions = 0;
 
 
-function showOptions(idQuery,username,ip) {
+function showOptions(idQuery,username) {
 	if(seeOptions == 0)
 		$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
 	else
-		sendVote(idQuery,username,ip)
+		sendVote(idQuery,username)
 }
 
-function sendVote(idQuery,username,ip){
+function sendVote(idQuery,username){
 	var rates =  document.getElementsByName('Vote');
 	var OptionX= '';
 	for(var i = 0; i < rates.length; i++){
@@ -21,11 +21,17 @@ function sendVote(idQuery,username,ip){
 		alert('Select One');
 		return;
 	}
-	$.postJSON("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX, 'IpUser' : ip , 'Username' : username}, alert('Registed'));
+	$.getJSON("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, registed);
+	alert('Registed');
+
+}
+
+function registed(){
+	console.log('Registado');
+
 }
 
 function  OptionsReceived(data) {
-	alert(data);
 	$.each(data, resultOptions);
 }
 

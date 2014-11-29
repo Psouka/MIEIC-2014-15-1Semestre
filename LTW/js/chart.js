@@ -3,26 +3,29 @@ var dataAwnsers;
 
 var id;
 
+var draw = 0;
 
 function drawChart(idQuery){
+  if(draw == 1)
+    return;
+
   id = idQuery;
 	$.getJSON("../db/countVotes.php", {'idQuery' : idQuery}, DataReceived);
 }
 
 
 function DataReceived(data){
-  alert(data);
 	dataVotes = data;
 	$.getJSON("../db/getAnswers.php", {'idQuery' : id}, AwnsersReceived);
 }
 
 function AwnsersReceived(data){
-  alert(data);
 	dataAwnsers = data;
 	drawC();
 }
 
 function  drawC() {
+  draw = 1;
   var index = 0;
   var x = d3.scale.linear()
   .domain([0, d3.max(dataVotes)])

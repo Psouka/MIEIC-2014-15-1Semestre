@@ -114,7 +114,7 @@ while ($row = $stmt4->fetch()) {
         <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
         </script>
       </div>
-      <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>','<?= $ip ?>');">
+      <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
     </p>
     <p>
       <div class="chart"></div>
