@@ -69,6 +69,7 @@ while ($row = $stmt4->fetch()) {
     <link rel="shortcut icon" href="../resources/icon.ico"/>
     <meta charset="utf-8">
     <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
+    <link rel="stylesheet" href="../css/chart.css" hreflang="en">
   </head>
   <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
@@ -115,12 +116,15 @@ while ($row = $stmt4->fetch()) {
       </div>
       <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>);">
     </p>
+    <p>
+      <div class="chart"></div>
+      <script src="../js/chart.js">
+      </script>
+      <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+    </p>
   </form>
 </div>
-<div class="chart"></div>
-<script src="../js/chart.js">
-</script>
-<input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+
 </div>
 </div>
 <footer>
