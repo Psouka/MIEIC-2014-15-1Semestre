@@ -14,9 +14,10 @@ function  OptionsReceived(data) {
 // Called for each line received
 function resultOptions(index, value) {
 	alert('Option');
-	var radioHtml = '<input type="radio" name="' + value + '"';
+	var radioHtml = '<input type="radio" name="Vote"';
+	radioHtml += 'value="' + value + '"'
 	radioHtml += '/>';
-
+radioHtml += value;
 	var radioFragment = document.createElement('div');
 	radioFragment.innerHTML = radioHtml;
 
