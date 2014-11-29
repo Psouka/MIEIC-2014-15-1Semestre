@@ -35,12 +35,21 @@ if(isset($_GET['id'])){
 if(isset($_GET['word'])){
 
   $word = $_GET['word'];
+
+  $wordsize = strlen($word);
+  if($wordsize < 3)
+  {
+   echo json_encode($result);
+   exit(); 
+  }
+
+
   $stmt = $db->prepare('SELECT Question FROM UserQuery');
   $stmt->execute();
   $Polls = $stmt->fetchAll();
 
   foreach ($Polls as $tempPoll){ 
-    if(strpos($tempPoll['Question'],$word) !== false)
+    if(stripos($tempPoll['Question'],$word) !== false)
      {  
       $result[] = $tempPoll['Question'];  
     }
