@@ -22,6 +22,12 @@ function deleteInput(divName) {
 	var num = parseInt(divName.name.slice(-1));
 	if(num > 2) {
 		divName.parentNode.parentNode.removeChild(divName.parentNode);
+          for(i = 1; i <= counter; i++) {
+               var nameA = "inputs" + counter.toString();
+               var nameB = "deleteInput" + counter.toString();
+               document.getElementById(divName).getElementsByClassName("newOpt").name = nameA;
+               document.getElementById(divName).getElementsByClassName("buttonDel").name = nameB; 
+          }
 		counter--;
 	}
 }
