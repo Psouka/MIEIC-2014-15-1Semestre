@@ -40,10 +40,10 @@
 </head>
 <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-    <div class="Login">
+    <div class="Logout">
         <form action="../db/logout.php" method="post">
 
-            <ul class="Login"> 
+            <ul class="Logout"> 
                 <li>
                      <p><center><?= $username ?></center></p>
                 </li>

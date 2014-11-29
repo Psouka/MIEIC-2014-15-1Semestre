@@ -8,7 +8,7 @@ body {
   font-family: 'Roboto';
 }
 
-.login {
+.logout {
    background: #505050;  
    position: absolute;
    right: 15px;
@@ -16,7 +16,7 @@ body {
 }
 
 
-.login li {
+.logout li {
   float:center;
   border : 3px;
   color: #FFFFFF;

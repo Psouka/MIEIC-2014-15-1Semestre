@@ -1,14 +1,14 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 
-$idPoll = $_GET['idUserQuery'];
+$idPoll = 4;
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-  $ip = $_SERVER['HTTP_CLIENT_IP'];
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 } else {
-  $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = $_SERVER['REMOTE_ADDR'];
 }
 $username = "test";
 
@@ -18,19 +18,38 @@ $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
 $stmt->execute(array($ip));
 
 while ($row = $stmt->fetch()) {
-  if(in_array($ip, $row)) {
-    $userid = $row['idUser'];
-    $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-    $stmt1->execute(array($userid));
-    while ($row1 = $stmt1->fetch()) {
-      if(in_array($userid, $row1)) {
-        $username = $row1['username'];
-      }
+    if(in_array($ip, $row)) {
+        $userid = $row['idUser'];
+        $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
+        $stmt1->execute(array($userid));
+        while ($row1 = $stmt1->fetch()) {
+            if(in_array($userid, $row1)) {
+                $username = $row1['username'];
+            }
+        }
+    }
+}
+$question = 0;
+$img = 0;
+
+$stmt3 = $dbh->prepare('SELECT idUserQuery, Question, Image FROM UserQuery WHERE idUserQuery = ?');
+$stmt3->execute(array($idPoll));
+while ($row = $stmt3->fetch()) {
+    if(in_array($idPoll, $row)) {
+      $question = $row['Question'];
+      $img = $row['Image'];
     }
   }
-}
 
-
+$answers = array();
+$stmt4 = $dbh->prepare('SELECT idUserQuery, Answerino FROM Answer WHERE idUserQuery = ?');
+$stmt4->execute(array($idPoll));
+while ($row = $stmt4->fetch()) {
+    if(in_array($idPoll, $row)) {
+      array_push($answers, $row['Answerino']);
+    }
+  }
+  
 ?>
 
 <html lang="en">
@@ -41,15 +60,15 @@ while ($row = $stmt->fetch()) {
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
+  <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
 </head>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div class="Logout">
+  <div class="LogoutM">
     <form action="createPoll.php" method="post">
       <ul class="Home"> 
         <li>
-         <p><?= $username ?></p>
+         <p><center><?= $username ?></center></p>
        </li>
        <li>
          <input type="submit" value="Home" class="buttonOut" />
@@ -71,20 +90,16 @@ while ($row = $stmt->fetch()) {
     </ul>
 
     <div id="Poll" class="form-action show">
-      <h1>Poll</h1>
       <form>
         <ul>
-          <p>
-            Question?
-          </p>
           <li>
-            <p> Questão aqui </p>
+            <h1> <?= $question ?></h1>
+            </br>
           </li>
-
-          <p>
-            Options:
-          </p>
-          script js para por as respostas
+          <img src= "<?= $img ?>">
+          </br></br>
+          <h2>Options:</h2>
+          <h3> <?= $temp[0] ?> </h3> </br>
         </ul>
       </form>
     </div>
