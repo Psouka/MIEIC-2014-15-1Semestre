@@ -1,5 +1,3 @@
-
-
 function searchPoll(username,id,word)
 {
 	clearSearch();
@@ -35,16 +33,16 @@ function  PollsReceived(data) {
 // Called for each line received
 function resultPoll(index, value) {
 	
-	var  a = document.createElement('a');
+	var elem = document.getElementById('dynamicSearch');
+	var a = document.createElement('a');
 	var linkText = document.createTextNode(value);
 	a.appendChild(linkText);
 	a.title = value;
 	a.href = "../db/poll.php?Question=" + value;
-	document.getElementById('dynamicSearch').appendChild(a);
-
-	var br = document.createElement('br');
-	document.getElementById('dynamicSearch').appendChild(br);
-
+	elem.appendChild(a);
+	elem.appendChild(document.createElement('br'));
+	elem.appendChild(document.createElement('br'));
+	elem.appendChild(document.createElement('br'));
 }
 
 

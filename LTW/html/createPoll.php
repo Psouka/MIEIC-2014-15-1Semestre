@@ -84,6 +84,8 @@
                             </li>
 
                              <p>
+
+
                         Options:
                     </p>
                     <p>
@@ -121,11 +123,13 @@
                             <input type="text" id = "userInput" name="username" placeholder="Username" >
                         </li>
                         <p>
+                    
+                    <input type="button" value="Search" class="button"
+                    onClick="searchUser(this.form.userInput.value);searchId(this.form.idInput.value);searchWord(this.form.wordInput.value);">
+                    
                     <div id="dynamicSearch">
                          <script src="../js/searchPoll.js" language="Javascript" type="text/javascript"></script>
                     </div>
-                    <input type="button" value="Search" class="button"
-                    onClick="searchPoll(this.form.userInput.value,this.form.idInput.value,this.form.wordInput.value);">
                 </p>
                     </ul>
                 </form>

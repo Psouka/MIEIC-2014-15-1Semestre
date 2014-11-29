@@ -15,7 +15,6 @@ body {
    top: 12px;
 }
 
-
 .logout li {
   float:center;
   border : 3px;
@@ -51,8 +50,15 @@ body {
   font-family: 'Roboto';
 }
 
+.flat-form a {
+  color:white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
 .flat-form a:visited  {
-  color: gray;
+  text-decoration: none;
+  color: #C8C8C8;
 }
 
 .flat-form #SearchPoll{
