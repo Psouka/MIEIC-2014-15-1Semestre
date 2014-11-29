@@ -1,7 +1,7 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 
-$Poll = $_GET['idUserQuery'];
+$idPoll = $_GET['idUserQuery'];
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
     $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -30,6 +30,8 @@ while ($row = $stmt->fetch()) {
     }
 }
 
+$stmt = $dbh->prepare('SELECT ,  FROM UserQuery WHERE idUserQuery = ?');
+$stmt->execute(array($idPoll));
 
 ?>
 
