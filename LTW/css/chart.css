@@ -1,5 +1,6 @@
 .chart div {
-  font: 10px sans-serif;
+  height: 30px;
+  font: 20px sans-serif;
   background-color: steelblue;
   text-align: right;
   padding: 3px;
@@ -8,7 +9,8 @@
 }
 
 .chart div:first-child{
-    font: 10px sans-serif;
+  height: 30px;
+  font: 20px sans-serif;
   background-color: steelblue;
   text-align: right;
   padding: 3px;

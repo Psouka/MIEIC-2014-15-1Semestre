@@ -45,8 +45,8 @@ body {
 }
 
 img {
-   width: auto;
-   max-height: 200px;
+ width: auto;
+ max-height: 200px;
 }
 
 .flat-form {
@@ -113,6 +113,29 @@ form input{
   border: none;
   outline: none;
 }
+
+#dynamicOptions div {
+  width: 490px;
+  height: 40px;
+  display: block;
+  text-align: left;
+  font-size: 17px;
+  padding-bottom: 10px;
+  line-height: 25px;
+  margin: 0px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+input[type="radio"]{
+  text-align: left;
+  display:inline;
+  height: 15px;
+  padding: 0px;
+  margin: 0px;
+}
+
+
 
 .show {
   display: block;
