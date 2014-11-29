@@ -44,7 +44,6 @@ function resultPoll(index, value) {
 
 	var br = document.createElement('br');
 	document.getElementById('dynamicSearch').appendChild(br);
-	document.getElementById('dynamicSearch').appendChild(br);
 
 }
 
