@@ -1,7 +1,7 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 
-$idPoll = 4;
+$idPoll = $_GET['idUserQuery'];
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
     $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -29,6 +29,15 @@ while ($row = $stmt->fetch()) {
         }
     }
 }
+
+$stmt2 = $dbh->prepare('SELECT Question, Image FROM UserQuery WHERE idUserQuery = ?');
+$stmt2->execute(array($idPoll));
+$row = $stmt2->fetch();
+
+$QuestionPoll = $row['Question'];
+$ImagePoll = $row['Image'];
+
+/*
 $question = 0;
 $img = 0;
 
@@ -40,7 +49,6 @@ while ($row = $stmt3->fetch()) {
       $img = $row['Image'];
     }
   }
-
 $answers = array();
 $stmt4 = $dbh->prepare('SELECT idUserQuery, Answerino FROM Answer WHERE idUserQuery = ?');
 $stmt4->execute(array($idPoll));
@@ -49,7 +57,7 @@ while ($row = $stmt4->fetch()) {
       array_push($answers, $row['Answerino']);
     }
   }
-  
+  */
 ?>
 
 <html lang="en">
@@ -93,14 +101,20 @@ while ($row = $stmt4->fetch()) {
       <form>
         <ul>
           <li>
-            <h1> <?= $question ?></h1>
+            <h1> <?= $QuestionPoll ?></h1>
             </br>
           </li>
-          <img src= "<?= $img ?>">
+          <img src= "<?php echo $ImagePoll ?>">
           </br></br>
           <h2>Options:</h2>
-          <h3> <?= $temp[0] ?> </h3> </br>
         </ul>
+        <p>
+                    <div id="dynamicOptions">
+                        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
+                        </script>
+                    </div>
+                    <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(3);">
+                </p>
       </form>
     </div>
     <div class="chart"></div>

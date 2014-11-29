@@ -12,7 +12,7 @@ function addInput(divName){
           var nameB = "deleteInput" + counter.toString();
           var nameC = 'onClick="deleteInput(this);"';
           newdiv.innerHTML = "<input type='text' name='" + nameA + "'class='newOpt' placeholder='New Option...'> <input type='button' name='" 
-          	+ nameB + "'class='buttonDel' value='−'" + nameC + ">";
+          + nameB + "'class='buttonDel' value='−'" + nameC + ">";
           document.getElementById(divName).appendChild(newdiv);
           counter++;
      }
@@ -28,6 +28,6 @@ function deleteInput(divName) {
                document.getElementById(divName).getElementsByClassName("newOpt").name = nameA;
                document.getElementById(divName).getElementsByClassName("buttonDel").name = nameB; 
           }
-		counter--;
-	}
+          counter--;
+     }
 }

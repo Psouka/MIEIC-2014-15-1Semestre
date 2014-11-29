@@ -7,6 +7,7 @@ function showOptions(idQuery) {
 
 
 function  OptionsReceived(data) {
+	alert(data);
 	$.each(data, resultOptions);
 }
 
@@ -19,6 +20,6 @@ function resultOptions(index, value) {
 	var radioFragment = document.createElement('div');
 	radioFragment.innerHTML = radioHtml;
 
-	document.getElementById('dynamicSearch').appendChild(radioFragment);
+	document.getElementById('dynamicOptions').appendChild(radioFragment);
 	return radioFragment.firstChild;
 }

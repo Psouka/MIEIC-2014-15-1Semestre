@@ -1,19 +1,19 @@
 <?php
-  $db = new PDO('sqlite:database.db');
-  $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+$db = new PDO('sqlite:database.db');
+$db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-  $array = array();
+$array = array();
 
-  if(isset($_GET['idQuery'])){ 
+if(isset($_GET['idQuery'])){ 
 	$idQ = $_GET['idQuery'];
 
-	$stmt = $dbh->prepare("SELECT Answerino FROM Answer WHERE idUserQuery = ?");
+	$stmt = $db->prepare("SELECT Answerino FROM Answer WHERE idUserQuery = ?");
 	$stmt->execute(array($idQ));
 	$Temperino = $stmt->fetchAll();
 
 
 	foreach ($Temperino as $temp)
-    $array[] = $temp['Answerino'];  
+		$array[] = $temp['Answerino'];  
 }
 
 
