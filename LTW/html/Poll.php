@@ -82,13 +82,16 @@ while ($row = $stmt4->fetch()) {
          <li>
            <input type="submit" value="Home" class="buttonOut" />
          </li>
-       </ul>   
+       </ul>
+       </form>   
        <ul class="Logout"> 
+        <form action="../db/logout.php" method="post">
         <li>
          <input type="submit" value="Log Out" class="buttonOut" />
        </li>
+       </form>
      </ul>      
-   </form>
+   
  </div>
  <div id ="container" class="container">
   <div class="flat-form">
