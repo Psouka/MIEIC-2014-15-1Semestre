@@ -4,11 +4,11 @@ $dbh = new PDO('sqlite:../db/database.db');
 $idPoll = $_GET['idUserQuery'];
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  $ip = $_SERVER['HTTP_CLIENT_IP'];
 } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
 } else {
-    $ip = $_SERVER['REMOTE_ADDR'];
+  $ip = $_SERVER['REMOTE_ADDR'];
 }
 $username = "test";
 
@@ -18,16 +18,16 @@ $stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
 $stmt->execute(array($ip));
 
 while ($row = $stmt->fetch()) {
-    if(in_array($ip, $row)) {
-        $userid = $row['idUser'];
-        $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-        $stmt1->execute(array($userid));
-        while ($row1 = $stmt1->fetch()) {
-            if(in_array($userid, $row1)) {
-                $username = $row1['username'];
-            }
-        }
+  if(in_array($ip, $row)) {
+    $userid = $row['idUser'];
+    $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
+    $stmt1->execute(array($userid));
+    while ($row1 = $stmt1->fetch()) {
+      if(in_array($userid, $row1)) {
+        $username = $row1['username'];
+      }
     }
+  }
 }
 
 $stmt2 = $dbh->prepare('SELECT Question, Image FROM UserQuery WHERE idUserQuery = ?');
@@ -58,38 +58,38 @@ while ($row = $stmt4->fetch()) {
     }
   }
   */
-?>
+  ?>
 
-<html lang="en">
-<head>
-  <script src="../resources/jquery-1.9.1.js"></script>
+  <html lang="en">
+  <head>
+    <script src="../resources/jquery-1.9.1.js"></script>
     <script src="../resources/d3.v3.min.js"> </script>
-  <script type="text/javascript" src="../js/page.js"></script>
-  <title>Pollerino</title>
-  <link rel="shortcut icon" href="../resources/icon.ico"/>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
-</head>
-<body>
-  <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div class="LogoutM">
-    <form action="createPoll.php" method="post">
-      <ul class="Home"> 
+    <script type="text/javascript" src="../js/page.js"></script>
+    <title>Pollerino</title>
+    <link rel="shortcut icon" href="../resources/icon.ico"/>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
+  </head>
+  <body>
+    <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
+    <div class="LogoutM">
+      <form action="createPoll.php" method="post">
+        <ul class="Home"> 
+          <li>
+           <p><center><?= $username ?></center></p>
+         </li>
+         <li>
+           <input type="submit" value="Home" class="buttonOut" />
+         </li>
+       </ul>   
+       <ul class="Logout"> 
         <li>
-         <p><center><?= $username ?></center></p>
+         <input type="submit" value="Log Out" class="buttonOut" />
        </li>
-       <li>
-         <input type="submit" value="Home" class="buttonOut" />
-       </li>
-     </ul>   
-     <ul class="Logout"> 
-      <li>
-       <input type="submit" value="Log Out" class="buttonOut" />
-     </li>
-   </ul>      
- </form>
-</div>
-<div id ="container" class="container">
+     </ul>      
+   </form>
+ </div>
+ <div id ="container" class="container">
   <div class="flat-form">
     <ul class="tabs">
       <li>
@@ -102,26 +102,26 @@ while ($row = $stmt4->fetch()) {
         <ul>
           <li>
             <h1> <?= $QuestionPoll ?></h1>
-            </br>
-          </li>
-          <img src= "<?php echo $ImagePoll ?>">
-          </br></br>
-          <h2>Options:</h2>
-        </ul>
-        <p>
-                    <div id="dynamicOptions">
-                        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
-                        </script>
-                    </div>
-                    <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(3);">
-                </p>
-      </form>
-    </div>
-    <div class="chart"></div>
-    <script src="../js/chart.js">
-    drawChart(2);
-    </script>
-  </div>
+          </br>
+        </li>
+        <img src= "<?php echo $ImagePoll ?>">
+      </br></br>
+      <h2>Options:</h2>
+    </ul>
+    <p>
+      <div id="dynamicOptions">
+        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
+        </script>
+      </div>
+      <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>);">
+    </p>
+  </form>
+</div>
+<div class="chart"></div>
+<script src="../js/chart.js">
+</script>
+<input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+</div>
 </div>
 <footer>
  <center> 2014 LTW  © All rights reserved to no one. </center>

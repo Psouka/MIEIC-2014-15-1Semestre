@@ -1,23 +1,20 @@
 
 function showOptions(idQuery) {
-	alert(idQuery);
-
 	$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
 }
 
 
 function  OptionsReceived(data) {
-	alert(data);
 	$.each(data, resultOptions);
 }
 
 // Called for each line received
 function resultOptions(index, value) {
-	alert('Option');
+	alert(value);
 	var radioHtml = '<input type="radio" name="Vote"';
 	radioHtml += 'value="' + value + '"'
 	radioHtml += '/>';
-radioHtml += value;
+	radioHtml += value;
 	var radioFragment = document.createElement('div');
 	radioFragment.innerHTML = radioHtml;
 
