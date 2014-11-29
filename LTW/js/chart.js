@@ -3,8 +3,8 @@ var dataAwnsers;
 
 var id;
 
+
 function drawChart(idQuery){
-  alert(idQuery);
   id = idQuery;
 	$.getJSON("../db/countVotes.php", {'idQuery' : idQuery}, DataReceived);
 }
@@ -23,6 +23,7 @@ function AwnsersReceived(data){
 }
 
 function  drawC() {
+  var index = 0;
   var x = d3.scale.linear()
   .domain([0, d3.max(dataVotes)])
   .range([0, 420]);
@@ -32,5 +33,5 @@ function  drawC() {
   .data(dataVotes)
   .enter().append("div")
   .style("width", function(d) { return x(d) + "px"; })
-  .text(function(d) { return dataAwnsers[dataVotes.indexOf(d)]; });
+  .text(function(d) { return dataAwnsers[index++]; });
 }
