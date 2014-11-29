@@ -30,13 +30,20 @@ while ($row = $stmt->fetch()) {
   }
 }
 
+$stmt2 = $dbh->prepare('SELECT Question, Image FROM UserQuery WHERE idUserQuery = ?');
+$stmt2->execute(array($idPoll));
+$row = $stmt2->fetch();
+
+$QuestionPoll = $row['Question'];
+$ImagePoll = $row['Image'];
+
 
 ?>
 
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-    <script src="../resources/d3.v3.min.js"> </script>
+  <script src="../resources/d3.v3.min.js"> </script>
   <script type="text/javascript" src="../js/page.js"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
@@ -46,22 +53,22 @@ while ($row = $stmt->fetch()) {
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <div class="Login">
-            <ul class="Login"> 
-                <li>
-                     <p><center><?= $username ?></center></p>
-                </li>
-                <li>
-                  <form action="../html/createPoll.php" method="post">
-                     <input type="submit" value="Home" class="buttonOut" />
-                      </form>
-                </li>
-                <li>
-                  <form action="../db/logout.php" method="post">
-                     <input type="submit" value="Log Out" class="buttonOut" />
-                     </form>
-                </li>
-            </ul>         
-        </div>
+    <ul class="Login"> 
+      <li>
+       <p><center><?= $username ?></center></p>
+     </li>
+     <li>
+      <form action="../html/createPoll.php" method="post">
+       <input type="submit" value="Home" class="buttonOut" />
+     </form>
+   </li>
+   <li>
+    <form action="../db/logout.php" method="post">
+     <input type="submit" value="Log Out" class="buttonOut" />
+   </form>
+ </li>
+</ul>         
+</div>
 <div id ="container" class="container">
   <div class="flat-form">
     <ul class="tabs">
@@ -74,18 +81,20 @@ while ($row = $stmt->fetch()) {
       <h1>Poll</h1>
       <form>
         <ul>
-          <p>
-            Question?
-          </p>
-          <li>
-            <p> Questão aqui </p>
-          </li>
-
+          <h2> <?= $QuestionPoll ?> </h2>
+          <img src="<?php echo $ImagePoll ?>" alt="Mountain View" style="width:304px;height:228px">
           <p>
             Options:
           </p>
-          script js para por as respostas
         </ul>
+        <p>
+        <div id="dynamicInput">
+          <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
+         // showOptions(2);
+         alert('yay');
+          </script>
+        </div>
+         </p>
       </form>
     </div>
     <div class="chart"></div>
