@@ -13,15 +13,28 @@ function get_tiny_url($url)  {
 
 
 session_start(); 
-	$dbh = new PDO('sqlite:database.db');
+$dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	$username = $_SESSION['usernameOn'];
-	$quest = $_POST['Question'];
-	$option = $_POST['myInputs'];
-	$image = $_POST['queryImage'];
+$username = $_SESSION['usernameOn'];
+$quest = $_POST['Question'];
+	//$option = $_POST['myInputs'];
+$image = $_POST['queryImage'];
 
-	$new_url = get_tiny_url($image);
+$new_url = get_tiny_url($image);
 
+$option = array();
+
+$i1 = 'inputs';
+$i2 = 1;
+$ifinal = $i1 . $i2;
+$pos = 0;
+
+while(isset($_POST[$ifinal])) {
+	$option[$pos] = $_POST[$ifinal];
+	$i2++;
+	$pos++;
+	$ifinal = $i1 . $i2;
+}
 
 if($username != 'test')
 {
@@ -41,10 +54,10 @@ if($username != 'test')
 	$stmt->execute(array($quest));
 	$row = $stmt->fetch();
 
-foreach ($option as $temp) {
-    $stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
-	$stmt->execute(array($row['idUserQuery'], $temp));
-}
+	foreach ($option as $temp) {
+		$stmt = $dbh->prepare('INSERT INTO Answer (idUserQuery,Answerino) VALUES (?, ?)');
+		$stmt->execute(array($row['idUserQuery'], $temp));
+	}
 	
 
 
