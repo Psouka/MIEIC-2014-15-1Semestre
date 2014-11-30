@@ -62,24 +62,24 @@ $ImagePoll = $row['Image'];
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <div class="LogoutM">
-      <form action="createPoll.php" method="post">
-        <ul class="Home"> 
-          <li>
-           <p><center><?= $username ?></center></p>
-         </li>
-         <li>
-           <input type="submit" value="Home" class="buttonOut" />
-         </li>
-       </ul>
-       </form>   
-       <ul class="Logout"> 
-        <form action="../db/logout.php" method="post">
+    <form action="createPoll.php" method="post">
+      <ul class="Home"> 
         <li>
-         <input type="submit" value="Log Out" class="buttonOut" />
+         <p><center><?= $username ?></center></p>
        </li>
-       </form>
-     </ul>      
- </div>
+       <li>
+         <input type="submit" value="Home" class="buttonOut" />
+       </li>
+     </ul>
+   </form>   
+   <ul class="Logout"> 
+    <form action="../db/logout.php" method="post">
+      <li>
+       <input type="submit" value="Log Out" class="buttonOut" />
+     </li>
+   </form>
+ </ul>      
+</div>
 <div id ="container" class="container">
   <div class="flat-form">
     <ul class="tabs">
@@ -113,14 +113,16 @@ $ImagePoll = $row['Image'];
 
 <div id="ManagePoll" class="form-action hide">
   <form>
-  <h1>ManagePoll</h1>
-  <p>
-    Apagar
-  </p> 
-  Script aqui
-  
-    cenas
-  </form>
+    <ul>
+      <li>
+        <h1> <?= $QuestionPoll ?></h1>
+      </br>
+    </li>
+    <img src= "<?php echo $ImagePoll ?>">
+  </br></br>
+  <h1>Options:</h1>
+</ul>
+</form>
 </div>
 
 </div>
