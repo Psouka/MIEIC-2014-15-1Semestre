@@ -14,6 +14,7 @@ function sendVote(idQuery,username){
 	for(var i = 0; i < rates.length; i++){
 		if(rates[i].checked){
 			OptionX = rates[i].value;
+			console.log(OptionX);
 		}
 	}
 	if(OptionX == '')
@@ -21,7 +22,7 @@ function sendVote(idQuery,username){
 		alert('Select One');
 		return;
 	}
-	$.getJSON("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, registed);
+	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, registed);
 	alert('Registed');
 
 }

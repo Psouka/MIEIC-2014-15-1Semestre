@@ -16,7 +16,7 @@ if(isset($_GET['idQuery'])){
 	for ($i = 0,$autoinc = 1; $i < $numberOptions; $i++,$autoinc++) {
 		$numberVotes = 0;
 
-		$stmt = $db->prepare("SELECT * FROM UserAnswer WHERE idUserQuery = ? and idUserAnswer = ?");
+		$stmt = $db->prepare("SELECT * FROM UserAnswer WHERE idUserQuery = ? and idAnswer = ?");
 		$stmt->execute(array($idQ,$autoinc));
 		$row = $stmt->fetchAll();
 		$numberVotes = count($row);

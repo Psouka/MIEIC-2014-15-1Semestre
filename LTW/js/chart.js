@@ -15,11 +15,13 @@ function drawChart(idQuery){
 
 
 function DataReceived(data){
+  console.log(data);
 	dataVotes = data;
 	$.getJSON("../db/getAnswers.php", {'idQuery' : id}, AwnsersReceived);
 }
 
 function AwnsersReceived(data){
+  console.log(data);
 	dataAwnsers = data;
 	drawC();
 }

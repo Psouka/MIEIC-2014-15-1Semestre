@@ -1,6 +1,6 @@
 <?php
-  $db = new PDO('sqlite:database.db');
-  $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
+  $dbh = new PDO('sqlite:database.db');
+  $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
 function get_tiny_url($url){  
 	$ch = curl_init();  

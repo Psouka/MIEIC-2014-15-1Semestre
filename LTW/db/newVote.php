@@ -2,10 +2,10 @@
 session_start(); 
 $dbh = new PDO('sqlite:database.db');
 
-if( isset($_GET['idQuery']) and isset($_GET['OptionX']) and isset($_GET['Username']) ){ 
-	$idQuery = $_GET['idQuery'];
-	$OptionX= $_GET['OptionX'];
-	$username = $_GET['Username'];
+if( isset($_POST['idQuery']) and isset($_POST['OptionX']) and isset($_POST['Username']) ){ 
+	$idQuery = $_POST['idQuery'];
+	$OptionX= $_POST['OptionX'];
+	$username = $_POST['Username'];
 
 	if($username != 'test')
 	{
