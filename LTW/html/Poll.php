@@ -68,7 +68,7 @@ while ($row = $stmt4->fetch()) {
     <title>Pollerino</title>
     <link rel="shortcut icon" href="../resources/icon.ico"/>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/Poll.css" hreflang="en">
+    <link rel="stylesheet" href="../css/poll.css" hreflang="en">
     <link rel="stylesheet" href="../css/chart.css" hreflang="en">
   </head>
   <body>

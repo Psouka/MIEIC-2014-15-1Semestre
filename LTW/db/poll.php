@@ -28,12 +28,12 @@
         
         if($idU === $row['idUser'])
             {
-                header( 'Location: ../html/ManagePoll.php?idUserQuery='.$idQ);
+                header( 'Location: ../html/managePoll.php?idUserQuery='.$idQ);
         exit();
     }
         
     }
-     header( 'Location: ../html/Poll.php?idUserQuery='.$idQ);
+     header( 'Location: ../html/poll.php?idUserQuery='.$idQ);
      exit();
 
 ?>

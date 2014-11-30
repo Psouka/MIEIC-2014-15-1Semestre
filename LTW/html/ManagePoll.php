@@ -35,7 +35,7 @@ $stmt->execute(array($idPoll));
 $row = $stmt->fetch();
 
 if($userid != $row['idUser']){
-  header( 'Location: ../html/Profile.php' );
+  header( 'Location: ../html/profile.php' );
   exit();
 }
 
