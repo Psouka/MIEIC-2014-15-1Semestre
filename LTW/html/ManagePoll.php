@@ -137,7 +137,6 @@ while ($row = $stmt->fetch()) {
   </br>
 </li>
 
-
 </br></br>
 <h1>Options:</h1>
 </ul>
