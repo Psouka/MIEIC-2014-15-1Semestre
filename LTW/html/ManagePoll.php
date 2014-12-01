@@ -39,46 +39,36 @@ if($userid != $row['idUser']){
   exit();
 }
 
-$stmt2 = $dbh->prepare('SELECT Question, Image FROM UserQuery WHERE idUserQuery = ?');
-$stmt2->execute(array($idPoll));
-$row = $stmt2->fetch();
-
-$QuestionPoll = $row['Question'];
-$ImagePoll = $row['Image'];
 
 ?>
 
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
-  <script src="../resources/d3.v3.min.js"> </script>
   <script type="text/javascript" src="../js/page.js"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/poll.css" hreflang="en">
-  <link rel="stylesheet" href="../css/chart.css" hreflang="en">
+  <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
 </head>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div class="LogoutM">
+  <div class="Logout">
     <form action="createPoll.php" method="post">
       <ul class="Home"> 
         <li>
-         <p><center><?= $username ?></center></p>
+         <p><?= $username ?></p>
        </li>
        <li>
          <input type="submit" value="Home" class="buttonOut" />
        </li>
-     </ul>
-   </form>   
-   <ul class="Logout"> 
-    <form action="../db/logout.php" method="post">
+     </ul>   
+     <ul class="Logout"> 
       <li>
        <input type="submit" value="Log Out" class="buttonOut" />
      </li>
-   </form>
- </ul>      
+   </ul>      
+ </form>
 </div>
 <div id ="container" class="container">
   <div class="flat-form">
@@ -87,45 +77,42 @@ $ImagePoll = $row['Image'];
         <a href="#Poll" class="active">Poll Statistics</a>
       </li>
       <li>
-        <a href="#ManagePoll">Manage Poll</a>
+        <a href="#PollOptions">Manage Poll</a>
       </li>
     </ul>
 
     <div id="Poll" class="form-action show">
+      <h1>Poll Statistics</h1>
       <form>
         <ul>
+          <p>
+            Question?
+          </p>
           <li>
-            <h1> <?= $QuestionPoll ?></h1>
-          </br>
-        </li>
-        <img src= "<?php echo $ImagePoll ?>">
-      </br></br>
-      <h2>Options:</h2>
-    </ul>
-    <p>
-      <div class="chart"></div>
-      <script src="../js/chart.js">
-      </script>
-      <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
-    </p>
-  </form>
-</div>
+            <p> Questão aqui </p>
+          </li>
 
-<div id="ManagePoll" class="form-action hide">
-  <form>
-    <ul>
-      <li>
-        <h1> <?= $QuestionPoll ?></h1>
-      </br>
-    </li>
-    <img src= "<?php echo $ImagePoll ?>">
-  </br></br>
-  <h1>Options:</h1>
-</ul>
-</form>
-</div>
+          <p>
+            Options:
+          </p>
+          script js para por as respostas
+        </ul>
+      </form>
 
-</div>
+    </div>
+
+    <div id="ManagePoll" class="form-action hide">
+      <h1>ManagePoll</h1>
+      <p>
+        Apagar
+      </p> 
+      Script aqui
+      <form>
+        cenas
+      </form>
+    </div>
+
+  </div>
 </div>
 <footer>
  <center> 2014 LTW  © All rights reserved to no one. </center>

@@ -13,20 +13,11 @@ if(isset($_GET['idQuery'])){
 
 	$numberOptions = count($row);
 
-
-	$stmt = $db->prepare("SELECT idAnswer FROM Answer WHERE idUserQuery = ?");
-	$stmt->execute(array($idQ));
-	$Temperino = $stmt->fetchAll();
-
-	$arraytemp = array();
-	foreach ($Temperino as $temp)
-		$arraytemp[] = $temp['idAnswer'];  
-
-	for ($i = 0; $i < $numberOptions; $i++) {
+	for ($i = 0,$autoinc = 1; $i < $numberOptions; $i++,$autoinc++) {
 		$numberVotes = 0;
 
 		$stmt = $db->prepare("SELECT * FROM UserAnswer WHERE idUserQuery = ? and idAnswer = ?");
-		$stmt->execute(array($idQ,$arraytemp[$i]));
+		$stmt->execute(array($idQ,$autoinc));
 		$row = $stmt->fetchAll();
 		$numberVotes = count($row);
 		$array[] = $numberVotes;
