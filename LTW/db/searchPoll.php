@@ -62,10 +62,11 @@ if(isset($_GET['username'])){
 if(isset($_GET['id'])){
 
   $id = $_GET['id'];
-  $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE idUserQuery = ? and Privacy = ?');
-  $stmt->execute(array($id,0));
+  $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE idUserQuery = ? and Privacy = ? or idUserQuery = ? and idUser = ?');
+  $stmt->execute(array($id,0,$id,$userid));
   $Poll = $stmt->fetch();
 
+  if(!empty($Poll))
   $result[] = $Poll['Question'];
 }
 
@@ -81,8 +82,8 @@ if(isset($_GET['word'])){
  }
 
 
- $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE Privacy = ?');
- $stmt->execute(array(0));
+ $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE Privacy = ? or idUser = ?');
+ $stmt->execute(array(0,$userid));
  $Polls = $stmt->fetchAll();
 
  foreach ($Polls as $tempPoll){ 
