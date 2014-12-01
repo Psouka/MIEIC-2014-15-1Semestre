@@ -2,6 +2,7 @@
 	session_start();
 	
 	$dbh = new PDO('sqlite:database.db');
+
 	$username = $_POST['usernameL'];
 	$password = $_POST['passwordL'];
 
@@ -39,7 +40,7 @@
 		header( 'Location: ../html/page.php' );
 	}
 	else {
-		header( 'Location: ../html/createPoll.php' );
+		header( 'Location: ../html/profile.php' );
 		unset($_SESSION['errNum']);
 	}
 
