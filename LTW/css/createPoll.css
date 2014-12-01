@@ -167,6 +167,11 @@ form input{
   margin-top: 10px;
 }
 
+#privacy{
+  height: 25px;
+width: 25px;
+}
+
 .button:hover {
   background: #1e75aa;
 }

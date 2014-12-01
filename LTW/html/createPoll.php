@@ -99,6 +99,10 @@ while ($row = $stmt->fetch()) {
                         <input type="button" value="Add another optionerino" class="buttonAdd" onClick="addInput('dynamicInput');">
                     </p>
                     <p>
+                        Private ? </br></br>
+                      <input type="checkbox" id="privacy" name="privacy" value="Yes" checked>
+                      </p>
+                      <p>
                         <li>
                             <input type="submit" value="Create" class="button" />
                         </li>

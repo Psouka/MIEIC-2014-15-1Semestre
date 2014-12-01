@@ -17,6 +17,14 @@ $dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 $username = $_SESSION['usernameOn'];
 $quest = $_POST['Question'];
+
+if(isset($_POST['privacy']))
+$privacy = 1;
+else
+$privacy = 0;
+
+echo($privacy);
+
 	//$option = $_POST['myInputs'];
 $image = $_POST['queryImage'];
 
@@ -39,14 +47,13 @@ while(isset($_POST[$ifinal])) {
 if($username != 'test')
 {
 
-
 	$stmt = $dbh->prepare('SELECT idUser FROM User WHERE username = ?');
 	$stmt->execute(array($username));
 	$row = $stmt->fetch();
 
 
-	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question,Image) VALUES (?, ?, ?)');
-	$stmt->execute(array($row['idUser'], $quest,$new_url));
+	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question,Image,Privacy) VALUES (?, ?, ?,?)');
+	$stmt->execute(array($row['idUser'], $quest,$new_url,$privacy));
 
 
 

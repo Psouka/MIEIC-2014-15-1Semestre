@@ -46,6 +46,17 @@ $row = $stmt2->fetch();
 $QuestionPoll = $row['Question'];
 $ImagePoll = $row['Image'];
 
+
+$questions = array();
+$stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
+$stmt->execute(array($userid));
+while ($row = $stmt->fetch()) {
+  if(in_array($userid, $row)) {
+    array_push($questions,$row['Question']);
+  }
+}
+
+
 ?>
 
 <html lang="en">
@@ -119,8 +130,16 @@ $ImagePoll = $row['Image'];
       </br>
     </li>
     <img src= "<?php echo $ImagePoll ?>">
+    <input type="text" name="newImage" placeholder="New Image">
   </br></br>
-  <h1>Options:</h1>
+  <li>
+    <h1> <?= $QuestionPoll ?></h1>
+  </br>
+</li>
+
+
+</br></br>
+<h1>Options:</h1>
 </ul>
 </form>
 </div>
