@@ -150,7 +150,7 @@ $_SESSION['idQuery'] = $idPoll;
 </ul>
 </br>
 Do you want remove this Poll? 
-<input type="checkbox" id="deletePoll" name="deletePoll" value="No">
+<input type="checkbox" id="deletePoll" name="deletePoll" value="Yes">
 <input type="submit" value="Update" class="button" />
 </form>
 </div>

@@ -2,6 +2,8 @@
 $dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 session_start();
+$idQ = $_SESSION['idQuery'];
+
 function get_tiny_url($url){  
 	$ch = curl_init();  
 	$timeout = 5;  
@@ -13,18 +15,21 @@ function get_tiny_url($url){
 	return $data;  
 }
 
-$idQ = $_SESSION['idQuery'];
 
-if(isset($_POST['newQuery']))
+function changeOption($oldOp,$newOp)
 {
-	
-	$newQuery = $_POST['newQuery'];
-
-	$stmt = $dbh->prepare("UPDATE UserQuery SET Question= ?  WHERE idUserQuery = ?");
-	$stmt->execute(array($newQuery,$idQ));
+	echo($oldOp);
+	echo($newOp);
+	echo("\r\n");
+	$dbh = new PDO('sqlite:database.db');
+	$idQ = $_SESSION['idQuery'];
+	$stmt = $dbh->prepare("UPDATE Answer SET Answerino = ?  WHERE idUserQuery = ? and Answerino = ?");
+	$stmt->execute(array($newOp,$idQ,$oldOp));
 }
 
-if(isset($_POST['DeleteidQuery']))
+
+
+if(isset($_POST['deletePoll']))
 {
 
 	$stmt = $dbh->prepare("DELETE FROM UserQuery WHERE idUserQuery = ?");
@@ -40,23 +45,33 @@ if(isset($_POST['DeleteidQuery']))
 
 if(isset($_POST['newImage']))
 {
-	$newImage = $_POST['newImage'];
-	$newImage = get_tiny_url($newImage);
+
+	if(preg_match('/[a-zA-Z]/',$_POST['newImage']))
+	{
+		$newImage = $_POST['newImage'];
+		$newImage = get_tiny_url($newImage);
 
 
-	$stmt = $dbh->prepare("UPDATE UserQuery SET Image = ?  WHERE idUserQuery = ?");
-	$stmt->execute(array($newImage,$idQ));
+		$stmt = $dbh->prepare("UPDATE UserQuery SET Image = ?  WHERE idUserQuery = ?");
+		$stmt->execute(array($newImage,$idQ));
+	}
 	
 }
 
+$stmt = $dbh->prepare("SELECT Answerino FROM Answer WHERE idUserQuery = ?");
+$stmt->execute(array($idQ));
+$Answers = $stmt->fetchAll();
 
-if(isset($_POST['newAnswer']) and isset($_POST['Answerino'])){ 
+foreach ($Answers as $temp)
+{
 
-	$Ans = isset($_POST['idAnswer']);
-	$newA = isset($_POST['newAnswer']);
-
-	$stmt = $dbh->prepare("UPDATE Answer SET Answerino = ?  WHERE idUserQuery = ? and Answerino = ?");
-	$stmt->execute(array($newA,$idQ,$Ans));
+	if(isset($_POST[$temp['Answerino']]))
+	{
+		if (preg_match('/[a-zA-Z]/',$_POST[$temp['Answerino']])) {
+			changeOption($temp['Answerino'],$_POST[$temp['Answerino']]);
+		}
+		
+	}
 }
 
 
