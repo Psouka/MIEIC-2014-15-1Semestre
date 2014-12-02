@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+
 $dbh = new PDO('sqlite:../db/database.db');
 
 $idPoll = $_GET['idUserQuery'];
@@ -131,25 +134,23 @@ while ($row = $stmt->fetch()) {
       <img src= "<?php echo $ImagePoll ?>">
     </br></br>
     <h2> New Image: </h2>
-    </br>
-    <input type="text" name="newImage" placeholder="New Image">
-  </li>
-  <li>
   </br>
-  <h1>Options:</h1>
-  </br>
-  <?php foreach($pollOptions as $tempOp) : ?>
+  <input type="text" name="newImage" placeholder="New Image">
+</li>
+<li>
+</br>
+<h1>Options:</h1>
+</br>
+<?php foreach($pollOptions as $tempOp) : ?>
   <h2> <?= $tempOp ?> </h2> </br>
   <input type="text" name="<?= $tempOp ?>" placeholder="New Option">
 <?php endforeach; ?>
 </li>
 </ul>
- <input type="submit" value="Update" class="button" />
- </br></br></br></br>
- Are you sure you want remove this Poll? 
- <input type="checkbox" id="deletePoll" name="deletePoll" value="No">
- </br>
- <input type="submit" value="Delete Poll" class="buttonDelete" />
+</br>
+Do you want remove this Poll? 
+<input type="checkbox" id="deletePoll" name="deletePoll" value="No">
+<input type="submit" value="Update" class="button" />
 </form>
 </div>
 
