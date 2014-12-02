@@ -55,8 +55,9 @@ while ($row = $stmt->fetch()) {
   array_push($pollOptions,$row['Answerino']);
 }
 
+session_start();
+$_SESSION['idQuery'] = $idPoll;
 
-$_SESSION['']
 
 ?>
 
@@ -72,7 +73,7 @@ $_SESSION['']
   <link rel="stylesheet" href="../css/chart.css" hreflang="en">
 </head>
 <body>
-  <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
+  <?php    $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <div class="LogoutM">
     <form action="createPoll.php" method="post">
       <ul class="Home"> 
@@ -124,7 +125,7 @@ $_SESSION['']
 </div>
 
 <div id="ManagePoll" class="form-action hide">
-  <form action="update_db.php" method="post">
+  <form action="../db/update_db.php" method="post">
     <ul>
       <li>
         <h1> <?= $QuestionPoll ?></h1>

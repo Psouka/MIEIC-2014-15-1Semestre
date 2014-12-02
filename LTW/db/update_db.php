@@ -1,7 +1,7 @@
 <?php
 $dbh = new PDO('sqlite:database.db');
 $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-
+session_start();
 function get_tiny_url($url){  
 	$ch = curl_init();  
 	$timeout = 5;  
@@ -13,18 +13,19 @@ function get_tiny_url($url){
 	return $data;  
 }
 
-else if(isset($_GET['idQuery']) and isset($_GET['newQuery']))
+$idQ = $_SESSION['idQuery'];
+
+if(isset($_POST['newQuery']))
 {
-	$idQ = $_GET['idQuery'];
-	$newQuery = $_GET['newQuery'];
+	
+	$newQuery = $_POST['newQuery'];
 
 	$stmt = $dbh->prepare("UPDATE UserQuery SET Question= ?  WHERE idUserQuery = ?");
 	$stmt->execute(array($newQuery,$idQ));
 }
 
-else if(isset($_GET['DeleteidQuery']))
+if(isset($_POST['DeleteidQuery']))
 {
-	$idQ = $_GET['DeleteidQuery'];
 
 	$stmt = $dbh->prepare("DELETE FROM UserQuery WHERE idUserQuery = ?");
 	$stmt->execute(array($idQ));
@@ -34,26 +35,25 @@ else if(isset($_GET['DeleteidQuery']))
 
 	$stmt = $dbh->prepare("DELETE FROM UserAnswer WHERE idUserQuery = ?");
 	$stmt->execute(array($idQ));
-	exit();
+	
 }
 
-else if(isset($_GET['idQuery']) and isset($_GET['newImage']))
+if(isset($_POST['newImage']))
 {
-	$idQ = $_GET['idQuery'];
-	$newImage = $_GET['newImage'];
+	$newImage = $_POST['newImage'];
 	$newImage = get_tiny_url($newImage);
 
 
 	$stmt = $dbh->prepare("UPDATE UserQuery SET Image = ?  WHERE idUserQuery = ?");
-	$stmt->execute(array($newQuery,$idQ));
-	exit();
+	$stmt->execute(array($newImage,$idQ));
+	
 }
 
 
-if(isset($_GET['idQuery']) and isset($_GET['newAnswer']) and isset($_GET['Answerino'])){ 
-	$idQ = $_GET['idQuery'];
-	$Ans = isset($_GET['idAnswer']);
-	$newA = isset($_GET['newAnswer']);
+if(isset($_POST['newAnswer']) and isset($_POST['Answerino'])){ 
+
+	$Ans = isset($_POST['idAnswer']);
+	$newA = isset($_POST['newAnswer']);
 
 	$stmt = $dbh->prepare("UPDATE Answer SET Answerino = ?  WHERE idUserQuery = ? and Answerino = ?");
 	$stmt->execute(array($newA,$idQ,$Ans));
