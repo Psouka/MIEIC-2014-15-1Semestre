@@ -121,7 +121,7 @@ while ($row = $stmt->fetch()) {
 </div>
 
 <div id="ManagePoll" class="form-action hide">
-  <form>
+  <form action="update_db.php" method="post">
     <ul>
       <li>
         <h1> <?= $QuestionPoll ?></h1>
@@ -145,6 +145,10 @@ while ($row = $stmt->fetch()) {
 </li>
 </ul>
  <input type="submit" value="Update" class="button" />
+ </br></br></br></br>
+ Are you sure you want remove this Poll? 
+ <input type="checkbox" id="deletePoll" name="deletePoll" value="No">
+ </br>
  <input type="submit" value="Delete Poll" class="buttonDelete" />
 </form>
 </div>
