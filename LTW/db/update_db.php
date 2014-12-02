@@ -75,4 +75,6 @@ foreach ($Answers as $temp)
 }
 
 
+header( 'Location: ../html/ManagePoll.php' );
+
 ?>

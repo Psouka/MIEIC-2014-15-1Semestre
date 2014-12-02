@@ -2,7 +2,16 @@
 
 $dbh = new PDO('sqlite:../db/database.db');
 
-$idPoll = $_GET['idUserQuery'];
+
+session_start();
+if(isset($_SESSION['idQuery']))
+  $idPoll = $_SESSION['idQuery'];
+else
+  $idPoll = $_GET['idUserQuery'];
+
+
+$_SESSION['idQuery'] = $idPoll;
+
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
   $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -55,8 +64,7 @@ while ($row = $stmt->fetch()) {
   array_push($pollOptions,$row['Answerino']);
 }
 
-session_start();
-$_SESSION['idQuery'] = $idPoll;
+
 
 
 ?>
