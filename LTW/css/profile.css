@@ -9,29 +9,61 @@ body {
 
 .logoutM {
   background: #505050;
-  position: relative;
-  margin: 25px auto;
-  width: 120px;
-  top: 162px;
-  left: 470px;
+  position: fixed;
+  width: 100%;
+  height: 40px auto;
 }
 
 .formLog {
+  height: 40px;
   padding-bottom: 1px;
   padding-top: 1px;
 }
 
-.userP {
-  text-align: center;
-  padding-bottom: 5px;
+.rightP .userP {
+  font-size: 25px;
+  float: right;
+  display: inline;
+  margin-right: 30px;
+  margin-top: 2px;
 }
 
-.logout, .home ul {
-  float: center;
+.rightD .buttonOut {
+  width: 170px;
+  height: 30px;
+  margin-right: 15px;
+  border: none;
+  outline: none;
+}
+
+.marquee {
+  float: right;
+  width: 700px;
+  margin-right: 150px;
+  margin-top: 3px;
+  display: inline;
+}
+
+.leftD {
+  float: left;
+}
+
+.rightD {
+  float: right;
+}
+
+.home {
+  clear: both;
+}
+
+.pollerinoP {
+  margin-left: 15px;
+  font-size: 30px;
+  margin-top: 1px;
 }
 
 .logout, .home li {
-  float: center;
+
   color: #FFFFFF;
   font-size: 20px;
   margin: 5;
@@ -39,12 +71,8 @@ body {
 }
 
 .buttonOut{
-  display: block;
   background: #136899;
   color: #ffffff;
-  padding-right: 15px;
-  text-align: center;
-  float: center;
 }
 
 .buttonOut:hover {
@@ -109,28 +137,6 @@ body {
   line-height: 25px;
 }
 
-form input{
-  width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
-  padding-left: 15px;
-  border: none;
-  outline: none;
-}
-
-#dynamicOptions div {
-  width: 490px;
-  height: 40px;
-  display: block;
-  text-align: left;
-  font-size: 17px;
-  padding-bottom: 10px;
-  line-height: 25px;
-  margin: 0px;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
 .show {
   display: block;
 }
@@ -159,6 +165,7 @@ form input{
 }
 
 #container {
-  padding-top: 5em;
+  clear: right;
+  padding-top: 8em;
   overflow: hidden;
 }

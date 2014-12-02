@@ -52,39 +52,47 @@ while ($row = $stmt->fetch()) {
 </head>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div id ="container" class="container">
-    <div class="LogoutM">
-      <form class = "formLog" action="../db/logout.php" method="post">
-        <ul class="Home"> 
-          <li>
-           <p class = "userP"><?= $username ?></p>
-         </li>
-         <li>
-           <input type="submit" value="Home" class="buttonOut" />
-         </li>
-       </ul>   
-       <ul class="Logout"> 
+  <div class="LogoutM">
+    <form class = "formLog" action="../db/logout.php" method="post">
+      <ul class="Home"> 
         <li>
-         <input type="submit" value="Log Out" class="buttonOut" />
-       </li>
-     </ul>      
-   </form>
- </div>
- <div class="flat-form">
-  <ul class="tabs">
-    <li>
-      <a href="" class="active">My Pollerinos</a>
-      <a href="../html/editProfile.php">Edit Profile(todo maybe?)</a>
-      <a href="../html/createPoll.php">Create or search Pollerinos</a>
-    </li>
-  </ul>
+          <div class = "leftD">
+            <p class = "pollerinoP"> Pollerino </p>
+          </div>
+          <div class = "rightD">
+            <input type="submit" value="Home" class="buttonOut" />
+            <input type="submit" value="Search" class="buttonOut" />
+            <input type="submit" value="Profile" class="buttonOut" />
+            <input type="submit" value="Log Out" class="buttonOut" />
+          </div>
+          <div class = "rightP">
+            <p class = "userP"><?= $username ?></p>
+          </div>
+          <div class = "marquee">
+            <marquee behavior = "scroll" direction = "left" onmouseover="this.stop();" onmouseout="this.start();"> Questões a aparecer, podes dar hover e para, falta por a clicar e ir pra poll </marquee>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
+  <div id ="container" class="container">
+   <div class="flat-form">
+    <ul class="tabs">
+      <li>
+        <a href="" class="active">My Pollerinos</a>
+        <a href="../html/editProfile.php">Edit Profile(todo maybe?)</a>
+        <a href="../html/createPoll.php">Create Pollerinos</a>
+      </li>
+    </ul>
 
-  <div id="Poll" class="form-action show">
-    <form>
-    </script></center>
-    <ul>
-      <?php if(is_null($questions)) : ?>
+    <div id="Poll" class="form-action show">
+      <form>
+      </script></center>
+      <ul>
+        <?php $questions = array_filter($questions);
+        if(empty($questions)) : ?>
         <h1> You dont have any pollerinos! </h1></br>
+        <h2> Click on create menu and create your first one! </h2> </br>
       <?php else : ?>
         <h1> Your Pollerinos: </h1></br>
         <li>
