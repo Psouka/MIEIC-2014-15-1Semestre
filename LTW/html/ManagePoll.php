@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 
 $dbh = new PDO('sqlite:../db/database.db');
 
@@ -57,6 +55,8 @@ while ($row = $stmt->fetch()) {
   array_push($pollOptions,$row['Answerino']);
 }
 
+
+$_SESSION['']
 
 ?>
 

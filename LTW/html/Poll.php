@@ -120,13 +120,13 @@ while ($row = $stmt4->fetch()) {
             <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
             </script>
           </div>
-          <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
+          <input type="button" value="Responde" class="buttonOut" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
         </p>
         <p>
           <div class="chart"></div>
           <script src="../js/chart.js">
           </script>
-          <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+          <input type="button" value="Chart" class="buttonOut" onClick="drawChart(<?= $idPoll ?>);">
         </p>
       </form>
     </div>

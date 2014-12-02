@@ -1,11 +1,15 @@
 .chart div {
-  height: 30px;
-  font: 20px sans-serif;
-  background-color: steelblue;
-  text-align: right;
-  padding: 3px;
-  margin: 1px;
-  color: white;
+height: 30px;
+font: 20px sans-serif;
+background-color: steelblue;
+text-align: right;
+padding: 3px;
+color: white;
+margin-bottom: 2px;
+border: solid 1px black;
+border-left: none;
+padding-top: 10px;
+padding-right: 10px;
 }
 
 .chart div:first-child{
@@ -16,4 +20,6 @@
   padding: 3px;
   color: white;
   margin-bottom: 2px;
+  border: solid 1px black;
+  border-left: none;
 }

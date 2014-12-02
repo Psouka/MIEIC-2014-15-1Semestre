@@ -31,7 +31,7 @@ function  drawC() {
   var index = 0;
   var x = d3.scale.linear()
   .domain([0, d3.max(dataVotes)])
-  .range([0, 420]);
+  .range([0, 375]);
 
   d3.select(".chart")
   .selectAll("div")
