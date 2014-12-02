@@ -1,6 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
 @import url(../resources/reset.css);
 
+html {
+  min-width: 1000px;
+}
+
 body {
   background-image: url("../resources/background.png");
   color: white;
@@ -52,10 +56,6 @@ body {
   float: right;
 }
 
-.home {
-  clear: both;
-}
-
 .pollerinoP {
   margin-left: 15px;
   font-size: 30px;
@@ -63,7 +63,6 @@ body {
 }
 
 .logout, .home li {
-
   color: #FFFFFF;
   font-size: 20px;
   margin: 5;
@@ -122,6 +121,7 @@ body {
   background: #505050; 
   border-right: none;
 }
+
 .form-action {
   padding: 0 20px;
   position: relative;

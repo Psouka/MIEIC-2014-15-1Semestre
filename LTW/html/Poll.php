@@ -74,61 +74,64 @@ while ($row = $stmt4->fetch()) {
   <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
     <div class="LogoutM">
-      <form action="createPoll.php" method="post">
+      <form class = "formLog" action="../db/logout.php" method="post">
         <ul class="Home"> 
           <li>
-           <p><center><?= $username ?></center></p>
-         </li>
-         <li>
-           <input type="submit" value="Home" class="buttonOut" />
-         </li>
-       </ul>
-       </form>   
-       <ul class="Logout"> 
-        <form action="../db/logout.php" method="post">
-        <li>
-         <input type="submit" value="Log Out" class="buttonOut" />
-       </li>
-       </form>
-     </ul>      
-   
- </div>
- <div id ="container" class="container">
-  <div class="flat-form">
-    <ul class="tabs">
-      <li>
-        <a href="#Poll" class="active">Poll Statistics</a>
-      </li>
-    </ul>
-
-    <div id="Poll" class="form-action show">
-      <form>
-        <ul>
+            <div class = "leftD">
+              <p class = "pollerinoP"> Pollerino </p>
+            </div>
+            <div class = "rightD">
+              <input type="submit" value="Home" class="buttonOut" />
+              <input type="submit" value="Search" class="buttonOut" />
+              <input type="submit" value="Profile" class="buttonOut" />
+              <input type="submit" value="Log Out" class="buttonOut" />
+            </div>
+            <div class = "rightP">
+              <p class = "userP"><?= $username ?></p>
+            </div>
+            <div class = "marquee">
+              <marquee behavior = "scroll" direction = "left" onmouseover="this.stop();" onmouseout="this.start();"> Questões a aparecer, podes dar hover e para, falta por a clicar e ir pra poll </marquee>
+            </div>
+          </li>
+        </ul>
+      </form>
+    </div>
+    <div id ="container" class="container">
+      <div class="flat-form">
+        <ul class="tabs">
           <li>
-            <h1> <?= $QuestionPoll ?></h1>
-          </br>
-        </li>
-        <img src= "<?php echo $ImagePoll ?>">
-      </br></br>
-      <h2>Options:</h2>
-    </ul>
-    <p>
-      <div id="dynamicOptions">
-        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
-        </script>
-      </div>
-      <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
-    </p>
-    <p>
-      <div class="chart"></div>
-      <script src="../js/chart.js">
-      </script>
-      <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
-    </p>
-  </form>
-</div>
+            <a href="#Poll" class="active">Poll Statistics</a>
+          </li>
+        </ul>
 
-</div>
+        <div id="Poll" class="form-action show">
+          <form>
+            <ul>
+              <li>
+                <h1> <?= $QuestionPoll ?></h1>
+              </br>
+            </li>
+            <img src= "<?php echo $ImagePoll ?>">
+          </br></br>
+          <h2>Options:</h2>
+        </ul>
+        <p>
+          <div id="dynamicOptions">
+            <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
+            </script>
+          </div>
+          <input type="button" value="Responde" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
+        </p>
+        <p>
+          <div class="chart"></div>
+          <script src="../js/chart.js">
+          </script>
+          <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+        </p>
+      </form>
+    </div>
+
+  </div>
 </div>
 <footer>
  <center> 2014 LTW  © All rights reserved to no one. </center>
