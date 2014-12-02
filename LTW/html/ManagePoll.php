@@ -47,13 +47,11 @@ $QuestionPoll = $row['Question'];
 $ImagePoll = $row['Image'];
 
 
-$questions = array();
-$stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
-$stmt->execute(array($userid));
+$pollOptions = array();
+$stmt = $dbh->prepare('SELECT Answerino FROM Answer WHERE idUserQuery = ?');
+$stmt->execute(array($idPoll));
 while ($row = $stmt->fetch()) {
-  if(in_array($userid, $row)) {
-    array_push($questions,$row['Question']);
-  }
+  array_push($pollOptions,$row['Answerino']);
 }
 
 
@@ -129,17 +127,25 @@ while ($row = $stmt->fetch()) {
         <h1> <?= $QuestionPoll ?></h1>
       </br>
     </li>
-    <img src= "<?php echo $ImagePoll ?>">
+    <li>
+      <img src= "<?php echo $ImagePoll ?>">
+    </br></br>
+    <h2> New Image: </h2>
+    </br>
     <input type="text" name="newImage" placeholder="New Image">
-  </br></br>
+  </li>
   <li>
-    <h1> <?= $QuestionPoll ?></h1>
   </br>
+  <h1>Options:</h1>
+  </br>
+  <?php foreach($pollOptions as $tempOp) : ?>
+  <h2> <?= $tempOp ?> </h2> </br>
+  <input type="text" name="<?= $tempOp ?>" placeholder="New Option">
+<?php endforeach; ?>
 </li>
-
-</br></br>
-<h1>Options:</h1>
 </ul>
+ <input type="submit" value="Update" class="button" />
+ <input type="submit" value="Delete Poll" class="buttonDelete" />
 </form>
 </div>
 
