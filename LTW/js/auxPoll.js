@@ -1,10 +1,4 @@
-var seeOptions = 0;
-
-
 function showOptions(idQuery,username) {
-	if(seeOptions == 0)
-		$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
-	else
 		sendVote(idQuery,username)
 }
 
@@ -14,22 +8,17 @@ function sendVote(idQuery,username){
 	for(var i = 0; i < rates.length; i++){
 		if(rates[i].checked){
 			OptionX = rates[i].value;
-			console.log(OptionX);
 		}
 	}
 	if(OptionX == '')
 	{
-		alert('Select One');
+		alert('Select one option');
 		return;
 	}
 	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, registed);
-	alert('Registed');
-
-}
-
-function registed(){
-	console.log('Registado');
-
+	document.getElementsByClassName('chart')[0].display.style = 'block';
+	document.getElementsByClassName('dynamicOptions')[0].display.style = 'none';
+	alert('Vote registed!')
 }
 
 function  OptionsReceived(data) {
@@ -47,4 +36,13 @@ function resultOptions(index, value) {
 
 	document.getElementById('dynamicOptions').appendChild(radioFragment);
 	return radioFragment.firstChild;
+}
+
+function init(seeOptions) {
+	if(seeOptions == 0) {
+		$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
+	}
+	else {
+		document.getElementsByClassName('chart')[0].display.style = 'none';
+	}
 }

@@ -32,14 +32,6 @@ body {
   margin-top: 2px;
 }
 
-.marquee {
-  float: right;
-  width: 700px;
-  margin-right: 150px;
-  margin-top: 3px;
-  display: inline;
-}
-
 .leftD {
   float: left;
 }
@@ -155,7 +147,7 @@ img {
 
 input[type="radio"]{
   height: 15px;
-  margin-top: 6px;
+  margin-top: -20px;
   float: left;
 }
 

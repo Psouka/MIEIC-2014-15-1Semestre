@@ -32,17 +32,17 @@ else {
 		$id1->execute();
 		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password) VALUES (?, ?, ?)');
 		$stmt2->execute(array($username, $email, sha1($password)));
-	}
 
-	$to      = $email;
+		$to      = $email;
 		$subject = 'Password Reset Request';
-		$message = 'Welcome ' . $username . ' !' . ;
+		$message = 'Welcome ' . $username . ' !';
 		$headers = 'From: adminerino@pollerino.com' . "\r\n" .
 		'Reply-To: adminerino@pollerino.com' . "\r\n" .
 		'X-Mailer: PHP/' . phpversion();
 		mail($to, $subject, $message, $headers);
+	}
 }
 
-header( 'Location: ../html/login.php' );
+header( 'Location: ../html/page.php' );
 exit();
 ?>

@@ -1,6 +1,7 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 
+$idPoll = 4;
 $ip = 0;
 if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
   $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -26,15 +27,6 @@ while ($row = $stmt->fetch()) {
         $username = $row1['username'];
       }
     }
-  }
-}
-
-$questions = array();
-$stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
-$stmt->execute(array($userid));
-while ($row = $stmt->fetch()) {
-  if(in_array($userid, $row)) {
-    array_push($questions,$row['Question']);
   }
 }
 
@@ -84,9 +76,8 @@ while ($row = $stmt->fetch()) {
       </li>
     </ul>
 
-    <div id="Poll" class="form-action show">
+    <div id="profileEdit" class="form-action show">
       <form>
-      </script></center>
       <ul>
         <?php $questions = array_filter($questions);
         if(empty($questions)) : ?>

@@ -1,5 +1,6 @@
-<?php
+a<?php
 $dbh = new PDO('sqlite:../db/database.db');
+$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $idPoll = $_GET['idUserQuery'];
 $ip = 0;
@@ -26,6 +27,18 @@ while ($row = $stmt->fetch()) {
       if(in_array($userid, $row1)) {
         $username = $row1['username'];
       }
+    }
+  }
+}
+
+$seeOptions = 0;
+
+$stm = $dbh->prepare('SELECT idUserQuery, idUser FROM UserAnswer WHERE idUserQuery = ? AND idUser = ?');
+$stm->execute(array($idPoll, $userid));
+while ($row = $stm->fetch()) {
+  if(in_array($userid, $row)) {
+    if(in_array($idPoll, $row)) {
+      $seeOptions = 1;
     }
   }
 }
@@ -89,9 +102,6 @@ while ($row = $stmt4->fetch()) {
             <div class = "rightP">
               <p class = "userP"><?= $username ?></p>
             </div>
-            <div class = "marquee">
-              <marquee behavior = "scroll" direction = "left" onmouseover="this.stop();" onmouseout="this.start();"> Questões a aparecer, podes dar hover e para, falta por a clicar e ir pra poll </marquee>
-            </div>
           </li>
         </ul>
       </form>
@@ -111,22 +121,23 @@ while ($row = $stmt4->fetch()) {
                 <h1> <?= $QuestionPoll ?></h1>
               </br>
             </li>
-            <img src= "<?php echo $ImagePoll ?>">
+            <img src= "<?= $ImagePoll ?>">
           </br></br>
           <h2>Options:</h2>
         </ul>
         <p>
           <div id="dynamicOptions">
-            <script src="../js/auxPoll.js" language="Javascript" type="text/javascript">
+            <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"> init(<?= $seeOptions?>)
             </script>
           </div>
-          <input type="button" value="Responde" class="buttonOut" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
+          <input type="button" value="Confirm answer" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
         </p>
         <p>
-          <div class="chart"></div>
+          <div class="chart">
           <script src="../js/chart.js">
           </script>
-          <input type="button" value="Chart" class="buttonOut" onClick="drawChart(<?= $idPoll ?>);">
+          <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+          </div>
         </p>
       </form>
     </div>
