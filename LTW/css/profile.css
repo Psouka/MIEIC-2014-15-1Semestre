@@ -69,6 +69,10 @@ body {
   padding: 0;
 }
 
+.pOpt {
+  font-size: 25px;
+}
+
 .buttonOut{
   background: #136899;
   color: #ffffff;

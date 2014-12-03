@@ -50,27 +50,6 @@ $row = $stmt2->fetch();
 $QuestionPoll = $row['Question'];
 $ImagePoll = $row['Image'];
 
-/*
-$question = 0;
-$img = 0;
-
-$stmt3 = $dbh->prepare('SELECT idUserQuery, Question, Image FROM UserQuery WHERE idUserQuery = ?');
-$stmt3->execute(array($idPoll));
-while ($row = $stmt3->fetch()) {
-    if(in_array($idPoll, $row)) {
-      $question = $row['Question'];
-      $img = $row['Image'];
-    }
-  }
-$answers = array();
-$stmt4 = $dbh->prepare('SELECT idUserQuery, Answerino FROM Answer WHERE idUserQuery = ?');
-$stmt4->execute(array($idPoll));
-while ($row = $stmt4->fetch()) {
-    if(in_array($idPoll, $row)) {
-      array_push($answers, $row['Answerino']);
-    }
-  }
-  */
   ?>
 
   <html lang="en">
@@ -123,26 +102,27 @@ while ($row = $stmt4->fetch()) {
             </li>
             <img src= "<?= $ImagePoll ?>">
           </br></br>
-          <h2>Options:</h2>
+          <p class = "pOpt">Options:</p>
         </ul>
         <p>
           <div id="dynamicOptions">
-            <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"> init(<?= $seeOptions?>)
+            <?php if($seeOptions == 0) : ?>
+              <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script> <script> init(<?= $seeOptions?>, <?= $idPoll ?>);
             </script>
-          </div>
-          <input type="button" value="Confirm answer" class="buttonAdd" onClick="showOptions(<?= $idPoll ?>,'<?= $username ?>');">
-        </p>
-        <p>
-          <div class="chart">
-          <script src="../js/chart.js">
-          </script>
-          <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
-          </div>
-        </p>
-      </form>
-    </div>
-
+          <?php endif; ?>
+        </div>
+      </p>
+      <p>
+        <div class="chart">
+          <?php if($seeOptions != 0) :?>
+            <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
+          <?php endif; ?>
+        </div>
+      </p>
+    </form>
   </div>
+
+</div>
 </div>
 <footer>
  <center> 2014 LTW  © All rights reserved to no one. </center>

@@ -128,7 +128,7 @@ img {
 }
 .form-action p {
   font-size: 20px;
-  padding-bottom: 10px;
+  padding-bottom: 4px;
   line-height: 25px;
 }
 
@@ -147,8 +147,12 @@ img {
 
 input[type="radio"]{
   height: 15px;
-  margin-top: -20px;
+  margin-top: 6px;
   float: left;
+}
+
+.radio {
+  
 }
 
 .show {
@@ -159,15 +163,16 @@ input[type="radio"]{
 }
 
 .button {
-  float:right;
   border: none;
+  position: relative;
   display: block;
   background: #136899;
   height: 40px;
-  width: 80px;
   padding-right: 15px;
+  padding-left: 15px;
   color: #ffffff;
   text-align: center;
+  vertical-align: bottom;
 }
 
 .button:hover {
