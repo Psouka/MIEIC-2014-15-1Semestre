@@ -122,6 +122,16 @@ body {
   padding: 12px 22px 12px 42px;
 }
 
+.tabs p {
+  background: #505050; 
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 22px 12px 42px;
+}
+
 .tabs a.active {
   background: #505050; 
   border-right: none;

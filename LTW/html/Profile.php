@@ -52,17 +52,17 @@ while ($row = $stmt->fetch()) {
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <div class="LogoutM">
-    <form class = "formLog" action="../db/logout.php" method="post">
+    <form class = "formLog">
       <ul class="Home"> 
         <li>
           <div class = "leftD">
             <p class = "pollerinoP"> Pollerino </p>
           </div>
           <div class = "rightD">
-            <input type="submit" value="Home" class="buttonOut" />
-            <input type="submit" value="Search" class="buttonOut" />
-            <input type="submit" value="Profile" class="buttonOut" />
-            <input type="submit" value="Log Out" class="buttonOut" />
+            <input type="button" value="Home" class="buttonOut" onclick="location.href='../html/page.php'"/>
+            <input type="button" value="Search" class="buttonOut" onclick="location.href='../html/searchPoll.php'"/>
+            <input type="button" value="Profile" class="buttonOut" onclick="location.href='../html/profile.php'"/>
+            <input type="button" value="Log Out" class="buttonOut" onclick="location.href='../db/logout.php'"/>
           </div>
           <div class = "rightP">
             <p class = "userP"><?= $username ?></p>

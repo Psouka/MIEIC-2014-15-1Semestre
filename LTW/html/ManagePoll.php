@@ -85,25 +85,26 @@ while ($row = $stmt->fetch()) {
 </head>
 <body>
   <?php    $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <div class="LogoutM">
-    <form action="createPoll.php" method="post">
+  <<div class="LogoutM">
+    <form class = "formLog">
       <ul class="Home"> 
         <li>
-         <p><center><?= $username ?></center></p>
-       </li>
-       <li>
-         <input type="submit" value="Home" class="buttonOut" />
-       </li>
-     </ul>
-   </form>   
-   <ul class="Logout"> 
-    <form action="../db/logout.php" method="post">
-      <li>
-       <input type="submit" value="Log Out" class="buttonOut" />
-     </li>
-   </form>
- </ul>      
-</div>
+          <div class = "leftD">
+            <p class = "pollerinoP"> Pollerino </p>
+          </div>
+          <div class = "rightD">
+            <input type="button" value="Home" class="buttonOut" onclick="location.href='../html/page.php'"/>
+            <input type="button" value="Search" class="buttonOut" onclick="location.href='../html/searchPoll.php'"/>
+            <input type="button" value="Profile" class="buttonOut" onclick="location.href='../html/profile.php'"/>
+            <input type="button" value="Log Out" class="buttonOut" onclick="location.href='../db/logout.php'"/>
+          </div>
+          <div class = "rightP">
+            <p class = "userP"><?= $username ?></p>
+          </div>
+        </li>
+      </ul>
+    </form>
+  </div>
 <div id ="container" class="container">
   <div class="flat-form">
     <ul class="tabs">
