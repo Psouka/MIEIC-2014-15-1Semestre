@@ -36,6 +36,7 @@ while ($row = $stmt->fetch()) {
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
   <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
+  <script  type="text/javascript" src="../js/searchPoll.js"></script>
 </head>
 <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
@@ -74,21 +75,16 @@ while ($row = $stmt->fetch()) {
             <form>
                 <ul>
                     <li>
-                        <input type="text" id= "wordInput" name="kWord" placeholder="Key Word" >
+                        <input type="text" id= "word" name="kWord" placeholder="Key Word" >
                     </li>
                     <li>
-                        <input type="text" id ="idInput" name="searchID" placeholder="ID" >
+                        <input type="text" id ="id" name="searchID" placeholder="ID" >
                     </li>
                     <li>
-                        <input type="text" id = "userInput" name="username" placeholder="Username" >
+                        <input type="text" id = "username" name="username" placeholder="Username" >
                     </li>
-                    <p>
-                       <input type="button" value="Search" class="button"
-                       onClick="searchPoll(this.form.userInput.value,this.form.idInput.value,this.form.wordInput.value);">
-                       <div id="dynamicSearch">
-                           <script src="../js/searchPoll.js" language="Javascript" type="text/javascript"></script>
-                       </div>
-                   </p>
+                    <div id = "results">
+                    </div>
                </ul>
            </form>
        </div>

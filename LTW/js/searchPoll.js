@@ -1,63 +1,55 @@
-function searchPoll(username,id,word)
-{
-	clearSearch();
-	var elem = document.getElementById('dynamicSearch');
-	var h1 = document.createElement('H1');
-	var tE = document.createTextNode('Results: ');
-	h1.appendChild(tE);
-	elem.appendChild(h1);
-	elem.appendChild(document.createElement('br'));
-	elem.appendChild(document.createElement('br'));
-	searchUser(username);
-	searchId(id);
-	searchWord(word);
-}
+    $(document).ready(function(){
+        $('#results').html('<p>Enter a search term to start filtering.</p>');
 
-function searchUser(username) {
-	if(username == "")
-		return;
-	$.getJSON("../db/searchPoll.php", {'username': username}, PollsReceived);
-}
+        $('#word').keyup(function() {
 
-function searchId(id) {
-	if(id == "")
-		return;
-	$.getJSON("../db/searchPoll.php", {'id': id}, PollsReceived);
-}
+            var searchVal = $(this).val();
+            if(searchVal !== '') {
+                $.get('../db/searchPoll.php?word='+searchVal, function(returnData) {
+                    if (jQuery.isEmptyObject(searchVal)) {
+                        $('#results').html('<p>Search term entered does not return any data.</p>');
+                    } else {
+                        $('#results').html(returnData);
+                    }
+                });
+            } else {
+                $('#results').html('<p>Enter a search term to start filtering.</p>');
+            }
 
-function searchWord(word) {
-	if(word == "")
-		return;
-	$.getJSON("../db/searchPoll.php", {'word': word}, PollsReceived);
-}
+        });
 
+        $('#id').keyup(function() {
 
-// Called when messages are received
-function  PollsReceived(data) {
-	$.each(data, resultPoll);
-}
+            var searchVal = $(this).val();
+            if(searchVal !== '') {
+                $.get('../db/searchPoll.php?id='+searchVal, function(returnData) {
+                   if (jQuery.isEmptyObject(searchVal)) {
+                        $('#results').html('<p>Search term entered does not return any data.</p>');
+                    } else {
+                        $('#results').html(returnData);
+                    }
+                });
+            } else {
+                $('#results').html('<p>Enter a search term to start filtering.</p>');
+            }
 
-// Called for each line received
-function resultPoll(index, value) {
-	
-	var elem = document.getElementById('dynamicSearch');
-	var a = document.createElement('a');
-	var linkText = document.createTextNode(value);
-	a.appendChild(linkText);
-	a.title = value;
-	a.href = "../db/poll.php?Question=" + value;
-	elem.appendChild(a);
-	elem.appendChild(document.createElement('br'));
-	elem.appendChild(document.createElement('br'));
-	elem.appendChild(document.createElement('br'));
-}
+        });
 
+        $('#username').keyup(function() {
 
-function clearSearch(){
-	var list = document.getElementById('dynamicSearch');
+            var searchVal = $(this).val();
+            if(searchVal !== '') {
+                $.get('../db/searchPoll.php?username='+searchVal, function(returnData) {
+                    if (jQuery.isEmptyObject(searchVal)) {
+                        $('#results').html('<p>Search term entered does not return any data.</p>');
+                    } else {
+                        $('#results').html(returnData);
+                    }
+                });
+            } else {
+                $('#results').html('<p>Enter a search term to start filtering.</p>');
+            }
 
-	while (list.firstChild) {
-		list.removeChild(list.firstChild);
-	}
+        });
 
-}
+    });

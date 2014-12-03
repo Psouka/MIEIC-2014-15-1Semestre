@@ -67,31 +67,23 @@ if(isset($_GET['id'])){
   $Poll = $stmt->fetch();
 
   if(!empty($Poll))
-  $result[] = $Poll['Question'];
+    $result[] = $Poll['Question'];
 }
 
 if(isset($_GET['word'])){
 
   $word = $_GET['word'];
 
-  $wordsize = strlen($word);
-  if($wordsize < 3)
-  {
-   echo json_encode($result);
-   exit(); 
- }
+  $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE Privacy = ? or idUser = ?');
+  $stmt->execute(array(0,$userid));
+  $Polls = $stmt->fetchAll();
 
-
- $stmt = $db->prepare('SELECT Question FROM UserQuery WHERE Privacy = ? or idUser = ?');
- $stmt->execute(array(0,$userid));
- $Polls = $stmt->fetchAll();
-
- foreach ($Polls as $tempPoll){ 
-  if(stripos($tempPoll['Question'],$word) !== false)
-  {  
-    $result[] = $tempPoll['Question'];  
+  foreach ($Polls as $tempPoll){ 
+    if(stripos($tempPoll['Question'],$word) !== false)
+    {  
+      $result[] = $tempPoll['Question'];  
+    }
   }
-}
 }
 echo json_encode($result);
 ?>
