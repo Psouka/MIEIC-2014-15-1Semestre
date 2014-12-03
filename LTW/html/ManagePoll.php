@@ -127,10 +127,10 @@ while ($row = $stmt->fetch()) {
       <h2>Options:</h2>
     </ul>
     <p>
-      <div class="chart"></div>
-      <script src="../js/chart.js">
-      </script>
-      <input type="button" value="Chart" class="buttonAdd" onClick="drawChart(<?= $idPoll ?>);">
+       <div class="chart">
+        <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
+        <script> drawChart(<?= $idPoll ?>);</script>
+    </div>
     </p>
   </form>
 </div>
