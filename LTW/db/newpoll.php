@@ -19,9 +19,9 @@ $username = $_SESSION['usernameOn'];
 $quest = $_POST['Question'];
 
 if(isset($_POST['privacy']))
-$privacy = 1;
+	$privacy = 1;
 else
-$privacy = 0;
+	$privacy = 0;
 
 echo($privacy);
 
@@ -66,7 +66,8 @@ if($username != 'test')
 		$stmt->execute(array($row['idUserQuery'], $temp));
 	}
 	
-
+	header( 'Location: ../html/poll.php?idUserQuery='.$row['idUserQuery']);
+	exit();
 
 }
 else
