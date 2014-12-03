@@ -5,7 +5,7 @@
 
             var searchVal = $(this).val();
             if(searchVal !== '') {
-                $.get('../db/searchPoll.php?word='+searchVal, function(returnData) {
+                $.getJSON('../db/searchPoll.php?word='+searchVal, function(returnData) {
                     if (returnData == []) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
@@ -22,13 +22,13 @@
 
             var searchVal = $(this).val();
             if(searchVal !== '') {
-                $.get('../db/searchPoll.php?id='+searchVal, function(returnData) {
-                   if (returnData == []) {
-                        $('#results').html('<p>Search term entered does not return any data.</p>');
-                    } else {
-                        $('#results').html(returnData);
-                    }
-                });
+                $.getJSON('../db/searchPoll.php?id='+searchVal, function(returnData) {
+                 if (returnData == []) {
+                    $('#results').html('<p>Search term entered does not return any data.</p>');
+                } else {
+                    $('#results').html(returnData);
+                }
+            });
             } else {
                 $('#results').html('<p>Enter a search term to start filtering.</p>');
             }
@@ -39,7 +39,7 @@
 
             var searchVal = $(this).val();
             if(searchVal !== '') {
-                $.get('../db/searchPoll.php?username='+searchVal, function(returnData) {
+                $.getJSON('../db/searchPoll.php?username='+searchVal, function(returnData) {
                     if (returnData == []) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
