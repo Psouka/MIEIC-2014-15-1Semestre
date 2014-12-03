@@ -1,7 +1,13 @@
     $(document).ready(function(){
+
+
+
         $('#results').html('<p>Enter a search term to start filtering.</p>');
 
         $('#word').keyup(function() {
+
+            $('#username').val('');
+            $('#id').val('');
 
             var searchVal = $(this).val();
             if(searchVal !== '') {
@@ -24,6 +30,9 @@
 
         $('#id').keyup(function() {
 
+            $('#username').val('');
+            $('#word').val('');
+
             var searchVal = $(this).val();
             if(searchVal !== '') {
                 $.getJSON('../db/searchPoll.php?id='+searchVal, function(returnData) {
@@ -44,6 +53,9 @@
         });
 
         $('#username').keyup(function() {
+
+            $('#word').val('');
+            $('#id').val('');
 
             var searchVal = $(this).val();
             if(searchVal !== '') {
