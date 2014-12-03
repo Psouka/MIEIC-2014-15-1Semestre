@@ -77,6 +77,7 @@ while ($row = $stmt->fetch()) {
       <form>
       <ul>
         <h1> Edit your Profile </h1></br>
+        
     </ul>
   </form>
 </div>
