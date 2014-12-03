@@ -10,6 +10,7 @@
   border-left: none;
   padding-top: 10px;
   padding-right: 10px;
+  white-space: nowrap;
 }
 
 .chart div:first-child{
@@ -25,5 +26,5 @@
   padding-top: 10px;
   padding-right: 10px;
   margin-bottom: 2px;
-
+  white-space: nowrap;
 }

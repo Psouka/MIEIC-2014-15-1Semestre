@@ -36,5 +36,5 @@ function  drawC() {
   .data(dataVotes)
   .enter().append("div")
   .style("width", function(d) { return x(d) + "px"; })
-  .text(function(d) { return dataAwnsers[index++]; });
+  .text(function(d) { return dataAwnsers[index] + " : " + dataVotes[index++]; });
 }
