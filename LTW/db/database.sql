@@ -14,8 +14,11 @@ CREATE TABLE User(
 	username NVARCHAR2(20) NOT NULL,
 	email NVARCHAR2(20) NOT NULL,
 	password NVARCHAR2(20) NOT NULL,
-	sex NVARCHAR2(5),
+	gender NVARCHAR2(5),
 	age INTEGER,
+	firstName NVARCHAR2(10),
+	lastName NVARCHAR2(10),
+
 	
 );
 

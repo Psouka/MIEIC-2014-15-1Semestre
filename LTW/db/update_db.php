@@ -4,6 +4,9 @@ $dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 session_start();
 $idQ = $_SESSION['idQuery'];
 
+$change = 0;
+
+
 function get_tiny_url($url){  
 	$ch = curl_init();  
 	$timeout = 5;  
@@ -54,6 +57,8 @@ if(isset($_POST['newImage']))
 
 		$stmt = $dbh->prepare("UPDATE UserQuery SET Image = ?  WHERE idUserQuery = ?");
 		$stmt->execute(array($newImage,$idQ));
+
+		$change = 1;
 	}
 	
 }
@@ -69,11 +74,19 @@ foreach ($Answers as $temp)
 	{
 		if (preg_match('/[a-zA-Z]/',$_POST[$temp['Answerino']])) {
 			changeOption($temp['Answerino'],$_POST[$temp['Answerino']]);
+			$change = 1;
 		}
 		
 	}
 }
 
+
+
+if($change != 0)
+{
+	$stmt = $dbh->prepare("DELETE FROM UserAnswer WHERE idUserQuery = ?");
+	$stmt->execute(array($idQ));
+}
 
 header( 'Location: ../html/ManagePoll.php' );
 
