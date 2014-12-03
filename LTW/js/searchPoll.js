@@ -9,7 +9,11 @@
                     if (returnData.length == 0) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
-                        $('#results').html(returnData);
+                        var htmlR = '<h1> Results: </h1> </br><ul>';
+                        for (var i = returnData.length - 1; i >= 0; i--) {
+                            htmlR += '<li style="padding-left: 5px;">' + returnData[i] + '</li>';
+                        };
+                        $('#results').html(htmlR + '</ul>');
                     }
                 });
             } else {
@@ -26,7 +30,11 @@
                  if (returnData.length == 0) {
                     $('#results').html('<p>Search term entered does not return any data.</p>');
                 } else {
-                    $('#results').html(returnData);
+                    var htmlR = '<h1> Results: </h1> </br><ul>';
+                    for (var i = returnData.length - 1; i >= 0; i--) {
+                        htmlR += '<li style="padding-left: 5px;">' + returnData[i] + '</li>';
+                    };
+                    $('#results').html(htmlR + '</ul>');
                 }
             });
             } else {
@@ -43,7 +51,11 @@
                     if (returnData.length == 0) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
-                        $('#results').html(returnData);
+                        var htmlR = '<h1> Results: </h1> </br><ul>';
+                        for (var i = returnData.length - 1; i >= 0; i--) {
+                            htmlR += '<li style="padding-left: 5px;">' + returnData[i] + '</li>';
+                        };
+                        $('#results').html(htmlR + '</ul>');
                     }
                 });
             } else {

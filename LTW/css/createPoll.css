@@ -226,3 +226,13 @@ form input{
   padding-top: 8em;
   overflow: hidden;
 }
+
+#results ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#results li {
+  font-size: 20px;
+  padding-bottom: 10px;
+}
