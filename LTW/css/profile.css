@@ -40,13 +40,6 @@ body {
   outline: none;
 }
 
-.marquee {
-  float: right;
-  width: 700px;
-  margin-right: 150px;
-  margin-top: 3px;
-  display: inline;
-}
 
 .leftD {
   float: left;

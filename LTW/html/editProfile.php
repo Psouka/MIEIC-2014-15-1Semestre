@@ -59,9 +59,6 @@ while ($row = $stmt->fetch()) {
           <div class = "rightP">
             <p class = "userP"><?= $username ?></p>
           </div>
-          <div class = "marquee">
-            <marquee behavior = "scroll" direction = "left" onmouseover="this.stop();" onmouseout="this.start();"> Questões a aparecer, podes dar hover e para, falta por a clicar e ir pra poll </marquee>
-          </div>
         </li>
       </ul>
     </form>
@@ -70,8 +67,8 @@ while ($row = $stmt->fetch()) {
    <div class="flat-form">
     <ul class="tabs">
       <li>
-        <a href="" class="active">My Pollerinos</a>
-        <a href="../html/editProfile.php">Edit Profile(todo maybe?)</a>
+        <a href="../html/Profile.php">My Pollerinos</a>
+        <a href="" class="active">Edit Profile(todo maybe?)</a>
         <a href="../html/createPoll.php">Create Pollerinos</a>
       </li>
     </ul>
@@ -79,18 +76,7 @@ while ($row = $stmt->fetch()) {
     <div id="profileEdit" class="form-action show">
       <form>
       <ul>
-        <?php $questions = array_filter($questions);
-        if(empty($questions)) : ?>
-        <h1> You dont have any pollerinos! </h1></br>
-        <h2> Click on create menu and create your first one! </h2> </br>
-      <?php else : ?>
-        <h1> Your Pollerinos: </h1></br>
-        <li>
-          <?php foreach($questions as $question) : ?>
-            <h2> <?= $question ?> </h2> </br>
-          <?php endforeach; ?>
-        </li></br>
-      <?php endif; ?>
+        <h1> Edit your Profile </h1></br>
     </ul>
   </form>
 </div>

@@ -67,9 +67,6 @@ while ($row = $stmt->fetch()) {
           <div class = "rightP">
             <p class = "userP"><?= $username ?></p>
           </div>
-          <div class = "marquee">
-            <marquee behavior = "scroll" direction = "left" onmouseover="this.stop();" onmouseout="this.start();"> Questões a aparecer, podes dar hover e para, falta por a clicar e ir pra poll </marquee>
-          </div>
         </li>
       </ul>
     </form>
