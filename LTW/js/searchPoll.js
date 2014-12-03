@@ -6,7 +6,7 @@
             var searchVal = $(this).val();
             if(searchVal !== '') {
                 $.get('../db/searchPoll.php?word='+searchVal, function(returnData) {
-                    if (jQuery.isEmptyObject(searchVal)) {
+                    if (returnData == []) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
                         $('#results').html(returnData);
@@ -23,7 +23,7 @@
             var searchVal = $(this).val();
             if(searchVal !== '') {
                 $.get('../db/searchPoll.php?id='+searchVal, function(returnData) {
-                   if (jQuery.isEmptyObject(searchVal)) {
+                   if (returnData == []) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
                         $('#results').html(returnData);
@@ -40,7 +40,7 @@
             var searchVal = $(this).val();
             if(searchVal !== '') {
                 $.get('../db/searchPoll.php?username='+searchVal, function(returnData) {
-                    if (jQuery.isEmptyObject(searchVal)) {
+                    if (returnData == []) {
                         $('#results').html('<p>Search term entered does not return any data.</p>');
                     } else {
                         $('#results').html(returnData);
