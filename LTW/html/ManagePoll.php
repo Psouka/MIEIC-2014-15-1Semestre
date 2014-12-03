@@ -66,10 +66,6 @@ $stmt->execute(array($idPoll));
 while ($row = $stmt->fetch()) {
   array_push($pollOptions,$row['Answerino']);
 }
-
-
-
-
 ?>
 
 <html lang="en">
@@ -105,33 +101,32 @@ while ($row = $stmt->fetch()) {
       </ul>
     </form>
   </div>
-<div id ="container" class="container">
-  <div class="flat-form">
-    <ul class="tabs">
-      <li>
-        <a href="#Poll" class="active">Poll Statistics</a>
-      </li>
-      <li>
-        <a href="#ManagePoll">Manage Poll</a>
-      </li>
-    </ul>
-
-    <div id="Poll" class="form-action show">
-      <form>
-        <ul>
-          <li>
-            <h1> <?= $QuestionPoll ?></h1>
-          </br>
+  <div id ="container" class="container">
+    <div class="flat-form">
+      <ul class="tabs">
+        <li>
+          <a href="#Poll" class="active">Poll Statistics</a>
         </li>
-        <img src= "<?php echo $ImagePoll ?>">
-      </br></br>
-      <h2>Options:</h2>
-    </ul>
-    <p>
+        <li>
+          <a href="#ManagePoll">Manage Poll</a>
+        </li>
+      </ul>
+      <div id="Poll" class="form-action show">
+        <form>
+          <ul>
+            <li>
+              <h1> <?= $QuestionPoll ?></h1>
+            </br>
+          </li>
+          <img src= "<?php echo $ImagePoll ?>">
+        </br></br>
+        <h2>Options:</h2>
+      </ul>
+      <p>
        <div class="chart">
         <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
         <script> drawChart(<?= $idPoll ?>);</script>
-    </div>
+      </div>
     </p>
   </form>
 </div>
@@ -146,7 +141,7 @@ while ($row = $stmt->fetch()) {
     <li>
       <img src= "<?php echo $ImagePoll ?>">
     </br></br>
-    <h2> New Image: </h2>
+    <p> New Image: </p>
   </br>
   <input type="text" name="newImage" placeholder="New Image">
 </li>
@@ -155,15 +150,18 @@ while ($row = $stmt->fetch()) {
 <h1>Options:</h1>
 </br>
 <?php foreach($pollOptions as $tempOp) : ?>
-  <h2> <?= $tempOp ?> </h2> </br>
+  <p> <?= $tempOp ?> </p> </br>
   <input type="text" name="<?= $tempOp ?>" placeholder="New Option">
 <?php endforeach; ?>
 </li>
 </ul>
 </br>
-Do you want remove this Poll? 
-<input type="checkbox" id="deletePoll" name="deletePoll" value="Yes">
+<p>Do you want remove this Poll?
+</br></br>
+<input type="checkbox" id="deletePoll" name="deletePoll" value="Yes"></p>
+<li id = "buttonli">
 <input type="submit" value="Update" class="button" />
+</li>
 </form>
 </div>
 
