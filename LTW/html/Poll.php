@@ -50,77 +50,81 @@ $row = $stmt2->fetch();
 $QuestionPoll = $row['Question'];
 $ImagePoll = $row['Image'];
 
-  ?>
+?>
 
-  <html lang="en">
-  <head>
-    <script src="../resources/jquery-1.9.1.js"></script>
-    <script src="../resources/d3.v3.min.js"> </script>
-    <script type="text/javascript" src="../js/page.js"></script>
-    <title>Pollerino</title>
-    <link rel="shortcut icon" href="../resources/icon.ico"/>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/poll.css" hreflang="en">
-    <link rel="stylesheet" href="../css/chart.css" hreflang="en">
-  </head>
-  <body>
-    <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-    <div class="LogoutM">
-      <form class = "formLog" action="../db/logout.php" method="post">
-        <ul class="Home"> 
-          <li>
-            <div class = "leftD">
-              <p class = "pollerinoP"> Pollerino </p>
-            </div>
-            <div class = "rightD">
-              <input type="submit" value="Home" class="buttonOut" />
-              <input type="submit" value="Search" class="buttonOut" />
-              <input type="submit" value="Profile" class="buttonOut" />
-              <input type="submit" value="Log Out" class="buttonOut" />
-            </div>
-            <div class = "rightP">
-              <p class = "userP"><?= $username ?></p>
-            </div>
-          </li>
-        </ul>
-      </form>
-    </div>
-    <div id ="container" class="container">
-      <div class="flat-form">
-        <ul class="tabs">
-          <li>
-            <a href="#Poll" class="active">Poll Statistics</a>
-          </li>
-        </ul>
-
-        <div id="Poll" class="form-action show">
-          <form>
-            <ul>
-              <li>
-                <h1> <?= $QuestionPoll ?></h1>
-              </br>
-            </li>
-            <img src= "<?= $ImagePoll ?>">
-          </br></br>
-          <p class = "pOpt">Options:</p>
-        </ul>
-        <p>
-          <div id="dynamicOptions">
-            <?php if($seeOptions == 0) : ?>
-              <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script> <script> init(<?= $seeOptions?>, <?= $idPoll ?>);
-            </script>
-          <?php endif; ?>
-        </div>
-      </p>
-      <p>
-        <div class="chart">
-          <?php if($seeOptions != 0) :?>
-            <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
-          <?php endif; ?>
-        </div>
-      </p>
+<html lang="en">
+<head>
+  <script src="../resources/jquery-1.9.1.js"></script>
+  <script src="../resources/d3.v3.min.js"> </script>
+  <script type="text/javascript" src="../js/page.js"></script>
+  <title>Pollerino</title>
+  <link rel="shortcut icon" href="../resources/icon.ico"/>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="../css/poll.css" hreflang="en">
+  <link rel="stylesheet" href="../css/chart.css" hreflang="en">
+</head>
+<body>
+  <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
+  <div class="LogoutM">
+    <form class = "formLog" action="../db/logout.php" method="post">
+      <ul class="Home"> 
+        <li>
+          <div class = "leftD">
+            <p class = "pollerinoP"> Pollerino </p>
+          </div>
+          <div class = "rightD">
+            <input type="submit" value="Home" class="buttonOut" />
+            <input type="submit" value="Search" class="buttonOut" />
+            <input type="submit" value="Profile" class="buttonOut" />
+            <input type="submit" value="Log Out" class="buttonOut" />
+          </div>
+          <div class = "rightP">
+            <p class = "userP"><?= $username ?></p>
+          </div>
+        </li>
+      </ul>
     </form>
   </div>
+  <div id ="container" class="container">
+    <div class="flat-form">
+      <ul class="tabs">
+        <li>
+          <a href="#Poll" class="active">Poll Statistics</a>
+        </li>
+      </ul>
+
+      <div id="Poll" class="form-action show">
+        <form>
+          <ul>
+            <li>
+              <h1> <?= $QuestionPoll ?></h1>
+            </br>
+          </li>
+          <img src= "<?= $ImagePoll ?>">
+        </br></br>
+        <p class = "pOpt">Options:</p>
+      </ul>
+      <p> <?php if($seeOptions == 0) : ?>
+        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
+        <div id="dynamicOptions">
+          
+         
+           <script> init(<?= $seeOptions?>, <?= $idPoll ?>);
+          </script>
+        
+      </div>
+      <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
+    <?php endif; ?>
+    </p>
+    <p>
+      <div class="chart">
+        <?php if($seeOptions != 0) :?>
+        <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
+      <?php endif; ?>
+    </div>
+  </p>
+</form>
+</div>
 
 </div>
 </div>

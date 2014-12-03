@@ -12,19 +12,16 @@ function sendVote(idQuery, username){
 		return;
 	}
 
+	console.log(idQuery);
+	console.log(OptionX);
+	console.log(username);
+
 	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username});
 	location.reload(true);
 }
 
 function  OptionsReceived(data) {
 	$.each(data, resultOptions);
-
-	var but = document.createElement('input');
-	but.setAttribute('type', 'button');
-	but.setAttribute('value', 'Confirm answer');
-	but.setAttribute('class', 'button');
-	but.setAttribute('onClick', 'sendVote( \'<?= $idPoll?>\', \'<?= $username ?>\');');
-	document.getElementById('dynamicOptions').appendChild(but);
 }
 
 // Called for each line received
