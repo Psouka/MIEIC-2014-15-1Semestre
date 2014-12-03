@@ -94,10 +94,14 @@ while ($row = $stmt->fetch()) {
             <p>
               <div id="dynamicInput">
                 <script src="../js/createPoll.js" language="Javascript" type="text/javascript"></script>
-                <input type="text" name="inputs1" class="newOpt" placeholder="New Option..." required>
-                <input type="button" name="deleteInput1" value="−" class="buttonDel" onClick="deleteInput(this);" required>
-                <input type="text" name="inputs2" class="newOpt" placeholder="New Option..." required>
-                <input type="button" name="deleteInput2" value="−" class="buttonDel" onClick="deleteInput(this);" required>
+                <div class="addtinput">
+                <input type="text" name="inputs1" class="newOpt" placeholder="New Optionerino..."> 
+                <input type="button" name="deleteInput1" class="buttonDel" value="−" onclick="deleteInput(this);">
+                </div>
+                <div class="addtinput">
+                <input type="text" name="inputs2" class="newOpt" placeholder="New Optionerino..."> 
+                <input type="button" name="deleteInput2" class="buttonDel" value="−" onclick="deleteInput(this);">
+                </div>
               </div>
               <input type="button" value="Add another optionerino" class="buttonAdd" onClick="addInput('dynamicInput');">
             </p>
