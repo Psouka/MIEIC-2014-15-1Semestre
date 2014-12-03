@@ -86,8 +86,10 @@ if($change != 0)
 {
 	$stmt = $dbh->prepare("DELETE FROM UserAnswer WHERE idUserQuery = ?");
 	$stmt->execute(array($idQ));
+	header( 'Location: ../html/profile.php' );
+} else {
+	header( 'Location: ../html/managePoll.php?idUserQuery=' + $idQ);
 }
 
-header( 'Location: ../html/ManagePoll.php' );
 
 ?>

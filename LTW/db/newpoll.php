@@ -66,7 +66,7 @@ if($username != 'test')
 		$stmt->execute(array($row['idUserQuery'], $temp));
 	}
 	
-	header( 'Location: ../html/poll.php?idUserQuery='.$row['idUserQuery']);
+	header( 'Location: ../html/managePoll.php?idUserQuery='.$row['idUserQuery']);
 	exit();
 
 }
