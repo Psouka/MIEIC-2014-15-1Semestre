@@ -85,7 +85,7 @@ while ($row = $stmt->fetch()) {
 </head>
 <body>
   <?php    $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
-  <<div class="LogoutM">
+  <div class="LogoutM">
     <form class = "formLog">
       <ul class="Home"> 
         <li>
