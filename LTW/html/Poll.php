@@ -104,22 +104,26 @@ $ImagePoll = $row['Image'];
         </br></br>
         <p class = "pOpt">Options:</p>
       </ul>
-      <p>
+      <p> <?php if($seeOptions == 0) : ?>
+        <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
         <div id="dynamicOptions">
-          <?php if($seeOptions == 0) : ?>
-            <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script> <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
+          
+         
+           <script> init(<?= $seeOptions?>, <?= $idPoll ?>);
           </script>
-        <?php endif; ?>
+        
       </div>
+      <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
+    <?php endif; ?>
     </p>
     <p>
       <div class="chart">
         <?php if($seeOptions != 0) :?>
-          <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
-        <?php endif; ?>
-      </div>
-    </p>
-  </form>
+        <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
+      <?php endif; ?>
+    </div>
+  </p>
+</form>
 </div>
 
 </div>
