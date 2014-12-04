@@ -12,12 +12,7 @@ function sendVote(idQuery, username){
 		return;
 	}
 
-	console.log(idQuery);
-	console.log(OptionX);
-	console.log(username);
-
-	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username});
-	location.reload(true);
+	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, location.reload(true););
 }
 
 function  OptionsReceived(data) {

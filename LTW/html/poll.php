@@ -52,13 +52,11 @@ $ImagePoll = $row['Image'];
 
 ?>
 
-
-
 <html lang="en">
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
   <script src="../resources/d3.v3.min.js"> </script>
-  <script type="text/javascript" src="../js/page.js"></script>
+  <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
@@ -67,16 +65,11 @@ $ImagePoll = $row['Image'];
 </head>
 <!--<?php flush(); ?> -->
 <body>
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-
+  <script>
+    $(window).bind("load", function() {
+      $.getScript('js/socialM.js', function() {});
+    });
+  </script>
   <!-- <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?> -->
   <div class="LogoutM">
     <form class = "formLog">
@@ -117,28 +110,31 @@ $ImagePoll = $row['Image'];
         </br></br>
         <p class = "pOpt">Options:</p>
       </ul>
-      <p>
-        <div id="dynamicOptions">
-          <?php if($seeOptions == 0) : ?>
-          <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
-          <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
-          </script>
-        <?php endif; ?>
-      </div>
-    </p>
-    <p>
-      <div class="chart">
-        <?php if($seeOptions != 0) :?>
-        <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
-        <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
+      <?php if($seeOptions == 0) : ?>
+        <p>
+          <div id="dynamicOptions">
+            <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
+            </script>
+          </div>
+          <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
+        </p>
       <?php endif; ?>
-    </div>
-  </p>
-  <?php $ref = 'Location: ../html/poll.php?idUserQuery=' + $idPoll; ?>
-  <div class="fb-share-button" data-layout="button"></div>
-  <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-</form>
-</br>
+      <p>
+        <div class="chart">
+          <?php if($seeOptions != 0) :?>
+            <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
+          <?php endif; ?>
+        </div>
+      </p>
+      <?php $ref = 'Location: ../html/poll.php?idUserQuery=' + $idPoll; ?>
+      <div id="fb-root"></div>
+      <div class="fb-share-button" data-layout="button"></div>
+      <!-- TWITTER -->
+      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+      <!-- G+ -->
+      <div class="g-plusone" data-size="medium" data-href="http://www.textsearcher.com/"></div>
+    </form>
+  </br>
 </div>
 
 </div>
