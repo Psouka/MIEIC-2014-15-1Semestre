@@ -65,11 +65,6 @@ $ImagePoll = $row['Image'];
 </head>
 <!--<?php flush(); ?> -->
 <body>
-  <script>
-    $(window).bind("load", function() {
-      $.getScript('js/socialM.js', function() {});
-    });
-  </script>
   <!-- <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?> -->
   <div class="LogoutM">
     <form class = "formLog">
@@ -111,30 +106,33 @@ $ImagePoll = $row['Image'];
         <p class = "pOpt">Options:</p>
       </ul>
       <?php if($seeOptions == 0) : ?>
-        <p>
-          <div id="dynamicOptions">
-            <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
-            </script>
-          </div>
-          <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
-        </p>
-      <?php endif; ?>
       <p>
-        <div class="chart">
-          <?php if($seeOptions != 0) :?>
-            <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
-          <?php endif; ?>
+        <div id="dynamicOptions">
+          <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
+          </script>
         </div>
+        <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
       </p>
-      <?php $ref = 'Location: ../html/poll.php?idUserQuery=' + $idPoll; ?>
-      <div id="fb-root"></div>
-      <div class="fb-share-button" data-layout="button"></div>
-      <!-- TWITTER -->
-      <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-      <!-- G+ -->
-      <div class="g-plusone" data-size="medium" data-href="http://www.textsearcher.com/"></div>
-    </form>
-  </br>
+    <?php endif; ?>
+    <p>
+      <div class="chart">
+        <?php if($seeOptions != 0) :?>
+        <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
+      <?php endif; ?>
+    </div>
+  </p>
+  <?php $ref = 'Location: ../html/poll.php?idUserQuery=' + $idPoll; ?>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button_count"></div>
+</form>
+</br>
 </div>
 
 </div>
