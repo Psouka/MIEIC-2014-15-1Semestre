@@ -4,7 +4,8 @@ $dbh = new PDO('sqlite:database.db');
 
 if( isset($_POST['idQuery']) and isset($_POST['OptionX']) and isset($_POST['Username']) ){ 
 	$idQuery = $_POST['idQuery'];
-	$OptionX= $_POST['OptionX'];
+	//$OptionX= $_POST['OptionX'];
+	$OptionX = json_decode($_POST['OptionX']);
 	$username = $_POST['Username'];
 
 	if($username != 'Guest')
@@ -25,14 +26,17 @@ if( isset($_POST['idQuery']) and isset($_POST['OptionX']) and isset($_POST['User
 			exit();
 		}
 
+		foreach ($OptionX as $Option) {
+			$stmt = $dbh->prepare('SELECT idAnswer FROM Answer WHERE Answerino = ?');
+			$stmt->execute(array($Option));
+			$row = $stmt->fetch();
+			$idAnswer = $row['idAnswer'];
 
-		$stmt = $dbh->prepare('SELECT idAnswer FROM Answer WHERE Answerino = ?');
-		$stmt->execute(array($OptionX));
-		$row = $stmt->fetch();
-		$idAnswer = $row['idAnswer'];
-
-		$stmt = $dbh->prepare('INSERT INTO UserAnswer (idUser,idAnswer,idUserQuery) VALUES (?,?,?)');
-		$stmt->execute(array($idUser,$idAnswer,$idQuery));
+			$stmt = $dbh->prepare('INSERT INTO UserAnswer (idUser,idAnswer,idUserQuery) VALUES (?,?,?)');
+			$stmt->execute(array($idUser,$idAnswer,$idQuery));
+			
+		}
+		
 
 		echo 'registed';
 	}

@@ -1,20 +1,21 @@
 var multiple = 0;
+var idQ;
 
 function sendVote(idQuery, username){
 	var rates =  document.getElementsByName('Vote');
-	var OptionX= '';
+	var OptionX = [];
 	for(var i = 0; i < rates.length; i++){
 		if(rates[i].checked){
-			OptionX = rates[i].value;
+			OptionX.push(rates[i].value);
 		}
 	}
-	if(OptionX == '')
+	if(OptionX.length == 0)
 	{
 		alert('Select one option');
 		return;
 	}
 
-	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : OptionX , 'Username' : username}, location.reload(true));
+	$.post("../db/newVote.php", {'idQuery' : idQuery, 'OptionX' : JSON.stringify(OptionX) , 'Username' : username}, location.reload(true));
 }
 
 function  OptionsReceived(data) {
@@ -42,11 +43,13 @@ function resultOptions(index, value) {
 function initMultiple(data){
 	console.log(data);
 	multiple = data;
+	$.getJSON("../db/getAnswers.php", {'idQuery' : idQ}, OptionsReceived);
 }
 
 function init(seeOptions, idQuery) {
+	idQ = idQuery;
 	if(seeOptions == 0) {
 		$.get("../db/getPolltype.php",{'idQuery' : idQuery},initMultiple);
-		$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
+		
 	}
 }
