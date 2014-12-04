@@ -91,5 +91,6 @@ if($change != 0)
 	header( 'Location: ../html/managePoll.php?idUserQuery=' + $idQ);
 }
 
+exit();
 
 ?>

@@ -60,4 +60,9 @@ if(isset($_POST['newPw']) and isset($_POST['confirmPw']))
 	
 }
 
+
+header( 'Location: ../html/editProfile.php' );
+exit();
+
+
 ?>
