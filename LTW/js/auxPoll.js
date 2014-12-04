@@ -39,8 +39,14 @@ function resultOptions(index, value) {
 	return radioFragment.firstChild;
 }
 
+function initMultiple(data){
+	console.log(data);
+	multiple = data;
+}
+
 function init(seeOptions, idQuery) {
 	if(seeOptions == 0) {
+		$.get("../db/getPolltype.php",{'idQuery' : idQuery},initMultiple);
 		$.getJSON("../db/getAnswers.php", {'idQuery' : idQuery}, OptionsReceived);
 	}
 }
