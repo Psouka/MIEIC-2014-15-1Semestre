@@ -37,6 +37,7 @@ while ($row = $stmt->fetch()) {
   <meta charset="utf-8">
   <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
 </head>
+<?php flush(); ?>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <div class="LogoutM">

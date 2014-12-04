@@ -2,139 +2,124 @@
 @import url(../resources/reset.css);
 
 body {
-  background-image: url("../resources/background.png");
-  color: white;
-  font-family: 'Roboto';
-}
+	color: white;
+	font-size: 100%;
+	font-family: Roboto;
+	background-image: url(http://paginas.fe.up.pt/~ei12060/PollWeb/resources/background.png);
+ }
 
 .flat-form {
-  background: #34495e;
-  margin: 25px auto;
-  width: 390px;
-  position: relative;
-  font-family: 'Roboto';
-}
+	margin: 1.563em auto;
+	width: 24.375em;
+	position: relative;
+	font-family: Roboto;
+	background: rgb(52, 73, 94);
+ }
 
-.flat-form #login {
-  height: 250px;
-}
+	.flat-form #login {height: 16em;}
 
-.flat-form #register {
-  height: 300px;
-}
+	.flat-form #register {height: 19em;}
 
-.flat-form #reset {
-  height: 250px;
-}
+	.flat-form #reset {height: 16em;}
 
 .tabs {
-  background: #505050;  
-  height: 40px;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  display: block;
-  margin-bottom: 20px;
-  padding-left: 25px;
-}
-.tabs li {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-}
+	height: 2.500em;
+	margin: 0em 0em 1.25em;
+	padding: 0em 0em 0em 1.563em;
+	list-style-type: none;
+	display: block;
+	background: rgb(80, 80, 80);
+ }
 
-.tabs a {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 22px;
+	.tabs li {
+		display: block;
+		float: left;
+		margin: 0em;
+		padding: 0em;
+	 }
 
-}
+	.tabs a {
+		display: block;
+		float: left;
+		text-decoration: none;
+		color: white;
+		font-size: 1em;
+		padding: 0.750em 1.375em;
+		background: rgb(80, 80, 80);
+	 }
 
-.tabs a.active {
-  background: #505050; 
-  border-right: none;
-}
+		.tabs a.active {
+			border-right-style: none;
+			background: rgb(80, 80, 80);
+		 }
 
 .form-action {
-  padding: 0 20px;
-  position: relative;
-}
+	padding: 0em 1.250em;
+	position: relative;
+ }
 
-.form-action h1 {
-  font-size: 42px;
-  padding-bottom: 30px;
-  text-align: center;
-}
-.form-action p.resetPw {
-  font-size: 12px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
-  line-height: 25px;
-}
+	.form-action h1 {
+		font-size: 2.625em;
+		padding-bottom: 0.75em;
+		text-align: center;
+	 }
 
-.form-action p.error {
-  font-size: 12px;
-  padding-bottom: 10px;
-  padding-left: 0px;
-  padding-right: 20px;
-  line-height: 25px;
-  color: red;
-  display: inline-block;
-  margin-top: 20px;
-}
+	.form-action p.resetpw {
+		font-size: 0.75em;
+		padding-bottom: 0.833em;
+		padding-left: 1.667em;
+		padding-right: 1.667em;
+		line-height: 2em;
+	 }
+
+	.form-action p.error {
+		font-size: 0.75em;
+		padding-bottom: 0.833em;
+		padding-left: 0em;
+		padding-right: 1.667em;
+		line-height: 2em;
+		color: red;
+		display: inline-block;
+		margin-top: 1.667em;
+	 }
 
 form {
-  padding-left: 20px !important;
-  padding-right: 20px !important;
-}
+	padding-left: 1.250em !important;
+	padding-right: 1.250em !important;
+ }
 
-form input[type=text],
-form input[type=email],
-form input[type=password] {
-  width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
-  padding-left: 15px;
-  background: #fff;
-  border: none;
-  color: #000000;  
-  outline: none;
-}
+	form input[type="text"], form input[type="email"], form input[type="password"] {
+		width: 100%;
+		height: 3.25em;
+		margin-bottom: 0.75em;
+		padding-left: 1.250em;
+		border: none;
+		color: rgb(0, 0, 0);
+		outline: none;
+		background: rgb(255, 255, 255);
+	 }
 
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
+.show {display: block;}
+
+.hide {display: none;}
 
 .button {
-  float:right;
-  border: none;
-  display: block;
-  background: #136899;
-  height: 40px;
-  width: 80px;
-  padding-right: 5px;
-  color: #ffffff;
-  text-align: center;
-  margin-top: 12px;
-}
+	float: right;
+	border: none;
+	display: block;
+	height: 3.25em;
+	width: 6.25em;
+	padding-right: 0.313em;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	margin-top: 0.750em;
+	background: rgb(19, 104, 153);
+ }
 
-.button:hover {
-  background: #1e75aa;
-}
+	.button:hover {background: rgb(30, 117, 170);}
 
-.button:active {
-  background: #CC3300;
-}
+	.button:active {background: rgb(204, 51, 0);}
 
-#container {
-  padding-top: 15em;
-}
+footer {margin-top: 1em;}
+
+#container {padding-top: 15em;}

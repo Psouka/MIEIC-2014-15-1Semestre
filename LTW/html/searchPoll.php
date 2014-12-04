@@ -38,6 +38,7 @@ while ($row = $stmt->fetch()) {
   <link rel="stylesheet" href="../css/createPoll.css" hreflang="en">
   <script  type="text/javascript" src="../js/searchPoll.js"></script>
 </head>
+<?php flush(); ?>
 <body>
     <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
     <div class="LogoutM">

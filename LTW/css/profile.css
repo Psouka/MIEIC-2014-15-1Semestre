@@ -1,168 +1,133 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
 @import url(../resources/reset.css);
 
-html {
-  min-width: 1000px;
-}
+html {min-width: 1000px;}
 
 body {
-  background-image: url("../resources/background.png");
   color: white;
-  font-family: 'Roboto';
-}
-
-.logoutM {
-  background: #505050;
-  position: fixed;
-  width: 100%;
-  height: 40px auto;
-}
-
-.formLog {
-  height: 40px;
-  padding-bottom: 1px;
-  padding-top: 1px;
-}
-
-.rightP .userP {
-  font-size: 25px;
-  float: right;
-  display: inline;
-  margin-right: 30px;
-  margin-top: 2px;
-}
-
-.rightD .buttonOut {
-  width: 170px;
-  height: 30px;
-  margin-right: 15px;
-  border: none;
-  outline: none;
-}
-
-
-.leftD {
-  float: left;
-}
-
-.rightD {
-  float: right;
-}
-
-.pollerinoP {
-  margin-left: 15px;
-  font-size: 30px;
-  margin-top: 1px;
-}
-
-.logout, .home li {
-  color: #FFFFFF;
-  font-size: 20px;
-  margin: 5;
-  padding: 0;
-}
-
-.pOpt {
-  font-size: 25px;
-}
-
-.buttonOut{
-  background: #136899;
-  color: #ffffff;
-}
-
-.buttonOut:hover {
-  background: #1e75aa;
-}
-
-.buttonOut:active {
-  background: #CC3300;
-}
+  font-family: Roboto;
+  background-image: url(http://paginas.fe.up.pt/~ei12060/PollWeb/resources/background.png);
+ }
 
 .flat-form {
-  background: #34495e;
-  margin: 25px auto;
-  width: 790px;
+  margin: 1.563em auto;
+  width: 49.375em;
   position: relative;
-  font-family: 'Roboto';
-}
+  font-family: Roboto;
+  background: rgb(52, 73, 94);
+ }
 
 .tabs {
-  background: #505050;  
-  height: 40px;
-  margin: 0;
-  padding: 0;
+  height: 2.500em;
+  margin: 0em 0em 1.25em;
+  padding: 0em;
   list-style-type: none;
-  width: 100%;
-  position: relative;
   display: block;
-  margin-bottom: 20px;
-}
-.tabs li {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-.tabs a {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 22px;
-}
+  background: rgb(80, 80, 80);
+ }
 
-.tabs a.active {
-  background: #505050; 
-  border-right: none;
-}
+  .tabs li {
+    display: block;
+    float: left;
+    margin: 0em;
+    padding: 0em;
+   }
+
+  .tabs a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
+
+    .tabs a.active {
+      border-right-style: none;
+      background: rgb(80, 80, 80);
+     }
 
 .form-action {
-  padding: 0 20px;
+  padding: 0em 1.25em;
   position: relative;
-}
+ }
 
-.form-action h1 {
-  font-size: 42px;
-  padding-bottom: 10px;
-}
-.form-action p {
-  font-size: 20px;
-  padding-bottom: 10px;
-  line-height: 25px;
-}
+  .form-action h1 {
+    font-size: 2.625em;
+    padding-bottom: 0.238em;
+   }
 
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
+  .form-action p {
+    font-size: 1.25em;
+    padding-bottom: 0.75em;
+    line-height: 1.250em;
+   }
 
-.button {
-  float:right;
-  border: none;
-  display: block;
-  background: #136899;
-  height: 40px;
-  width: 80px;
-  padding-right: 15px;
-  color: #ffffff;
-  text-align: center;
-}
-
-.button:hover {
-  background: #1e75aa;
-}
-
-.button:active {
-  background: #CC3300;
-}
+.show {display: block;}
 
 #container {
   clear: right;
   padding-top: 8em;
   overflow: hidden;
-}
+ }
+
+.logoutM {
+  background: #505050;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 2.5em auto;
+ }
+
+.formLog {
+  height: 2.5em;
+  padding-bottom: 0.063em;
+  padding-top: 0.063em;
+ }
+
+.rightP .userP {
+  font-size: 1.25em;
+  float: right;
+  display: inline;
+  margin-right: 1.250em;
+  margin-top: 0.083em;
+ }
+
+.rightD .buttonOut {
+  width: 13em;
+  height: 2.35em;
+  margin-right: 0.938em;
+  border: none;
+  outline: none;
+ }
+
+.leftD {float: left;}
+
+.rightD {float: right;}
+
+.pollerinoP {
+  margin-left: 0.5em;
+  font-size: 1.5em;
+  margin-top: 0.033em;
+ }
+
+.logout, .home li {
+  color: #FFFFFF;
+  font-size: 1.25em;
+  margin: 0.25em;
+  padding: 0em;
+ }
+
+.pOpt {font-size: 1.5em;}
+
+.buttonOut {
+  background: #136899;
+  color: #ffffff;
+ }
+
+  .buttonOut:hover {background: #1e75aa;}
+
+  .buttonOut:active {background: #CC3300;}
+
+  footer {margin-top: 1em;}

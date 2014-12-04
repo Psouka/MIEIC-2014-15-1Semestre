@@ -1,0 +1,168 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+@import url(../resources/reset.css);
+
+html {
+  min-width: 1000px;
+}
+
+body {
+  background-image: url("../resources/background.png");
+  color: white;
+  font-family: 'Roboto';
+}
+
+.logoutM {
+  background: #505050;
+  position: fixed;
+  width: 100%;
+  height: 40px auto;
+}
+
+.formLog {
+  height: 40px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+
+.rightP .userP {
+  font-size: 25px;
+  float: right;
+  display: inline;
+  margin-right: 30px;
+  margin-top: 2px;
+}
+
+.rightD .buttonOut {
+  width: 170px;
+  height: 30px;
+  margin-right: 15px;
+  border: none;
+  outline: none;
+}
+
+
+.leftD {
+  float: left;
+}
+
+.rightD {
+  float: right;
+}
+
+.pollerinoP {
+  margin-left: 15px;
+  font-size: 30px;
+  margin-top: 1px;
+}
+
+.logout, .home li {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin: 5;
+  padding: 0;
+}
+
+.pOpt {
+  font-size: 25px;
+}
+
+.buttonOut{
+  background: #136899;
+  color: #ffffff;
+}
+
+.buttonOut:hover {
+  background: #1e75aa;
+}
+
+.buttonOut:active {
+  background: #CC3300;
+}
+
+.flat-form {
+  background: #34495e;
+  margin: 25px auto;
+  width: 790px;
+  position: relative;
+  font-family: 'Roboto';
+}
+
+.tabs {
+  background: #505050;  
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+}
+.tabs li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.tabs a {
+  background: #505050; 
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 22px 12px 22px;
+}
+
+.tabs a.active {
+  background: #505050; 
+  border-right: none;
+}
+
+.form-action {
+  padding: 0 20px;
+  position: relative;
+}
+
+.form-action h1 {
+  font-size: 42px;
+  padding-bottom: 10px;
+}
+.form-action p {
+  font-size: 20px;
+  padding-bottom: 10px;
+  line-height: 25px;
+}
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.button {
+  float:right;
+  border: none;
+  display: block;
+  background: #136899;
+  height: 40px;
+  width: 80px;
+  padding-right: 15px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.button:hover {
+  background: #1e75aa;
+}
+
+.button:active {
+  background: #CC3300;
+}
+
+#container {
+  clear: right;
+  padding-top: 8em;
+  overflow: hidden;
+}
