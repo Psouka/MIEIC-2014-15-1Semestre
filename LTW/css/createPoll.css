@@ -1,163 +1,104 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
 @import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
 
-html {
-  min-width: 1000px;
-}
+html {min-width: 1000px;}
 
 body {
-  background-image: url("../resources/background.png");
   color: white;
-  font-family: 'Roboto';
-}
+  font-family: Roboto;
+  background-image: url(http://gnomo.fe.up.pt/~ei12060/PollWeb/resources/background.png);
+ }
 
-.logoutM {
-  background: #505050;
-  position: fixed;
+img {
+  width: auto;
+  max-height: 12.5em;
+ }
+
+.flat-form {
+  margin: 1.563em auto;
+  width: 49.375em;
+  position: relative;
+  font-family: Roboto;
+  background: rgb(52, 73, 94);
+  z-index: 0;
+ }
+
+ form input {
   width: 100%;
-  height: 40px auto;
-  z-index: 1;
-}
-
-.formLog {
-  height: 40px;
-  padding-bottom: 1px;
-  padding-top: 1px;
-}
-
-.rightP .userP {
-  font-size: 25px;
-  float: right;
-  display: inline;
-  margin-right: 30px;
-  margin-top: 2px;
-}
-
-.leftD {
-  float: left;
-}
-
-.rightD {
-  float: right;
-}
-
-.pollerinoP {
-  margin-left: 15px;
-  font-size: 30px;
-  margin-top: 1px;
-}
-
-.logout, .home li {
-  color: #FFFFFF;
-  font-size: 20px;
-  margin: 5;
-  padding: 0;
-}
-
-.buttonOut{
-  background: #136899;
-  color: #ffffff;
-  width: 170px;
-  height: 30px;
-  margin-right: 15px;
-  margin-bottom: 0px;
+  height: 3.25em;
+  margin-bottom: 0.625em;
+  padding-left: 0.938em;
+  background: #fff;
   border: none;
+  color: #000000;  
   outline: none;
 }
 
-.buttonOut:hover {
-  background: #1e75aa;
-}
-
-.buttonOut:active {
-  background: #CC3300;
-}
-
-.flat-form {
-  background: #34495e;
-  margin: 25px auto;
-  width: 790px;
-  position: relative;
-  font-family: 'Roboto';
-  z-index: 0;
-}
-
-.flat-form a {
-  color:white;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-.flat-form a:visited  {
-  text-decoration: none;
-  color: #C8C8C8;
-}
-
-.flat-form #SearchPoll{
-  height: 305px auto;
-}
-
 .tabs {
-  background: #505050;  
-  height: 40px;
-  margin: 0;
-  padding: 0;
+  height: 2.500em;
+  margin: 0em 0em 1.25em;
+  padding: 0em;
   list-style-type: none;
-  width: 100%;
-  position: relative;
   display: block;
-  margin-bottom: 20px;
-}
-.tabs li {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-.tabs a {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 42px;
-}
+  background: rgb(80, 80, 80);
+ }
 
-.tabs p {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 42px;
-}
+  .tabs li {
+    display: block;
+    float: left;
+    margin: 0em;
+    padding: 0em;
+   }
 
-.tabs a.active {
-  background: #505050; 
-  border-right: none;
-}
+   .tabs p {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
+
+  .tabs a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
+
+    .tabs a.active {
+      border-right-style: none;
+      background: rgb(80, 80, 80);
+     }
 
 .form-action {
-  padding: 0 40px;
+  padding: 0px 2.5em;
   position: relative;
-}
+ }
 
-.form-action h1 {
-  font-size: 42px;
-  padding-bottom: 10px;
-}
-.form-action p {
-  font-size: 20px;
-  padding-bottom: 10px;
-  line-height: 25px;
-}
+  .form-action h1 {
+    font-size: 2.625em;
+    padding-bottom: 0.625em;
+   }
+
+  .form-action p {
+    font-size: 1.25em;
+    padding-bottom: 0.5em;
+    line-height: 1.250em;
+   }
+
+.show {display: block;}
+
+.hide {display: none;}
 
 .newOpt {
   width: 92%;
-  height: 40px;
-  margin-bottom: 10px;
+  height: 3.25em;
+  margin-bottom: 0.8em;
   background: #fff;
   border: none;
   color: #000000;  
@@ -166,80 +107,107 @@ body {
 
 .buttonDel {
   padding-left: 0px;
-  width: 7%;
-  height: 40px;
-  margin-bottom: 10px;
-  margin-left: 2px;
+  width: 7.18%;
+  height: 3.25em;
+  margin-bottom: 0.8em;
+  margin-left: 0.160em;
   background: #fff;
   border: none;
   color: #000000;  
   outline: none;
-}
-
-form input{
-  width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
-  padding-left: 15px;
-  background: #fff;
-  border: none;
-  color: #000000;  
-  outline: none;
-}
-
-.show {
-  display: block;
-}
-.hide {
-  display: none;
 }
 
 .button {
   border: none;
   display: block;
-  background: #136899;
-  height: 40px;
-  width: 80px;
-  padding-right: 15px;
-  color: #ffffff;
+  height: 3.25em;;
+  width: 9em;
+  color: rgb(255, 255, 255);
   text-align: center;
-  margin-top: -10px;
-}
+  margin-top: -0.625em;
+  background: rgb(19, 104, 153);
+ }
 
-#SearchPoll .button {
-  margin-top: 10px;
-}
+  .button:hover {background: rgb(30, 117, 170);}
 
-#privacy{
-  height: 25px;
-  width: 25px;
-}
-
-#multiple{
-  height: 25px;
-  width: 25px;
-}
-
-.button:hover {
-  background: #1e75aa;
-}
-
-.button:active {
-  background: #CC3300;
-}
+  .button:active {background: rgb(204, 51, 0);}
 
 #container {
   clear: right;
   padding-top: 8em;
   overflow: hidden;
+ }
+
+ .logoutM {
+  background: #505050;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 2.5em auto;
+ }
+
+.formLog {
+  height: 2.5em;
+  padding-bottom: 0.063em;
+  padding-top: 0.063em;
+  z-index: 1;
+ }
+
+.rightP .userP {
+  font-size: 1.25em;
+  float: right;
+  display: inline;
+  margin-right: 1.250em;
+  margin-top: 0.083em;
+ }
+
+.rightD .buttonOut {
+  width: 13em;
+  height: 2.35em;
+  margin-right: 0.938em;
+  border: none;
+  outline: none;
+ }
+
+.leftD {float: left;}
+
+.rightD {float: right;}
+
+.pollerinoP {
+  margin-left: 0.5em;
+  font-size: 1.5em;
+  margin-top: 0.033em;
+ }
+
+.logout, .home li {
+  color: #FFFFFF;
+  font-size: 1.25em;
+  margin: 0.25em;
+  padding: 0em;
+ }
+
+.pOpt {font-size: 1.5em;}
+
+.buttonOut {
+  background: #136899;
+  color: #ffffff;
+ }
+
+  .buttonOut:hover {background: #1e75aa;}
+
+  .buttonOut:active {background: #CC3300;}
+
+  #privacy, #multiple{
+  height: 25px;
+  width: 25px;
 }
 
 #results ul {
   list-style-type: disc;
-  padding-left: 20px;
+  padding-left: 1.250em;
 }
 
 #results li {
-  font-size: 20px;
-  padding-bottom: 10px;
+  font-size: 1.250em;
+  padding-bottom: 0.625em;
 }

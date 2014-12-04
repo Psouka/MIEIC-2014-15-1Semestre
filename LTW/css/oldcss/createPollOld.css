@@ -1,0 +1,245 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:100);
+@import url(http://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.css);
+
+html {
+  min-width: 1000px;
+}
+
+body {
+  background-image: url("../resources/background.png");
+  color: white;
+  font-family: 'Roboto';
+}
+
+.logoutM {
+  background: #505050;
+  position: fixed;
+  width: 100%;
+  height: 40px auto;
+  z-index: 1;
+}
+
+.formLog {
+  height: 40px;
+  padding-bottom: 1px;
+  padding-top: 1px;
+}
+
+.rightP .userP {
+  font-size: 25px;
+  float: right;
+  display: inline;
+  margin-right: 30px;
+  margin-top: 2px;
+}
+
+.leftD {
+  float: left;
+}
+
+.rightD {
+  float: right;
+}
+
+.pollerinoP {
+  margin-left: 15px;
+  font-size: 30px;
+  margin-top: 1px;
+}
+
+.logout, .home li {
+  color: #FFFFFF;
+  font-size: 20px;
+  margin: 5;
+  padding: 0;
+}
+
+.buttonOut{
+  background: #136899;
+  color: #ffffff;
+  width: 170px;
+  height: 30px;
+  margin-right: 15px;
+  margin-bottom: 0px;
+  border: none;
+  outline: none;
+}
+
+.buttonOut:hover {
+  background: #1e75aa;
+}
+
+.buttonOut:active {
+  background: #CC3300;
+}
+
+.flat-form {
+  background: #34495e;
+  margin: 25px auto;
+  width: 790px;
+  position: relative;
+  font-family: 'Roboto';
+  z-index: 0;
+}
+
+.flat-form a {
+  color:white;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.flat-form a:visited  {
+  text-decoration: none;
+  color: #C8C8C8;
+}
+
+.flat-form #SearchPoll{
+  height: 305px auto;
+}
+
+.tabs {
+  background: #505050;  
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  width: 100%;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+}
+.tabs li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.tabs a {
+  background: #505050; 
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 22px 12px 42px;
+}
+
+.tabs p {
+  background: #505050; 
+  display: block;
+  float: left;
+  text-decoration: none;
+  color: white;
+  font-size: 16px;
+  padding: 12px 22px 12px 42px;
+}
+
+.tabs a.active {
+  background: #505050; 
+  border-right: none;
+}
+
+.form-action {
+  padding: 0 40px;
+  position: relative;
+}
+
+.form-action h1 {
+  font-size: 42px;
+  padding-bottom: 10px;
+}
+.form-action p {
+  font-size: 20px;
+  padding-bottom: 10px;
+  line-height: 25px;
+}
+
+.newOpt {
+  width: 92%;
+  height: 40px;
+  margin-bottom: 10px;
+  background: #fff;
+  border: none;
+  color: #000000;  
+  outline: none;
+}
+
+.buttonDel {
+  padding-left: 0px;
+  width: 7%;
+  height: 40px;
+  margin-bottom: 10px;
+  margin-left: 2px;
+  background: #fff;
+  border: none;
+  color: #000000;  
+  outline: none;
+}
+
+form input{
+  width: 100%;
+  height: 40px;
+  margin-bottom: 10px;
+  padding-left: 15px;
+  background: #fff;
+  border: none;
+  color: #000000;  
+  outline: none;
+}
+
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
+
+.button {
+  border: none;
+  display: block;
+  background: #136899;
+  height: 40px;
+  width: 80px;
+  padding-right: 15px;
+  color: #ffffff;
+  text-align: center;
+  margin-top: -10px;
+}
+
+#SearchPoll .button {
+  margin-top: 10px;
+}
+
+#privacy{
+  height: 25px;
+  width: 25px;
+}
+
+#multiple{
+  height: 25px;
+  width: 25px;
+}
+
+.button:hover {
+  background: #1e75aa;
+}
+
+.button:active {
+  background: #CC3300;
+}
+
+#container {
+  clear: right;
+  padding-top: 8em;
+  overflow: hidden;
+}
+
+#results ul {
+  list-style-type: disc;
+  padding-left: 20px;
+}
+
+#results li {
+  font-size: 20px;
+  padding-bottom: 10px;
+}

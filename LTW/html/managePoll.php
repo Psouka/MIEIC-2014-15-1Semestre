@@ -160,7 +160,7 @@ while ($row = $stmt->fetch()) {
   <input type="text" name="newImage" placeholder="New Image">
 </li>
 <li>
-</br>
+</br></br>
 <h1>Options:</h1>
 </br>
 <?php foreach($pollOptions as $tempOp) : ?>
