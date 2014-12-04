@@ -5,9 +5,8 @@
 	<script src="../resources/jquery-1.9.1.js"></script>
 	<script src="../js/page.js"></script>
 	<link rel="shortcut icon" href="../resources/icon.ico">
-	<link rel="stylesheet" href="../css/pageOld.css" hreflang="en">
+	<link rel="stylesheet" href="../css/page.css" hreflang="en">
 </head>
-<?php flush(); ?>
 <body>
 	<?php
 	session_start();

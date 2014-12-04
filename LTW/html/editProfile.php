@@ -77,7 +77,7 @@ while ($row = $stmt->fetch()) {
     <div id="profileEdit" class="form-action show">
       <form action="../db/update_user.php" method="post">
         <ul>
-          <h1> Edit your Profile </h1></br>
+          <h1> Update your Profile </h1></br>
         </br><h2> First Name </h2>
         <input type="text" name="FirstName" placeholder="New First Name">
        </br></br><h2> Last Name </h2>
