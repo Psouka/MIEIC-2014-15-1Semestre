@@ -79,7 +79,7 @@ body {
   width: 790px;
   position: relative;
   font-family: 'Roboto';
-  z-index: -1;
+  z-index: 0;
 }
 
 .flat-form a {

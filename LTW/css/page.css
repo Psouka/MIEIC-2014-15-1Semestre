@@ -14,7 +14,7 @@ body {
 	position: relative;
 	font-family: Roboto;
 	background: rgb(52, 73, 94);
-	z-index: -1;
+	z-index: 0;
 
  }
 
