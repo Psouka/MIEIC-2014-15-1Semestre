@@ -17,7 +17,8 @@ CREATE TABLE User(
 	gender NVARCHAR2(5),
 	age INTEGER,
 	firstName NVARCHAR2(10),
-	lastName NVARCHAR2(10)	
+	lastName NVARCHAR2(10),
+	loginAttempts INTEGER	
 );
 
 CREATE TABLE UserLogin(

@@ -31,7 +31,7 @@ while ($row = $stmt->fetch()) {
 		$to      = $email;
 		$subject = 'Password Reset Request';
 		$message = 'Your new password is: ' . $newPw . "\r\n\r\n" . "To change this temporary password go to your profile area and change it.";
-		$headers = 'From: adminerino@pollerino.com' . "\r\n" .
+		$headers = 'From: Pollerino <adminerino@pollerino.com>' . "\r\n" .
 		'Reply-To: adminerino@pollerino.com' . "\r\n" .
 		'X-Mailer: PHP/' . phpversion();
 		mail($to, $subject, $message, $headers);

@@ -36,7 +36,7 @@ else {
 		$to      = $email;
 		$subject = 'Password Reset Request';
 		$message = 'Welcome ' . $username . ' !';
-		$headers = 'From: adminerino@pollerino.com' . "\r\n" .
+		$headers = 'From: Pollerino <adminerino@pollerino.com>' . "\r\n" .
 		'Reply-To: adminerino@pollerino.com' . "\r\n" .
 		'X-Mailer: PHP/' . phpversion();
 		mail($to, $subject, $message, $headers);

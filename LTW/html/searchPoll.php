@@ -40,7 +40,6 @@ while ($row = $stmt->fetch()) {
 </head>
 <?php flush(); ?>
 <body>
-    <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
     <div class="LogoutM">
     <form class = "formLog">
       <ul class="Home"> 
