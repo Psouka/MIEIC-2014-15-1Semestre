@@ -33,7 +33,8 @@ CREATE TABLE UserQuery(
 	idUser NUMBER  REFERENCES User(idUser),
 	Question VARCHAR(200) NOT NULL,
 	Image VARCHAR(200) NOT NULL,
-	Privacy INTEGER NOT NULL
+	Privacy INTEGER NOT NULL,
+	Multiple INTEGER NOT NULL
 );
 
 

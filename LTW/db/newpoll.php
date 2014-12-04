@@ -23,7 +23,11 @@ if(isset($_POST['privacy']))
 else
 	$privacy = 0;
 
-echo($privacy);
+if(isset($_POST['multiple']))
+	$multiple = 1;
+else
+	$multiple = 0;
+
 
 	//$option = $_POST['myInputs'];
 $image = $_POST['queryImage'];
@@ -52,8 +56,8 @@ if($username != 'Guest')
 	$row = $stmt->fetch();
 
 
-	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question,Image,Privacy) VALUES (?, ?, ?,?)');
-	$stmt->execute(array($row['idUser'], $quest,$new_url,$privacy));
+	$stmt = $dbh->prepare('INSERT INTO UserQuery (idUser,Question,Image,Privacy,Multiple) VALUES (?,?,?,?,?)');
+	$stmt->execute(array($row['idUser'], $quest,$new_url,$privacy,$multiple));
 
 
 

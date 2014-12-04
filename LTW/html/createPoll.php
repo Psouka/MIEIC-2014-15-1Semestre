@@ -112,6 +112,10 @@ while ($row = $stmt->fetch()) {
               <input type="checkbox" id="privacy" name="privacy" value="Yes" checked>
             </p>
             <p>
+              Multiple Answers ? </br></br>
+              <input type="checkbox" id="multiple" name="multiple" value="Yes" checked>
+            </p>
+            <p>
               <li>
                 <input type="submit" value="Create" class="button" />
               </li>
