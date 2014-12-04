@@ -183,8 +183,8 @@ while ($row = $stmt->fetch()) {
             <option value="100">100</option>
           </select>
           <h2> Change Password </h2></br>
-          <input type="text" name="newPw" placeholder="New Password">
-          <input type="text" name="confirmPw" placeholder="Confirm Password">
+          <input type="password" name="newPw" placeholder="New Password">
+          <input type="password" name="confirmPw" placeholder="Confirm Password">
           <p>
 
           </p>

@@ -49,13 +49,13 @@ if(isset($_POST['LastName']))
 
 if(isset($_POST['newPw']) and isset($_POST['confirmPw']))
 {
-
 	if(preg_match('/[a-zA-Z]/',$_POST['newPw']) and preg_match('/[a-zA-Z]/',$_POST['confirmPw'])
 		and $_POST['confirmPw'] === $_POST['newPw'])
 	{
 		echo($_POST['confirmPw']);
-		$stmt = $dbh->prepare("UPDATE User SET lastName = ?  WHERE idUser = ?");
-		$stmt->execute(array($_POST['LastName'],$idU));
+		echo($idU);
+		$stmt = $dbh->prepare("UPDATE User SET password = ?  WHERE idUser = ?");
+		$stmt->execute(array(sha1($_POST['newPw']),$idU));
 	}
 	
 }
