@@ -23,7 +23,7 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 
 
 
-$username = "test";
+$username = "Guest";
 
 $userid = 0;
 

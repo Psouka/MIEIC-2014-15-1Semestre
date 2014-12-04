@@ -44,7 +44,7 @@ while(isset($_POST[$ifinal])) {
 	$ifinal = $i1 . $i2;
 }
 
-if($username != 'test')
+if($username != 'Guest')
 {
 
 	$stmt = $dbh->prepare('SELECT idUser FROM User WHERE username = ?');

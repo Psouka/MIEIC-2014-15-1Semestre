@@ -10,7 +10,7 @@ if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
 } else {
   $ip = $_SERVER['REMOTE_ADDR'];
 }
-$username = "test";
+$username = "Guest";
 
 $userid = 0;
 
