@@ -1,3 +1,5 @@
+var multiple = 0;
+
 function sendVote(idQuery, username){
 	var rates =  document.getElementsByName('Vote');
 	var OptionX= '';
@@ -22,7 +24,10 @@ function  OptionsReceived(data) {
 // Called for each line received
 function resultOptions(index, value) {
 	seeOptions = 1;
-	var radioHtml = value +'<input type="radio" name="Vote"';
+	if(multiple == 0)
+		var radioHtml = value +'<input type="radio" name="Vote"';
+	else
+		var radioHtml = value +'<input type="checkbox" name="Vote"';
 	radioHtml += 'value="' + value + '"'
 	radioHtml += '/>';
 	var radioFragment = document.createElement('div');
