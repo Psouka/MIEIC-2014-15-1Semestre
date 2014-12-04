@@ -79,7 +79,6 @@ while ($row = $stmt->fetch()) {
   <link rel="stylesheet" href="../css/poll.css" hreflang="en">
   <link rel="stylesheet" href="../css/chart.css" hreflang="en">
 </head>
-<?php flush(); ?>
 <body>
   <div id="fb-root"></div>
   <script>(function(d, s, id) {
@@ -130,14 +129,16 @@ while ($row = $stmt->fetch()) {
           </li>
           <img src= "<?php echo $ImagePoll ?>">
         </br></br>
-        <h2>Options:</h2>
+        <p>Options:</p>
       </ul>
+      </br>
       <p>
        <div class="chart">
         <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
         <script> drawChart(<?= $idPoll ?>);</script>
       </div>
     </p>
+    </br>
     <div class="fb-share-button" data-layout="button"></div>
     <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
   </form>

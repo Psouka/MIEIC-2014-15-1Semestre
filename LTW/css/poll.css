@@ -1,97 +1,33 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:100);
 @import url(../resources/reset.css);
 
-html {
-  min-width: 1000px;
-}
+html {min-width: 1000px;}
 
 body {
-  background-image: url("../resources/background.png");
   color: white;
-  font-family: 'Roboto';
-}
-
-.logoutM {
-  background: #505050;
-  position: fixed;
-  width: 100%;
-  height: 40px auto;
-}
-
-.formLog {
-  height: 40px;
-  padding-bottom: 1px;
-  padding-top: 1px;
-  z-index: 1;
-}
-
-.rightP .userP {
-  font-size: 25px;
-  float: right;
-  display: inline;
-  margin-right: 30px;
-  margin-top: 2px;
-}
-
-.leftD {
-  float: left;
-}
-
-.rightD {
-  float: right;
-}
-
-.pollerinoP {
-  margin-left: 15px;
-  font-size: 30px;
-  margin-top: 1px;
-}
-
-.logout, .home li {
-  color: #FFFFFF;
-  font-size: 20px;
-  margin: 5;
-  padding: 0;
-}
-
-.buttonOut{
-  background: #136899;
-  color: #ffffff;
-  width: 170px;
-  height: 30px;
-  margin-right: 15px;
-  margin-bottom: 0px;
-  border: none;
-  outline: none;
-}
-
-.buttonOut:hover {
-  background: #1e75aa;
-}
-
-.buttonOut:active {
-  background: #CC3300;
-}
+  font-family: Roboto;
+  background-image: url(http://gnomo.fe.up.pt/~ei12060/PollWeb/resources/background.png);
+ }
 
 img {
- width: auto;
- max-height: 200px;
-}
+  width: auto;
+  max-height: 12.5em;
+ }
 
 .flat-form {
-  background: #34495e;
-  margin: 25px auto;
-  width: 790px;
+  margin: 1.563em auto;
+  width: 49.375em;
   position: relative;
-  font-family: 'Roboto';
+  font-family: Roboto;
+  background: rgb(52, 73, 94);
   z-index: 0;
-}
+ }
 
-form input:not(input[type="radio"]) {
+ form input[type="text"] {
   width: 100%;
-  height: 40px;
-  margin-bottom: 10px;
-  padding-left: 15px;
+  height: 3.25em;
+  margin-bottom: 0.625em;
+  padding-left: 0.938em;
   background: #fff;
   border: none;
   color: #000000;  
@@ -100,72 +36,160 @@ form input:not(input[type="radio"]) {
 
 form input[type="radio"] {
   float: left;
-  height: 20px;
-  width: 20px;
-  margin-top: 3px;
-  margin-right: 10px;
-}
-
-#privacy{
-  height: 25px;
-  width: 25px;
-}
+  height: 1.250em;
+  width: 1.250em;
+  margin-top: 0.188em;
+  margin-right: 0.625em;
+ }
 
 .tabs {
-  background: #505050;  
-  height: 40px;
-  margin: 0;
-  padding: 0;
+  height: 2.500em;
+  margin: 0em 0em 1.25em;
+  padding: 0em;
   list-style-type: none;
-  width: 100%;
-  position: relative;
   display: block;
-  margin-bottom: 20px;
-}
-.tabs li {
-  display: block;
-  float: left;
-  margin: 0;
-  padding: 0;
-}
-.tabs a {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 42px;
-}
+  background: rgb(80, 80, 80);
+ }
 
-.tabs p {
-  background: #505050; 
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 16px;
-  padding: 12px 22px 12px 42px;
-}
+  .tabs li {
+    display: block;
+    float: left;
+    margin: 0em;
+    padding: 0em;
+   }
 
-.tabs a.active {
-  background: #505050; 
-  border-right: none;
-}
+   .tabs p {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
+
+  .tabs a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
+
+    .tabs a.active {
+      border-right-style: none;
+      background: rgb(80, 80, 80);
+     }
 
 .form-action {
-  padding: 0 40px;
+  padding: 0px 2.5em;
   position: relative;
+ }
+
+  .form-action h1 {
+    font-size: 2.625em;
+    padding-bottom: 0.625em;
+   }
+
+  .form-action p {
+    font-size: 1.25em;
+   }
+
+.show {display: block;}
+
+.hide {display: none;}
+
+.button {
+  border: none;
+  display: block;
+  height: 3.25em;;
+  width: 9em;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin-top: -0.625em;
+  background: rgb(19, 104, 153);
+ }
+
+  .button:hover {background: rgb(30, 117, 170);}
+
+  .button:active {background: rgb(204, 51, 0);}
+
+#container {
+  clear: right;
+  padding-top: 8em;
+  overflow: hidden;
+ }
+
+ .logoutM {
+  background: #505050;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 2.5em auto;
+ }
+
+.formLog {
+  height: 2.5em;
+  padding-bottom: 0.063em;
+  padding-top: 0.063em;
+  z-index: 1;
+ }
+
+.rightP .userP {
+  font-size: 1.25em;
+  float: right;
+  display: inline;
+  margin-right: 1.250em;
+  margin-top: 0.083em;
+ }
+
+.rightD .buttonOut {
+  width: 13em;
+  height: 2.35em;
+  margin-right: 0.938em;
+  border: none;
+  outline: none;
+ }
+
+.leftD {float: left;}
+
+.rightD {float: right;}
+
+.pollerinoP {
+  margin-left: 0.5em;
+  font-size: 1.5em;
+  margin-top: 0.033em;
+ }
+
+.logout, .home li {
+  color: #FFFFFF;
+  font-size: 1.25em;
+  margin: 0.25em;
+  padding: 0em;
+ }
+
+.pOpt {font-size: 1.5em;}
+
+.buttonOut {
+  background: #136899;
+  color: #ffffff;
+ }
+
+  .buttonOut:hover {background: #1e75aa;}
+
+  .buttonOut:active {background: #CC3300;}
+
+#deletePoll {
+  width: 25px;
+  height: 25px;
 }
 
-.form-action h1 {
-  font-size: 42px;
+#buttonli {
+  list-style-type: none;
   padding-bottom: 10px;
-}
-.form-action p {
-  font-size: 20px;
-  padding-bottom: 10px;
-  line-height: 25px;
+  padding-top: 20px;
 }
 
 #dynamicOptions div {
@@ -179,47 +203,4 @@ form input[type="radio"] {
   margin: 0px;
   overflow: hidden;
   white-space: nowrap;
-}
-
-.show {
-  display: block;
-}
-.hide {
-  display: none;
-}
-
-.button {
-  border: none;
-  display: block;
-  background: #136899;
-  height: 40px;
-  width: 120px;
-  color: #ffffff;
-  text-align: center;
-  margin-top: -10px;
-}
-
-.button:hover {
-  background: #1e75aa;
-}
-
-.button:active {
-  background: #CC3300;
-}
-
-#container {
-  clear: right;
-  padding-top: 8em;
-  overflow: hidden;
-}
-
-#deletePoll {
-  width: 25px;
-  height: 25px;
-}
-
-#buttonli {
-  list-style-type: none;
-  padding-bottom: 10px;
-  padding-top: 20px;
 }
