@@ -7,7 +7,7 @@ if( isset($_POST['idQuery']) and isset($_POST['OptionX']) and isset($_POST['User
 	$OptionX= $_POST['OptionX'];
 	$username = $_POST['Username'];
 
-	if($username != 'test')
+	if($username != 'Guest')
 	{
 		$stmt = $dbh->prepare('SELECT idUser FROM User WHERE username = ?');
 		$stmt->execute(array($username));

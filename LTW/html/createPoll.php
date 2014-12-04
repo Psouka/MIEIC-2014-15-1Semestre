@@ -27,6 +27,7 @@ while ($row = $stmt->fetch()) {
     }
   }
 }
+
 ?>
 
 <html lang="en">
