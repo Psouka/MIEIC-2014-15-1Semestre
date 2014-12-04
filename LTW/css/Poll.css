@@ -22,6 +22,7 @@ body {
   height: 40px;
   padding-bottom: 1px;
   padding-top: 1px;
+  z-index: 1;
 }
 
 .rightP .userP {
@@ -83,6 +84,7 @@ img {
   width: 790px;
   position: relative;
   font-family: 'Roboto';
+  z-index: -1;
 }
 
 form input:not(input[type="radio"]) {
