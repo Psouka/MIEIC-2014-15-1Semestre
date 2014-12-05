@@ -3,36 +3,17 @@ $db = new PDO('sqlite:database.db');
 $db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 $result = array();
 
+session_start();
 
-$ip = 0;
-if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-  $ip = $_SERVER['HTTP_CLIENT_IP'];
-} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-} else {
-  $ip = $_SERVER['REMOTE_ADDR'];
-}
-$usernameIP = "Guest";
+if(isset($_SESSION['username']))
+  $usernameIP = $_SESSION['username'];
+else
+  $usernameIP = "Guest";
 
-$userid = 0;
+if(isset($_SESSION['idUser']))
+  $userid = $_SESSION['idUser'];
 
-$stmt = $db->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
-$stmt->execute(array($ip));
-
-while ($row = $stmt->fetch()) {
-  if(in_array($ip, $row)) {
-    $userid = $row['idUser'];
-    $stmt1 = $db->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-    $stmt1->execute(array($userid));
-    while ($row1 = $stmt1->fetch()) {
-      if(in_array($userid, $row1)) {
-        $usernameIP = $row1['username'];
-      }
-    }
-  }
-}
-
-
+$ip = $_SESSION['ip'];
 
 if(isset($_GET['username'])){ 
   $username = $_GET['username'];

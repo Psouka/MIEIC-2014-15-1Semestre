@@ -10,7 +10,7 @@ else
 
 if(isset($_SESSION['idUser']))
   $userid = $_SESSION['idUser'];
-
+/*
 $questions = array();
 $stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
 $stmt->execute(array($userid));
@@ -19,7 +19,7 @@ while ($row = $stmt->fetch()) {
     array_push($questions,$row['Question']);
   }
 }
-
+*/
 ?>
 
 <html lang="en">
@@ -72,27 +72,19 @@ while ($row = $stmt->fetch()) {
 
     <div id="Poll" class="form-action show">
       <form>
-      </script></center>
-      <ul>
-        <?php $questions = array_filter($questions);
-        if(empty($questions)) : ?>
-        <h1> You dont have any pollerinos! </h1></br>
-        <h2> Click on create menu and create your first one! </h2> </br>
-      <?php else : ?>
-      <h1> Your Pollerinos: </h1></br>
-      <li>
-        <?php foreach($questions as $question) : ?>
-        <h2> <?= $question ?> </h2> </br>
-      <?php endforeach; ?>
-    </li></br>
-  <?php endif; ?>
-</ul>
-</form>
-</div>
-</div>
-<footer>
- <center> 2014 LTW  © All rights reserved to no one. </center>
-</br> <center> Pls no copy pasterino </center>
+        <script src="../js/searchMine.js"></script></center>
+        <ul>
+          <div id = "dynamicSearch">
+            <script> searchPoll('<?= $username; ?>');
+            </script>
+          </div>
+        </ul>
+      </form>
+    </div>
+  </div>
+  <footer>
+   <center> 2014 LTW  © All rights reserved to no one. </center>
+ </br> <center> Pls no copy pasterino </center>
 </footer>
 </body>
 </html>

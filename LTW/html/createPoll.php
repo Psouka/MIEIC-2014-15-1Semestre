@@ -1,7 +1,6 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
 session_start();
-$idPoll = $_GET['idUserQuery'];
 
 if(isset($_SESSION['username']))
   $username = $_SESSION['username'];
@@ -25,7 +24,6 @@ if(isset($_SESSION['idUser']))
 </head>
 <?php flush(); ?>
 <body>
-  <!--<?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?> -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
