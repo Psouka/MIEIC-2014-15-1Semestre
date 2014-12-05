@@ -29,6 +29,7 @@ form input {
   outline: none;
   font-family: Roboto;
   font-size: 1em;
+  font-weight: bold;
  }
 
 .tabs {
