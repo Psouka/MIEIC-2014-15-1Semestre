@@ -83,23 +83,30 @@ while ($row = $stmt->fetch()) {
         </ul>
         <nav>
           <ul class="pager">
-          <?php 
+            <?php 
             $pageB = $numPag-1;
             $pageN = $numPag+1;
             $urlB = 'poll.php?numPag=' . $pageB;
             $urlN = 'poll.php?numPag=' . $pageN;
             ?>
-          <?php if($pageB <= 0) :?>
-           <!-- <li class="previous disabled"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li> -->
-          <?php else:?>
-            <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
-          <?php endif;?>
-            <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
-          </ul>
-        </nav>
-      </form>
+            <?php if($pageB <= 0) :?>
+              <li class="previous disabled"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+            <?php else:?>
+              <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+            <?php endif;?>
+            <?php if($pageB <= 0) :?>
+              <script language="javascript" > var id = searchPolls(<?php echo $numPag ?>); </script>
+              <?php $value = var id;?>
+              <?php if($value <= 0) :?>
+                <li class="next disabled"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
+              <?php else:?>
+                <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
+              <?php endif;?>
+            </ul>
+          </nav>
+        </form>
+      </div>
     </div>
-  </div>
   <footer>
    <center> 2014 LTW  © All rights reserved to no one. </center>
  </br> <center> Pls no copy pasterino </center>
