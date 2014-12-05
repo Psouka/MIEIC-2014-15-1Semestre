@@ -78,7 +78,7 @@ while ($row = $stmt->fetch()) {
       <form>
         <ul>
           <div id = "dynamicSearch">
-          <script> searchPolls( <?php echo $numPag-1 ?>);  </script>
+            <script> searchPolls( <?php echo $numPag-1 ?>);  </script>
           </div>
         </ul>
         <nav>
@@ -90,26 +90,26 @@ while ($row = $stmt->fetch()) {
             $urlN = 'poll.php?numPag=' . $pageN;
             ?>
             <?php if($pageB <= 0) :?>
-              <li class="previous disabled"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
-            <?php else:?>
-              <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
-            <?php endif;?>
-            <?php if($pageB <= 0) :?>
-              <script language="javascript" > var id = searchPolls(<?php echo $numPag ?>); </script>
-              <?php $value = var id;?>
-              <?php if($value <= 0) :?>
-                <li class="next disabled"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
-              <?php else:?>
-                <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
-              <?php endif;?>
-            </ul>
-          </nav>
-        </form>
-      </div>
-    </div>
-  <footer>
-   <center> 2014 LTW  © All rights reserved to no one. </center>
- </br> <center> Pls no copy pasterino </center>
+            <li class="previous disabled"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+          <?php else:?>
+          <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+        <?php endif;?>
+        <?php if($pageB <= 0) :?>
+        <script language="javascript" > var idv = searchPolls(<?php echo $numPag ?>); </script>
+        <?php $value = "<script>document.write(idv)</script>"?>
+        <?php if($value <= 0) :?>
+        <li class="next disabled"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
+      <?php else:?>
+      <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
+    <?php endif;?>
+  </ul>
+</nav>
+</form>
+</div>
+</div>
+<footer>
+ <center> 2014 LTW  © All rights reserved to no one. </center>
+</br> <center> Pls no copy pasterino </center>
 </footer>
 </body>
 </html>
