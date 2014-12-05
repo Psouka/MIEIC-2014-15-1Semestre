@@ -10,3 +10,4 @@ function sendComment(idQuery, username){
 
 	$.post("../db/newCom.php", {'idQuery' : idQuery, 'Comment' : comment , 'Username' : username}, location.reload(true));
 }
+

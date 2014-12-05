@@ -10,7 +10,7 @@ else
 
 if(isset($_SESSION['idUser']))
   $userid = $_SESSION['idUser'];
-/*
+
 $questions = array();
 $stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
 $stmt->execute(array($userid));
@@ -19,7 +19,7 @@ while ($row = $stmt->fetch()) {
     array_push($questions,$row['Question']);
   }
 }
-*/
+
 ?>
 
 <html lang="en">
@@ -70,6 +70,11 @@ while ($row = $stmt->fetch()) {
 
     <div id="Poll" class="form-action show">
       <form>
+        <?php $questions = array_filter($questions);
+        if(empty($questions)) : ?>
+        <h1> You dont have any pollerinos! </h1></br>
+        <h2> Click on create menu and create your first one! </h2> </br>
+        <?php else : ?>
         <script src="../js/searchMine.js"></script></center>
         <ul>
           <div id = "dynamicSearch">
@@ -77,6 +82,7 @@ while ($row = $stmt->fetch()) {
             </script>
           </div>
         </ul>
+        <?php endif; ?>
       </form>
     </div>
   </div>
