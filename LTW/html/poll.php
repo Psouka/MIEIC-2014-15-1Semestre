@@ -143,7 +143,7 @@ $ImagePoll = $row['Image'];
     <h1>Comments</h1></br>
   </br>
   <p>Comment:</p> 
-  <textarea name="comment" id="comment" maxlength="170" rows="4" cols="50"></textarea><br />
+  <textarea name="comment" id="comment" maxlength="170" rows="8" cols="75"></textarea><br />
   <input type="button" value="Comment!" class="buttonOut"/>
 </form>
 </br>
