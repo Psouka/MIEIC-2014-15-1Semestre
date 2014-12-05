@@ -18,12 +18,6 @@ body {
 
  }
 
-	.flat-form #login {height: 16em;}
-
-	.flat-form #register {height: 19em;}
-
-	.flat-form #reset {height: 16em;}
-
 .tabs {
 	height: 2.500em;
 	margin: 0em 0em 1.25em;
@@ -78,11 +72,22 @@ body {
 		font-size: 0.75em;
 		padding-bottom: 0.833em;
 		padding-left: 0em;
-		padding-right: 1.667em;
 		line-height: 2em;
 		color: red;
 		display: inline-block;
 		margin-top: 1.667em;
+		float: right;
+	 }
+
+	 .form-action p.error.login {
+		font-size: 0.75em;
+		padding-bottom: 0.833em;
+		padding-left: 0em;
+		line-height: 2em;
+		color: red;
+		display: inline-block;
+		float: inherit;
+		margin-top: 0em;
 	 }
 
 form {
@@ -119,6 +124,7 @@ form {
 	background: rgb(19, 104, 153);
 	font-family: Roboto;
 	font-size: 0.85em;
+	margin-bottom: 1em;
  }
 
 	.button:hover {background: rgb(30, 117, 170);}
