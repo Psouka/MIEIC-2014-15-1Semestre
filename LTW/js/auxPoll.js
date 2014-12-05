@@ -26,11 +26,11 @@ function  OptionsReceived(data) {
 function resultOptions(index, value) {
 	seeOptions = 1;
 	if(multiple == 0)
-		var radioHtml = value +'<input type="radio" name="Vote"';
+		var radioHtml = '<input type="radio" name="Vote"';
 	else
-		var radioHtml = value +'<input type="checkbox" name="Vote"';
+		var radioHtml = '<input type="checkbox" name="Vote"';
 	radioHtml += 'value="' + value + '"'
-	radioHtml += '/>';
+	radioHtml += '/>' + value;
 	var radioFragment = document.createElement('div');
 	radioFragment.setAttribute('class', 'radio');
 	radioFragment.innerHTML = radioHtml;
