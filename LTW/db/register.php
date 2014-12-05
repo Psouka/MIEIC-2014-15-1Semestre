@@ -30,8 +30,8 @@ else {
 	if($check == 0) {
 		$id1 = $dbh->prepare("SELECT count(*) FROM User");
 		$id1->execute();
-		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password) VALUES (?, ?, ?)');
-		$stmt2->execute(array($username, $email, sha1($password)));
+		$stmt2 = $dbh->prepare('INSERT INTO User (username, email, password,loginAttempts) VALUES (?, ?, ?,?)');
+		$stmt2->execute(array($username, $email, sha1($password),0));
 
 		$to      = $email;
 		$subject = 'Password Reset Request';

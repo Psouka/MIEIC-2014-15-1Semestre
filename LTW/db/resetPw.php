@@ -15,8 +15,12 @@ function randomPassword() {
     }
     return implode($pass); //turn the array into a string
 }
+if(isset($_SESSION['email']))
+	$email = $_SESSION['email'];
+else
+	$email = $_POST['email'];
 
-$email = $_POST['email'];
+
 $newPw = randomPassword();
 
 $stmt = $dbh->prepare('SELECT email FROM User WHERE email = ?');
