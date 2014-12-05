@@ -66,6 +66,22 @@ $stmt->execute(array($idPoll));
 while ($row = $stmt->fetch()) {
   array_push($pollOptions,$row['Answerino']);
 }
+
+function get_tiny_url($url)  {  
+  $ch = curl_init();  
+  $timeout = 5;  
+  curl_setopt($ch,CURLOPT_URL,'http://tinyurl.com/api-create.php?url='.$url);  
+  curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);  
+  curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,$timeout);  
+  $data = curl_exec($ch);  
+  curl_close($ch);  
+  return $data;  
+}
+
+$Link = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'] .'?idUserQuery='. $idPoll;
+$Link = str_replace("managePoll","poll",$Link);
+$Link = get_tiny_url($Link);
+
 ?>
 
 <html lang="en">
@@ -132,20 +148,25 @@ while ($row = $stmt->fetch()) {
         <form>
           <ul>
             <li>
-              <h1> <?= $QuestionPoll ?></h1>
+              <h1> Link: </h1>
+              <?php echo $Link?>
             </br>
           </li>
-          <img src= "<?php echo $ImagePoll ?>">
-        </br></br>
-        <p>Options:</p>
-      </ul>
-    </br>
-    <p>
-     <div class="chart">
-      <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
-      <script> drawChart(<?= $idPoll ?>);</script>
-    </div>
-  </p>
+          <li>
+            <h1> <?= $QuestionPoll ?></h1>
+          </br>
+        </li>
+        <img src= "<?php echo $ImagePoll ?>">
+      </br></br>
+      <p>Options:</p>
+    </ul>
+  </br>
+  <p>
+   <div class="chart">
+    <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
+    <script> drawChart(<?= $idPoll ?>);</script>
+  </div>
+</p>
 </br>
 <div class="fb-share-button" data-layout="button"></div>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
