@@ -66,7 +66,7 @@ while ($row = $stmt->fetch()) {
     <ul class="tabs">
       <li>
         <a href="" class="active">My Pollerinos</a>
-        <a href="../html/editProfile.php">Edit Profile(todo maybe?)</a>
+        <a href="../html/editProfile.php">Edit Profile</a>
       </li>
     </ul>
 
