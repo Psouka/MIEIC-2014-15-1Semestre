@@ -128,7 +128,7 @@ $Link = get_tiny_url($Link);
           <li><a href="../html/page.php">Home</a></li>
           <li><a href="../html/createPoll.php">Create</a></li>
           <li><a href="../html/searchPoll.php">Search</a></li>
-          <li><a href="../html/logout.php">Logout</a></li>
+          <li><a href="../db/logout.php">Logout</a></li>
           
         </ul>
       </div><!-- /.navbar-collapse -->
