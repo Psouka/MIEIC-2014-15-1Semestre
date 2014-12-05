@@ -56,8 +56,7 @@ if(isset($_SESSION['idUser']))
     <ul class="tabs">
       <li>
         <a href="../html/Profile.php">My Pollerinos</a>
-        <a href="" class="active">Edit Profile(todo maybe?)</a>
-        <a href="../html/createPoll.php">Create Pollerinos</a>
+        <a href="" class="active">Edit Profile</a>
       </li>
     </ul>
 
