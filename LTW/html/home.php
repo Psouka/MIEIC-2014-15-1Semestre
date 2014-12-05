@@ -10,8 +10,11 @@ else
 if(isset($_SESSION['idUser']))
   $userid = $_SESSION['idUser'];
 
-if(isset($_GET['numPag'])){ 
-  $numP = $_GET['numPag'];
+if(isset($_GET['page'])){ 
+  $numP = $_GET['page'];
+}
+else {
+  $numP = 1;
 }
 /*
 $questions = array();
@@ -54,7 +57,7 @@ while ($row = $stmt->fetch()) {
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
           <li id = "userL"><a href="../html/profile.php"><?= $username?></a></li>
-          <li><a href="../html/page.php">Home</a></li>
+          <li><a href="../html/home.php?page=1">Home</a></li>
           <li><a href="../html/createPoll.php">Create</a></li>
           <li><a href="../html/searchPoll.php">Search</a></li>
           <li><a href="../db/logout.php">Logout</a></li>
@@ -67,8 +70,7 @@ while ($row = $stmt->fetch()) {
    <div class="flat-form">
     <ul class="tabs">
       <li>
-        <a href="" class="active">My Pollerinos</a>
-        <a href="../html/editProfile.php">Edit Profile</a>
+        <a href="" class="active">Pollerinos</a>
       </li>
     </ul>
 
@@ -81,7 +83,17 @@ while ($row = $stmt->fetch()) {
         </ul>
         <nav>
           <ul class="pager">
-            <li class="previous"><a href="poll.php?numPag="><span aria-hidden="true">&larr;</span> Older</a></li> <!--meter o num da pag como get, ver php e js getPolls e search -->
+          <?php 
+            $pageB = $numPag-1;
+            $pageN = $numPag+1;
+            $urlB = 'poll.php?numPag=' . $pageB;
+            $urlN = 'poll.php?numPag=' . $pageN;
+            ?>;
+          <?php if($pageB <= 0) ?>
+            <li class="previous disabled"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+          <?php else;?>
+            <li class="previous"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+          <?php endif;?>
             <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </nav>
