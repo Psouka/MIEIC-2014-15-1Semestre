@@ -156,6 +156,15 @@ a:visited {
   color: gray;
 }
 
+.navbar-right {
+  margin-right: 3em;
+}
+
+#userL {
+  font-size: 1.5em;
+  margin-right: 3em;
+}
+
 a.navbar-brand p {
   font-size: 2em;
 }
