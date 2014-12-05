@@ -31,6 +31,9 @@
 	if(strcmp($errNum,'NoEmailReset') === 0) {
 		$errMsg = 'This email is not registered';
 	}
+	if(strcmp($errNum,'MaxAttempts') === 0) {
+		$errMsg = 'Max attempts reached, check your email';
+	}
 	unset($_SESSION['errNum']);
 	?>
 	<div id ="container" class="container">
@@ -67,13 +70,12 @@
 								<input type="button" value="Login as a Guest" class="button guest" />
 							</li>
 							<li>
-							<?php if(strcmp($errNum,'WrongInputs') === 0) : ?> 
+							<?php if((strcmp($errNum,'WrongInputs') === 0) or (strcmp($errNum,'MaxAttempts') === 0)) : ?> 
 								<p class="error login"> <?= $errMsg ?> </p>
 							<?php endif; ?>
 						</li>
 					</ul>
 				</form>
-
 			</div>
 			<?php if((strcmp($errNum,'UserNotChars') === 0) or (strcmp($errNum,'UserTaken') === 0) or (strcmp($errNum,'EmailTaken') === 0)) : ?>
 				<div id="register" class="form-action show">
@@ -101,7 +103,7 @@
 						</ul>
 					</form>
 				</div>
-				<?php if(strcmp($errNum,'NoEmailReset') === 0) : ?>
+				<?php if((strcmp($errNum,'NoEmailReset') === 0)) : ?>
 					<div id="reset" class="form-action show">
 					<?php else : ?>
 						<div id="reset" class="form-action hide">

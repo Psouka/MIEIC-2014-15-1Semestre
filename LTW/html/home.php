@@ -78,7 +78,7 @@ while ($row = $stmt->fetch()) {
       <form>
         <ul>
           <div id = "dynamicSearch">
-          <script> searchPolls( <?php echo $numPag-1 ?>); </script>
+          <script> searchPolls(); </script>
           </div>
         </ul>
         <nav>
