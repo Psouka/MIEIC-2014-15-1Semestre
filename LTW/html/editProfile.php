@@ -27,7 +27,6 @@ if(isset($_SESSION['idUser']))
 </head>
 <?php flush(); ?>
 <body>
-  <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; $_SESSION['idUser'] = $userid ?>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->

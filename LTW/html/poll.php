@@ -49,7 +49,6 @@ $ImagePoll = $row['Image'];
 </head>
 <!--<?php flush(); ?> -->
 <body>
-  <!-- <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?> -->
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
