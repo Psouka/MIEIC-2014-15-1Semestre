@@ -86,12 +86,12 @@ while ($row = $stmt->fetch()) {
           <?php 
             $pageB = $numPag-1;
             $pageN = $numPag+1;
-            $urlB = 'poll.php?numPag=' . $pageB;
-            $urlN = 'poll.php?numPag=' . $pageN;
+            $urlB = 'poll.php?page=' . $pageB;
+            $urlN = 'poll.php?page=' . $pageN;
             ?>;
-          <?php if($pageB <= 0) ?>
+          <?php if($pageB <= 0) : ?>
             <li class="previous disabled"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
-          <?php else;?>
+          <?php else : ?>
             <li class="previous"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
           <?php endif;?>
             <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
