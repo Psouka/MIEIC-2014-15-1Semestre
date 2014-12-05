@@ -10,7 +10,6 @@ function searchPolls(page)
 	elem.appendChild(ul);
 	elem.appendChild(document.createElement('br'));
 	elem.appendChild(document.createElement('br'));
-	console.log(search_p());
 	search_p(page);
 }
 
