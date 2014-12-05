@@ -7,7 +7,7 @@ body {
   color: white;
   font-family: Roboto;
   background-image: url(http://gnomo.fe.up.pt/~ei12060/PollWeb/resources/background.png);
-}
+ }
 
 .flat-form {
   margin: 1.563em auto;
@@ -16,7 +16,7 @@ body {
   font-family: Roboto;
   background: rgb(52, 73, 94);
   z-index: 0;
-}
+ }
 
 form input {
   width: 100%;
@@ -25,11 +25,11 @@ form input {
   padding-left: 0.938em;
   background: #fff;
   border: none;
-  color: #000000;  
+  color: #000000;
   outline: none;
   font-family: Roboto;
   font-size: 1em;
-}
+ }
 
 .tabs {
   height: 2.500em;
@@ -38,55 +38,55 @@ form input {
   list-style-type: none;
   display: block;
   background: rgb(80, 80, 80);
-}
+ }
 
-.tabs li {
-  display: block;
-  float: left;
-  margin: 0em;
-  padding: 0em;
-}
+  .tabs li {
+    display: block;
+    float: left;
+    margin: 0em;
+    padding: 0em;
+   }
 
-.tabs p {
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 1em;
-  padding: 0.750em 1.375em;
-  background: rgb(80, 80, 80);
-}
+  .tabs p {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
 
-.tabs a {
-  display: block;
-  float: left;
-  text-decoration: none;
-  color: white;
-  font-size: 1em;
-  padding: 0.750em 1.375em;
-  background: rgb(80, 80, 80);
-}
+  .tabs a {
+    display: block;
+    float: left;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    padding: 0.750em 1.375em;
+    background: rgb(80, 80, 80);
+   }
 
-.tabs a.active {
-  border-right-style: none;
-  background: rgb(80, 80, 80);
-}
+    .tabs a.active {
+      border-right-style: none;
+      background: rgb(80, 80, 80);
+     }
 
 .form-action {
   padding: 0px 2.5em;
   position: relative;
-}
+ }
 
-.form-action h1 {
-  font-size: 2.625em;
-  padding-bottom: 0.625em;
-}
+  .form-action h1 {
+    font-size: 2.625em;
+    padding-bottom: 0.625em;
+   }
 
-.form-action p {
-  font-size: 1.25em;
-  padding-bottom: 0.5em;
-  line-height: 1.250em;
-}
+  .form-action p {
+    font-size: 1.25em;
+    padding-bottom: 0.5em;
+    line-height: 1.250em;
+   }
 
 .show {display: block;}
 
@@ -97,10 +97,10 @@ form input {
   margin-bottom: 0.8em;
   background: #fff;
   border: none;
-  color: #000000;  
+  color: #000000;
   outline: none;
   font-family: Roboto;
-}
+ }
 
 .buttonDel {
   padding-left: 0px;
@@ -109,122 +109,116 @@ form input {
   margin-left: 0.160em;
   background: #fff;
   border: none;
-  color: #000000;  
+  color: #000000;
   outline: none;
   font-family: Roboto;
   padding-left: 0em;
-}
+ }
 
 .button {
   border: none;
   display: block;
-  height: 3.25em;;
+  height: 3.25em;
   width: 9em;
   color: rgb(255, 255, 255);
   text-align: center;
   margin-top: -0.625em;
   background: rgb(19, 104, 153);
   padding-left: 0em;
-}
+ }
 
-.button:hover {background: rgb(30, 117, 170);}
+  .button:hover {background: rgb(30, 117, 170);}
 
-.button:active {background: rgb(204, 51, 0);}
+  .button:active {background: rgb(204, 51, 0);}
 
 #container {
   clear: right;
   padding-top: 8em;
   overflow: hidden;
-}
+ }
 
-#privacy, #multiple{
+#privacy, #multiple {
   height: 25px;
   width: 25px;
-}
+ }
 
 #results ul {
   list-style-type: disc;
   padding-left: 1.250em;
-}
+ }
 
 #results li {
   font-size: 1.250em;
   padding-bottom: 0.625em;
-}
+ }
 
-a:visited {
-  color: gray;
-}
+li a {color: white;}
 
-.navbar-right {
-  margin-right: 3em;
-}
+  li a:visited {color: gray;}
+
+    li a:visited:hover {
+      text-decoration: bold;
+      color: gray;
+    }
+
+  li a:link:hover {
+    text-decoration: bold;
+    color:white;
+  }
+
+.navbar-right {margin-right: 3em;}
 
 #userL {
   font-size: 1.5em;
   margin-right: 3em;
-}
+ }
 
-a.navbar-brand p {
-  font-size: 2em;
-}
+a.navbar-brand p {font-size: 2em;}
 
 .navbar-default {
   background-color: #505050;
   border-color: #787878;
-}
-.navbar-default .navbar-brand {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-  color: #ecdbff;
-}
-.navbar-default .navbar-text {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-nav > li > a {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
-  color: #ecdbff;
-}
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
-  color: #ecdbff;
-  background-color: #787878;
-}
-.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
-  color: #ecdbff;
-  background-color: #787878;
-}
-.navbar-default .navbar-toggle {
-  border-color: #787878;
-}
-.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
-  background-color: #787878;
-}
-.navbar-default .navbar-toggle .icon-bar {
-  background-color: #ecf0f1;
-}
-.navbar-default .navbar-collapse,
-.navbar-default .navbar-form {
-  border-color: #ecf0f1;
-}
-.navbar-default .navbar-link {
-  color: #ecf0f1;
-}
-.navbar-default .navbar-link:hover {
-  color: #ecdbff;
-}
+ }
 
-@media (max-width: 767px) {
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a {
-    color: #ecf0f1;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #ecdbff;
-  }
-  .navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  .navbar-default .navbar-brand {color: #ecf0f1;}
+
+    .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {color: #ecdbff;}
+
+  .navbar-default .navbar-text {color: #ecf0f1;}
+
+  .navbar-default .navbar-nav > li > a {color: #ecf0f1;}
+
+    .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {color: #ecdbff;}
+
+  .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
     color: #ecdbff;
     background-color: #787878;
-  }
-}
+   }
+
+  .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    color: #ecdbff;
+    background-color: #787878;
+   }
+
+  .navbar-default .navbar-toggle {border-color: #787878;}
+
+    .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {background-color: #787878;}
+
+    .navbar-default .navbar-toggle .icon-bar {background-color: #ecf0f1;}
+
+  .navbar-default .navbar-collapse,
+.navbar-default .navbar-form {border-color: #ecf0f1;}
+
+  .navbar-default .navbar-link {color: #ecf0f1;}
+
+    .navbar-default .navbar-link:hover {color: #ecdbff;}
+
+@media (max-width: 767px) {.navbar-default .navbar-nav .open .dropdown-menu > li > a}
+
+.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {color: #ecdbff;}
+
+.navbar-default .navbar-nav .open .dropdown-menu > .active > a, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+  color: #ecdbff;
+  background-color: #787878;
+ }
+

@@ -36,34 +36,42 @@ while ($row = $stmt->fetch()) {
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
   <script src="../resources/d3.v3.min.js"> </script>
+  <script src="../resources/js/bootstrap.min.js"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="../css/profile.css" hreflang="en">
+  <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/poll.css" hreflang="en">
 </head>
 <?php flush(); ?>
 <body>
   <?php  session_start();   $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; $_SESSION['idUser'] = $userid ?>
-  <div class="LogoutM">
-    <form class = "formLog">
-      <ul class="Home"> 
-        <li>
-          <div class = "leftD">
-            <p class = "pollerinoP"> Pollerino </p>
-          </div>
-          <div class = "rightD">
-            <input type="button" value="Home" class="buttonOut" onclick="location.href='../html/page.php'"/>
-            <input type="button" value="Search" class="buttonOut" onclick="location.href='../html/searchPoll.php'"/>
-            <input type="button" value="Profile" class="buttonOut" onclick="location.href='../html/profile.php'"/>
-            <input type="button" value="Log Out" class="buttonOut" onclick="location.href='../db/logout.php'"/>
-          </div>
-          <div class = "rightP">
-            <p class = "userP"><?= $username ?></p>
-          </div>
-        </li>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../html/page.php"><p>Pollerino</p></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li id = "userL"><a href="../html/profile.php"><?= $username?></a></li>
+        <li><a href="../html/page.php">Home</a></li>
+        <li><a href="../html/createPoll.php">Create</a></li>
+        <li><a href="../html/searchPoll.php">Search</a></li>
+        <li><a href="../html/logout.php">Logout</a></li>
+        
       </ul>
-    </form>
-  </div>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
   <div id ="container" class="container">
    <div class="flat-form">
     <ul class="tabs">
@@ -78,11 +86,11 @@ while ($row = $stmt->fetch()) {
       <form action="../db/update_user.php" method="post">
         <ul>
           <h1> Update your Profile </h1></br>
-        </br><h2> First Name </h2>
+        </br><h2> First Name </h2></br>
         <input type="text" name="FirstName" placeholder="New First Name">
-       </br></br><h2> Last Name </h2>
+       </br></br><h2> Last Name </h2></br>
       <input type="text" name="LastName" placeholder="New Last Name">
-    </br></br><h2>Idade</h2>
+    </br></br><h2>Idade</h2></br>
     <select name="Age" id="age">
       <option value="" selected="selected">(Select Your Age)</option> 
       <option value="6">6</option>
@@ -182,16 +190,14 @@ while ($row = $stmt->fetch()) {
       <option value="100">100</option>
     </select>
 
-  </br></br><h2>Gender</h2>
-  <input type="radio" name="Gender" value="male">Male<br>
+  </br></br><h2>Gender</h2></br></br>
+  <input type="radio" name="Gender" value="male">Male</br></br>
   <input type="radio" name="Gender" value="female">Female
 </br></br><h2> Change Password </h2></br>
 <input type="password" name="newPw" placeholder="New Password">
 <input type="password" name="confirmPw" placeholder="Confirm Password">
-<p>
-
-</p>
-<input type="submit" value="Update" class="button" />
+</br></br>
+<input type="submit" value="Update" class="button" /></br>
 </ul>
 </form>
 </div>
