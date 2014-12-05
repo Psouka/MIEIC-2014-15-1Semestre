@@ -1,5 +1,5 @@
 .chart div {
-  height: 30px;
+  height: 40px;
   font: 20px sans-serif;
   background-color: #136899;
   text-align: right;
@@ -8,13 +8,13 @@
   margin-bottom: 2px;
   border: solid 1px black;
   border-left: none;
-  padding-top: 10px;
+  padding-top: 8px;
   padding-right: 10px;
   white-space: nowrap;
 }
 
 .chart div:first-child{
-  height: 30px;
+  height: 40px;
   font: 20px sans-serif;
   background-color: #136899;
   text-align: right;
@@ -23,7 +23,7 @@
   margin-bottom: 2px;
   border: solid 1px black;
   border-left: none;
-  padding-top: 10px;
+  padding-top: 8px;
   padding-right: 10px;
   margin-bottom: 2px;
   white-space: nowrap;

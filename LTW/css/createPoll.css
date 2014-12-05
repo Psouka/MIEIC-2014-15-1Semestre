@@ -134,8 +134,12 @@ form input {
 
 #container {
   clear: right;
-  padding-top: 8em;
+  padding-top: 1em;
   overflow: hidden;
+ }
+
+ #container.search {
+  padding-top: 3em;
  }
 
 #privacy, #multiple {
@@ -165,6 +169,11 @@ li a {color: white;}
   li a:link:hover {
     text-decoration: bold;
     color:white;
+  }
+
+footer {
+    margin-top: 1em;
+    margin-bottom: 1.5em;
   }
 
 .navbar-right {margin-right: 3em;}

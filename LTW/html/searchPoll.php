@@ -49,7 +49,7 @@ if(isset($_SESSION['idUser']))
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div id ="container" class="container">
+  <div id ="container" class="container search">
     <div class="flat-form">
       <ul class="tabs">
         <li>
