@@ -2,7 +2,6 @@
 $dbh = new PDO('sqlite:../db/database.db');
 session_start();
 
-
 if(isset($_SESSION['username']))
   $username = $_SESSION['username'];
 else
@@ -10,6 +9,10 @@ else
 
 if(isset($_SESSION['idUser']))
   $userid = $_SESSION['idUser'];
+
+if(isset($_GET['numPag'])){ 
+  $numP = $_GET['numPag'];
+}
 /*
 $questions = array();
 $stmt = $dbh->prepare('SELECT idUser, Question FROM UserQuery WHERE idUser = ?');
@@ -70,13 +73,18 @@ while ($row = $stmt->fetch()) {
 
     <div id="Poll" class="form-action show">
       <form>
-        <script src="../js/searchMine.js"></script></center>
+        <script src="../js/getPolls.js"></script></center>
         <ul>
           <div id = "dynamicSearch">
-            <script> searchPoll('<?= $username; ?>');
-            </script>
+          <script> searchPolls(); </script>
           </div>
         </ul>
+        <nav>
+          <ul class="pager">
+            <li class="previous"><a href="poll.php?numPag="><span aria-hidden="true">&larr;</span> Older</a></li> <!--meter o num da pag como get, ver php e js getPolls e search -->
+            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
       </form>
     </div>
   </div>
