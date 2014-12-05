@@ -1,4 +1,4 @@
-function searchPolls()
+function searchPolls(page)
 {
 	var elem = document.getElementById('dynamicSearch');
 	var h1 = document.createElement('H1');
@@ -11,11 +11,11 @@ function searchPolls()
 	elem.appendChild(document.createElement('br'));
 	elem.appendChild(document.createElement('br'));
 	console.log(search_p());
-	search_p();
+	search_p(page);
 }
 
-function search_p() {
-	$.getJSON("../db/getPolls.php", PollsReceived);
+function search_p(page) {
+	$.getJSON("../db/getPolls.php",{'numPag' : page}, PollsReceived);
 }
 
 // Called when messages are received

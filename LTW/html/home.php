@@ -11,10 +11,10 @@ if(isset($_SESSION['idUser']))
   $userid = $_SESSION['idUser'];
 
 if(isset($_GET['page'])){ 
-  $numP = $_GET['page'];
+  $numPag = $_GET['page'];
 }
 else {
-  $numP = 1;
+  $numPag = 1;
 }
 /*
 $questions = array();
@@ -78,7 +78,7 @@ while ($row = $stmt->fetch()) {
       <form>
         <ul>
           <div id = "dynamicSearch">
-          <script> searchPolls(); </script>
+          <script> searchPolls( <?php echo $numPag-1 ?>); </script>
           </div>
         </ul>
         <nav>
@@ -88,13 +88,13 @@ while ($row = $stmt->fetch()) {
             $pageN = $numPag+1;
             $urlB = 'poll.php?numPag=' . $pageB;
             $urlN = 'poll.php?numPag=' . $pageN;
-            ?>;
-          <?php if($pageB <= 0) ?>
-            <li class="previous disabled"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
-          <?php else;?>
-            <li class="previous"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+            ?>
+          <?php if($pageB <= 0) :?>
+           <!-- <li class="previous disabled"><a href=<?= $urlP ?>><span aria-hidden="true">&larr;</span> Older</a></li> -->
+          <?php else:?>
+            <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
           <?php endif;?>
-            <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
+            <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </nav>
       </form>
