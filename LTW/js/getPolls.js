@@ -10,11 +10,12 @@ function searchPolls()
 	elem.appendChild(ul);
 	elem.appendChild(document.createElement('br'));
 	elem.appendChild(document.createElement('br'));
+	console.log(search_p());
 	search_p();
 }
 
 function search_p() {
-	$.getJSON("../db/getPolls.php"}, PollsReceived);
+	$.getJSON("../db/getPolls.php", PollsReceived);
 }
 
 // Called when messages are received
