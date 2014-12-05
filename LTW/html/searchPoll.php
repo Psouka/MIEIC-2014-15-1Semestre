@@ -6,7 +6,8 @@ if(isset($_SESSION['username']))
   $username = $_SESSION['username'];
 else
   $username = "Guest";
-$userid = $_SESSION['idUser'];
+if(isset($_SESSION['idUser']))
+  $userid = $_SESSION['idUser'];
 ?>
 
 <html lang="en">

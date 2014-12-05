@@ -19,7 +19,9 @@ if(isset($_SESSION['username']))
   $username = $_SESSION['username'];
 else
   $username = "Guest";
-$userid = $_SESSION['idUser'];
+
+if(isset($_SESSION['idUser']))
+  $userid = $_SESSION['idUser'];
 
 $stmt = $dbh->prepare('SELECT idUser FROM UserQuery WHERE idUserQuery = ?');
 $stmt->execute(array($idPoll));
@@ -129,22 +131,22 @@ $Link = get_tiny_url($Link);
               <h1> Link: </h1>
               <?php echo $Link?>
             </br>
-            </br>
-          </li>
-          <li>
-            <h1> <?= $QuestionPoll ?></h1>
           </br>
         </li>
-        <img src= "<?php echo $ImagePoll ?>">
-      </br></br>
-      <p>Options:</p>
-    </ul>
-  </br>
-  <p>
-   <div class="chart">
-    <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
-    <script> drawChart(<?= $idPoll ?>);</script>
-  </div>
+        <li>
+          <h1> <?= $QuestionPoll ?></h1>
+        </br>
+      </li>
+      <img src= "<?php echo $ImagePoll ?>">
+    </br></br>
+    <p>Options:</p>
+  </ul>
+</br>
+<p>
+ <div class="chart">
+  <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script>
+  <script> drawChart(<?= $idPoll ?>);</script>
+</div>
 </p>
 </br>
 <div class="fb-share-button" data-layout="button"></div>
