@@ -43,9 +43,9 @@ if($check == 0) {
 		$stmt = $dbh->prepare('UPDATE User SET loginAttempts = ? WHERE idUser = ?');
 		$stmt->execute(array(0, $row['idUser']));
 		$_SESSION['email'] = $row['email'];
+		$_SESSION['errNum'] = 'MaxAttempts';
 		header( 'Location: ../db/resetPw.php' );
 		exit();
-
 	}
 
 	$stmt = $dbh->prepare('UPDATE User SET loginAttempts = ? WHERE idUser = ?');
