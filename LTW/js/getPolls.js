@@ -10,10 +10,10 @@ function searchPolls()
 	elem.appendChild(ul);
 	elem.appendChild(document.createElement('br'));
 	elem.appendChild(document.createElement('br'));
-	search();
+	search_p();
 }
 
-function search() {
+function search_p() {
 	$.getJSON("../db/getPolls.php"}, PollsReceived);
 }
 

@@ -30,6 +30,7 @@ while ($row = $stmt->fetch()) {
   <script src="../resources/jquery-1.9.1.js"></script>
   <script src="../resources/d3.v3.min.js"> </script>
   <script src="../resources/js/bootstrap.min.js"></script>
+  <script src="../js/getPolls.js" language="Javascript" type="text/javascript"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
@@ -73,7 +74,6 @@ while ($row = $stmt->fetch()) {
 
     <div id="Poll" class="form-action show">
       <form>
-        <script src="../js/getPolls.js"></script></center>
         <ul>
           <div id = "dynamicSearch">
           <script> searchPolls(); </script>
