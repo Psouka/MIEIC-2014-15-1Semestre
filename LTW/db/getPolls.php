@@ -15,7 +15,7 @@ $var = $numP * 10;
 $limit = $var + 10;
 
 $stmt = $db->prepare("SELECT Question FROM UserQuery WHERE Privacy = ? and rowid >= '$var' and rowid < '$limit' ");
-$stmt->execute(array($numP, 0));
+$stmt->execute(array(0));
 $Temperino = $stmt->fetchAll();
 
 echo json_encode($array);
