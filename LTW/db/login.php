@@ -40,6 +40,8 @@ if($check == 0) {
 
 	if($loginAtemp > 3)
 	{
+		$stmt = $dbh->prepare('UPDATE User SET loginAttempts = ? WHERE idUser = ?');
+		$stmt->execute(array(0, $row['idUser']));
 		$_SESSION['email'] = $row['email'];
 		header( 'Location: ../db/resetPw.php' );
 		exit();
