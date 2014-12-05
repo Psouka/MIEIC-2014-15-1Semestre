@@ -1,39 +1,32 @@
 <?php
-    $dbh = new PDO('sqlite:../db/database.db');
+$dbh = new PDO('sqlite:../db/database.db');
+session_start();
+$idPoll = $_GET['idUserQuery'];
 
-    $query =  $_GET['Question'];
+if(isset($_SESSION['username']))
+  $username = $_SESSION['username'];
+else
+  $username = "Guest";
+$userid = $_SESSION['idUser'];
 
-    $stmt = $dbh->prepare('SELECT idUserQuery, idUser FROM UserQuery WHERE Question = ?');
-    $stmt->execute(array($query));
-    $temp = $stmt->fetch();
+$query =  $_GET['Question'];
 
-    $idQ =$temp['idUserQuery'];
-    $idU = $temp['idUser'];
+$stmt = $dbh->prepare('SELECT idUserQuery, idUser FROM UserQuery WHERE Question = ?');
+$stmt->execute(array($query));
+$temp = $stmt->fetch();
+
+$idQ =$temp['idUserQuery'];
+$idU = $temp['idUser'];
 
 
-    $ip = 0;
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-            $ip = $_SERVER['HTTP_CLIENT_IP'];
-        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
-    }
+if($idU === $userid)
+{
+    header( 'Location: ../html/managePoll.php?idUserQuery='.$idQ);
+    exit();
+}
 
-    
-    $stmt1 = $dbh->prepare('SELECT idUser FROM UserLogin WHERE IPUser = ?');
-    $stmt1->execute(array($ip));
 
-    if($row = $stmt1->fetch()){
-        
-        if($idU === $row['idUser'])
-            {
-                header( 'Location: ../html/managePoll.php?idUserQuery='.$idQ);
-        exit();
-    }
-        
-    }
-     header( 'Location: ../html/poll.php?idUserQuery='.$idQ);
-     exit();
+header( 'Location: ../html/poll.php?idUserQuery='.$idQ);
+exit();
 
 ?>

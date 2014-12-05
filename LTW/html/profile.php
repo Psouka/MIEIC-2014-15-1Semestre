@@ -65,7 +65,6 @@ if(isset($_SESSION['username']))
         <li>
           <a href="" class="active">My Pollerinos</a>
           <a href="../html/editProfile.php">Edit Profile(todo maybe?)</a>
-          <a href="../html/createPoll.php">Create Pollerinos</a>
         </li>
       </ul>
 

@@ -129,6 +129,7 @@ $Link = get_tiny_url($Link);
               <h1> Link: </h1>
               <?php echo $Link?>
             </br>
+            </br>
           </li>
           <li>
             <h1> <?= $QuestionPoll ?></h1>
