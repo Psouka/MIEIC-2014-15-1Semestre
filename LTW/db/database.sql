@@ -58,6 +58,3 @@ CREATE TABLE PollComment(
 	idUser NUMBER  REFERENCES User(idUser),
 	Comment VARCHAR(200) NOT NULL
 );
-
-INSERT INTO User VALUES (1, 'cera', 'cera@asd.com', 'cera');
-INSERT INTO UserLogin VALUES(1, 1, '172.22.128.225');
