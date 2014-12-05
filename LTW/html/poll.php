@@ -127,9 +127,9 @@ $ImagePoll = $row['Image'];
   <form>
     <h1>Comments</h1></br>
   </br>
-  <p>Comment:</p> 
-  <textarea name="comment" id="comment" maxlength="170" rows="8" cols="75"></textarea><br/>
-  <input type="button" value="Comment!" class="buttonOut" onclick="sendComment(<?= $idPoll?>,'<?php echo $username ?>');"/>
+  <p>Comment:</p> </br>
+  <textarea name="comment" id="comment" maxlength="170" rows="8" cols="75" style="color:BLACK"></textarea><br/>
+  <input type="button" value="Comment!" class="button" onclick="sendComment(<?= $idPoll?>,'<?php echo $username ?>');"/>
 </form>
 </br>
 </div>
