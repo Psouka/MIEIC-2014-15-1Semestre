@@ -55,6 +55,12 @@ if($check == 0) {
 	header( 'Location: ../html/page.php' );
 }
 else {
+	$_SESSION['username'] = $username;
+	$_SESSION['ip'] = $ip;
+	$_SESSION['idUser'] = $row['idUser'];
+	$_SESSION['usernameOn'] = $username;
+	$_SESSION['ipOut'] = $ip;
+
 	$stmt = $dbh->prepare('UPDATE User SET loginAttempts = ? WHERE idUser = ?');
 	$stmt->execute(array(0, $row['idUser']));
 	header( 'Location: ../html/profile.php' );

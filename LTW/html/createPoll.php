@@ -1,32 +1,13 @@
 <?php
 $dbh = new PDO('sqlite:../db/database.db');
-$ip = 0;
-if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-  $ip = $_SERVER['HTTP_CLIENT_IP'];
-} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-  $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-} else {
-  $ip = $_SERVER['REMOTE_ADDR'];
-}
-$username = "Guest";
+session_start();
+$idPoll = $_GET['idUserQuery'];
 
-$userid = 0;
-
-$stmt = $dbh->prepare('SELECT idUser, IPUser FROM UserLogin WHERE IPUser = ?');
-$stmt->execute(array($ip));
-
-while ($row = $stmt->fetch()) {
-  if(in_array($ip, $row)) {
-    $userid = $row['idUser'];
-    $stmt1 = $dbh->prepare('SELECT username, idUser FROM User WHERE idUser = ?');
-    $stmt1->execute(array($userid));
-    while ($row1 = $stmt1->fetch()) {
-      if(in_array($userid, $row1)) {
-        $username = $row1['username'];
-      }
-    }
-  }
-}
+if(isset($_SESSION['username']))
+  $username = $_SESSION['username'];
+else
+  $username = "Guest";
+$userid = $_SESSION['idUser'];
 
 ?>
 

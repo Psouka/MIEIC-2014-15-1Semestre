@@ -9,6 +9,6 @@ session_start();
 	$stmt1 = $dbh->prepare('DELETE FROM UserLogin WHERE IPUser = ?');
  	$stmt1->execute(array($ip));
 
-
+session_destroy();
 header( 'Location: ../html/page.php' );
 ?>
