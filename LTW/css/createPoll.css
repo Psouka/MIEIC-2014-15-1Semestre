@@ -9,11 +9,6 @@ body {
   background-image: url(http://gnomo.fe.up.pt/~ei12060/PollWeb/resources/background.png);
 }
 
-img {
-  width: auto;
-  max-height: 12.5em;
-}
-
 .flat-form {
   margin: 1.563em auto;
   width: 49.375em;
@@ -159,6 +154,10 @@ form input {
 
 a:visited {
   color: gray;
+}
+
+a.navbar-brand p {
+  font-size: 2em;
 }
 
 .navbar-default {
