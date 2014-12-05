@@ -134,12 +134,8 @@ form input {
 
 #container {
   clear: right;
-  padding-top: 1em;
-  overflow: hidden;
- }
-
- #container.search {
   padding-top: 3em;
+  overflow: hidden;
  }
 
 #privacy, #multiple {

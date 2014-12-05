@@ -76,30 +76,21 @@ $Link = get_tiny_url($Link);
   <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/poll.css" hreflang="en">
   <link rel="stylesheet" href="../css/chart.css" hreflang="en">
-</head>
+  <script type="text/javascript">var switchTo5x=true;</script>
+  <script type="text/javascript" src="../resources/buttons.js"></script>
+  </head>
 <body>
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  <?php    $_SESSION['usernameOn'] = $username;  $_SESSION['ipOut'] = $ip; ?>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
           <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
+          <span> <p>Menu</p> </span>
         </button>
         <a class="navbar-brand" href="../html/page.php"><p>Pollerino</p></a>
       </div>
-
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
@@ -108,7 +99,6 @@ $Link = get_tiny_url($Link);
           <li><a href="../html/createPoll.php">Create</a></li>
           <li><a href="../html/searchPoll.php">Search</a></li>
           <li><a href="../db/logout.php">Logout</a></li>
-          
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -148,8 +138,12 @@ $Link = get_tiny_url($Link);
 </div>
 </p>
 </br>
-<div class="fb-share-button" data-layout="button"></div>
-<a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+<span class='st_facebook_large' displayText='Facebook'></span>
+<span class='st_googleplus_large' displayText='Google +'></span>
+<span class='st_twitter_large' displayText='Tweet'></span>
+<span class='st_linkedin_large' displayText='LinkedIn'></span>
+<span class='st_pinterest_large' displayText='Pinterest'></span>
+<span class='st_email_large' displayText='Email'></span>
 </form>
 </br>
 </div>

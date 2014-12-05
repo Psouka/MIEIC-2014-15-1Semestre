@@ -71,7 +71,7 @@ body {
   clear: right;
   padding-top: 3em;
   overflow: hidden;
- }
+}
 
   footer {
     margin-top: 1em;
@@ -87,19 +87,28 @@ body {
   margin-right: 3em;
 }
 
-li a {color: white;}
-
-  li a:visited {color: gray;}
-
-    li a:visited:hover {
-      text-decoration: bold;
-      color: gray;
-    }
-
-  li a:link:hover {
-    text-decoration: bold;
-    color:white;
+#pollList {
+  list-style-type: disc;
+  padding-left: 1.250em;
+}
+  #pollList li {
+    font-size: 1.250em;
+    padding-bottom: 0.625em;
   }
+
+  #pollList a {color: white;}
+
+    #pollList a:visited {color: gray;}
+
+      #pollList a:visited:hover {
+        text-decoration: bold;
+        color: gray;
+      }
+
+    #pollList a:link:hover {
+      text-decoration: bold;
+      color:white;
+    }
 
 a.navbar-brand p {
   font-size: 2em;
