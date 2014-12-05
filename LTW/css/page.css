@@ -99,6 +99,8 @@ form {
 		color: rgb(0, 0, 0);
 		outline: none;
 		background: rgb(255, 255, 255);
+		font-family: Roboto;
+		font-size: 0.85em;
 	 }
 
 .show {display: block;}
@@ -106,21 +108,31 @@ form {
 .hide {display: none;}
 
 .button {
-	float: right;
 	border: none;
-	display: block;
+	display: inline;
 	height: 3.25em;
 	width: 6.25em;
-	padding-right: 0.313em;
 	color: rgb(255, 255, 255);
 	text-align: center;
 	margin-top: 0.750em;
 	background: rgb(19, 104, 153);
+	font-family: Roboto;
+	font-size: 0.85em;
  }
 
 	.button:hover {background: rgb(30, 117, 170);}
 
 	.button:active {background: rgb(204, 51, 0);}
+
+	.button.guest {
+		width: 10em;
+		float: right;
+	}
+
+#or {
+	display: inline;
+	padding-left: 2em;
+}
 
 footer {margin-top: 1em;}
 

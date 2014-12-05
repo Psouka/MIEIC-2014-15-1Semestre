@@ -66,6 +66,8 @@
 						<p class="error"> <?= $errMsg ?> </p>
 					<?php endif; ?>
 					<input type="submit" value="Login" class="button" />
+					<p id="or">or</p>
+					<input type="button" value="Login as a Guest" class="button guest" />
 				</li>
 			</ul>
 		</form>
