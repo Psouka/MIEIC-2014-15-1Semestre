@@ -56,6 +56,7 @@ $ImagePoll = $row['Image'];
 <head>
   <script src="../resources/jquery-1.9.1.js"></script>
   <script src="../resources/d3.v3.min.js"> </script>
+  <script src="../js/page.js"></script>
   <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
@@ -91,6 +92,7 @@ $ImagePoll = $row['Image'];
       <ul class="tabs">
         <li>
           <a href="#Poll" class="active">Poll Statistics</a>
+          <a href="#Comments">Poll Comments</a>
         </li>
       </ul>
 
@@ -136,7 +138,16 @@ $ImagePoll = $row['Image'];
 </form>
 </br>
 </div>
-
+<div id="Comments" class="form-action hide">
+  <form>
+    <h1>Comments</h1></br>
+  </br>
+  <p>Comment:</p> 
+  <textarea name="comment" id="comment" maxlength="170" rows="4" cols="50"></textarea><br />
+  <input type="button" value="Comment!" class="buttonOut"/>
+</form>
+</br>
+</div>
 </div>
 </div>
 <footer>

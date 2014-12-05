@@ -56,7 +56,7 @@ if($check == 0) {
 }
 else {
 	$stmt = $dbh->prepare('UPDATE User SET loginAttempts = ? WHERE idUser = ?');
-		$stmt->execute(array(0, $row['idUser']));
+	$stmt->execute(array(0, $row['idUser']));
 	header( 'Location: ../html/profile.php' );
 	unset($_SESSION['errNum']);
 }
