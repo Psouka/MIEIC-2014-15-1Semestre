@@ -40,6 +40,7 @@ $ImagePoll = $row['Image'];
   <script src="../resources/js/bootstrap.min.js"></script>
   <script src="../js/page.js"></script>
   <script src="../js/auxPoll.js" language="Javascript" type="text/javascript"></script>
+  <script src="../js/comment.js" language="Javascript" type="text/javascript"></script>
   <title>Pollerino</title>
   <link rel="shortcut icon" href="../resources/icon.ico"/>
   <meta charset="utf-8">
@@ -99,7 +100,7 @@ $ImagePoll = $row['Image'];
           <script> init(<?= $seeOptions?>, <?= $idPoll ?>, '<?= $username; ?>');
           </script>
         </div>
-        <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');">
+        <input type="button" value="Confirm answer" class="button" onclick="sendVote(<?= $idPoll?>,'<?php echo $username ?>');"/>
       </p>
     <?php endif; ?>
     <div class="chart">
@@ -128,7 +129,7 @@ $ImagePoll = $row['Image'];
   </br>
   <p>Comment:</p> 
   <textarea name="comment" id="comment" maxlength="170" rows="8" cols="75"></textarea><br />
-  <input type="button" value="Comment!" class="buttonOut"/>
+  <input type="button" value="Comment!" class="buttonOut" onclick="sendComment(<?= $idPoll?>,'<?php echo $username ?>');"/>
 </form>
 </br>
 </div>
