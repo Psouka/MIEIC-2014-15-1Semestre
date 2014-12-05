@@ -128,7 +128,7 @@ $Link = get_tiny_url($Link);
           <ul>
             <li>
               <h1> Link: </h1>
-              <?php echo $Link?>
+              <a href=<?php echo $Link?>> <?php echo $Link?> </a>
             </br>
           </br>
         </li>

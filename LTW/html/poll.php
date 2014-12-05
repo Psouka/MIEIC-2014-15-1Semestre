@@ -75,7 +75,7 @@ $ImagePoll = $row['Image'];
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
-  <div id ="container" class="container">
+  <div id ="container" class="container poll">
     <div class="flat-form">
       <ul class="tabs">
         <li>
@@ -109,7 +109,7 @@ $ImagePoll = $row['Image'];
       <script src="../js/chart.js" language="Javascript" type="text/javascript"> </script> <script> drawChart(<?= $idPoll ?>);</script>
     <?php endif; ?>
   </div>
-</br></br>
+</br>
 <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];

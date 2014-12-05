@@ -87,6 +87,20 @@ body {
   margin-right: 3em;
 }
 
+li a {color: white;}
+
+  li a:visited {color: gray;}
+
+    li a:visited:hover {
+      text-decoration: bold;
+      color: gray;
+    }
+
+  li a:link:hover {
+    text-decoration: bold;
+    color:white;
+  }
+
 a.navbar-brand p {
   font-size: 2em;
 }
