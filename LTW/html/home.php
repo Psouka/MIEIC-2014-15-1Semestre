@@ -90,14 +90,14 @@ while ($row = $stmt->fetch()) {
             $urlN = 'poll.php?numPag=' . $pageN;
             ?>
             <?php if($pageB <= 0) :?>
-            <li class="previous disabled"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
+            <li class="previous disabled"><a><span aria-hidden="true">&larr;</span> Older</a></li>
           <?php else:?>
           <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
         <?php endif;?>
         <script language="javascript" > var idv = search_p(<?php echo $numPag ?>); </script>
         <?php $value = "<script>document.write(idv)</script>"?>
         <?php if($value <= 0) :?>
-        <li class="next disabled"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
+        <li class="next disabled"><a>Newer <span aria-hidden="true">&rarr;</span></a></li>
       <?php else:?>
       <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
     <?php endif;?>
