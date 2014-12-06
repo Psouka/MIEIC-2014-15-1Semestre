@@ -21,3 +21,6 @@ Grupo 54, Turma 5
 -  Graph
 
 ----- Username/Password Predefinidos -----
+
+Username: feup
+Password: feup
