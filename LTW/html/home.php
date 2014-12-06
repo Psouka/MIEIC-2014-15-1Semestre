@@ -94,8 +94,7 @@ while ($row = $stmt->fetch()) {
           <?php else:?>
           <li class="previous"><a href=<?= '?page='.$pageB ?>><span aria-hidden="true">&larr;</span> Older</a></li>
         <?php endif;?>
-        <?php if($pageB <= 0) :?>
-        <script language="javascript" > var idv = searchPolls(<?php echo $numPag ?>); </script>
+        <script language="javascript" > var idv = search_p(<?php echo $numPag ?>); </script>
         <?php $value = "<script>document.write(idv)</script>"?>
         <?php if($value <= 0) :?>
         <li class="next disabled"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>
