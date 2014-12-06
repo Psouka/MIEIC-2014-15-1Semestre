@@ -96,7 +96,7 @@ while ($row = $stmt->fetch()) {
         <?php endif;?>
         <script language="javascript" > var idv = search_p(<?php echo $numPag ?>); </script>
         <?php $value = "<script>document.write(idv)</script>"?>
-        <?php if($value <= 0) :?>
+        <?php if($value == 0) :?>
         <li class="next disabled"><a>Newer <span aria-hidden="true">&rarr;</span></a></li>
       <?php else:?>
       <li class="next"><a href=<?= '?page='.$pageN ?>>Newer <span aria-hidden="true">&rarr;</span></a></li>

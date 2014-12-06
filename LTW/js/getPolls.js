@@ -12,7 +12,13 @@ function searchPolls(page)
 }
 
 function search_p(page) {
-	$.getJSON("../db/getPolls.php",{'numPag' : page}, PollsReceived);
+
+	var data = $.getJSON("../db/getPolls.php",{'numPag' : page}, PollsReceived);
+	if(data.lenght == 0) {
+		return 0;
+	}
+	else 
+		return 1;
 }
 
 // Called when messages are received
