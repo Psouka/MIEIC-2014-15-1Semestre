@@ -1,3 +1,0 @@
-- Verificar email após registo
-- Tentativas de login
-- Editar perfil
