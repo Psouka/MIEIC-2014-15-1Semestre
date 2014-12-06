@@ -54,6 +54,7 @@ img {
   outline: none;
   font-family: Roboto;
   font-size: 0.9em;
+  font-weight: bold;
 }
 
 input[type="radio"], input[type="checkbox"] {
