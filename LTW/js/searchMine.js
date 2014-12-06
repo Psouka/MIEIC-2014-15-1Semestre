@@ -8,8 +8,6 @@ function searchPoll(username,id,word)
 	h1.appendChild(tE);
 	elem.appendChild(h1);
 	elem.appendChild(ul);
-	elem.appendChild(document.createElement('br'));
-	elem.appendChild(document.createElement('br'));
 	searchUser(username);
 }
 
