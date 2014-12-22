@@ -1499,7 +1499,7 @@ void ANFScene::process(Node* node,Appearance * app) {
 
 		for(unsigned int i = 0; i < nodes.size(); i++) {
 			glPushMatrix();
-			nodes[i]->setDisplayListGen(true); //TODO dunno if it's supposed to be there, check later
+			nodes[i]->setDisplayListGen(true); 
 			if(nodes[i]->getApp()->getTextRef() != "inherit")
 			{
 				nodes[i]->ApplyApp();
