@@ -8,7 +8,7 @@ Board::Board()
 	float xy2[2] = {(float)1/nSpaces, (float)1/nSpaces};
 	this->rec = new Rect(xy1[0],xy1[1], xy2[0],xy2[1]);
 
-	piece = new Piece();
+	piece = new Cylinder(0.05,0.05, 0.05, 50, 1);
 
 	vector<char> boardTmp;
 
@@ -20,9 +20,15 @@ Board::Board()
 
 	Black = new CGFappearance("textures/black.jpg",1,1);
 	White = new CGFappearance("textures/white.jpg",1,1);
-	PlayerA = new CGFappearance("textures/blue.jpg",1,1);
-	PlayerB = new CGFappearance("textures/red.jpg",1,1);
 
+	// Appearance(float *a, float *d, float *s, float shi, string id, string textureref);
+	float a[4] = {0.4,0.4,0.4,1};
+	float d[4] = {0.3,0.3,0.3,1};
+	float s[4] = {0.5,0.5,0.5,1};
+	PlayerA = new Appearance(a,d,s,50,"PlayerA","none");
+	PlayerA->setAppTexture(new Texture("PlayerA","textures/blue.jpg",1,1));
+	PlayerB = new Appearance(a,d,s,50,"PlayerB","none");
+	PlayerB->setAppTexture(new Texture("PlayerB","textures/red.jpg",1,1));
 	vector<vector< char > > item ( 13,vector<char> ( 13, '0' ) );
 
 	for(unsigned int i = 0; i < item.size(); i++)
@@ -82,25 +88,27 @@ void Board::draw(Texture* t)
 			else
 				White->apply();
 
-			rec->draw(t);
-			glPopMatrix();
-				glPopName();
+			rec->draw(t); 
 
 			glPopName();
+			glPopName();
+
+			glPopMatrix();
 
 			// DrawPiece
 			if(board[i*2][j*2] == 'A' || board[i*2][j*2] == 'B'){
-
-			glPushMatrix();
+				glPushMatrix();
+				
+			
 			glRotated(-90, 1, 0, 0);
-			glTranslated(x, y, 0);
+			glTranslated(x+0.07, y+0.07, 0);
 
 			if(board[i*2][j*2] == 'A')
 				PlayerA->apply();
 			else
 				PlayerB->apply();
 
-			rec->draw(t);
+			piece->draw(t);
 			glPopMatrix();
 			}
 		

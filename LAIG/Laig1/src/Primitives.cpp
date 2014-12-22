@@ -529,22 +529,3 @@ void Flag::setWind(int wind)
 {
 	this->shader->wind = wind;
 }
-
-Piece::Piece(){
-	//<cylinder base="0.12" top="0.12" height="0.05" slices="50" stacks="1" />
-	cyl = new Cylinder(0.05,0.05, 0.05, 50, 1);
-
-}
-
-void Piece::draw(Texture* t){
-
-	glPushMatrix();
-	cyl->draw(t);
-	glPopMatrix();
-
-}
-
-Piece::~Piece(){
-	delete(cyl);
-}
-

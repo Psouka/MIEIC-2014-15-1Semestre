@@ -181,7 +181,32 @@
     </transforms>
     <appearanceref id="inherit" />
     <descendants>
-      <noderef id="board_body" />
+      <noderef id="board_body" />    <noderef id="board_P1P1" />
+      <noderef id="board_P2P1" />
+    </descendants>
+  </node>
+  <node id="board_P1P1">
+    <transforms>
+      <transform type="translate" to="1.25 0 0.20" />
+      <transform type="rotate" axis="x" angle="-90" />
+    </transforms>
+    <appearanceref id="P1" />
+    <primitives>
+      <cylinder base="0.12" top="0.12" height="0.05" slices="50" stacks="1" />
+    </primitives>
+    <descendants>
+    </descendants>
+  </node>
+  <node id="board_P2P1">
+    <transforms>
+      <transform type="translate" to="1.25 0 2.30" />
+      <transform type="rotate" axis="x" angle="-90" />
+    </transforms>
+    <appearanceref id="P2" />
+    <primitives>
+      <cylinder base="0.13" top="0.13" height="0.05" slices="50" stacks="1" />
+    </primitives>
+    <descendants>
     </descendants>
   </node>
   <node id="board_neutron">

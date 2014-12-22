@@ -131,17 +131,4 @@ public :
 };
 
 
-
-class Piece : public Primitives{
-	unsigned int x,y;
-	Cylinder* cyl;
-
-public:
-	Piece();
-	~Piece();
-	void draw(Texture* t);
-	void update(unsigned long t){};
-};
-
-
 #endif
