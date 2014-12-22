@@ -4,6 +4,7 @@
 #include <vector>
 #include "Shader.h"
 #include "CGFobject.h"
+#include "Appearance.h"
 #include "Textures.h"
 using namespace std;
 
@@ -129,4 +130,17 @@ public :
 	void setWind(int wind);
 };
 
+
+
+class Piece : public Primitives{
+	unsigned int x,y;
+	Cylinder* cyl;
+	Appearance* playerApp;
+
+public:
+	Piece(Appearance* playerText);
+	~Piece();
+	void draw(Texture* t);
+	void update(unsigned long t){};
+};
 #endif

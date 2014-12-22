@@ -136,6 +136,7 @@ void Cylinder::draw(Texture* t) {
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
+
 Sphere::Sphere(float radius, int slices, int stacks): Primitives() {
 	this->radius = radius;
 	this->slices = slices;
@@ -298,7 +299,6 @@ void Patch ::draw(Texture* t){
 
 }
 
-
 Vehicle ::~Vehicle(){
 	for(unsigned int i = 0; i < top.size(); i++)
 		delete(top[i]);
@@ -432,9 +432,9 @@ void Vehicle ::draw(Texture* t){
 
 	for(unsigned int i = 0; i < top.size(); i++)
 		top[i]->draw(t);
-		
 
-	
+
+
 	text_bot->apply();
 	int ang = 0;
 	float transl = 1.5;
@@ -453,7 +453,7 @@ void Vehicle ::draw(Texture* t){
 		bot[0]->draw(t);
 		glPopMatrix();
 	}
-	
+
 	//parte debaixo da caixa
 	glPushMatrix();
 	glRotated(-90,1,0,0);
@@ -529,3 +529,31 @@ void Flag::setWind(int wind)
 {
 	this->shader->wind = wind;
 }
+
+Piece::Piece(Appearance* playerText){
+	//<cylinder base="0.12" top="0.12" height="0.05" slices="50" stacks="1" />
+	cyl = new Cylinder(0.12,0.12, 0.05, 50, 1);
+
+	playerApp = playerText;
+}
+
+void Piece::draw(Texture* t){
+
+	// TODO
+	// Desenhar peça centrada na origem. Alinhada com o eixo y
+	// Textura depende do player
+	glPushMatrix();
+
+	playerApp->apply();
+
+	glPushMatrix();
+	cyl->draw(t);
+	glPopMatrix();
+
+	glPopMatrix();
+}
+
+Piece::~Piece(){
+	delete(cyl);
+}
+
