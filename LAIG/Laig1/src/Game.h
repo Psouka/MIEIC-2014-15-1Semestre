@@ -13,6 +13,7 @@ class Game
 
 public:
 	Game();
+	~Game(void);
 	void nextPlayer();
 	void previousPlayer();
 	Board* getBoard();

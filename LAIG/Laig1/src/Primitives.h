@@ -135,10 +135,9 @@ public :
 class Piece : public Primitives{
 	unsigned int x,y;
 	Cylinder* cyl;
-	Appearance* playerApp;
 
 public:
-	Piece(Appearance* playerText);
+	Piece();
 	~Piece();
 	void draw(Texture* t);
 	void update(unsigned long t){};

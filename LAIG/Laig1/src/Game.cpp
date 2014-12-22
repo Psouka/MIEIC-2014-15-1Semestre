@@ -17,3 +17,8 @@ void Game::previousPlayer() {
 Board* Game::getBoard(){
 	return GameBoard;
 }
+
+
+Game :: ~Game(void){
+	delete(GameBoard);
+}
