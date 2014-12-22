@@ -11,7 +11,7 @@ int main(int argc, char* argv[]) {
 		if(argc > 1)
 			app.setScene(Scene = new ANFScene(argv[1]));
 		else
-			app.setScene(Scene = new ANFScene("teste.anf"));
+			app.setScene(Scene = new ANFScene("room.anf"));
 
 		app.setInterface(new TPinterface(Scene));
 
