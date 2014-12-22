@@ -22,7 +22,6 @@
     <ClCompile Include="..\src\Lights.cpp" />
     <ClCompile Include="..\src\main.cpp" />
     <ClCompile Include="..\src\Node.cpp" />
-    <ClCompile Include="..\src\PickInterface.cpp" />
     <ClCompile Include="..\src\Primitives.cpp" />
     <ClCompile Include="..\src\Shader.cpp" />
     <ClCompile Include="..\src\Socket.cpp" />
@@ -41,7 +40,6 @@
     <ClInclude Include="..\src\Graph.h" />
     <ClInclude Include="..\src\Lights.h" />
     <ClInclude Include="..\src\Node.h" />
-    <ClInclude Include="..\src\PickInterface.h" />
     <ClInclude Include="..\src\Primitives.h" />
     <ClInclude Include="..\src\Shader.h" />
     <ClInclude Include="..\src\Socket.h" />

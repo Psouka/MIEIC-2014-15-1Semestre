@@ -10,10 +10,8 @@
 #include "Graph.h"
 #include "Animation.h"
 #include "Game.h"
-#include "PickInterface.h"
 
 class ANFScene:public CGFscene {
-	friend PickInterface;
 public:
 	//interface
 	int globalWind;
