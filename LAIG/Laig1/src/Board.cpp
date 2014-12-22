@@ -70,8 +70,8 @@ void Board::draw(Texture* t)
 
 			glPushMatrix();
 
-			glPushName(i+1);
-			glPushName(j+1);
+			glPushName(i);
+			glPushName(j);
 
 			float y = (float)j/nSpaces;			
 

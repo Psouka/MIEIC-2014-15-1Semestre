@@ -1,5 +1,6 @@
 #include "ANFScene.h"
 #include "TPinterface.h"
+#include "PickInterface.h"
 
 int main(int argc, char* argv[]) {
 
@@ -14,6 +15,8 @@ int main(int argc, char* argv[]) {
 			app.setScene(Scene = new ANFScene("room.anf"));
 
 		app.setInterface(new TPinterface(Scene));
+
+		app.setInterface(new PickInterface());
 
 		app.run();
 	}
