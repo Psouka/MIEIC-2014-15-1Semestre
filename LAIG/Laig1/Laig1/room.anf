@@ -6,8 +6,8 @@
   </globals>
 
   <cameras initial="Player 1">
-    <perspective id="Player 1" near="0.1" far="50.0" angle="90.0" pos="8.5 6.5 9.5" target="8.5 4.35 8.5" />
-    <perspective id="Player 2" near="0.1" far="50.0" angle="90.0" pos="8.5 6.5 7.5" target="8.5 4.35 8.5" />
+    <perspective id="Player 1" near="0.1" far="50.0" angle="90.0" pos="7.5 7.5  8.5" target="8.5 4.35 8.5" />
+    <perspective id="Player 2" near="0.1" far="50.0" angle="90.0" pos="9.5 7.5  8.5" target="8.5 4.35 8.5" />
     <ortho id="x-vision" direction="x" near="-15" far="50" left="-19" right="3" top="11" bottom="-3" />
     <ortho id="y-vision" direction="y" near="-15" far="50" left="-5" right="15" top="15" bottom="-5" />
     <ortho id="z-vision" direction="z" near="-15" far="50" left="-5" right="15" top="15" bottom="-5" />
@@ -87,8 +87,8 @@
     </node>
     <node id="chairP2">
       <transforms>
-        <transform type="translate" to="8.5 0.5 11.25" />
-        <transform type="rotate" axis="y" angle="180" />
+        <transform type="translate" to="10.5 0.5 8.55" />
+        <transform type="rotate" axis="y" angle="270" />
       </transforms>
       <appearanceref id="wood" />
       <descendants>
@@ -102,7 +102,8 @@
    </node>
    <node id="chairP1">
     <transforms>
-      <transform type="translate" to="8.5 0.5 6.25" />
+      <transform type="translate" to="6.5 0.5 8.55" />
+      <transform type="rotate" axis="y" angle="90" />
     </transforms>
     <appearanceref id="wood" />
     <descendants>
@@ -176,37 +177,13 @@
   </node>
   <node id="board">
     <transforms>
+
+      <transform type="rotate" axis="y" angle="90" />
       <transform type="translate" to="7.25 4.35 7.25" />
     </transforms>
     <appearanceref id="inherit" />
     <descendants>
       <noderef id="board_body" />
-      <noderef id="board_P1P1" />
-      <noderef id="board_P2P1" />
-    </descendants>
-  </node>
-  <node id="board_P1P1">
-    <transforms>
-      <transform type="translate" to="1.25 0 0.20" />
-      <transform type="rotate" axis="x" angle="-90" />
-    </transforms>
-    <appearanceref id="P1" />
-    <primitives>
-      <cylinder base="0.12" top="0.12" height="0.05" slices="50" stacks="1" />
-    </primitives>
-    <descendants>
-    </descendants>
-  </node>
-  <node id="board_P2P1">
-    <transforms>
-      <transform type="translate" to="1.25 0 2.30" />
-      <transform type="rotate" axis="x" angle="-90" />
-    </transforms>
-    <appearanceref id="P2" />
-    <primitives>
-      <cylinder base="0.13" top="0.13" height="0.05" slices="50" stacks="1" />
-    </primitives>
-    <descendants>
     </descendants>
   </node>
   <node id="board_neutron">
@@ -226,7 +203,6 @@
     </transforms>
     <appearanceref id="inherit" />
     <descendants>
-      <noderef id="board_body_top" />
       <noderef id="board_body_front" />
       <noderef id="board_body_right" />
       <noderef id="board_body_back" />
@@ -274,16 +250,6 @@
       <rectangle xy1="0 0" xy2="2.5 0.1" />
     </primitives>
   </node>
-  <node id="board_body_top">
-    <transforms>
-      <transform type="translate" to="0 0 2.5" />
-      <transform type="rotate" axis="x" angle="-90" />
-    </transforms>
-    <appearanceref id="board" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 2.5" />
-    </primitives>
-  </node>
   <node id="board_body_front">
     <transforms>
       <transform type="translate" to="0 -0.1 2.5"/>
@@ -296,6 +262,7 @@
   <node id="table">
     <transforms>
       <transform type="translate" to="8.5 0.5 8.5" />
+      <transform type="rotate" axis="y" angle="90" />
     </transforms>
     <appearanceref id="wood" />
     <descendants>
