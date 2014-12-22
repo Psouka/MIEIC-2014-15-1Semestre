@@ -2,7 +2,7 @@
 #define GAME_H
 
 #include "Socket.h"
-#include "Primitives.h"
+#include "Board.h"
 
 using namespace std;
 
