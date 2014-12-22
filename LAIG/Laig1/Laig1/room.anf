@@ -177,8 +177,6 @@
   </node>
   <node id="board">
     <transforms>
-
-      <transform type="rotate" axis="y" angle="90" />
       <transform type="translate" to="7.25 4.35 7.25" />
     </transforms>
     <appearanceref id="inherit" />
