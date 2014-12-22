@@ -8,13 +8,14 @@ using namespace std;
 
 class Game
 {
-	Board GameBoard;
+	Board* GameBoard;
 	int player;
 
 public:
 	Game();
 	void nextPlayer();
 	void previousPlayer();
+	Board* getBoard();
 
 };
 

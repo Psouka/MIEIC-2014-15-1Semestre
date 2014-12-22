@@ -9,6 +9,7 @@
 #include "Appearance.h"
 #include "Graph.h"
 #include "Animation.h"
+#include "Game.h"
 
 class ANFScene:public CGFscene {
 public:
@@ -50,8 +51,8 @@ protected:
 	vector <Flag *> Flags;
 
 	Globals ANFGlobals;
-
 	Graph* ANFGraph;
+	Game* GameScene;
 
 	TiXmlDocument* doc;
 

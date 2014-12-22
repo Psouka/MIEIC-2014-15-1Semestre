@@ -1,14 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-
+#include "Appearance.h"
 #include "Primitives.h"
 
 
 class Board: public Primitives {
 	vector< vector<char> > board;
+	
 	Rect* rec;
-
+	CGFappearance * Black, *White;
 	bool isSelected(int column, int row);
 
 public:	
@@ -18,7 +19,6 @@ public:
 	int nSpaces;
 	Board();
 	~Board(void);
-	void init(int nSpaces);
 
 	vector<char> getPositions();
 	void setPositions(vector<char> newPos);

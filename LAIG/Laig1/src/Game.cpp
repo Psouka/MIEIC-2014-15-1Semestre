@@ -1,6 +1,7 @@
 #include "Game.h"
 
 Game::Game(){
+	GameBoard = new Board();
 }
 
 void Game::nextPlayer() {
@@ -11,4 +12,8 @@ void Game::nextPlayer() {
 void Game::previousPlayer() {
 	this->player--;
 	this->player %= 2;
+}
+
+Board* Game::getBoard(){
+	return GameBoard;
 }

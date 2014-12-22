@@ -2,12 +2,8 @@
 
 Board::Board()
 {
-}
-
-void Board::init(int nSpaces) {
-
-	this->nSpaces = nSpaces;
-
+	this->nSpaces = 7;
+	
 	float xy1[2] = {0, 0};
 	float xy2[2] = {(float)1/nSpaces, (float)1/nSpaces};
 	this->rec = new Rect(xy1[0],xy1[1], xy2[0],xy2[1]);
@@ -19,7 +15,12 @@ void Board::init(int nSpaces) {
 	}
 
 	board.push_back(boardTmp);
+
+	Black = new CGFappearance("textures/black.jpg",1,1);
+	White = new CGFappearance("textures/white.jpg",1,1);
+
 }
+
 
 Board::~Board(void) {
 }
@@ -28,13 +29,15 @@ Board::~Board(void) {
 void Board::draw(Texture* t)
 {
 	glPushMatrix();		
-	glTranslated(-0.5, 0, 0.5);	
-
+	glScaled(2.5,1,2.5);
+	glTranslated(2.9, 4.35, 3.9);	
+	
 	// For each line
+
+	int black = 2;
+
     for(int i = 0; i < nSpaces; i++) {
-
 		float x = (float)i/nSpaces;
-
         // For each row
         for(int j = 0; j < nSpaces; j++) {
 
@@ -50,6 +53,14 @@ void Board::draw(Texture* t)
 			glPushMatrix();
 			glRotated(-90, 1, 0, 0);
 			glTranslated(x, y, 0);
+
+			black ++;
+	        black %= 2;
+			if(black)
+				Black->apply();
+			else
+				White->apply();
+
 			rec->draw(t);
 			glPopMatrix();
 

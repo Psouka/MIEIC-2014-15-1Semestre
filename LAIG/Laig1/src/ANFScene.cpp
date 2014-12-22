@@ -5,7 +5,7 @@
 #include <time.h>
 
 ANFScene::ANFScene(char *filename): CGFscene() {
-
+	GameScene = new Game();
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
@@ -72,12 +72,13 @@ int ANFScene::parseCameras() {
 		bool perspectiveRead = false, orthoRead = false;
 
 		TiXmlElement* camElement=camerasElement->FirstChildElement();
+		float parsenear, parsefar, angle;
 		while(camElement)
 		{
 			if(strcmp(camElement->Value(),"perspective")==0)
 			{
 				printf("\n(Perspective)");
-				float near, far, angle;
+				
 				char *id=NULL;
 				float position[3], target[3];
 
@@ -86,13 +87,13 @@ int ANFScene::parseCameras() {
 				else
 					printf("ID ERROR");
 
-				if (camElement->QueryFloatAttribute("near",&near)==TIXML_SUCCESS && 
-					camElement->QueryFloatAttribute("far",&far)==TIXML_SUCCESS &&
+				if (camElement->QueryFloatAttribute("near",&parsenear)==TIXML_SUCCESS && 
+					camElement->QueryFloatAttribute("far",&parsefar)==TIXML_SUCCESS &&
 					camElement->QueryFloatAttribute("angle",&angle)==TIXML_SUCCESS)
 				{
 
-					printf("\n	near: %f",near);
-					printf("\n	far: %f",far);
+					printf("\n	near: %f",parsenear);
+					printf("\n	far: %f",parsefar);
 					printf("\n	angle: %f",angle);
 
 					initial=(char *)camElement->Attribute("pos");
@@ -124,7 +125,7 @@ int ANFScene::parseCameras() {
 
 
 				}
-				Camera* camera = new PerspectiveCamera(string(id),near,far, angle);
+				Camera* camera = new PerspectiveCamera(string(id),parsenear,parsefar, angle);
 				camera->setPosition(position);
 				camera->setTarget(target);
 
@@ -140,7 +141,7 @@ int ANFScene::parseCameras() {
 				printf("\n(Ortho)");
 
 				char *id=NULL, direction;
-				float near,far,left,right,top,bottom;
+				float parsenear,parsefar,left,right,top,bottom;
 
 				if(id = (char *)camElement->Attribute("id"))
 					printf("\n	id: %s",id);
@@ -154,22 +155,22 @@ int ANFScene::parseCameras() {
 				else
 					printf("DIRECTION ERROR");
 
-				if (camElement->QueryFloatAttribute("near",&near)==TIXML_SUCCESS && 
-					camElement->QueryFloatAttribute("far",&far)==TIXML_SUCCESS &&
+				if (camElement->QueryFloatAttribute("near",&parsenear)==TIXML_SUCCESS && 
+					camElement->QueryFloatAttribute("far",&parsefar)==TIXML_SUCCESS &&
 					camElement->QueryFloatAttribute("left",&left)==TIXML_SUCCESS &&
 					camElement->QueryFloatAttribute("right",&right)==TIXML_SUCCESS && 
 					camElement->QueryFloatAttribute("top",&top)==TIXML_SUCCESS &&
 					camElement->QueryFloatAttribute("bottom",&bottom)==TIXML_SUCCESS)
 				{
 
-					printf("\n	near:%f",near);
-					printf("\n	far:%f",far);
+					printf("\n	near:%f",parsenear);
+					printf("\n	far:%f",parsefar);
 					printf("\n	left:%f",left);
 					printf("\n	right:%f",right);
 					printf("\n	top:%f",top);
 					printf("\n	bottom:%f",bottom);
 
-					Camera* camera = new OrthoCamera(string(id),near,far,left,right,top,bottom,direction);
+					Camera* camera = new OrthoCamera(string(id),parsenear,parsefar,left,right,top,bottom,direction);
 
 					if(strcmp(id,initial_c)==0)
 					{
@@ -1359,7 +1360,6 @@ bool compareVectors(vector<float> v1, vector<float> v2) {
 	return true;
 }
 
-
 void ANFScene::update(unsigned long t) {
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
@@ -1410,6 +1410,7 @@ void ANFScene::display() {
 		lights[i]->updateL();
 	}
 
+	GameScene->getBoard()->draw(new Texture("NULL"));
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
