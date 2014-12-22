@@ -1012,8 +1012,8 @@ int ANFScene::parseGraph() {
 					if(ValString && sscanf_s(ValString,"%f %f",&x1, &y1)==2
 						&& ValString2 && sscanf_s(ValString2,"%f %f",&x2, &y2)==2)
 					{
-						Nodetemp->addPrimitive(new Rectangle(x1,y1,x2,y2));
-						printf("\n	Rectangle x1: %f y1:%f x2: %f y2:%f",x1,y1,x2,y2);
+						Nodetemp->addPrimitive(new Rect(x1,y1,x2,y2));
+						printf("\n	Rect x1: %f y1:%f x2: %f y2:%f",x1,y1,x2,y2);
 					}
 					else
 						printf("\nERROR RECTANGLE");

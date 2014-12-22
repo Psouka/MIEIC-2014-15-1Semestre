@@ -28,12 +28,12 @@ public:
 	void update(unsigned long t){};
 };
 
-class Rectangle: public Primitives {
+class Rect: public Primitives {
 
 	float x1, y1, x2, y2;
 
 public:
-	Rectangle(float x1,float y1, float x2, float y2);
+	Rect(float x1,float y1, float x2, float y2);
 	void draw(Texture* t);
 	void update(unsigned long t){};
 };
@@ -110,7 +110,7 @@ class Vehicle : public Primitives{
 	CGFappearance * text_bot;
 
 	vector<Patch*> top;
-	vector<Rectangle*>bot;
+	vector<Rect*>bot;
 	vector<Cylinder*>mid;
 public:
 	~Vehicle();
@@ -140,6 +140,34 @@ class Piece : public Primitives{
 public:
 	Piece(Appearance* playerText);
 	~Piece();
+	void draw(Texture* t);
+	void update(unsigned long t){};
+};
+
+
+class Board: public Primitives {
+	vector< vector<char> > board;
+	Rect* rec;
+
+	bool isSelected(int column, int row);
+
+public:	
+	vector<int> selectedColumns;
+	vector<int> selectedRows;
+
+	int nSpaces;
+	Board();
+	~Board(void);
+	void init(int nSpaces);
+
+	vector<char> getPositions();
+	void setPositions(vector<char> newPos);
+
+	vector<char> undo();
+
+	void selectSpace(int column, int row);
+	void clearSelected();
+
 	void draw(Texture* t);
 	void update(unsigned long t){};
 };
