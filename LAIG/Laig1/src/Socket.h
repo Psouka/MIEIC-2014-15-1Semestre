@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SOCKET_H
+#define SOCKET_H
 
 #include <winsock2.h>
 #include <iostream>
@@ -19,3 +20,6 @@ public:
 
 	string sendMessage(string message);
 };
+
+
+#endif

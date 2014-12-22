@@ -1,7 +1,10 @@
 #include "Socket.h"
+#define IPADDRESS "127.0.0.1"
+#define PORT 60070
+
 
 Socket::Socket() {
-	WSADATA wsaData;
+	 WSADATA wsaData;
     int iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
     if (iResult != NO_ERROR)
 		printf("Client: Error at WSAStartup().\n");
@@ -13,7 +16,6 @@ Socket::Socket() {
     if (m_socket == INVALID_SOCKET) {
         printf("Client: socket() - Error at socket(): %ld\n", WSAGetLastError());
         WSACleanup();
-        throw exception();
     }
 	else
        printf("Client: socket() is OK.\n");
@@ -23,12 +25,11 @@ Socket::Socket() {
     clientService.sin_family = AF_INET;
     // Just test using the localhost, you can try other IP address
     clientService.sin_addr.s_addr = inet_addr("127.0.0.1");
-    clientService.sin_port = htons(60001);
+    clientService.sin_port = htons(60070);
 
     if (connect(m_socket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR) {
         printf("Client: connect() - Failed to connect.\n");
         WSACleanup();
-        throw exception();
     }
     else {
        printf("Client: connect() is OK.\n");

@@ -9,6 +9,7 @@ using namespace std;
 class Game
 {
 	Board* GameBoard;
+	Socket* socket;
 	int player;
 
 public:

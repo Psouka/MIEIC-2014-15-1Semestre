@@ -2,6 +2,7 @@
 
 Game::Game(){
 	GameBoard = new Board();
+	socket = new Socket();
 }
 
 void Game::nextPlayer() {
@@ -21,4 +22,5 @@ Board* Game::getBoard(){
 
 Game :: ~Game(void){
 	delete(GameBoard);
+	delete(socket);
 }
