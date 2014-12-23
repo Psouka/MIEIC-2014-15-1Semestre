@@ -17,6 +17,8 @@ public:
 	int globalWind;
 	int drawMode;
 	int Active_Camera;
+	int play_Mode;
+	int wallPosition;
 	ANFScene() {}
 	ANFScene(char *filename);
 	~ANFScene();

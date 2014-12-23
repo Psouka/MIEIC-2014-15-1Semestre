@@ -529,3 +529,10 @@ void Flag::setWind(int wind)
 {
 	this->shader->wind = wind;
 }
+
+Cube::Cube():Primitives(){
+}
+
+void Cube:: draw(Texture* t){
+	glutSolidCube(0.025);
+}

@@ -52,8 +52,6 @@ string Socket::sendMessage(string message) {
 		//printf("Client: send() error %ld.\n", WSAGetLastError());
 	}
 
-	// Receive Response
-
 	string answer = "";
 	int pos = 0;
 	while (true) {

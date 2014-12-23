@@ -7,10 +7,11 @@
 
 class Board: public Primitives {
 	vector< vector<char> > board;
+	Cube *wall;
 	Cylinder *piece;
 	Rect* rec;
 	CGFappearance * Black, *White;
-	Appearance * PlayerA, *PlayerB;
+	Appearance * PlayerA, *PlayerB, *wallApp;
 
 	bool isSelected(int column, int row);
 

@@ -1,4 +1,5 @@
 :-use_module(library(random)).
+:-use_module(library(sockets)).
 board(        
 [[0,' ',0,' ',0,' ',0,' ',0,' ',0,' ',0],
  [' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' '],
@@ -533,18 +534,37 @@ botAvsBotB(_,_,_,_,_,_,3):-print('\nGame Over').
 
 botVsBot:- board(B),creatBotP(12,6,BotPs2),creatBotP(0,6,BotPs1),randomPlayer(P),botAvsBotB(B,P,BotPs1,1,BotPs2,1,0).
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%LAIG%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+port(60070).
 
-test:- board(B), checkMov('B',B,12,6,12,0,2,NewB), printBoard(NewB).
+% launch me in sockets mode
+server:-
+  port(Port),
+  socket_server_open(Port, Socket),
+  socket_server_accept(Socket, _Client, Stream, [type(text)]),
+  write('Accepted connection'), nl,
+  serverLoop(Stream),
+  socket_server_close(Socket).
 
-testV :- A = 'B', A = 'B', write(A).
-test7:- board(B),checkArea(NrA,NrB, 0, 0,B, Visited), write(NrA),write(NrB),printBoard(Visited).
-test5:- board(B), checkSizeArea(NrP,Symbol,12,12,B,C), printBoard(C) ,write(NrP),write(Symbol).
-test6 :- board(B),getWinner(B,0,0,0,0,Winner), write(Winner).
-test4:- board(B), getMov('A',B,12,6,10,8,NewB), printBoard(NewB).
-test3:- board(B), checkEndGame(B,0,0).
-test2:- board(B),checkMov('A',B,0,0,2,0,4,FinalB), printBoard(FinalB).
+% wait for commands
+serverLoop(Stream) :-
+  repeat,
+  read(Stream, ClientMsg),
+  write('Received: '), write(ClientMsg), nl,
+  parse_input(ClientMsg, MyReply),
+  format(Stream, '~q.~n', [MyReply]),
+  write('Wrote: '), write(MyReply), nl,
+  flush_output(Stream),
+  (ClientMsg == quit; ClientMsg == end_of_file), !.
 
-testBot :-board(B),creatBotP(12,6,BotP),botPlay(B,BotP,1,NewB,_,_,'B'), printBoard(NewB).
-
-test1:- board(B),checkMov('B',B,6,6).
+parse_input(comando(Arg1, Arg2), Answer) :-
+  comando(Arg1, Arg2, Answer).
+  
+parse_input(quit, ok-bye) :- !.
+    
+comando(Arg1, Arg2, Answer) :-
+  write(Arg1), nl, write(Arg2), nl,
+  Answer = 5.

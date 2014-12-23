@@ -55,6 +55,21 @@ void TPinterface::initGUI() {
 	GLUI_Panel * windPanel = addPanel("Wind: ", 1);
 	GLUI_Spinner* winrot =addSpinnerToPanel( windPanel,"",  2, &(Scene->globalWind), 4);
 
+	addColumn();
+	GLUI_Panel * movPanel = addPanel("Mov: ", 1);
+	GLUI_RadioGroup *modeGame = addRadioGroupToPanel(movPanel,&Scene->play_Mode,5);
+
+	addRadioButtonToGroup(modeGame, "New Piece");
+	addRadioButtonToGroup(modeGame, "Move Piece");
+
+
+	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
+	GLUI_Listbox * wallList = addListboxToPanel(movPiece, (char*)"", &(Scene->wallPosition), 6);
+
+	wallList->add_item (0, "Top");
+	wallList->add_item (1, "Bottom");
+	wallList->add_item (2, "Left");
+	wallList->add_item (2, "Right");
 
 }
 
@@ -81,9 +96,14 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		printf("\nWind Changed");
 		Scene->setGlobalWind();
 		break;
+	case 5:
+		printf("\nPlay Mode Changed");
+		break;
+	case 6:
+		printf("\nWall position Changed");
+		break;
 	}
 }
-
 
 void TPinterface::processMouse(int button, int state, int x, int y) 
 {

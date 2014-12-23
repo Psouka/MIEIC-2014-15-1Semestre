@@ -68,7 +68,6 @@
         <noderef id="wall_left" />
         <noderef id="wall_back" />
         <noderef id="table" />
-        <noderef id="board" />
         <noderef id="chairP1" />
         <noderef id="chairP2" />
       </descendants> 
@@ -162,88 +161,6 @@
     <descendants>
       <noderef id="my_unit_cube" />
     </descendants>
-  </node>
-  <node id="board">
-    <transforms>
-      <transform type="translate" to="7.25 4.35 7.25" />
-    </transforms>
-    <appearanceref id="inherit" />
-    <descendants>
-      <noderef id="board_body" />
-    </descendants>
-  </node>
-  <node id="board_neutron">
-    <transforms>
-      <transform type="translate" to="1.25 0 1.25" />
-      <transform type="rotate" axis="x" angle="-90" />
-    </transforms>
-    <appearanceref id="neutron" />
-    <primitives>
-      <cylinder base="0.17" top="0.17" height="0.125" slices="50" stacks="1" />
-    </primitives>
-    <descendants>
-    </descendants>
-  </node>
-  <node id="board_body">
-    <transforms>
-    </transforms>
-    <appearanceref id="inherit" />
-    <descendants>
-      <noderef id="board_body_front" />
-      <noderef id="board_body_right" />
-      <noderef id="board_body_back" />
-      <noderef id="board_body_left" />
-      <noderef id="board_body_bottom" />
-    </descendants>
-  </node>
-  <node id="board_body_bottom">
-    <transforms>
-      <transform type="translate" to="0 -0.1 0"/>
-      <transform type="rotate" axis="x" angle="90" />
-    </transforms>
-    <appearanceref id="inherit" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 2.5" />
-    </primitives>
-  </node>
-  <node id="board_body_left">
-    <transforms>
-      <transform type="translate" to="0 -0.1 0"/>
-      <transform type="rotate" axis="y" angle="-90" />
-    </transforms>
-    <appearanceref id="inherit" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 0.1" />
-    </primitives>
-  </node>
-  <node id="board_body_back">
-    <transforms>
-      <transform type="translate" to="2.5 -0.1 0"/>
-      <transform type="rotate" axis="y" angle="180" />
-    </transforms>
-    <appearanceref id="inherit" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 0.1" />
-    </primitives>
-  </node>
-  <node id="board_body_right">
-    <transforms>
-      <transform type="translate" to="2.5 -0.1 2.5"/>
-      <transform type="rotate" axis="y" angle="90" />
-    </transforms>
-    <appearanceref id="inherit" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 0.1" />
-    </primitives>
-  </node>
-  <node id="board_body_front">
-    <transforms>
-      <transform type="translate" to="0 -0.1 2.5"/>
-    </transforms>
-    <appearanceref id="inherit" />
-    <primitives>
-      <rectangle xy1="0 0" xy2="2.5 0.1" />
-    </primitives>
   </node>
   <node id="table">
     <transforms>

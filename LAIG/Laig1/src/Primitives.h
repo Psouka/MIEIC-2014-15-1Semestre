@@ -130,5 +130,10 @@ public :
 	void setWind(int wind);
 };
 
-
+class Cube: public Primitives{
+public:
+	void draw(Texture* t);
+	void update(unsigned long t){};
+	Cube();
+};
 #endif
