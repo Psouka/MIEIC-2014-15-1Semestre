@@ -39,17 +39,16 @@ Board::Board()
 	for(unsigned int i = 0; i < item.size(); i++)
 		for(unsigned int a = 0; a < item[i].size(); a++)
 		{
-			if(a % 2 != 0)
-				item[i][a] = ' ';
-			else
-				if(i % 2 != 0)
+			if(i % 2 != 0)
 					item[i][a] = ' ';
+			else if(a % 2 != 0)
+				item[i][a] = ' ';
+				
 		}
 
 		item[0][6] = 'A';
 		item[0][0] = 'A';
 		item[1][0] = '|';
-		//item[3][0] = '|';
 		item[1][2] = '|';
 		item[0][1] = '-';
 		item[12][6] = 'B';
@@ -67,7 +66,7 @@ void Board::draw(Texture* t)
 {
 	glPushMatrix();		
 	glScaled(2.5,1,2.5);
-	glTranslated(2.9, 4.35, 3);
+	glTranslated(3, 4.25, 3);
 	glRotated(180, 1, 0, 0);
 
 	// For each line
