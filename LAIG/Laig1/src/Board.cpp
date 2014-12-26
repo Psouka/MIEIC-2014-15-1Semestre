@@ -60,6 +60,12 @@ Board::~Board(void) {
 	delete(White);
 	delete(Black);
 	delete(rec);
+
+	delete(wall);
+	delete(piece);
+	delete(PlayerA);
+	delete(PlayerB);
+	delete(wallApp);
 }
 
 void Board::draw(Texture* t)
@@ -71,7 +77,7 @@ void Board::draw(Texture* t)
 
 	// For each line
 	int black = 2;
-
+	glRotated(-90, 1, 0, 0);
 	for(int i = 0; i < nSpaces; i++) {
 		float x = (float)i/nSpaces;
 		for(int j = 0; j < nSpaces; j++) {
@@ -83,7 +89,7 @@ void Board::draw(Texture* t)
 			glPushName(j);
 
 			glPushMatrix();
-			glRotated(-90, 1, 0, 0);
+			
 			glTranslated(x,y, 0);
 			glScaled(5.75,5.75,1);
 
@@ -102,11 +108,12 @@ void Board::draw(Texture* t)
 			glPopMatrix();
 			glPopMatrix();
 			// DrawPiece
+
+
 			if(board[i*2][j*2] == 'A' || board[i*2][j*2] == 'B'){
 
 				glPushMatrix();
 
-				glRotated(-90, 1, 0, 0);
 				glTranslated(x, y, -0.05);
 
 				if(board[i*2][j*2] == 'A')
@@ -127,7 +134,6 @@ void Board::draw(Texture* t)
 				if(board[i*2][j*2+1] == '-' )
 				{
 					glPushMatrix();
-					glRotated(-90, 1, 0, 0);
 					glTranslated(x, y+0.07, -0.03);
 					glScaled(5,1,1);
 
@@ -143,7 +149,6 @@ void Board::draw(Texture* t)
 				if(board[i*2+1][j*2] == '|')
 				{
 					glPushMatrix();
-					glRotated(-90, 1, 0, 0);
 					glRotated(90, 0, 0, 1);
 					glTranslated(y, -x-0.07, -0.03);
 					glScaled(5,1,1);
@@ -153,7 +158,7 @@ void Board::draw(Texture* t)
 
 					glPopMatrix();
 				}
-			}
+			} 
 		}
 	}
 
