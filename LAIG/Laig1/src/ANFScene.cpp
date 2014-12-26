@@ -1418,8 +1418,9 @@ void ANFScene::display() {
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
 
-	GameScene->getBoard()->draw(NULL);
-
+	Texture * temp = new Texture("NULL");
+	GameScene->getBoard()->draw(temp);
+	delete(temp);
 
 	glutSwapBuffers();
 

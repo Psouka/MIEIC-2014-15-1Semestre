@@ -131,6 +131,7 @@ public :
 };
 
 class Cube: public Primitives{
+	Rect *rec;
 public:
 	void draw(Texture* t);
 	void update(unsigned long t){};

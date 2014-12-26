@@ -531,8 +531,45 @@ void Flag::setWind(int wind)
 }
 
 Cube::Cube():Primitives(){
+	rec = new Rect(0,0,1,1);
 }
 
 void Cube:: draw(Texture* t){
-	glutSolidCube(0.025);
+	
+		glPushMatrix();
+		glPushMatrix();
+		glTranslated(-0.5,-0.5,0.5);
+		rec->draw(t);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(0.5, -0.5, -0.5);
+		glRotated(180, 0, 1, 0);
+		rec->draw(t);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(-0.5, 0.5, 0.5);
+		glRotated(-90, 1, 0, 0);
+		rec->draw(t);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(-0.5, -0.5, -0.5);
+		glRotated(90, 1, 0, 0);
+		rec->draw(t);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(0.5, -0.5, 0.5);
+		glRotated(90, 0, 1, 0);
+		rec->draw(t);
+		glPopMatrix();
+
+		glPushMatrix();
+		glTranslated(-0.5, -0.5, -0.5);
+		glRotated(-90, 0, 1, 0);
+		rec->draw(t);
+		glPopMatrix();
+		glPopMatrix();
 }

@@ -73,11 +73,10 @@ void Board::draw(Texture* t)
 	glPushMatrix();		
 	glScaled(2.5,1,2.5);
 	glTranslated(3, 4.25, 3);
-	glRotated(180, 1, 0, 0);
+	glRotated(90, 1, 0, 0);
 
 	// For each line
 	int black = 2;
-	glRotated(-90, 1, 0, 0);
 	for(int i = 0; i < nSpaces; i++) {
 		float x = (float)i/nSpaces;
 		for(int j = 0; j < nSpaces; j++) {
@@ -91,7 +90,7 @@ void Board::draw(Texture* t)
 			glPushMatrix();
 			
 			glTranslated(x,y, 0);
-			glScaled(5.75,5.75,1);
+			glScaled(0.15,0.15,0.15);
 
 			black ++;
 			black %= 2;
@@ -107,9 +106,9 @@ void Board::draw(Texture* t)
 
 			glPopMatrix();
 			glPopMatrix();
+			
 			// DrawPiece
-
-
+			/*
 			if(board[i*2][j*2] == 'A' || board[i*2][j*2] == 'B'){
 
 				glPushMatrix();
@@ -158,7 +157,7 @@ void Board::draw(Texture* t)
 
 					glPopMatrix();
 				}
-			} 
+			} */
 		}
 	}
 
