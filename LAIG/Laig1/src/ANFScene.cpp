@@ -1263,6 +1263,8 @@ ANFScene::~ANFScene()
 	for(unsigned int i = 0; i<Flags.size(); i++)
 		delete(Flags[i]);
 
+	delete(GameScene);
+	
 }
 
 TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val)
@@ -1318,6 +1320,7 @@ void ANFScene::init() {
 	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 
 	setUpdatePeriod(60);
+
 }
 
 void ANFScene::FillChildren(Node* node) {
@@ -1410,10 +1413,13 @@ void ANFScene::display() {
 		lights[i]->updateL();
 	}
 
-	GameScene->getBoard()->draw(new Texture("NULL"));
+	
 
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
+
+	GameScene->getBoard()->draw(NULL);
+
 
 	glutSwapBuffers();
 

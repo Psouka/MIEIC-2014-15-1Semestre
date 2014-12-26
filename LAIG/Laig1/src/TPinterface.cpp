@@ -117,6 +117,7 @@ void TPinterface::processMouse(int button, int state, int x, int y)
 
 void TPinterface::performPicking(int x, int y) 
 {
+
 	// Sets the buffer to be used for selection and activate selection mode
 	glSelectBuffer (BUFSIZE, selectBuf);
 	glRenderMode(GL_SELECT);
