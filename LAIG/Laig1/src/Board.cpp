@@ -89,8 +89,8 @@ void Board::draw(Texture* t)
 
 			glPushMatrix();
 			
-			glTranslated(x,y, 0);
-			glScaled(0.15,0.15,0.15);
+			glTranslated(x,y, -0.05);
+			glScaled(0.14,0.14,0.075);
 
 			black ++;
 			black %= 2;
@@ -127,14 +127,14 @@ void Board::draw(Texture* t)
 				}
 				glPopMatrix();
 			}
-
+			
 			if(j+1 < nSpaces){
 
 				if(board[i*2][j*2+1] == '-' )
 				{
 					glPushMatrix();
 					glTranslated(x, y+0.07, -0.03);
-					glScaled(5,1,1);
+					glScaled(0.15,0.15,0.15);
 
 					wallApp->apply();
 					wall->draw(t);
@@ -150,15 +150,15 @@ void Board::draw(Texture* t)
 					glPushMatrix();
 					glRotated(90, 0, 0, 1);
 					glTranslated(y, -x-0.07, -0.03);
-					glScaled(5,1,1);
+					glScaled(0.15,0.15,0.15);
 
 					wallApp->apply();
 					wall->draw(t);
 
 					glPopMatrix();
 				}
-			} */
-		}
+			} */ 
+		} 
 	}
 
 	glPopMatrix();

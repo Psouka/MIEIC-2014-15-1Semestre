@@ -534,6 +534,10 @@ Cube::Cube():Primitives(){
 	rec = new Rect(0,0,1,1);
 }
 
+Cube :: ~Cube(){
+delete rec;
+}
+
 void Cube:: draw(Texture* t){
 	
 		glPushMatrix();
