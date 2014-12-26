@@ -40,10 +40,10 @@ Board::Board()
 		for(unsigned int a = 0; a < item[i].size(); a++)
 		{
 			if(i % 2 != 0)
-					item[i][a] = ' ';
+				item[i][a] = ' ';
 			else if(a % 2 != 0)
 				item[i][a] = ' ';
-				
+
 		}
 
 		item[0][6] = 'A';
@@ -88,7 +88,7 @@ void Board::draw(Texture* t)
 			glPushName(j);
 
 			glPushMatrix();
-			
+
 			glTranslated(x,y, -0.05);
 			glScaled(0.14,0.14,0.075);
 
@@ -99,42 +99,42 @@ void Board::draw(Texture* t)
 			else
 				White->apply();
 
-			wall->draw(t); 
+		 	wall->draw(t); 
 
 			glPopName();
 			glPopName();
 
 			glPopMatrix();
 			glPopMatrix();
-			
+
 			// DrawPiece
-			/*
-			if(board[i*2][j*2] == 'A' || board[i*2][j*2] == 'B'){
 
+			if(board[i*2][j*2] == 'A')
+			{
 				glPushMatrix();
-
-				glTranslated(x, y, -0.05);
-
-				if(board[i*2][j*2] == 'A')
-				{
-					PlayerA->apply();
-					piece->draw(PlayerA->APPTexture);
-				}
-				else
-				{
-					PlayerB->apply();
-					piece->draw(PlayerB->APPTexture);
-				}
+				glTranslated(x, y, -0.15);
+				PlayerA->apply();
+				piece->draw(PlayerA->APPTexture);
 				glPopMatrix();
 			}
+			else if(board[i*2][j*2] == 'B')
+			{
+				glPushMatrix();
+				glTranslated(x, y, -0.15);
+				PlayerB->apply();
+				piece->draw(PlayerB->APPTexture);
+				glPopMatrix();
+			}
+
+
 			
 			if(j+1 < nSpaces){
 
 				if(board[i*2][j*2+1] == '-' )
 				{
 					glPushMatrix();
-					glTranslated(x, y+0.07, -0.03);
-					glScaled(0.15,0.15,0.15);
+					glTranslated(x, y+0.07, -0.1);
+					glScaled(0.13,0.02,0.13);
 
 					wallApp->apply();
 					wall->draw(t);
@@ -149,15 +149,15 @@ void Board::draw(Texture* t)
 				{
 					glPushMatrix();
 					glRotated(90, 0, 0, 1);
-					glTranslated(y, -x-0.07, -0.03);
-					glScaled(0.15,0.15,0.15);
+					glTranslated(y, -x-0.07, -0.1);
+					glScaled(0.13,0.02,0.13);
 
 					wallApp->apply();
 					wall->draw(t);
 
 					glPopMatrix();
 				}
-			} */ 
+			} 
 		} 
 	}
 

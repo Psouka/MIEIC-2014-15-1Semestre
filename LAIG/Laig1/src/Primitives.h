@@ -49,11 +49,13 @@ public:
 };
 
 class Cylinder: public Primitives {
-
+	GLUquadricObj *disk, *disk1;
+	GLUquadricObj *cylind;
 	float base,top,height,angle;
 	int slices, stacks;
 
 public:
+	~Cylinder();
 	Cylinder(float base, float top, float height, int slices, int stacks);
 	void draw(Texture* t);
 	void update(unsigned long t){};

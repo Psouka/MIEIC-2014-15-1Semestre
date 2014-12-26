@@ -84,16 +84,13 @@ Cylinder::Cylinder(float base, float top, float height, int slices, int stacks):
 	this->slices = slices;
 	this->stacks = stacks;
 	this->angle = 2 * acos(-1.0) / slices;
-}
-
-void Cylinder::draw(Texture* t) {
-
-	GLUquadricObj *disk, *disk1;
-	GLUquadricObj *cylind;
 
 	cylind = gluNewQuadric();
 	disk = gluNewQuadric();
 	disk1 = gluNewQuadric();
+}
+
+void Cylinder::draw(Texture* t) {
 
 	//Bot
 	glPushMatrix();
@@ -135,6 +132,9 @@ void Cylinder::draw(Texture* t) {
 	gluDisk(disk1, 0, top, slices, slices);
 	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
+}
+
+Cylinder :: ~Cylinder(){
 }
 
 Sphere::Sphere(float radius, int slices, int stacks): Primitives() {
