@@ -35,7 +35,6 @@ vector<float> Animation::getInitialPos() {
 	return initialPos;
 }
 
-
 void LinearAnimation::init(unsigned long t) {
 	this->distance = 0;
 

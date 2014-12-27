@@ -17,6 +17,10 @@ public:
 	~Game(void);
 	void nextPlayer();
 	void previousPlayer();
+	void addPiece(unsigned int x,unsigned int y);
+	void movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned int yf,unsigned int wall);
+	bool checkPiece(unsigned int x,unsigned int y);
+	bool checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned int yf,unsigned int wall);
 	Board* getBoard();
 
 };

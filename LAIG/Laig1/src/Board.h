@@ -26,6 +26,7 @@ class Board: public Primitives {
 	Play playerPlay;
 
 public:	
+
 	int nSpaces;
 	Board();
 	~Board(void);

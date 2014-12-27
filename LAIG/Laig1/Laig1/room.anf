@@ -6,7 +6,7 @@
   </globals>
 
   <cameras initial="Player 1">
-    <perspective id="Player 1" near="0.1" far="50.0" angle="90.0" pos="7.5 7.5  8.5" target="8.5 4.35 8.5" />
+    <perspective id="Player 1" near="0.1" far="50.0" angle="90.0" pos="7 7.5  8.5" target="8.5 4.35 8.5" />
     <perspective id="Player 2" near="0.1" far="50.0" angle="90.0" pos="9.5 7.5  8.5" target="8.5 4.35 8.5" />
     <ortho id="x-vision" direction="x" near="-15" far="50" left="-19" right="3" top="11" bottom="-3" />
     <ortho id="y-vision" direction="y" near="-15" far="50" left="-5" right="15" top="15" bottom="-5" />

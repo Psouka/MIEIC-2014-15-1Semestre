@@ -14,6 +14,7 @@
 class ANFScene:public CGFscene {
 public:
 	//interface
+	Game* GameScene;
 	int globalWind;
 	int drawMode;
 	int Active_Camera;
@@ -54,7 +55,6 @@ protected:
 
 	Globals ANFGlobals;
 	Graph* ANFGraph;
-	Game* GameScene;
 
 	TiXmlDocument* doc;
 

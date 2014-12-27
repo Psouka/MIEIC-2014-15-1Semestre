@@ -197,6 +197,9 @@ string Board::getBoardString() {
 
 		// Each Point
 		for(unsigned int j = 0; j < board[i].size(); j ++) {
+			if(board[j][i] == '0')
+				boardString << board[j][i];
+			else
 			boardString << "'" << board[j][i] << "'";
 
 			if(j + 1 < board[i].size())
@@ -204,6 +207,10 @@ string Board::getBoardString() {
 		}
 
 		boardString << "]";
+
+		if(i + 1 < board.size())
+				boardString << ",";
+
 	}
 
 	boardString << "]";

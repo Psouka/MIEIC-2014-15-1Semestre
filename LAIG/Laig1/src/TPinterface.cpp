@@ -66,10 +66,10 @@ void TPinterface::initGUI() {
 	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
 	GLUI_Listbox * wallList = addListboxToPanel(movPiece, (char*)"", &(Scene->wallPosition), 6);
 
-	wallList->add_item (0, "Top");
-	wallList->add_item (1, "Bottom");
-	wallList->add_item (2, "Left");
-	wallList->add_item (2, "Right");
+	wallList->add_item (1, "North");
+	wallList->add_item (2, "South");
+	wallList->add_item (3, "West");
+	wallList->add_item (4, "East");
 
 }
 
@@ -195,6 +195,8 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		printf("\nPicked ID's: ");
 		for (unsigned int i=0; i<nselected; i++)
 			printf("%d ",selected[i]);
+
+		Scene->GameScene->checkPiece(2*selected[0],2*selected[1]);
 		printf("\n");
 	}
 }

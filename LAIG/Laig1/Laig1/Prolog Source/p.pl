@@ -534,23 +534,23 @@ botAvsBotB(_,_,_,_,_,_,3):-print('\nGame Over').
 
 botVsBot:- board(B),creatBotP(12,6,BotPs2),creatBotP(0,6,BotPs1),randomPlayer(P),botAvsBotB(B,P,BotPs1,1,BotPs2,1,0).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%LAIG%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%                 Sockets                   %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 port(60070).
 
 % launch me in sockets mode
 server:-
   port(Port),
-  socket_server_open(Port, Socket),
+  socket_server_open(Port,Socket),
   socket_server_accept(Socket, _Client, Stream, [type(text)]),
   write('Accepted connection'), nl,
-  serverLoop(Stream),
+  server_loop(Stream),
   socket_server_close(Socket).
 
 % wait for commands
-serverLoop(Stream) :-
+server_loop(Stream) :-
   repeat,
   read(Stream, ClientMsg),
   write('Received: '), write(ClientMsg), nl,
@@ -560,11 +560,22 @@ serverLoop(Stream) :-
   flush_output(Stream),
   (ClientMsg == quit; ClientMsg == end_of_file), !.
 
-parse_input(comando(Arg1, Arg2), Answer) :-
-  comando(Arg1, Arg2, Answer).
-  
-parse_input(quit, ok-bye) :- !.
-    
-comando(Arg1, Arg2, Answer) :-
-  write(Arg1), nl, write(Arg2), nl,
-  Answer = 5.
+parse_input([addPiece, Board, Player, Column, Row], MyReply):-
+ checkMov(Player,Board,Column,Row), !, MyReply is 1.
+
+parse_input([addPiece, Board, Player, Column, Row], 0).
+
+
+parse_input([movePiece, Board, Player, Xinicial,Yinicial,Xfinal,Yfinal,Wall],MyReply):-
+checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB), !, MyReply is 1.
+
+parse_input([movePiece, Board, Player, Xinicial,Yinicial,Xfinal,Yfinal,Wall],0).
+
+
+parse_input([gameOver, Board], MyReply):-
+  checkEndGame(B,0,0),!, getWinner(B,0,0,0,0,MyReply).
+
+parse_input([gameOver, Board], 0).
+
+
+parse_input(quit, ok-bye):- !.
