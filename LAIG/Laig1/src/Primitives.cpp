@@ -535,7 +535,7 @@ Cube::Cube():Primitives(){
 }
 
 Cube :: ~Cube(){
-delete rec;
+delete(rec);
 }
 
 void Cube:: draw(Texture* t){

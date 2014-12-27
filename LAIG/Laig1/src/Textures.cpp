@@ -5,6 +5,10 @@ Texture::Texture(): CGFtexture() {
 
 }
 
+Texture::~Texture(){
+}
+
+
 Texture::Texture(string i, string f, float tex_s,float tex_t): CGFtexture(f) {
 	id = i;
 	file = f;

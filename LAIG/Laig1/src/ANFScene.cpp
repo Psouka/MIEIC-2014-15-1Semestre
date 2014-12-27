@@ -1390,6 +1390,7 @@ void ANFScene::update(unsigned long t) {
 	for(unsigned int i = 0; i < Flags.size();i++)
 		Flags[i]->update(t);
 
+	GameScene->getBoard()->update(t);
 }
 
 void ANFScene::display() {
@@ -1420,6 +1421,7 @@ void ANFScene::display() {
 
 	Texture * temp = new Texture("NULL");
 	GameScene->getBoard()->draw(temp);
+
 	delete(temp);
 
 	glutSwapBuffers();

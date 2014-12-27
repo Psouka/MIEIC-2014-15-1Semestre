@@ -51,6 +51,7 @@ public:
 	void setAnimsVector(vector<Animation*> animsv);
 	int getActiveAnim();
 	void setActiveAnim(int animN);
+	bool hasAnim();
 };
 
 #endif

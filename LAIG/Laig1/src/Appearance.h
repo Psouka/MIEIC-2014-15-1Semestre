@@ -10,6 +10,7 @@ public:
 	Texture *APPTexture;
 	Appearance(float *a, float *d, float *s, float shi, string id, string textureref);
 	Appearance(string text_ref);
+	~Appearance();
 	string getAppId();
 	string getTextRef();
 	void setAppTexture(Texture * t);

@@ -150,3 +150,8 @@ void Node::scale(float x, float y, float z)
 	glGetFloatv(GL_MODELVIEW_MATRIX,transforms);
 	glPopMatrix();
 }
+
+
+bool Node:: hasAnim(){
+return (animsV.size() != 0);
+}

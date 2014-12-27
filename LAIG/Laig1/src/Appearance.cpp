@@ -9,6 +9,10 @@ Appearance::Appearance(float*a,float *d,float *s, float shi, string id, string t
 	this->textureref = textureref;
 }
 
+Appearance :: ~Appearance(){
+	delete(APPTexture);
+}
+
 Appearance::Appearance(string text_ref) {
 	this->textureref = text_ref;
 }

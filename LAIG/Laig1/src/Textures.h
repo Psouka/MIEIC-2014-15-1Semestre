@@ -15,6 +15,7 @@ public:
 	Texture(string id);
 	Texture(string i, string f, float tex_s,float tex_t);
 	Texture();
+	~Texture();
 	string getFile();
 	string getId();
 	int getTexId();

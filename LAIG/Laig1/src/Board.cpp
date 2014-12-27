@@ -54,6 +54,11 @@ Board::Board()
 		item[12][6] = 'B';
 
 		this->board = item;
+
+		playerPlay.active = false;
+		playerPlay.wall = false;
+		playerPlay.Player = PlayerA;
+
 }
 
 Board::~Board(void) {
@@ -66,6 +71,14 @@ Board::~Board(void) {
 	delete(PlayerA);
 	delete(PlayerB);
 	delete(wallApp);
+
+	if(playerPlay.active)
+		delete(playerPlay.animPiece);
+
+	if(playerPlay.wall)
+		delete(playerPlay.animWall);
+
+	delete(playerPlay.Player);
 }
 
 void Board::draw(Texture* t)
@@ -125,9 +138,7 @@ void Board::draw(Texture* t)
 				piece->draw(PlayerB->APPTexture);
 				glPopMatrix();
 			}
-
-
-			
+	
 			if(j+1 < nSpaces){
 
 				if(board[i*2][j*2+1] == '-' )
@@ -162,4 +173,40 @@ void Board::draw(Texture* t)
 	}
 
 	glPopMatrix();
+}
+
+void Board::update(unsigned long t){
+
+	if(playerPlay.active)
+		playerPlay.animPiece->update(t);
+
+	if(playerPlay.wall)
+		playerPlay.animWall->update(t);
+
+}
+
+string Board::getBoardString() {
+
+	stringstream boardString;
+	boardString << "[";
+
+	// Each Row
+	for(unsigned int i = 0; i < board.size(); i++) {
+		
+		boardString << "[";
+
+		// Each Point
+		for(unsigned int j = 0; j < board[i].size(); j ++) {
+			boardString << "'" << board[j][i] << "'";
+
+			if(j + 1 < board[i].size())
+				boardString << ",";
+		}
+
+		boardString << "]";
+	}
+
+	boardString << "]";
+
+	return boardString.str();
 }
