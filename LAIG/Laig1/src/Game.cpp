@@ -3,6 +3,7 @@
 Game::Game(){
 	GameBoard = new Board();
 	socket = new Socket();
+	player = 0;
 }
 
 void Game::nextPlayer() {
@@ -31,6 +32,33 @@ Game :: ~Game(void){
 
 
 void Game::addPiece(unsigned int x,unsigned int y){
+	GameBoard->playerPlay.active = true;
+	GameBoard->playerPlay.wall = 0;
+
+	delete(GameBoard->playerPlay.animPiece);
+
+	vector<vector<float>> cPoint;
+	vector<float> point(3);
+	point[0] = 0;
+	point[1] = 0;
+	point[2] = -0.5;
+	cPoint.push_back(point);
+	point[0] = 0;
+	point[1] = 0;
+	point[2] = 0;
+	cPoint.push_back(point);
+
+	GameBoard->playerPlay.animPiece = new LinearAnimation("Piece",1.5, cPoint);
+
+	delete(GameBoard->playerPlay.animWall);
+	GameBoard->playerPlay.animWall = new NoAnimation();
+
+	GameBoard->playerPlay.Player = GameBoard->getPalyerApp(this->player%2);
+
+	GameBoard->playerPlay.col = x;
+	GameBoard->playerPlay.line = y;
+
+
 
 	nextPlayer();
 }

@@ -186,18 +186,25 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		for (int j=0; j < num; j++) 
 			ptr++;
 	}
-	
+
 	// if there were hits, the one selected is in "selected", and it consist of nselected "names" (integer ID's)
 	if (selected!=NULL)
 	{
 		// this should be replaced by code handling the picked object's ID's (stored in "selected"), 
 		// possibly invoking a method on the scene class and passing "selected" and "nselected"
-		printf("\nPicked ID's: ");
-		for (unsigned int i=0; i<nselected; i++)
-			printf("%d ",selected[i]);
+		printf("\nPosition: ");
+		printf("%d ",selected[0]);
+		printf("%d ",selected[1]);
 
-		if(Scene->play_Mode == 0)
-		Scene->GameScene->checkPiece(2*selected[0],2*selected[1]);
+		if(Scene->play_Mode == 0){
+			if(Scene->GameScene->checkPiece(2*selected[0],2*selected[1]))
+				Scene->GameScene->addPiece(selected[0],selected[1]);
+		}
+		else if(Scene->play_Mode == 1){
+			//todo
+		}
+
+
 		printf("\n");
 	}
 }

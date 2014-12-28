@@ -56,11 +56,12 @@ Board::Board()
 		this->board = item;
 
 		playerPlay.active = false;
-		playerPlay.wall = false;
+		playerPlay.wall = 0;
 		playerPlay.Player = PlayerA;
 
 		playerPlay.animPiece = new NoAnimation();
 		playerPlay.animWall = new NoAnimation();
+		playerPlay.col = playerPlay.line = 0;
 
 }
 
@@ -115,7 +116,7 @@ void Board::draw(Texture* t)
 			else
 				White->apply();
 
-		 	wall->draw(t); 
+			wall->draw(t); 
 
 			glPopName();
 			glPopName();
@@ -141,7 +142,7 @@ void Board::draw(Texture* t)
 				piece->draw(PlayerB->APPTexture);
 				glPopMatrix();
 			}
-	
+
 			if(j+1 < nSpaces){
 
 				if(board[i*2][j*2+1] == '-' )
@@ -171,8 +172,18 @@ void Board::draw(Texture* t)
 
 					glPopMatrix();
 				}
-			} 
+			}
 		} 
+	}
+	//drawPlay
+	if(playerPlay.active && playerPlay.wall == 0)
+	{
+		glPushMatrix();
+		glTranslated((float)playerPlay.col/nSpaces, (float)playerPlay.line/nSpaces, -0.15);
+		playerPlay.animPiece->apply();
+		playerPlay.Player->apply();
+		piece->draw(playerPlay.Player->APPTexture);
+		glPopMatrix();
 	}
 
 	glPopMatrix();
@@ -182,9 +193,14 @@ void Board::update(unsigned long t){
 
 	if(playerPlay.active)
 		playerPlay.animPiece->update(t);
+	else
+		return;
 
-	if(playerPlay.wall)
+	if(playerPlay.wall == 0)
 		playerPlay.animWall->update(t);
+
+	if(playerPlay.animPiece->getStop())
+		resetPlay();
 
 }
 
@@ -195,7 +211,7 @@ string Board::getBoardString() {
 
 	// Each Row
 	for(unsigned int i = 0; i < board.size(); i++) {
-		
+
 		boardString << "[";
 
 		// Each Point
@@ -203,7 +219,7 @@ string Board::getBoardString() {
 			if(board[j][i] == '0')
 				boardString << board[j][i];
 			else
-			boardString << "'" << board[j][i] << "'";
+				boardString << "'" << board[j][i] << "'";
 
 			if(j + 1 < board[i].size())
 				boardString << ",";
@@ -212,11 +228,37 @@ string Board::getBoardString() {
 		boardString << "]";
 
 		if(i + 1 < board.size())
-				boardString << ",";
+			boardString << ",";
 
 	}
 
 	boardString << "]";
 
 	return boardString.str();
+}
+
+Appearance* Board::getPalyerApp(unsigned int p){
+	if(p == 1)
+		return PlayerA;
+	else
+		return PlayerB;
+}
+
+void Board::resetPlay(){
+
+	if(playerPlay.active && playerPlay.wall == 0)
+	{
+		if(playerPlay.Player->getAppId() == "PlayerA")
+			board[2*playerPlay.col][2*playerPlay.line] = 'A';
+		else if(playerPlay.Player->getAppId() == "PlayerB")
+			board[2*playerPlay.col][2*playerPlay.line] = 'B';
+
+	}
+
+	playerPlay.active = false;
+
+	playerPlay.wall = 0;
+	delete(playerPlay.animPiece);
+	playerPlay.animPiece = new NoAnimation();
+
 }

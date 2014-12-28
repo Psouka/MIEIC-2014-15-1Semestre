@@ -7,11 +7,12 @@
 #include <sstream>
 
 typedef struct {
+	unsigned int col,line;
 	Appearance * Player;
 	Animation * animPiece;
 	Animation * animWall;
 	bool active;
-	bool wall;
+	int wall;
    
 } Play;
 
@@ -22,16 +23,19 @@ class Board: public Primitives {
 	Rect* rec;
 	CGFappearance * Black, *White;
 	Appearance * PlayerA, *PlayerB, *wallApp;
-	Play playerPlay;
+	
 
 public:	
 	vector< vector<char> > board;
+	Play playerPlay;
 	int nSpaces;
 	Board();
 	~Board(void);
 	void draw(Texture* t);
 	void update(unsigned long t);
 	string getBoardString();
+	Appearance* getPalyerApp(unsigned int  p);
+	void resetPlay();
 };
 
 #endif
