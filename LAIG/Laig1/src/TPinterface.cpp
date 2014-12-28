@@ -13,11 +13,13 @@ TPinterface::~TPinterface(){
 }
 
 TPinterface::TPinterface(): CGFinterface() {
+	inicial_move_x = inicial_move_y = -1;
 }
 
 TPinterface::TPinterface(ANFScene* S): CGFinterface() {
 	testVar=0;
 	Scene = S;
+	inicial_move_x = inicial_move_y = -1;
 }
 
 void TPinterface::initGUI() {
@@ -195,16 +197,31 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		printf("\nPosition: ");
 		printf("%d ",selected[0]);
 		printf("%d ",selected[1]);
+		printf("\n");
 
 		if(Scene->play_Mode == 0){
 			if(Scene->GameScene->checkPiece(2*selected[0],2*selected[1]))
 				Scene->GameScene->addPiece(selected[0],selected[1]);
 		}
 		else if(Scene->play_Mode == 1){
-			//todo
+			if(inicial_move_x == -1)
+			{
+				inicial_move_x = selected[0];
+				inicial_move_y = selected[1];
+			}
+			else if(Scene->GameScene->checkMove(2*inicial_move_x,2*inicial_move_y,2*selected[0],2*selected[1],Scene->wallPosition))
+			{
+				Scene->GameScene->movePiece(2*inicial_move_x,2*inicial_move_y,2*selected[0],2*selected[1],Scene->wallPosition);
+				inicial_move_x = -1;
+				inicial_move_y = -1;
+			}
+			else
+			{
+			inicial_move_x = -1;
+			inicial_move_y = -1;
+			}
 		}
 
 
-		printf("\n");
 	}
 }

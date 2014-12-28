@@ -9,6 +9,7 @@ class TPinterface: public CGFinterface {
 	ANFScene *Scene;
 	std::vector<Light *> lights;
 	std::vector<Camera *> cameras;
+	int inicial_move_x,inicial_move_y;
 
 public:
 	~TPinterface();

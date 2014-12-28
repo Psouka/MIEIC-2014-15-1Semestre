@@ -185,6 +185,15 @@ void Board::draw(Texture* t)
 		piece->draw(playerPlay.Player->APPTexture);
 		glPopMatrix();
 	}
+	else if(playerPlay.active) // move
+	{
+		glPushMatrix();
+		glTranslated((float)playerPlay.col/nSpaces, (float)playerPlay.line/nSpaces, -0.15);
+		playerPlay.animPiece->apply();
+		playerPlay.Player->apply();
+		piece->draw(playerPlay.Player->APPTexture);
+		glPopMatrix();
+	}
 
 	glPopMatrix();
 }
