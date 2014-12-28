@@ -59,6 +59,9 @@ Board::Board()
 		playerPlay.wall = false;
 		playerPlay.Player = PlayerA;
 
+		playerPlay.animPiece = new NoAnimation();
+		playerPlay.animWall = new NoAnimation();
+
 }
 
 Board::~Board(void) {

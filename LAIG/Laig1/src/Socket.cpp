@@ -43,17 +43,16 @@ Socket::Socket() {
 string Socket::sendMessage(string message) {
 	message += ".\n";
 
-	int len = message.length();
+	unsigned int len = message.length();
 	const char* s = message.c_str();
 
 	int bytesSent = send(m_socket, s, len, 0);
 	if(bytesSent == SOCKET_ERROR) {
 		throw exception();
-		//printf("Client: send() error %ld.\n", WSAGetLastError());
 	}
 
 	string answer = "";
-	int pos = 0;
+
 	while (true) {
 		char buffer;
 		recv(m_socket, &buffer, 1, 0);
@@ -61,12 +60,9 @@ string Socket::sendMessage(string message) {
 			break;
 		answer += buffer;
 	}
-
 	return answer;
 }
 
 Socket::~Socket() {
-	cout << "Asking prolog to quit" << endl;
-	char buff[] = "bye.\n";
-	sendMessage("bye");
+	sendMessage("quit");
 }

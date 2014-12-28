@@ -1,12 +1,17 @@
 #include "ANFScene.h"
 #include "TPinterface.h"
-
+#include <stdlib.h> 
+ANFScene *Scene;
+void _exit(){
+	Scene->GameScene->getSocket()->sendMessage("quit");
+}
 
 int main(int argc, char* argv[]) {
 
 	CGFapplication app = CGFapplication();
+	atexit (_exit);
 	try {
-		ANFScene *Scene;
+		
 		app.init(&argc, argv);
 
 		if(argc > 1)
@@ -26,7 +31,6 @@ int main(int argc, char* argv[]) {
 		cout << "Erro inesperado: " << ex.what();
 		return -1;
 	}
-
 	return 0;
 
 }

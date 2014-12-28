@@ -19,6 +19,10 @@ Board* Game::getBoard(){
 	return GameBoard;
 }
 
+Socket* Game:: getSocket(){
+	return socket;
+}
+
 
 Game :: ~Game(void){
 	delete(GameBoard);
@@ -28,11 +32,14 @@ Game :: ~Game(void){
 
 void Game::addPiece(unsigned int x,unsigned int y){
 
+	nextPlayer();
 }
 
 
 void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned int yf,unsigned int wall){
 
+
+	nextPlayer();
 }
 
 bool Game::checkPiece(unsigned int x,unsigned int y){

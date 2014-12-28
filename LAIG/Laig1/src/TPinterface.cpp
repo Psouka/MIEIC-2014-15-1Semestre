@@ -196,6 +196,7 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		for (unsigned int i=0; i<nselected; i++)
 			printf("%d ",selected[i]);
 
+		if(Scene->play_Mode == 0)
 		Scene->GameScene->checkPiece(2*selected[0],2*selected[1]);
 		printf("\n");
 	}

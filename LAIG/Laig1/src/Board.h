@@ -17,7 +17,6 @@ typedef struct {
 
 
 class Board: public Primitives {
-	vector< vector<char> > board;
 	Cube *wall;
 	Cylinder *piece;
 	Rect* rec;
@@ -26,7 +25,7 @@ class Board: public Primitives {
 	Play playerPlay;
 
 public:	
-
+	vector< vector<char> > board;
 	int nSpaces;
 	Board();
 	~Board(void);
