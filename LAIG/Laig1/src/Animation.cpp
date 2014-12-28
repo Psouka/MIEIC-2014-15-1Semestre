@@ -107,11 +107,11 @@ void LinearAnimation::update(unsigned long t) {
 		transZ = transZ + temp[2];
 
 		//se passar do ponto de controlo ignora o resto do incremento
-		if(abs((transX) > abs(controlPoint[idPC+1][0])))
+		if(abs(transX) > abs(controlPoint[idPC+1][0]))
 			transX = controlPoint[idPC+1][0];
-		if(abs((transY) > abs(controlPoint[idPC+1][1])))
+		if(abs(transY) > abs(controlPoint[idPC+1][1]))
 			transY = controlPoint[idPC+1][1];
-		if(abs((transZ) > abs(controlPoint[idPC+1][2])))
+		if(abs(transZ) > abs(controlPoint[idPC+1][2]))
 			transZ = controlPoint[idPC+1][2];
 
 		if(transX == controlPoint[idPC+1][0] && transY == controlPoint[idPC+1][1] && transZ == controlPoint[idPC+1][2]) 

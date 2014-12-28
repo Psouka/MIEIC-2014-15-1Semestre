@@ -74,20 +74,16 @@ void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	point[1] = 0;
 	point[2] = 0;
 	cPoint.push_back(point);
-	point[0] = 0;
-	point[1] = 0;
-	point[2] = -0.5;
+	point[0] = (float)(xf-xi)/2;
+	point[1] = (float)(yf-yi)/2;
+	point[2] = -0.3;
 	cPoint.push_back(point);
 	point[0] = xf-xi;
 	point[1] = yf-yi;
-	point[2] = -0.5;
-	cPoint.push_back(point);
-	point[0] = xf-xi;
-	point[1] = yf-yi;
-	point[2] = 0;
+	point[2] = 0; 
 	cPoint.push_back(point);
 
-	GameBoard->playerPlay.animPiece = new LinearAnimation("Piece",1.5, cPoint);
+	GameBoard->playerPlay.animPiece = new LinearAnimation("Piece",2, cPoint);
 
 	delete(GameBoard->playerPlay.animWall);
 	GameBoard->playerPlay.animWall = new NoAnimation();
