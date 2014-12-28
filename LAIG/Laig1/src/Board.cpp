@@ -263,6 +263,16 @@ void Board::resetPlay(){
 			board[2*playerPlay.col][2*playerPlay.line] = 'B';
 
 	}
+	if(playerPlay.active)
+	{
+		vector<float> t = playerPlay.animPiece->getFinalPos();
+
+		if(playerPlay.Player->getAppId() == "PlayerA")
+			board[2*(playerPlay.col+t[0])][2*(playerPlay.line+t[1])] = 'A';
+		else if(playerPlay.Player->getAppId() == "PlayerB")
+			board[2*(playerPlay.col+t[0])][2*(playerPlay.line+t[1])] = 'B';
+
+	}
 
 	playerPlay.active = false;
 
