@@ -205,8 +205,7 @@ void Board::update(unsigned long t){
 	else
 		return;
 
-	if(playerPlay.wall == 0)
-		playerPlay.animWall->update(t);
+	playerPlay.animWall->update(t);
 
 	if(playerPlay.animPiece->getStop())
 		resetPlay();
@@ -268,9 +267,9 @@ void Board::resetPlay(){
 		vector<float> t = playerPlay.animPiece->getFinalPos();
 
 		if(playerPlay.Player->getAppId() == "PlayerA")
-			board[2*(playerPlay.col+t[0])][2*(playerPlay.line+t[1])] = 'A';
+			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)] = 'A';
 		else if(playerPlay.Player->getAppId() == "PlayerB")
-			board[2*(playerPlay.col+t[0])][2*(playerPlay.line+t[1])] = 'B';
+			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)] = 'B';
 
 	}
 
