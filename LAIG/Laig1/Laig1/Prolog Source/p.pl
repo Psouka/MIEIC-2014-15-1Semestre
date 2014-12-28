@@ -567,7 +567,7 @@ parse_input([addPiece, Board, Player, Column, Row], 0).
 
 
 parse_input([movePiece, Board, Player, Xinicial,Yinicial,Xfinal,Yfinal,Wall],MyReply):-
-checkMov(P,B,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB), !, MyReply is 1.
+checkMov(Player,Board,Xinicial,Yinicial,Xfinal,Yfinal,Wall,FinalB), !, MyReply is 1.
 
 parse_input([movePiece, Board, Player, Xinicial,Yinicial,Xfinal,Yfinal,Wall],0).
 

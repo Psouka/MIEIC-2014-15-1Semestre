@@ -135,15 +135,15 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	else
 		message << ",'B',";
 
-	message << to_string(xi) << ",";
+	message << xi << ",";
 
-	message <<  to_string(yi) << ",";
+	message <<  yi << ",";
 
-	message <<  to_string(xf) << ",";
+	message <<  xf << ",";
 
-	message <<  to_string(yf) << ",";
+	message <<  yf << ",";
 
-	message << to_string(wall)  << "]";
+	message << wall  << "]";
 	
 
 	string response = this->socket->sendMessage(message.str());

@@ -211,7 +211,7 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			}
 			else if(Scene->GameScene->checkMove(2*inicial_move_x,2*inicial_move_y,2*selected[0],2*selected[1],Scene->wallPosition))
 			{
-				Scene->GameScene->movePiece(2*inicial_move_x,2*inicial_move_y,2*selected[0],2*selected[1],Scene->wallPosition);
+				Scene->GameScene->movePiece(inicial_move_x,inicial_move_y,selected[0],selected[1],Scene->wallPosition);
 				inicial_move_x = -1;
 				inicial_move_y = -1;
 			}
