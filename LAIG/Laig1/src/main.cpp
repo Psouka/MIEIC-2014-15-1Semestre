@@ -3,6 +3,7 @@
 #include <stdlib.h> 
 ANFScene *Scene;
 void _exit(){
+	if(Scene->GameScene->getSocket()->isActive())
 	Scene->GameScene->getSocket()->sendMessage("quit");
 }
 

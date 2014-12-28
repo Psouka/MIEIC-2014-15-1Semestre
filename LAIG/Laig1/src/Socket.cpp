@@ -29,11 +29,13 @@ Socket::Socket() {
 
     if (connect(m_socket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR) {
         printf("Client: connect() - Failed to connect.\n");
+		active = false;
         WSACleanup();
     }
     else {
        printf("Client: connect() is OK.\n");
        printf("Client: Can start sending and receiving data...\n");
+	   active = true;
     }
 
     // Send and receive data.
@@ -53,11 +55,9 @@ string Socket::sendMessage(string message) {
 
 	string answer = "";
 
-	while (true) {
-		char buffer;
+	char buffer = '_';
+	while (buffer != '\n') {
 		recv(m_socket, &buffer, 1, 0);
-		if (buffer == '\n')
-			break;
 		answer += buffer;
 	}
 	return answer;
@@ -65,4 +65,8 @@ string Socket::sendMessage(string message) {
 
 Socket::~Socket() {
 	sendMessage("quit");
+}
+
+bool Socket::isActive(){
+	return active;
 }

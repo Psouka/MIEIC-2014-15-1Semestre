@@ -55,15 +55,13 @@ bool Game::checkPiece(unsigned int x,unsigned int y){
 
 	message << x << ",";
 
-	message << x << "]";
+	message << y << "]";
 	
-	printf("Sent: %s\n",message.str());
 
 	string response = this->socket->sendMessage(message.str());
 
-	printf("Received: %s\n",response);
 
-	return atoi(response.c_str()) == 1;
+	return response == "1.\r\n";
 }
 
 bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned int yf,unsigned int wall){
@@ -91,5 +89,5 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 
 	string response = this->socket->sendMessage(message.str());
 
-	return atoi(response.c_str()) == 1;
+	return response == "1.\r\n";
 }
