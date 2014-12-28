@@ -48,7 +48,7 @@ void Game::addPiece(unsigned int x,unsigned int y){
 	point[2] = 0;
 	cPoint.push_back(point);
 
-	GameBoard->playerPlay.animPiece = new LinearAnimation("Piece",1.5, cPoint);
+	GameBoard->playerPlay.animPiece = new LinearAnimation("Piece",0.7, cPoint);
 
 	delete(GameBoard->playerPlay.animWall);
 	GameBoard->playerPlay.animWall = new NoAnimation();
