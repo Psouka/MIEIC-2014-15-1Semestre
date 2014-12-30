@@ -238,10 +238,10 @@ void Board::update(unsigned long t){
 	if(playerPlay.wallFalling)
 		playerPlay.animWall->update(t);
 
-	if(playerPlay.animPiece->getStop())
+	if(playerPlay.animPiece->getStop() && playerPlay.active)
 		startWall();
 
-	if(playerPlay.animWall->getStop())
+	if(playerPlay.animWall->getStop() && playerPlay.wallFalling)
 		endPlay();
 }
 
@@ -333,14 +333,8 @@ void Board:: endPlay(){
 		break;
 
 	}
-	
-	delete(playerPlay.animPiece);
-	playerPlay.animPiece = new NoAnimation();
-	
-	delete(playerPlay.animWall);
-	playerPlay.animWall = new NoAnimation();
-}
 
+}
 
 void Board::resetBoard(){
 	vector<vector< char > > item ( 13,vector<char> ( 13, '0' ) );
@@ -366,4 +360,35 @@ bool Board::isPlaying(){
 }
 
 void Board::undo(){
+
+	if(playerPlay.wall == 0)
+	{
+		board[2*playerPlay.col][2*playerPlay.line] = '0';
+	}
+	else
+	{
+		vector<float> t = playerPlay.animPiece->getFinalPos();
+		char oldchar = board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)];
+		board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)] = '0';
+
+		board[2*(playerPlay.col)][2*(playerPlay.line)] = oldchar;
+		char asd;
+		switch(playerPlay.wall){
+		case 1:
+			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7) -1] = ' ';
+			break;
+		case 2:
+			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7) +1] = ' ';
+			break;
+		case 3:
+			board[2*(playerPlay.col+t[0]*7)-1][2*(playerPlay.line+t[1]*7)] = ' ';
+			break;
+		case 4:
+			board[2*(playerPlay.col+t[0]*7)+1][2*(playerPlay.line+t[1]*7)] = ' ';
+			break;
+
+		}
+
+
+	}
 }

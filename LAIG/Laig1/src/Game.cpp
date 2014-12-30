@@ -5,6 +5,7 @@ Game::Game(){
 	socket = new Socket();
 	player = 1;
 	endGame = false;
+	undoDone = false;
 }
 
 void Game::nextPlayer() {
@@ -37,6 +38,7 @@ Game :: ~Game(void){
 
 void Game::addPiece(unsigned int x,unsigned int y){
 	GameBoard->playerPlay.active = true;
+	GameBoard->playerPlay.wallFalling = false;
 	GameBoard->playerPlay.wall = 0;
 
 	delete(GameBoard->playerPlay.animPiece);
@@ -61,7 +63,8 @@ void Game::addPiece(unsigned int x,unsigned int y){
 
 	GameBoard->playerPlay.col = x;
 	GameBoard->playerPlay.line = y;
-
+	
+	undoDone = false;
 	nextPlayer();
 }
 
@@ -110,6 +113,8 @@ void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	GameBoard->playerPlay.line = yi;
 
 	GameBoard->board[2*xi][2*yi] = '0';
+
+	undoDone = false;
 	nextPlayer();
 }
 
@@ -190,5 +195,9 @@ bool Game::isActive(){
 }
 
 void Game::undo(){
-	return GameBoard->undo();
+	if(!undoDone)
+	{
+		GameBoard->undo();
+		previousPlayer();
+	}
 }

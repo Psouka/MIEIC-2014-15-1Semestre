@@ -12,6 +12,7 @@ class Game
 	Socket* socket;
 	int player;
 	bool endGame;
+	bool undoDone;
 public:
 	Game();
 	~Game(void);
