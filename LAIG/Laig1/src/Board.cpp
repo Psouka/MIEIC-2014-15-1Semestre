@@ -313,7 +313,7 @@ void Board::startWall(){
 
 }
 
-void Board:: endPlay(){
+void Board::endPlay(){
 	playerPlay.wallFalling = false;
 	vector<float> t = playerPlay.animPiece->getFinalPos();
 
@@ -372,7 +372,7 @@ void Board::undo(){
 		board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)] = '0';
 
 		board[2*(playerPlay.col)][2*(playerPlay.line)] = oldchar;
-		char asd;
+
 		switch(playerPlay.wall){
 		case 1:
 			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7) -1] = ' ';

@@ -198,6 +198,6 @@ void Game::undo(){
 	if(!undoDone)
 	{
 		GameBoard->undo();
-		previousPlayer();
+		nextPlayer();
 	}
 }
