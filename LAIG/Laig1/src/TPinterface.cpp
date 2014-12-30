@@ -103,7 +103,21 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		Scene->setGlobalWind();
 		break;
 	case 5:
-		printf("\nPlay Mode Changed");
+		if(Scene->GameScene->isActive())
+		{
+			Scene->play_Mode = -1;
+			printf("\nPlaying");
+		}
+		else
+		{
+			Scene->GameScene->checkGame();
+			if(Scene->GameScene->gameState())
+			{
+			Scene->play_Mode = -1;
+			printf("\nGame Over");
+			}
+			printf("\nPlay Mode Changed");
+		}
 		break;
 	case 6:
 		printf("\nWall position Changed");

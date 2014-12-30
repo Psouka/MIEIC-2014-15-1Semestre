@@ -573,7 +573,7 @@ parse_input([movePiece, Board, Player, Xinicial,Yinicial,Xfinal,Yfinal,Wall],0).
 
 
 parse_input([gameOver, Board], MyReply):-
-  checkEndGame(B,0,0),!, getWinner(B,0,0,0,0,MyReply).
+  checkEndGame(Board,0,0),!, getWinner(Board,0,0,0,0,MyReply),!.
 
 parse_input([gameOver, Board], 0).
 

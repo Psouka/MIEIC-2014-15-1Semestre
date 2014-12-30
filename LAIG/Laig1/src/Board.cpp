@@ -297,3 +297,7 @@ void Board::resetBoard(){
 
 		this->board = item;
 }
+
+bool Board::isPlaying(){
+	return playerPlay.active;
+}

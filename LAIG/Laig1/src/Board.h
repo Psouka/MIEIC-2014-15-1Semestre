@@ -37,6 +37,7 @@ public:
 	Appearance* getPalyerApp(unsigned int  p);
 	void resetPlay();
 	void resetBoard();
+	bool isPlaying();
 };
 
 #endif

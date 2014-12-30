@@ -163,7 +163,7 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	return response == "1.\r\n";
 }
 
-char Game::checkGame(){
+void Game::checkGame(){
 
 	stringstream message;
 
@@ -174,9 +174,18 @@ char Game::checkGame(){
 
 	string response = this->socket->sendMessage(message.str());
 
-	return response.at(0);
+ if(response.find("0") == string::npos)
+ {
+	 cout << "\nThe winner is the player " << response.at(1) << ".";
+	 endGame = true;
+ }
 }
 
 bool Game::gameState(){
 	return endGame;
+}
+
+
+bool Game::isActive(){
+	return GameBoard->isPlaying();
 }
