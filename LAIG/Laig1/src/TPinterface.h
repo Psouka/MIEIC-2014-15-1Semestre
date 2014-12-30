@@ -10,7 +10,7 @@ class TPinterface: public CGFinterface {
 	std::vector<Light *> lights;
 	std::vector<Camera *> cameras;
 	int inicial_move_x,inicial_move_y;
-
+	GLUI_StaticText* messageDisplay;
 public:
 	~TPinterface();
 	TPinterface();
@@ -20,6 +20,7 @@ public:
 	virtual void processMouse(int button, int state, int x, int y);	
 	void performPicking(int x, int y);
 	void processHits(GLint hits, GLuint buffer[]); 
+	void updateMessage();
     
     int testVar;
 	

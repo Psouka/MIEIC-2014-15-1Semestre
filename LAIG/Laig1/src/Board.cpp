@@ -386,9 +386,7 @@ void Board::undo(){
 		case 4:
 			board[2*(playerPlay.col+t[0]*7)+1][2*(playerPlay.line+t[1]*7)] = ' ';
 			break;
-
 		}
-
 
 	}
 }

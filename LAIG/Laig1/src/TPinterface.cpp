@@ -63,6 +63,9 @@ void TPinterface::initGUI() {
 
 
 	GLUI_Panel * movPanel = addPanel("Mov: ", 1);
+
+	messageDisplay = addStaticTextToPanel(movPanel, "Player A");
+
 	GLUI_RadioGroup *modeGame = addRadioGroupToPanel(movPanel,&Scene->play_Mode,5);
 
 	addRadioButtonToGroup(modeGame, "New Piece");
@@ -110,11 +113,11 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		}
 		else
 		{
-			Scene->GameScene->checkGame();
-			if(Scene->GameScene->gameState())
+			string m;
+			if((m = Scene->GameScene->checkGame()) != "")
 			{
 			Scene->play_Mode = -1;
-			printf("\nGame Over");
+			messageDisplay->set_text(m.c_str());
 			}
 			else
 			printf("\nPlay Mode Changed");
@@ -127,10 +130,12 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		printf("\nNew Game");
 		Scene->play_Mode = -1;
 		Scene->GameScene->newGame();
+		updateMessage();
 		break;
 	case 8:
 		printf("\n Undo");
 		Scene->GameScene->undo();
+		updateMessage();
 		break;
 	default:
 		break;
@@ -237,6 +242,7 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			{
 				Scene->GameScene->addPiece(selected[0],selected[1]);
 				Scene->play_Mode = -1;
+				updateMessage();
 			}
 		}
 		else if(Scene->play_Mode == 1){
@@ -251,6 +257,7 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 				Scene->play_Mode = -1;
 				inicial_move_x = -1;
 				inicial_move_y = -1;
+				updateMessage();
 			}
 			else
 			{
@@ -261,4 +268,15 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 
 
 	}
+}
+
+void TPinterface::updateMessage(){
+
+	if(Scene->GameScene->gameState())
+		return;
+
+	if(Scene->GameScene->getPlayer())
+	messageDisplay->set_text("Player A");
+	else
+	messageDisplay->set_text("Player B");
 }

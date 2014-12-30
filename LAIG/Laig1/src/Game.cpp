@@ -21,6 +21,7 @@ void Game::previousPlayer() {
 void Game::newGame(){
 	player = 1;
 	undoDone = true;
+	endGame = false;
 	GameBoard->resetBoard();
 }
 
@@ -169,7 +170,7 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	return response == "1.\r\n";
 }
 
-void Game::checkGame(){
+string Game::checkGame(){
 
 	stringstream message;
 
@@ -179,12 +180,16 @@ void Game::checkGame(){
 	
 
 	string response = this->socket->sendMessage(message.str());
-
+	string retorno = "";
  if(response.find("0") == string::npos)
  {
-	 cout << "\nThe winner is the player " << response.at(1) << ".";
+	 retorno += "\nPlayer ";
+	 retorno +=response.at(1);
+	 retorno +=" Won";
 	 endGame = true;
  }
+
+ return retorno;
 }
 
 bool Game::gameState(){
@@ -202,4 +207,8 @@ void Game::undo(){
 		nextPlayer();
 		undoDone = true;
 	}
+}
+
+int Game::getPlayer(){
+	return player;
 }
