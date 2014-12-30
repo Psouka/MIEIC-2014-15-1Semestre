@@ -185,7 +185,10 @@ bool Game::gameState(){
 	return endGame;
 }
 
-
 bool Game::isActive(){
 	return GameBoard->isPlaying();
+}
+
+void Game::undo(){
+	return GameBoard->undo();
 }

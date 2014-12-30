@@ -27,6 +27,7 @@ public:
 	Board* getBoard();
 	Socket* getSocket();
 	bool isActive();
+	void undo();
 
 };
 

@@ -12,6 +12,7 @@ typedef struct {
 	Animation * animPiece;
 	Animation * animWall;
 	bool active;
+	bool wallFalling;
 	int wall;
    
 } Play;
@@ -35,9 +36,11 @@ public:
 	void update(unsigned long t);
 	string getBoardString();
 	Appearance* getPalyerApp(unsigned int  p);
-	void resetPlay();
+	void startWall();
+	void endPlay();
 	void resetBoard();
 	bool isPlaying();
+	void undo();
 };
 
 #endif

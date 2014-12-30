@@ -56,6 +56,7 @@ Board::Board()
 		this->board = item;
 
 		playerPlay.active = false;
+		playerPlay.wallFalling = false;
 		playerPlay.wall = 0;
 		playerPlay.Player = PlayerA;
 
@@ -195,6 +196,37 @@ void Board::draw(Texture* t)
 		glPopMatrix();
 	}
 
+
+	if(playerPlay.wallFalling){
+		vector<float> temp = playerPlay.animPiece->getFinalPos();
+		float wallX = (playerPlay.col+temp[0]*7)/nSpaces, wallY= (playerPlay.line+temp[1]*7)/nSpaces;
+
+		glPushMatrix();
+
+		switch(playerPlay.wall){
+		case 1:
+			glTranslated(wallX, wallY-0.07, -0.1);
+			break;
+		case 2:
+			glTranslated(wallX, wallY+0.07, -0.1);
+			break;
+		case 3:
+			glRotated(90, 0, 0, 1);
+			glTranslated(wallY, -wallX+0.07, -0.1);
+			break;
+		case 4:
+			glRotated(90, 0, 0, 1);
+			glTranslated(wallY, -wallX-0.07, -0.1);
+			break;
+
+		}
+		glScaled(0.13,0.02,0.13);
+		playerPlay.animWall->apply();
+		wallApp->apply();
+		wall->draw(t);
+		glPopMatrix();
+
+	}
 	glPopMatrix();
 }
 
@@ -203,11 +235,14 @@ void Board::update(unsigned long t){
 	if(playerPlay.active)
 		playerPlay.animPiece->update(t);
 
-	playerPlay.animWall->update(t);
+	if(playerPlay.wallFalling)
+		playerPlay.animWall->update(t);
 
 	if(playerPlay.animPiece->getStop())
-		resetPlay();
+		startWall();
 
+	if(playerPlay.animWall->getStop())
+		endPlay();
 }
 
 string Board::getBoardString() {
@@ -250,7 +285,7 @@ Appearance* Board::getPalyerApp(unsigned int p){
 		return PlayerB;
 }
 
-void Board::resetPlay(){
+void Board::startWall(){
 
 	if(playerPlay.active && playerPlay.wall == 0)
 	{
@@ -258,6 +293,8 @@ void Board::resetPlay(){
 			board[2*playerPlay.col][2*playerPlay.line] = 'A';
 		else if(playerPlay.Player->getAppId() == "PlayerB")
 			board[2*playerPlay.col][2*playerPlay.line] = 'B';
+
+		playerPlay.wallFalling = false;
 
 	}
 	if(playerPlay.active)
@@ -269,15 +306,41 @@ void Board::resetPlay(){
 		else if(playerPlay.Player->getAppId() == "PlayerB")
 			board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7)] = 'B';
 
+		playerPlay.wallFalling = true;
 	}
 
 	playerPlay.active = false;
 
-	playerPlay.wall = 0;
+}
+
+void Board:: endPlay(){
+	playerPlay.wallFalling = false;
+	vector<float> t = playerPlay.animPiece->getFinalPos();
+
+	switch(playerPlay.wall){
+
+	case 1:
+		board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7) -1] = '-';
+		break;
+	case 2:
+		board[2*(playerPlay.col+t[0]*7)][2*(playerPlay.line+t[1]*7) +1] = '-';
+		break;
+	case 3:
+		board[2*(playerPlay.col+t[0]*7)-1][2*(playerPlay.line+t[1]*7)] = '|';
+		break;
+	case 4:
+		board[2*(playerPlay.col+t[0]*7)+1][2*(playerPlay.line+t[1]*7)] = '|';
+		break;
+
+	}
+	
 	delete(playerPlay.animPiece);
 	playerPlay.animPiece = new NoAnimation();
-
+	
+	delete(playerPlay.animWall);
+	playerPlay.animWall = new NoAnimation();
 }
+
 
 void Board::resetBoard(){
 	vector<vector< char > > item ( 13,vector<char> ( 13, '0' ) );
@@ -299,5 +362,8 @@ void Board::resetBoard(){
 }
 
 bool Board::isPlaying(){
-	return playerPlay.active;
+	return playerPlay.active || playerPlay.wallFalling;
+}
+
+void Board::undo(){
 }

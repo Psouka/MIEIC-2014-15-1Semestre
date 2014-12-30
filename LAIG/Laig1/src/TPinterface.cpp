@@ -59,7 +59,7 @@ void TPinterface::initGUI() {
 
 	addColumn();
 
-	 addButton((char*)"New Game", 7);
+	addButton((char*)"New Game", 7);
 
 
 	GLUI_Panel * movPanel = addPanel("Mov: ", 1);
@@ -67,7 +67,7 @@ void TPinterface::initGUI() {
 
 	addRadioButtonToGroup(modeGame, "New Piece");
 	addRadioButtonToGroup(modeGame, "Move Piece");
-
+	addButton((char*)"Undo", 8);
 
 	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
 	GLUI_Listbox * wallList = addListboxToPanel(movPiece, (char*)"", &(Scene->wallPosition), 6);
@@ -116,6 +116,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			Scene->play_Mode = -1;
 			printf("\nGame Over");
 			}
+			else
 			printf("\nPlay Mode Changed");
 		}
 		break;
@@ -124,7 +125,12 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		break;
 	case 7:
 		printf("\nNew Game");
+		Scene->play_Mode = -1;
 		Scene->GameScene->newGame();
+		break;
+	case 8:
+		printf("\n Undo");
+		Scene->GameScene->undo();
 		break;
 	default:
 		break;
