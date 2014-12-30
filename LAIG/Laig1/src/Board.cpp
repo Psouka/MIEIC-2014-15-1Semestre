@@ -202,8 +202,6 @@ void Board::update(unsigned long t){
 
 	if(playerPlay.active)
 		playerPlay.animPiece->update(t);
-	else
-		return;
 
 	playerPlay.animWall->update(t);
 
@@ -279,4 +277,23 @@ void Board::resetPlay(){
 	delete(playerPlay.animPiece);
 	playerPlay.animPiece = new NoAnimation();
 
+}
+
+void Board::resetBoard(){
+	vector<vector< char > > item ( 13,vector<char> ( 13, '0' ) );
+
+	for(unsigned int i = 0; i < item.size(); i++)
+		for(unsigned int a = 0; a < item[i].size(); a++)
+		{
+			if(i % 2 != 0)
+				item[i][a] = ' ';
+			else if(a % 2 != 0)
+				item[i][a] = ' ';
+
+		}
+
+		item[0][6] = 'A';
+		item[12][6] = 'B';
+
+		this->board = item;
 }

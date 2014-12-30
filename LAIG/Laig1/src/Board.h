@@ -36,6 +36,7 @@ public:
 	string getBoardString();
 	Appearance* getPalyerApp(unsigned int  p);
 	void resetPlay();
+	void resetBoard();
 };
 
 #endif

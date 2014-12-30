@@ -6,6 +6,8 @@
 
 ANFScene::ANFScene(char *filename): CGFscene() {
 	GameScene = new Game();
+
+	play_Mode = -1;
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 

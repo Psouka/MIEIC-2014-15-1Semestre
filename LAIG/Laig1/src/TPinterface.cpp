@@ -58,6 +58,10 @@ void TPinterface::initGUI() {
 	GLUI_Spinner* winrot =addSpinnerToPanel( windPanel,"",  2, &(Scene->globalWind), 4);
 
 	addColumn();
+
+	 addButton((char*)"New Game", 7);
+
+
 	GLUI_Panel * movPanel = addPanel("Mov: ", 1);
 	GLUI_RadioGroup *modeGame = addRadioGroupToPanel(movPanel,&Scene->play_Mode,5);
 
@@ -104,12 +108,21 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 	case 6:
 		printf("\nWall position Changed");
 		break;
+	case 7:
+		printf("\nNew Game");
+		Scene->GameScene->newGame();
+		break;
+	default:
+		break;
 	}
 }
 
 void TPinterface::processMouse(int button, int state, int x, int y) 
 {
 	CGFinterface::processMouse(button,state, x, y);
+
+	if(Scene->play_Mode == -1 || Scene->GameScene->gameState())
+		return;
 
 	// do picking on mouse press (GLUT_DOWN)
 	// this could be more elaborate, e.g. only performing picking when there is a click (DOWN followed by UP) on the same place
@@ -201,7 +214,10 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 
 		if(Scene->play_Mode == 0){
 			if(Scene->GameScene->checkPiece(2*selected[0],2*selected[1]))
+			{
 				Scene->GameScene->addPiece(selected[0],selected[1]);
+				Scene->play_Mode = -1;
+			}
 		}
 		else if(Scene->play_Mode == 1){
 			if(inicial_move_x == -1)
@@ -212,6 +228,7 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			else if(Scene->GameScene->checkMove(2*inicial_move_x,2*inicial_move_y,2*selected[0],2*selected[1],Scene->wallPosition))
 			{
 				Scene->GameScene->movePiece(inicial_move_x,inicial_move_y,selected[0],selected[1],Scene->wallPosition);
+				Scene->play_Mode = -1;
 				inicial_move_x = -1;
 				inicial_move_y = -1;
 			}
