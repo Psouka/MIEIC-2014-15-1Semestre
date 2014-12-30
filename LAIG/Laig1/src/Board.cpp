@@ -297,7 +297,7 @@ void Board::startWall(){
 		playerPlay.wallFalling = false;
 
 	}
-	if(playerPlay.active)
+	else if(playerPlay.active)
 	{
 		vector<float> t = playerPlay.animPiece->getFinalPos();
 
