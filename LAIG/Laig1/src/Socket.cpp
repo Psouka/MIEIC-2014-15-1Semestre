@@ -54,12 +54,13 @@ string Socket::sendMessage(string message) {
 	}
 
 	string answer = "";
+	char buffer;
 
-	char buffer = '_';
-	while (buffer != '\n') {
+	do {
 		recv(m_socket, &buffer, 1, 0);
 		answer += buffer;
-	}
+	}while (buffer != '\n');
+	
 	return answer;
 }
 

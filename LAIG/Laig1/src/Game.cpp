@@ -5,7 +5,7 @@ Game::Game(){
 	socket = new Socket();
 	player = 1;
 	endGame = false;
-	undoDone = false;
+	undoDone = true;
 }
 
 void Game::nextPlayer() {
@@ -20,6 +20,7 @@ void Game::previousPlayer() {
 
 void Game::newGame(){
 	player = 1;
+	undoDone = true;
 	GameBoard->resetBoard();
 }
 
@@ -199,5 +200,6 @@ void Game::undo(){
 	{
 		GameBoard->undo();
 		nextPlayer();
+		undoDone = true;
 	}
 }
