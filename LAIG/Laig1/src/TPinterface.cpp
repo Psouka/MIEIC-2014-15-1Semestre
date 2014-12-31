@@ -82,7 +82,6 @@ void TPinterface::initGUI() {
 	addRadioButtonToGroup(modeGame, "New Piece");
 	addRadioButtonToGroup(modeGame, "Move Piece");
 
-	addButton((char*)"Undo", 8);
 
 	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
 
@@ -93,6 +92,8 @@ void TPinterface::initGUI() {
 	wallList->add_item (3, "West");
 	wallList->add_item (4, "East");
 
+
+	addButton((char*)"Undo", 8);
 	addColumn();
 
 	GLUI_Panel * graphPanel = addPanel( (char*)"Scene");
