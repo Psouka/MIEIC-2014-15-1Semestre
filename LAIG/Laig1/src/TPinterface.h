@@ -11,7 +11,7 @@ class TPinterface: public CGFinterface {
 	vector<Camera *> cameras;
 	int inicial_move_x,inicial_move_y;
 	GLUI_StaticText* messageDisplay;
-
+	int graph;
 	vector<Graph*> Graphs;
 public:
 	~TPinterface();

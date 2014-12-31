@@ -4,7 +4,7 @@
     <culling face="back" order="ccw"/>
     <lighting enabled="true" local="true" doublesided="false" ambient="0.3 0.3 0.3 1"/>
   </globals>
-
+<!--
   <cameras initial="Player 1">
     <perspective id="Player 1" near="0.1" far="50.0" angle="90.0" pos="7 7.5  8.5" target="8.5 4.35 8.5" />
     <perspective id="Player 2" near="0.1" far="50.0" angle="90.0" pos="9.5 7.5  8.5" target="8.5 4.35 8.5" />
@@ -13,7 +13,8 @@
     <ortho id="y-vision" direction="y" near="-15" far="50" left="-5" right="15" top="15" bottom="-5" />
     <ortho id="z-vision" direction="z" near="-15" far="50" left="-5" right="15" top="15" bottom="-5" />
   </cameras>
-
+  -->
+<!--
   <lights>
     <light id="room" type="omni" enabled="true" pos="8.5 10 8.5" marker="true">
       <component type="ambient" value="1 1 1 1" />
@@ -21,11 +22,11 @@
       <component type="specular" value="1 1 1 1" />
     </light>
   </lights>
-
+-->
   <textures>
-    <texture id="texture_floor" file="textures/floor2.jpg" texlength_s="6" texlength_t="6" />
+    <texture id="texture_floor" file="textures/floor.jpg" texlength_s="6" texlength_t="6" />
     <texture id="texture_walls" file="textures/wall.jpg" texlength_s="1" texlength_t="1" />
-    <texture id="texture_wood" file="textures/wood2.jpg" texlength_s="1" texlength_t="1" />
+    <texture id="texture_wood" file="textures/wood.jpg" texlength_s="1" texlength_t="1" />
   </textures>
 
   <appearances>
@@ -173,7 +174,7 @@
   </node>
   <node id="table_leg_LB">
     <transforms>
-      <transform type="translate" to="-2 1.75 -1.75" />
+      <transform type="translate" to="-3.25 1.75 -1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -183,7 +184,7 @@
   </node>
   <node id="table_leg_RB">
     <transforms>
-      <transform type="translate" to="2 1.75 -1.75" />
+      <transform type="translate" to="3.25 1.75 -1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -193,7 +194,7 @@
   </node>
   <node id="table_leg_LF">
     <transforms>
-      <transform type="translate" to="-2 1.75 1.75" />
+      <transform type="translate" to="-3.25 1.75 1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -203,7 +204,7 @@
   </node>
   <node id="table_leg_RF">
     <transforms>
-      <transform type="translate" to="2 1.75 1.75" />
+      <transform type="translate" to="3.25 1.75 1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -214,7 +215,7 @@
   <node id="table_topped">
     <transforms>
       <transform type="translate" to="0 3.5 0" />
-      <transform type="scale" factor="5 0.5 5" />
+      <transform type="scale" factor="8 0.5 5" />
     </transforms>
     <appearanceref id="inherit" />
     <descendants>

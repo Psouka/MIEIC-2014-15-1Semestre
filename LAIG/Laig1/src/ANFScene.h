@@ -24,6 +24,7 @@ public:
 	ANFScene(char *filename);
 	~ANFScene();
 	static TiXmlElement *findChildByAttribute(TiXmlElement *parent,const char * attr, const char *val);
+	void parse(char *filename);
 	int parseGlobals();
 	int parseCameras();
 	int parseLights();
@@ -44,6 +45,8 @@ public:
 	vector <Camera*> getCameras();
 	void changeCamera();
 	void setGlobalWind();
+	Graph* getGraph();
+	void setGraph(Graph* g);
 
 protected:
 	vector <Camera*> cameras;

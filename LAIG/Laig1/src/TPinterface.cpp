@@ -20,6 +20,18 @@ TPinterface::TPinterface(ANFScene* S): CGFinterface() {
 	testVar=0;
 	Scene = S;
 	inicial_move_x = inicial_move_y = -1;
+	Graphs.push_back(Scene->getGraph());
+
+	Scene->parse("room2.anf");
+	Graphs.push_back(Scene->getGraph());
+
+	Scene->parse("room3.anf");
+	Graphs.push_back(Scene->getGraph());
+
+	Scene->setGraph(Graphs[0]);
+
+	graph = 0;
+
 }
 
 void TPinterface::initGUI() {
@@ -81,6 +93,15 @@ void TPinterface::initGUI() {
 	wallList->add_item (2, "South");
 	wallList->add_item (3, "West");
 	wallList->add_item (4, "East");
+
+	addColumn();
+
+	GLUI_Panel * graphPanel = addPanel( (char*)"Draw Mode");
+	GLUI_Listbox * graphList = addListboxToPanel(graphPanel, (char*)"", &(graph), 9);
+
+	graphList->add_item (0, "Room 1");
+	graphList->add_item (1, "Room 2");
+	graphList->add_item (2, "Room 3");
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -137,6 +158,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		printf("\n Undo");
 		Scene->GameScene->undo();
 		updateMessage();
+		break;
+	case 9:
+		Scene->setGraph(Graphs[graph]);
 		break;
 	default:
 		break;

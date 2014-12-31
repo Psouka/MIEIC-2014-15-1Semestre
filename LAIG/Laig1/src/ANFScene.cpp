@@ -5,8 +5,14 @@
 #include <time.h>
 
 ANFScene::ANFScene(char *filename): CGFscene() {
-	
-	doc=new TiXmlDocument( filename );
+	parse(filename);
+	GameScene = new Game();
+	play_Mode = -1;
+	globalWind = 10;
+}
+
+void ANFScene::parse(char *filename){
+		doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
 	if ( !loadOkay )
@@ -1285,13 +1291,7 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 
 void ANFScene::init() {
 
-	GameScene = new Game();
-
-	play_Mode = -1;
-
 	srand((time(NULL)));
-
-	globalWind = 10;
 
 	if(ANFGlobals.enabled)
 		glEnable(GL_LIGHTING);
@@ -1526,4 +1526,12 @@ void ANFScene::process(Node* node,Appearance * app) {
 			glPopMatrix();
 		}
 	}
+}
+
+Graph* ANFScene::getGraph(){
+	return ANFGraph;
+}
+
+void ANFScene::setGraph(Graph* g){
+	this->ANFGraph = g;
 }
