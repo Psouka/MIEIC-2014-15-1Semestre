@@ -1427,7 +1427,6 @@ void ANFScene::display() {
 
 	Texture * temp = new Texture("NULL");
 	GameScene->getBoard()->draw(temp);
-
 	delete(temp);
 
 	glutSwapBuffers();

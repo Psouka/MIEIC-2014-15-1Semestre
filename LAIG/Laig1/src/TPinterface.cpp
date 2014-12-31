@@ -28,9 +28,8 @@ TPinterface::TPinterface(ANFScene* S): CGFinterface() {
 	Scene->parse("room3.anf");
 	Graphs.push_back(Scene->getGraph());
 
-	Scene->setGraph(Graphs[0]);
-
 	graph = 0;
+	Scene->setGraph(Graphs[graph]);
 
 }
 
@@ -160,6 +159,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		updateMessage();
 		break;
 	case 9:
+		printf("\n Room Changed");
 		Scene->setGraph(Graphs[graph]);
 		break;
 	default:
