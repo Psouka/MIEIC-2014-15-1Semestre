@@ -25,7 +25,7 @@
   <textures>
     <texture id="texture_floor" file="textures/floor2.jpg" texlength_s="6" texlength_t="6" />
     <texture id="texture_walls" file="textures/wall.jpg" texlength_s="1" texlength_t="1" />
-    <texture id="texture_wood" file="textures/wood.jpg" texlength_s="1" texlength_t="1" />
+    <texture id="texture_wood" file="textures/wood2.jpg" texlength_s="1" texlength_t="1" />
   </textures>
 
   <appearances>
@@ -65,8 +65,6 @@
         <noderef id="table" />
         <noderef id="chairP1" />
         <noderef id="chairP2" />
-        <noderef id="flagstick"/>
-        <noderef id="flagFEUP"/>
       </descendants> 
     </node>
     <node id="chairP2">
@@ -175,7 +173,7 @@
   </node>
   <node id="table_leg_LB">
     <transforms>
-      <transform type="translate" to="-3.25 1.75 -1.75" />
+      <transform type="translate" to="-2 1.75 -1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -185,7 +183,7 @@
   </node>
   <node id="table_leg_RB">
     <transforms>
-      <transform type="translate" to="3.25 1.75 -1.75" />
+      <transform type="translate" to="2 1.75 -1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -195,7 +193,7 @@
   </node>
   <node id="table_leg_LF">
     <transforms>
-      <transform type="translate" to="-3.25 1.75 1.75" />
+      <transform type="translate" to="-2 1.75 1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -205,7 +203,7 @@
   </node>
   <node id="table_leg_RF">
     <transforms>
-      <transform type="translate" to="3.25 1.75 1.75" />
+      <transform type="translate" to="2 1.75 1.75" />
       <transform type="scale" factor="0.5 3.5 0.5" />
     </transforms>
     <appearanceref id="inherit" />
@@ -216,7 +214,7 @@
   <node id="table_topped">
     <transforms>
       <transform type="translate" to="0 3.5 0" />
-      <transform type="scale" factor="8 0.5 5" />
+      <transform type="scale" factor="5 0.5 5" />
     </transforms>
     <appearanceref id="inherit" />
     <descendants>
@@ -380,29 +378,6 @@
     </primitives>
     <descendants>
     </descendants>
-  </node>
-  <node id="flagFEUP">
-    <transforms>
-      <transform type="translate" to="7.7 5.5 3.2" />
-      <transform type="rotate" axis="z" angle="180.0"/>
-      <transform type="rotate" axis="x" angle="90.0"/>
-      <transform type="scale" factor="1.5 1 1" />
-    </transforms>
-    <appearanceref id="default" />
-    <primitives>         
-      <flag texture="flag.jpg" />
-    </primitives>
-  </node>
-
-  <node id="flagstick">
-    <transforms>
-      <transform type="translate" to="8.5 6 3.1" />
-      <transform type="rotate" axis="x" angle="90.0"/>
-    </transforms>
-    <appearanceref id="default" />
-    <primitives>        
-      <cylinder base="0.1" top="0.1" height="6" slices="10" stacks="10" />  
-    </primitives>
   </node>
 </graph>
 

@@ -7,10 +7,12 @@
 class TPinterface: public CGFinterface {
 
 	ANFScene *Scene;
-	std::vector<Light *> lights;
-	std::vector<Camera *> cameras;
+	vector<Light *> lights;
+	vector<Camera *> cameras;
 	int inicial_move_x,inicial_move_y;
 	GLUI_StaticText* messageDisplay;
+
+	vector<Graph*> Graphs;
 public:
 	~TPinterface();
 	TPinterface();

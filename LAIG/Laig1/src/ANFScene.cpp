@@ -5,9 +5,7 @@
 #include <time.h>
 
 ANFScene::ANFScene(char *filename): CGFscene() {
-	GameScene = new Game();
-
-	play_Mode = -1;
+	
 	doc=new TiXmlDocument( filename );
 	bool loadOkay = doc->LoadFile();
 
@@ -1286,6 +1284,10 @@ TiXmlElement *ANFScene::findChildByAttribute(TiXmlElement *parent,const char * a
 }
 
 void ANFScene::init() {
+
+	GameScene = new Game();
+
+	play_Mode = -1;
 
 	srand((time(NULL)));
 
