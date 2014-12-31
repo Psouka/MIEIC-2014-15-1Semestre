@@ -1200,6 +1200,8 @@ int ANFScene::parseGraph() {
 			nodeElement = nodeElement->NextSiblingElement();
 		} 
 	}
+
+	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
 	return 0;
 }
 
@@ -1321,7 +1323,7 @@ void ANFScene::init() {
 
 	changeCamera();
 
-	FillChildren(ANFGraph->getGraph()[ANFGraph->getRoot()]);
+	
 
 	setUpdatePeriod(60);
 

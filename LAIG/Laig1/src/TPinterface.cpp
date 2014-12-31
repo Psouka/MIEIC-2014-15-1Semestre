@@ -96,7 +96,7 @@ void TPinterface::initGUI() {
 
 	addColumn();
 
-	GLUI_Panel * graphPanel = addPanel( (char*)"Draw Mode");
+	GLUI_Panel * graphPanel = addPanel( (char*)"Scene");
 	GLUI_Listbox * graphList = addListboxToPanel(graphPanel, (char*)"", &(graph), 9);
 
 	graphList->add_item (0, "Room 1");
