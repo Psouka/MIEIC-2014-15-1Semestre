@@ -239,7 +239,7 @@ string Game::checkGame(){
 			board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7)] = 'A';
 		else if(GameBoard->playerPlay.Player->getAppId() == "PlayerB")
 			board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7)] = 'B';
-	}
+	
 
 	vector<float> t = GameBoard->playerPlay.animPiece->getFinalPos();
 
@@ -260,7 +260,7 @@ string Game::checkGame(){
 
 	}
 
-
+	}
 	stringstream boardString;
 	boardString << "[";
 
