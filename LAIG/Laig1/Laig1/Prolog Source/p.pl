@@ -25,35 +25,49 @@ board(
 %------------------------------------------------------------------------
 %BotPlay
 
+% random(+X, +Y, -List)
 creatBotC(X,Y,[X,Y]).
 creatBotP(X,Y,[[X,Y]]).
 
+checkTopNear(B,X,Y,N):-Ny is Y - 1, elementAt(B,Elem,X,Ny),!,Elem \= 0,!,N is 1.
+checkTopNear(_,_,_,0).
 
-checkTopNear(B,X,Y,N):-Ny is Y - 1, elementAt(B,Elem,X,Ny),!,Elem == 0,!,N is 0.
-checkBotNear(B,X,Y,N).            
-checkLeftNear(B,X,Y,N).
-checkRightNear(B,X,Y,N).
-checkNear(B,X,Y):-checkTopNear(B,X,Y,N1),checkBotNear(B,X,Y,N2),checkLeftNear(B,X,Y,N3),checkRightNear(B,X,Y,N4), NFinal is N1+N2+N3+N4, NFinal ==0,!.
+checkBotNear(B,X,Y,N):-Ny is Y + 1, elementAt(B,Elem,X,Ny),!,Elem \= 0,!,N is 1.
+checkBotNear(_,_,_,0).
+            
+checkLeftNear(B,X,Y,N):-Nx is X - 1, elementAt(B,Elem,Nx,Y),!,Elem \= 0,!,N is 1.
+checkLeftNear(_,_,_,0).
 
+checkRightNear(B,X,Y,N):-Nx is X + 1, elementAt(B,Elem,Nx,Y),!,Elem \= 0,!,N is 1.
+checkRightNear(_,_,_,0).
+
+% checkNear(+B, +B,+Y)
+checkNear(B,X,Y):-checkTopNear(B,X,Y,N1),checkBotNear(B,X,Y,N2),checkLeftNear(B,X,Y,N3),checkRightNear(B,X,Y,N4), NFinal is N1+N2+N3+N4, NFinal < 2,!.
+
+% botPlay(+B,+BotP,+NrP,-NewB,-NewBotP,-NewNrP,+BotSymbol)
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol):- random(1,6,Play), Play \= 1,!, botMov(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol).
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol):- botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP,5,BotSymbol),!.
 botPlay(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol):-botMov(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol).
 
 checkNotIsol(N):- N >1.
-botMovAux(B,X,Y,NewX,NewY,NewB,Count,BotSymbol):- write('\nTentarMover\n'),Count > 0, !,random(0,7,NewX2),NewX is NewX2*2,
+
+botMovAux(B,X,Y,NewX,NewY,NewB,Count,BotSymbol):- Count > 0, !,random(0,7,NewX2),NewX is NewX2*2,
         random(0,7,NewY2),NewY is NewY2 * 2,
         random(1,5,Wall),
-        checkMov(BotSymbol,B,X,Y, NewX, NewY, Wall, NewB),!.
+        (checkNear(B,X,Y) ->checkMov(BotSymbol,B,X,Y,X,Y, Wall, NewB)
+        ;checkMov(BotSymbol,B,X,Y, NewX, NewY, Wall, NewB)),!.
 
 botMovAux(B,X,Y,NewX,NewY,NewB,Count,BotSymbol):- NewCount is Count-1, botMovAux(B,X,Y,NewX,NewY,NewB,NewCount,BotSymbol).
 
+% botMov(+B,+BotP,+NrP,-NewB,-NewBotP,+NrP,+BotSymbol)
 botMov(B,BotP,NrP,NewB,NewBotP,NrP,BotSymbol):- random(0,NrP,P),elementAt(BotP,Play,P),elementAt(Play,X,0),elementAt(Play,Y,1),!,
         checkArea(NrA,NrB,X,Y,B, _), !,NrPeoes is NrA + NrB,checkNotIsol(NrPeoes), !,botMovAux(B,X,Y,NewX,NewY,NewB,15,BotSymbol),creatBotC(NewX,NewY,NewP),
         replace(BotP,P, NewP,NewBotP).
 
 botMov(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol):- botMov(B,BotP,NrP,NewB,NewBotP,NewNrP,BotSymbol).
 
-botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP,Count,BotSymbol):-write('\nTentarCriar\n'),Count > 0,!,random(0,7,X),X2 is X *2,random(0,7,Y),Y2 is Y*2,
+% botCreat(+B,+BotP,+NrP,-NewB,-NewBotP,-NewNrP,+Count,+BotSymbol)
+botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP,Count,BotSymbol):-Count > 0,!,random(0,7,X),X2 is X *2,random(0,7,Y),Y2 is Y*2,
         checkMov(BotSymbol,B,X2,Y2),!, NewNrP is NrP +1,replace(B,X2,Y2,BotSymbol,NewB), creatBotP(X2,Y2,PList),append(BotP,PList,NewBotP).
 
 botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP,Count,BotSymbol):- Count > 0,!,Count2 is Count -1,botCreat(B,BotP,NrP,NewB,NewBotP,NewNrP,Count2,BotSymbol).
@@ -577,5 +591,11 @@ parse_input([gameOver, Board], MyReply):-
 
 parse_input([gameOver, Board], 0).
 
+parse_input([playBot,Board,NrPBots,NrP],MyReply):-
+botPlay(Board,NrPBots,NrP,MyReply,_,_,'B'), !.
+
+parse_input([playBot,Board,NrPBots,NrP],Board).
 
 parse_input(quit, ok-bye):- !.
+
+test :- board(B),botPlay(B,[[12,6]],1,MyReply,T,C,'B').

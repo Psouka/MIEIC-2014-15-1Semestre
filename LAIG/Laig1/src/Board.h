@@ -5,6 +5,8 @@
 #include "Primitives.h"
 #include "Animation.h"
 #include <sstream>
+#include <string>
+#include <algorithm>
 
 typedef struct {
 	unsigned int col,line;
@@ -41,6 +43,7 @@ public:
 	void resetBoard();
 	bool isPlaying();
 	void undo();
+	void setBoard(string boardString);
 };
 
 #endif

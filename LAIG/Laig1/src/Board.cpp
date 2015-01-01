@@ -47,10 +47,6 @@ Board::Board()
 		}
 
 		item[0][6] = 'A';
-		item[0][0] = 'A';
-		item[1][0] = '|';
-		item[1][2] = '|';
-		item[0][1] = '-';
 		item[12][6] = 'B';
 
 		this->board = item;
@@ -389,4 +385,24 @@ void Board::undo(){
 		}
 
 	}
+}
+
+void Board::setBoard(string boardString){
+
+	boardString.erase(remove(boardString.begin(), boardString.end(), '\r'), boardString.end());
+	boardString.erase(remove(boardString.begin(), boardString.end(), '['), boardString.end());
+	boardString.erase(remove(boardString.begin(), boardString.end(), ']'), boardString.end());
+	boardString.erase(remove(boardString.begin(), boardString.end(), '.'), boardString.end());
+	boardString.erase(remove(boardString.begin(), boardString.end(), '\''), boardString.end());
+	boardString.erase(remove(boardString.begin(), boardString.end(), ','), boardString.end());
+
+	unsigned int indice = 0;
+	for(unsigned int i = 0; i < board.size(); i++)
+		for(unsigned int j = 0; j < board[i].size(); j++)
+			{
+				board[j][i] = boardString.at(indice);
+				indice++;
+			}
+
+
 }

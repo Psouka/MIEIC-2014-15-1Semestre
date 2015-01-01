@@ -1323,8 +1323,6 @@ void ANFScene::init() {
 
 	changeCamera();
 
-	
-
 	setUpdatePeriod(60);
 
 }

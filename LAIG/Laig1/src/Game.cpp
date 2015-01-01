@@ -6,6 +6,7 @@ Game::Game(){
 	player = 1;
 	endGame = false;
 	undoDone = true;
+	playBot();
 }
 
 void Game::nextPlayer() {
@@ -65,7 +66,7 @@ void Game::addPiece(unsigned int x,unsigned int y){
 
 	GameBoard->playerPlay.col = x;
 	GameBoard->playerPlay.line = y;
-	
+
 	undoDone = false;
 	nextPlayer();
 }
@@ -120,6 +121,50 @@ void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	nextPlayer();
 }
 
+void Game::playBot(){
+	stringstream message;
+	stringstream BotPoints;
+
+	message << "[playBot, ";
+
+	message << GameBoard->getBoardString();
+
+	unsigned int NrP_Bots = 0;
+
+	BotPoints <<  "[";
+
+	for(unsigned int i = 0; i < 7; i++)
+		for(unsigned int j = 0; j < 7; j++)
+			if(GameBoard->board[2*i][2*j] == 'B')
+			{
+				NrP_Bots++;
+				if(BotPoints.str() == "[")
+				{
+					BotPoints <<  "[";
+					BotPoints <<  i*2;
+					BotPoints <<  ",";
+					BotPoints <<  j*2;
+					BotPoints <<  "]";
+				}
+				else
+				{
+					BotPoints << ",";
+					BotPoints <<  "[";
+					BotPoints <<  i*2;
+					BotPoints <<  ",";
+					BotPoints <<  j*2;
+					BotPoints <<  "]";
+				}
+			}
+			BotPoints <<  "]";
+			message << ","<< BotPoints.str() << ","<< NrP_Bots << "]";
+
+			string response = this->socket->sendMessage(message.str());
+
+			GameBoard->setBoard(response);
+
+}
+
 bool Game::checkPiece(unsigned int x,unsigned int y){
 	stringstream message;
 	message << "[addPiece, ";
@@ -134,7 +179,7 @@ bool Game::checkPiece(unsigned int x,unsigned int y){
 	message << x << ",";
 
 	message << y << "]";
-	
+
 
 	string response = this->socket->sendMessage(message.str());
 
@@ -163,7 +208,7 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 	message <<  yf << ",";
 
 	message << wall  << "]";
-	
+
 
 	string response = this->socket->sendMessage(message.str());
 
@@ -177,19 +222,19 @@ string Game::checkGame(){
 	message << "[gameOver, ";
 	message << GameBoard->getBoardString();
 	message <<  "]";
-	
+
 
 	string response = this->socket->sendMessage(message.str());
 	string retorno = "";
- if(response.find("0") == string::npos)
- {
-	 retorno += "\nPlayer ";
-	 retorno +=response.at(1);
-	 retorno +=" Won";
-	 endGame = true;
- }
+	if(response.find("0") == string::npos)
+	{
+		retorno += "\nPlayer ";
+		retorno +=response.at(1);
+		retorno +=" Won";
+		endGame = true;
+	}
 
- return retorno;
+	return retorno;
 }
 
 bool Game::gameState(){
