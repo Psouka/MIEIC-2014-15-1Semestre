@@ -32,6 +32,8 @@ public:
 	bool isActive();
 	void undo();
 	int getPlayer();
+	vector< vector<char> > getFutureBoard();
+	string getboardString(vector< vector<char> > board);
 
 };
 

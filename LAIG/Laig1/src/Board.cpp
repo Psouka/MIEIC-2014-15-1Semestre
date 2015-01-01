@@ -400,6 +400,7 @@ void Board::setBoard(string boardString){
 	for(unsigned int i = 0; i < board.size(); i++)
 		for(unsigned int j = 0; j < board[i].size(); j++)
 			{
+				if(boardString.at(indice) != 'A')
 				board[j][i] = boardString.at(indice);
 				indice++;
 			}

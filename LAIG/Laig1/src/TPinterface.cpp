@@ -278,7 +278,10 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 					updateMessage();
 
 				if(Scene->GameScene->bot == 1)
-					Scene->GameScene->playBot();
+				{
+						Scene->GameScene->playBot();
+						updateMessage();
+				}
 			}
 		}
 		else if(Scene->play_Mode == 1){
@@ -304,7 +307,10 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 					updateMessage();
 
 				if(Scene->GameScene->bot == 1)
-					Scene->GameScene->playBot();
+				{
+						Scene->GameScene->playBot();
+						updateMessage();
+				}
 
 			}
 			else
