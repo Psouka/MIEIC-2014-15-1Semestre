@@ -14,6 +14,7 @@ class Game
 	bool endGame;
 	bool undoDone;
 public:
+	int bot;
 	Game();
 	~Game(void);
 	void nextPlayer();

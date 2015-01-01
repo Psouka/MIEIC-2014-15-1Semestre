@@ -4,9 +4,9 @@ Game::Game(){
 	GameBoard = new Board();
 	socket = new Socket();
 	player = 1;
+	bot = 0;
 	endGame = false;
 	undoDone = true;
-	playBot();
 }
 
 void Game::nextPlayer() {
@@ -122,6 +122,10 @@ void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 }
 
 void Game::playBot(){
+
+	if(endGame)
+		return;
+
 	stringstream message;
 	stringstream BotPoints;
 
@@ -162,7 +166,7 @@ void Game::playBot(){
 			string response = this->socket->sendMessage(message.str());
 
 			GameBoard->setBoard(response);
-
+			nextPlayer();
 }
 
 bool Game::checkPiece(unsigned int x,unsigned int y){
@@ -217,10 +221,77 @@ bool Game::checkMove(unsigned int xi,unsigned int yi,unsigned int xf,unsigned in
 
 string Game::checkGame(){
 
-	stringstream message;
+	vector< vector<char> > board = GameBoard->board;
 
+	if(GameBoard->playerPlay.active && GameBoard->playerPlay.wall == 0)
+	{
+		if(GameBoard->playerPlay.Player->getAppId() == "PlayerA")
+			board[2*GameBoard->playerPlay.col][2*GameBoard->playerPlay.line] = 'A';
+		else if(GameBoard->playerPlay.Player->getAppId() == "PlayerB")
+			board[2*GameBoard->playerPlay.col][2*GameBoard->playerPlay.line] = 'B';
+
+	}
+	else if(GameBoard->playerPlay.active)
+	{
+		vector<float> t = GameBoard->playerPlay.animPiece->getFinalPos();
+
+		if(GameBoard->playerPlay.Player->getAppId() == "PlayerA")
+			board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7)] = 'A';
+		else if(GameBoard->playerPlay.Player->getAppId() == "PlayerB")
+			board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7)] = 'B';
+	}
+
+	vector<float> t = GameBoard->playerPlay.animPiece->getFinalPos();
+
+	switch(GameBoard->playerPlay.wall){
+
+	case 1:
+		board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7) -1] = '-';
+		break;
+	case 2:
+		board[2*(GameBoard->playerPlay.col+t[0]*7)][2*(GameBoard->playerPlay.line+t[1]*7) +1] = '-';
+		break;
+	case 3:
+		board[2*(GameBoard->playerPlay.col+t[0]*7)-1][2*(GameBoard->playerPlay.line+t[1]*7)] = '|';
+		break;
+	case 4:
+		board[2*(GameBoard->playerPlay.col+t[0]*7)+1][2*(GameBoard->playerPlay.line+t[1]*7)] = '|';
+		break;
+
+	}
+
+
+	stringstream boardString;
+	boardString << "[";
+
+	// Each Row
+	for(unsigned int i = 0; i < board.size(); i++) {
+
+		boardString << "[";
+
+		// Each Point
+		for(unsigned int j = 0; j < board[i].size(); j ++) {
+			if(board[j][i] == '0')
+				boardString << board[j][i];
+			else
+				boardString << "'" << board[j][i] << "'";
+
+			if(j + 1 < board[i].size())
+				boardString << ",";
+		}
+
+		boardString << "]";
+
+		if(i + 1 < board.size())
+			boardString << ",";
+
+	}
+
+	boardString << "]";
+
+	stringstream message;
 	message << "[gameOver, ";
-	message << GameBoard->getBoardString();
+	message << boardString.str();
 	message <<  "]";
 
 

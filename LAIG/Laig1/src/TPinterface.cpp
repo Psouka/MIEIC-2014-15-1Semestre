@@ -72,6 +72,13 @@ void TPinterface::initGUI() {
 
 	addButton((char*)"New Game", 7);
 
+	GLUI_Panel * gameMode = addPanel("Game Mode", 1);
+
+
+	GLUI_RadioGroup *gMode = addRadioGroupToPanel(gameMode,&Scene->GameScene->bot,10);
+	addRadioButtonToGroup(gMode, "Player vs Player");
+	addRadioButtonToGroup(gMode, "Player vs Pc");
+
 
 	GLUI_Panel * movPanel = addPanel("Mov: ", 1);
 
@@ -86,7 +93,7 @@ void TPinterface::initGUI() {
 	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
 
 	GLUI_Listbox * wallList = addListboxToPanel(movPiece, (char*)"", &(Scene->wallPosition), 6);
-	
+
 	wallList->add_item (1, "North");
 	wallList->add_item (2, "South");
 	wallList->add_item (3, "West");
@@ -99,9 +106,9 @@ void TPinterface::initGUI() {
 	GLUI_Panel * graphPanel = addPanel( (char*)"Scene");
 	GLUI_Listbox * graphList = addListboxToPanel(graphPanel, (char*)"", &(graph), 9);
 
-	graphList->add_item (0, "Room 1");
-	graphList->add_item (1, "Room 2");
-	graphList->add_item (2, "Room 3");
+	graphList->add_item (0, "Room1.anf");
+	graphList->add_item (1, "Room2.anf");
+	graphList->add_item (2, "Room3.anf");
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -128,21 +135,10 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		Scene->setGlobalWind();
 		break;
 	case 5:
-		if(Scene->GameScene->isActive())
+		if(Scene->GameScene->isActive() || Scene->GameScene->gameState() )
 		{
 			Scene->play_Mode = -1;
-			printf("\nPlaying");
-		}
-		else
-		{
-			string m;
-			if((m = Scene->GameScene->checkGame()) != "")
-			{
-			Scene->play_Mode = -1;
-			messageDisplay->set_text(m.c_str());
-			}
-			else
-			printf("\nPlay Mode Changed");
+			printf("\nPlaying / Game over");
 		}
 		break;
 	case 6:
@@ -162,6 +158,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 	case 9:
 		printf("\n Room Changed");
 		Scene->setGraph(Graphs[graph]);
+		break;
+	case 10:
+		printf("\n Game Mode Changed");
 		break;
 	default:
 		break;
@@ -268,7 +267,18 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 			{
 				Scene->GameScene->addPiece(selected[0],selected[1]);
 				Scene->play_Mode = -1;
-				updateMessage();
+
+				string m;
+				if((m = Scene->GameScene->checkGame()) != "")
+				{
+					Scene->play_Mode = -1;
+					messageDisplay->set_text(m.c_str());
+				}
+				else
+					updateMessage();
+
+				if(Scene->GameScene->bot == 1)
+					Scene->GameScene->playBot();
 			}
 		}
 		else if(Scene->play_Mode == 1){
@@ -283,12 +293,24 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 				Scene->play_Mode = -1;
 				inicial_move_x = -1;
 				inicial_move_y = -1;
-				updateMessage();
+
+				string m;
+				if((m = Scene->GameScene->checkGame()) != "")
+				{
+					Scene->play_Mode = -1;
+					messageDisplay->set_text(m.c_str());
+				}
+				else
+					updateMessage();
+
+				if(Scene->GameScene->bot == 1)
+					Scene->GameScene->playBot();
+
 			}
 			else
 			{
-			inicial_move_x = -1;
-			inicial_move_y = -1;
+				inicial_move_x = -1;
+				inicial_move_y = -1;
 			}
 		}
 
@@ -302,7 +324,7 @@ void TPinterface::updateMessage(){
 		return;
 
 	if(Scene->GameScene->getPlayer())
-	messageDisplay->set_text("Player A");
+		messageDisplay->set_text("Player A");
 	else
-	messageDisplay->set_text("Player B");
+		messageDisplay->set_text("Player B");
 }
