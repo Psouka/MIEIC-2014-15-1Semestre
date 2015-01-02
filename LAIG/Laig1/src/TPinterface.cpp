@@ -171,7 +171,7 @@ void TPinterface::processMouse(int button, int state, int x, int y)
 {
 	CGFinterface::processMouse(button,state, x, y);
 
-	if(Scene->play_Mode == -1 || Scene->GameScene->gameState())
+	if(Scene->play_Mode == -1 || Scene->GameScene->gameState()|| !Scene->GameScene->getSocket()->isActive())
 		return;
 
 	// do picking on mouse press (GLUT_DOWN)
