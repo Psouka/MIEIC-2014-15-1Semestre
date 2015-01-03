@@ -175,16 +175,7 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 
 void TPinterface::processMouse(int button, int state, int x, int y) 
 {
-	CGFinterface::processMouse(button,state, x, y);
-
-	if(Scene->GameScene->timePassed())
-	{
-		if(Scene->GameScene->getPlayer() == 1)
-			messageDisplay->set_text("Time out,Player B won");
-		else
-			messageDisplay->set_text("Time out,Player A won");
-	}
-		
+	CGFinterface::processMouse(button,state, x, y);		
 
 	if(Scene->play_Mode == -1 || Scene->GameScene->gameState()|| !Scene->GameScene->getSocket()->isActive())
 		return;
@@ -348,4 +339,9 @@ void TPinterface::updateMessage(){
 		messageDisplay->set_text("Player A");
 	else
 		messageDisplay->set_text("Player B");
+}
+
+void TPinterface::setMessage(string m){
+
+	messageDisplay->set_text(m.c_str());
 }

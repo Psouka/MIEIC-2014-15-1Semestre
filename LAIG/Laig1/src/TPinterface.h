@@ -23,6 +23,7 @@ public:
 	void performPicking(int x, int y);
 	void processHits(GLint hits, GLuint buffer[]); 
 	void updateMessage();
+	void setMessage(string m);
     
     int testVar;
 	

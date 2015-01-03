@@ -1,4 +1,5 @@
 ﻿#include "ANFScene.h"
+#include "TPinterface.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
@@ -1397,6 +1398,17 @@ void ANFScene::update(unsigned long t) {
 	GameScene->getBoard()->update(t);
 
 	GameScene->update(t);
+
+	TPinterface* temp = dynamic_cast<TPinterface*>(iface);
+
+	if(GameScene->timePassed())
+	{
+		if(GameScene->getPlayer() == 1)
+			temp->setMessage("Time out,Player B won");
+		else
+			temp->setMessage("Time out,Player A won");
+	}
+
 
 }
 
