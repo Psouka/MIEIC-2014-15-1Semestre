@@ -22,6 +22,7 @@ void Game::previousPlayer() {
 }
 
 void Game::newGame(){
+	currentTime = 0;
 	player = 1;
 	undoDone = true;
 	endGame = false;
@@ -348,5 +349,8 @@ void Game::update(unsigned long t){
 }
 
 bool Game::timePassed(){
-	return currentTime >= timePlay;
+	if(currentTime >= timePlay)
+		endGame = true;
+
+	return endGame;
 }

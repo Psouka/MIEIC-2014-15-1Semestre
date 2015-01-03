@@ -178,7 +178,13 @@ void TPinterface::processMouse(int button, int state, int x, int y)
 	CGFinterface::processMouse(button,state, x, y);
 
 	if(Scene->GameScene->timePassed())
-		messageDisplay->set_text("Time passed");
+	{
+		if(Scene->GameScene->getPlayer() == 1)
+			messageDisplay->set_text("Time out,Player B won");
+		else
+			messageDisplay->set_text("Time out,Player A won");
+	}
+		
 
 	if(Scene->play_Mode == -1 || Scene->GameScene->gameState()|| !Scene->GameScene->getSocket()->isActive())
 		return;
