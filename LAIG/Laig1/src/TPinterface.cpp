@@ -89,10 +89,9 @@ void TPinterface::initGUI() {
 	addRadioButtonToGroup(modeGame, "New Piece");
 	addRadioButtonToGroup(modeGame, "Move Piece");
 
+	addStaticTextToPanel(movPanel, "Wall:");
 
-	GLUI_Panel * movPiece = addPanel("In Case Move", 1);
-
-	GLUI_Listbox * wallList = addListboxToPanel(movPiece, (char*)"", &(Scene->wallPosition), 6);
+	GLUI_Listbox * wallList = addListboxToPanel(movPanel, (char*)"", &(Scene->wallPosition), 6);
 
 	wallList->add_item (1, "North");
 	wallList->add_item (2, "South");
@@ -109,6 +108,10 @@ void TPinterface::initGUI() {
 	graphList->add_item (0, "Room1.anf");
 	graphList->add_item (1, "Room2.anf");
 	graphList->add_item (2, "Room3.anf");
+
+
+	GLUI_Panel * playTime = addPanel("Time to Play: ", 1);
+	GLUI_Spinner* playRoll =addSpinnerToPanel( playTime,"",  2, &(Scene->GameScene->timePlay), 11);
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -162,6 +165,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 	case 10:
 		printf("\n Game Mode Changed");
 		break;
+	case 11:
+		printf("\n Time Changed");
+		break;
 	default:
 		break;
 	}
@@ -170,6 +176,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 void TPinterface::processMouse(int button, int state, int x, int y) 
 {
 	CGFinterface::processMouse(button,state, x, y);
+
+	if(Scene->GameScene->timePassed())
+		messageDisplay->set_text("Time passed");
 
 	if(Scene->play_Mode == -1 || Scene->GameScene->gameState()|| !Scene->GameScene->getSocket()->isActive())
 		return;

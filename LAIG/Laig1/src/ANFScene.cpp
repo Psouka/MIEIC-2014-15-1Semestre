@@ -1395,6 +1395,9 @@ void ANFScene::update(unsigned long t) {
 		Flags[i]->update(t);
 
 	GameScene->getBoard()->update(t);
+
+	GameScene->update(t);
+
 }
 
 void ANFScene::display() {

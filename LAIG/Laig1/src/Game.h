@@ -13,7 +13,9 @@ class Game
 	int player;
 	bool endGame;
 	bool undoDone;
+	float currentTime;
 public:
+	int timePlay;
 	int bot;
 	Game();
 	~Game(void);
@@ -34,6 +36,8 @@ public:
 	int getPlayer();
 	vector< vector<char> > getFutureBoard();
 	string getboardString(vector< vector<char> > board);
+	void update(unsigned long t);
+	bool timePassed();
 
 };
 

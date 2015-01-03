@@ -7,6 +7,8 @@ Game::Game(){
 	bot = 0;
 	endGame = false;
 	undoDone = true;
+	timePlay = 10;
+	currentTime = 0;
 }
 
 void Game::nextPlayer() {
@@ -40,6 +42,7 @@ Game :: ~Game(void){
 }
 
 void Game::addPiece(unsigned int x,unsigned int y){
+	currentTime = 0;
 	GameBoard->playerPlay.active = true;
 	GameBoard->playerPlay.wallFalling = false;
 	GameBoard->playerPlay.wall = 0;
@@ -72,6 +75,7 @@ void Game::addPiece(unsigned int x,unsigned int y){
 }
 
 void Game::movePiece(unsigned int xi,unsigned int yi,unsigned int xf,unsigned int yf,unsigned int wall){
+	currentTime = 0;
 	GameBoard->playerPlay.active = true;
 	GameBoard->playerPlay.wall = wall;
 
@@ -125,6 +129,8 @@ void Game::playBot(){
 
 	if(endGame)
 		return;
+
+	currentTime = 0;
 
 	stringstream message;
 	stringstream BotPoints;
@@ -334,4 +340,13 @@ string Game::getboardString(vector< vector<char> > board){
 	boardString << "]";
 
 	return boardString.str();
+}
+
+void Game::update(unsigned long t){
+	if(currentTime < timePlay && !endGame)
+		currentTime += 0.06;
+}
+
+bool Game::timePassed(){
+	return currentTime >= timePlay;
 }
