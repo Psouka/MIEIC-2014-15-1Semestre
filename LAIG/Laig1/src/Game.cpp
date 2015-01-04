@@ -34,15 +34,15 @@ void Game::newGame(){
 
 	switch(bestOf){
 		case 0:
-			if(pointsA > 1 && pointsB == 0 || pointsB > 1 && pointsA == 0 )
+			if(pointsA > 1 && pointsB == 0 || pointsB > 1 && pointsA == 0 || pointsA + pointsB == 3)
 				pointsA = pointsB = 0;
 			break;
 		case 1:
-			if(pointsA > 2 && pointsB == 0 || pointsB > 2 && pointsA == 0 )
+			if(pointsA > 2 && pointsB == 0 || pointsB > 2 && pointsA == 0 || pointsA + pointsB == 5)
 				pointsA = pointsB = 0;
 			break;
 		case 2:
-			if(pointsA > 4 && pointsB == 0 || pointsB > 4 && pointsA == 0 )
+			if(pointsA > 4 && pointsB == 0 || pointsB > 4 && pointsA == 0 || pointsA + pointsB == 9)
 				pointsA = pointsB = 0;
 			break;
 
