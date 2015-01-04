@@ -5,10 +5,12 @@ Game::Game(){
 	socket = new Socket();
 	player = 1;
 	bot = 0;
-	endGame = false;
+	endGame = true;
 	undoDone = true;
 	timePlay = 10;
 	currentTime = 0;
+	bestOf = 0;
+	pointsA = pointsB = 0;
 }
 
 void Game::nextPlayer() {
@@ -29,6 +31,22 @@ void Game::newGame(){
 	GameBoard->resetBoard();
 	GameBoard->selectetPos.col = -1;
 	GameBoard->selectetPos.line = -1;
+
+	switch(bestOf){
+		case 0:
+			if(pointsA > 1 && pointsB == 0 || pointsB > 1 && pointsA == 0 )
+				pointsA = pointsB = 0;
+			break;
+		case 1:
+			if(pointsA > 2 && pointsB == 0 || pointsB > 2 && pointsA == 0 )
+				pointsA = pointsB = 0;
+			break;
+		case 2:
+			if(pointsA > 4 && pointsB == 0 || pointsB > 4 && pointsA == 0 )
+				pointsA = pointsB = 0;
+			break;
+
+		}
 }
 
 Board* Game::getBoard(){
@@ -245,6 +263,11 @@ string Game::checkGame(){
 		retorno +=response.at(1);
 		retorno +=" Won";
 		endGame = true;
+
+		if(response.at(1) == 'A')
+			pointsA++;
+		else
+			pointsB++;
 	}
 
 	return retorno;
@@ -264,6 +287,7 @@ void Game::undo(){
 		GameBoard->undo();
 		nextPlayer();
 		undoDone = true;
+		currentTime = 0;
 		isSelected(-1,-1);
 	}
 }
@@ -367,19 +391,39 @@ void Game::isSelected(unsigned int col, unsigned int line){
 void Game::draw(){
 
 	// drawTimer
-		glPushMatrix();		
+	char array[10];
+	glDisable(GL_LIGHTING);
+
+
+	glPushMatrix();
+	glTranslatef(2,2,1);
+	glScalef(0.05, 0.05, 0.05);
+	glColor3f(1.0,1.0,0.0);	
+
+	sprintf_s(array, "%d", pointsA);
+	glutStrokeCharacter(GLUT_STROKE_ROMAN, array[0]);
+	glutStrokeCharacter(GLUT_STROKE_ROMAN, '-');
+	sprintf_s(array, "%d", pointsB);
+	glutStrokeCharacter(GLUT_STROKE_ROMAN, array[0]);
+	glPopMatrix();
+
+
+	glPushMatrix();		
 	glScaled(2.5,1,2.5);
 	glTranslated(3, 4.25, 3);
 	glRotated(90, 1, 0, 0);
 
-	if(player == 1)
+	if(player == 1){
+		glColor3f(0.0,0.0,1.0);
 		glRasterPos3f(-0.3,0,-0.1);
-	else
+	}else{
+		glColor3f(1.0,0.0,0.0);
 		glRasterPos3f(1.1,0.8,-0.1);
+	}
 
-
-	char array[10];
 	sprintf_s(array, "%f", timePlay -currentTime);
+
+
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'T');
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'i');
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'm');
@@ -389,11 +433,12 @@ void Game::draw(){
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ' ');
 	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, array[0]);
 	if(timePlay -currentTime >= 10)
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, array[1]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, array[1]);
+
 	glPopMatrix();
 
+	glEnable(GL_LIGHTING);
 
-	
 	Texture * temp = new Texture("NULL");
 	GameBoard->draw(temp);
 	delete(temp);

@@ -1433,8 +1433,6 @@ void ANFScene::display() {
 		lights[i]->updateL();
 	}
 
-	
-
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
 

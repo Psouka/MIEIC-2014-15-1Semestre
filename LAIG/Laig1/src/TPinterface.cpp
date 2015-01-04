@@ -112,6 +112,13 @@ void TPinterface::initGUI() {
 
 	GLUI_Panel * playTime = addPanel("Time to Play: ", 1);
 	GLUI_Spinner* playRoll =addSpinnerToPanel( playTime,"",  2, &(Scene->GameScene->timePlay), 11);
+
+	GLUI_Panel * scorePanel = addPanel( (char*)"Best Of");
+	GLUI_Listbox * besofList = addListboxToPanel(scorePanel, (char*)"", &(Scene->GameScene->bestOf), 12);
+
+	besofList->add_item (0, "3");
+	besofList->add_item (1, "5");
+	besofList->add_item (2, "9");
 }
 
 void TPinterface::processGUI(GLUI_Control *ctrl) {
@@ -172,6 +179,8 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		printf("\n Game Mode Changed");
 		break;
 	case 11:
+		if(Scene->GameScene->timePlay > 60)
+			Scene->GameScene->timePlay = 60;
 		printf("\n Time Changed");
 		break;
 	default:

@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 	try {
 		
 		app.init(&argc, argv);
-
+		glutReshapeWindow(710,550);
 		if(argc > 1)
 			app.setScene(Scene = new ANFScene(argv[1]));
 		else

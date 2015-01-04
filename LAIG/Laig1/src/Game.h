@@ -16,6 +16,7 @@ class Game
 	float currentTime;
 	unsigned int pointsA,pointsB;
 public:
+	int bestOf;
 	int timePlay;
 	int bot;
 	Game();
