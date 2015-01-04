@@ -157,6 +157,12 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 		printf("\n Undo");
 		Scene->GameScene->undo();
 		updateMessage();
+		if(Scene->GameScene->getPlayer() == 1)
+			Scene->Active_Camera = 1;
+		else
+			Scene->Active_Camera = 2;
+
+		Scene->changeCamera();
 		break;
 	case 9:
 		printf("\n Room Changed");
@@ -268,6 +274,8 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 		printf("%d ",selected[1]);
 		printf("\n");
 
+		Scene->GameScene->isSelected(selected[0],selected[1]);
+
 		if(Scene->play_Mode == 0){
 			if(Scene->GameScene->checkPiece(2*selected[0],2*selected[1]))
 			{
@@ -285,9 +293,16 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 
 				if(Scene->GameScene->bot == 1)
 				{
-						Scene->GameScene->playBot();
-						updateMessage();
+					Scene->GameScene->playBot();
+					updateMessage();
 				}
+
+				if(Scene->GameScene->getPlayer() == 1)
+					Scene->Active_Camera = 1;
+				else
+					Scene->Active_Camera = 2;
+
+				Scene->changeCamera();
 			}
 		}
 		else if(Scene->play_Mode == 1){
@@ -314,9 +329,16 @@ void TPinterface::processHits (GLint hits, GLuint buffer[])
 
 				if(Scene->GameScene->bot == 1)
 				{
-						Scene->GameScene->playBot();
-						updateMessage();
+					Scene->GameScene->playBot();
+					updateMessage();
 				}
+
+				if(Scene->GameScene->getPlayer() == 1)
+					Scene->Active_Camera = 1;
+				else
+					Scene->Active_Camera = 2;
+
+				Scene->changeCamera();
 
 			}
 			else

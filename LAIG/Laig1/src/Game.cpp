@@ -27,6 +27,8 @@ void Game::newGame(){
 	undoDone = true;
 	endGame = false;
 	GameBoard->resetBoard();
+	GameBoard->selectetPos.col = -1;
+	GameBoard->selectetPos.line = -1;
 }
 
 Board* Game::getBoard(){
@@ -262,6 +264,7 @@ void Game::undo(){
 		GameBoard->undo();
 		nextPlayer();
 		undoDone = true;
+		isSelected(-1,-1);
 	}
 }
 
@@ -353,4 +356,45 @@ bool Game::timePassed(){
 		endGame = true;
 
 	return endGame;
+}
+
+void Game::isSelected(unsigned int col, unsigned int line){
+	GameBoard->selectetPos.col = col;
+	GameBoard->selectetPos.line = line;
+	GameBoard->selectetPos.Player = player;
+}
+
+void Game::draw(){
+
+	// drawTimer
+		glPushMatrix();		
+	glScaled(2.5,1,2.5);
+	glTranslated(3, 4.25, 3);
+	glRotated(90, 1, 0, 0);
+
+	if(player == 1)
+		glRasterPos3f(-0.3,0,-0.1);
+	else
+		glRasterPos3f(1.1,0.8,-0.1);
+
+
+	char array[10];
+	sprintf_s(array, "%f", timePlay -currentTime);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'T');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'i');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'm');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'e');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'r');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ':');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, ' ');
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, array[0]);
+	if(timePlay -currentTime >= 10)
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, array[1]);
+	glPopMatrix();
+
+
+	
+	Texture * temp = new Texture("NULL");
+	GameBoard->draw(temp);
+	delete(temp);
 }

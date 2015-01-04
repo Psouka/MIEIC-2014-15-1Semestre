@@ -60,6 +60,10 @@ Board::Board()
 		playerPlay.animWall = new NoAnimation();
 		playerPlay.col = playerPlay.line = 0;
 
+		selectetPos.col = -1;
+		selectetPos.line = -1;
+		selectetPos.Player = -1;
+
 }
 
 Board::~Board(void) {
@@ -108,7 +112,15 @@ void Board::draw(Texture* t)
 
 			black ++;
 			black %= 2;
-			if(black)
+			if(selectetPos.col == i && selectetPos.line == j)
+			{
+				if(selectetPos.Player == 1)
+					PlayerA->apply();
+				else
+					PlayerB->apply();
+
+			}
+			else if(black)
 				Black->apply();
 			else
 				White->apply();

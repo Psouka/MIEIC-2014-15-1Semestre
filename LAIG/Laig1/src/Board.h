@@ -19,6 +19,12 @@ typedef struct {
    
 } Play;
 
+typedef struct {
+	unsigned int col,line;
+	int Player;
+   
+} Selected;
+
 
 class Board: public Primitives {
 	Cube *wall;
@@ -26,11 +32,10 @@ class Board: public Primitives {
 	Rect* rec;
 	CGFappearance * Black, *White;
 	Appearance * PlayerA, *PlayerB, *wallApp;
-	
-
 public:	
 	vector< vector<char> > board;
 	Play playerPlay;
+	Selected selectetPos;
 	int nSpaces;
 	Board();
 	~Board(void);

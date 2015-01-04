@@ -14,6 +14,7 @@ class Game
 	bool endGame;
 	bool undoDone;
 	float currentTime;
+	unsigned int pointsA,pointsB;
 public:
 	int timePlay;
 	int bot;
@@ -38,6 +39,8 @@ public:
 	string getboardString(vector< vector<char> > board);
 	void update(unsigned long t);
 	bool timePassed();
+	void isSelected(unsigned int col, unsigned int line);
+	void draw();
 
 };
 

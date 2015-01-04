@@ -1404,9 +1404,9 @@ void ANFScene::update(unsigned long t) {
 	if(GameScene->timePassed())
 	{
 		if(GameScene->getPlayer() == 1)
-			temp->setMessage("Time out,Player B won");
+			temp->setMessage("Player B won");
 		else
-			temp->setMessage("Time out,Player A won");
+			temp->setMessage("Player A won");
 	}
 
 
@@ -1438,9 +1438,7 @@ void ANFScene::display() {
 	Node * root= ANFGraph->getGraph()[ANFGraph->getRoot()];
 	process(root,root->getApp());
 
-	Texture * temp = new Texture("NULL");
-	GameScene->getBoard()->draw(temp);
-	delete(temp);
+	GameScene->draw();
 
 	glutSwapBuffers();
 
